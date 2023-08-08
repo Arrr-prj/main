@@ -30,6 +30,9 @@
         android:testOnly="true"
         android:theme="@style/Theme.Skgudwls" >
         <activity
+            android:name="com.example.skgudwls.MainpageActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.skgudwls.RegisterActivity"
             android:exported="false" />
         <activity

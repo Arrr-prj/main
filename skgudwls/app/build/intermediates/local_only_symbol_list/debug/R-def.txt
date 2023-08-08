@@ -9,6 +9,9 @@ color teal_700
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable notification_icon
+drawable person_icon
+drawable search_icon
 id btn_Identification
 id btn_back
 id btn_kakaoLoginScreen
@@ -17,6 +20,10 @@ id btn_loginScreen
 id btn_register
 id btn_registerScreen
 id btn_sendCode
+id button4
+id button5
+id button6
+id button7
 id et_address
 id et_code
 id et_email
@@ -25,6 +32,9 @@ id et_pwd
 id et_pwd2
 id et_rrn
 id et_sex
+id floatingActionButton
+id floatingActionButton2
+id floatingActionButton3
 id textView
 id textView2
 id textView3
@@ -35,8 +45,10 @@ id textView8
 id textView9
 id toolbar
 id toolbar2
+id toolbar4
 layout activity_login
 layout activity_main
+layout activity_mainpage
 layout activity_register
 mipmap ic_launcher
 mipmap ic_launcher_round
