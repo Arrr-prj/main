@@ -20,12 +20,12 @@
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\layout_activity_mainpage.xml.flat",
-        "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\activity_mainpage.xml"
-    },
-    {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\layout_goods_item.xml.flat",
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\goods_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\layout_activity_mainpage.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\activity_mainpage.xml"
     },
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\mipmap-xxhdpi_ic_launcher.webp.flat",
@@ -56,12 +56,12 @@
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.skgudwls.app-merged_res-34:/layout_activity_mainpage.xml.flat",
-        "source": "com.example.skgudwls.app-main-36:/layout/activity_mainpage.xml"
-    },
-    {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.skgudwls.app-merged_res-34:/layout_activity_modify.xml.flat",
+        "source": "com.example.skgudwls.app-main-36:/layout/activity_modify.xml"
     },
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\drawable_notification_icon.xml.flat",
@@ -86,6 +86,10 @@
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\menu_menu_top.xml.flat",
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\menu\\menu_top.xml"
+    },
+    {
+        "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\layout_activity_mypage.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\activity_mypage.xml"
     },
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\drawable-v24_ic_launcher_foreground.xml.flat",
@@ -132,11 +136,19 @@
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\activity_main.xml"
     },
     {
+        "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\drawable_backspace_icon.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\drawable\\backspace_icon.xml"
+    },
+    {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-merged_res-34:\\layout_activity_modify.xml.flat",
+        "source": "C:\\Users\\user\\.gradle\\daemon\\7.5\\com.example.skgudwls.app-main-36:\\layout\\activity_modify.xml"
     }
 ]

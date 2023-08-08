@@ -12,14 +12,18 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".ModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MypageActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false"
-            android:parentActivityName=".PublicauctionActivity"/>
-
+            android:parentActivityName=".PublicauctionActivity" />
         <activity
             android:name=".Goods"
             android:exported="false" />
-
         <activity
             android:name=".MainpageActivity"
             android:exported="false" />
@@ -38,8 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PublicauctionActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".PublicauctionActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -16,7 +16,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class loginActivity extends AppCompatActivity {
-
     private FirebaseAuth mFirebaseAuth; // 파이어 베이스 인증
     private EditText mEtEmail, mEtPwd;
     private Button mBtnRegister, mBtnLogin, mBtnBack;
@@ -48,15 +47,14 @@ public class loginActivity extends AppCompatActivity {
                 String strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
 
-
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(loginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공
-                            Intent intent = new Intent(loginActivity.this, MainpageActivity.class);
+                            Intent intent = new Intent(loginActivity.this, MypageActivity.class);
                             startActivity(intent);
-                            finish();
+ //                           finish();
                         } else {
                             Toast.makeText(loginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                         }

@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton2" />
+        app:layout_constraintTop_toTopOf="@+id/btn_mypage" />
 
     <TextView
         android:id="@+id/textView9"
@@ -97,7 +97,7 @@
         android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
-        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_mypage" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -113,7 +113,7 @@
         app:srcCompat="@drawable/search_icon" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/btn_mypage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -133,8 +133,8 @@
         android:clickable="true"
         android:outlineProvider="none"
         app:backgroundTint="#00FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_mypage"
+        app:layout_constraintTop_toTopOf="@+id/btn_mypage"
         app:maxImageSize="40dp"
         app:srcCompat="@drawable/notification_icon" />
 

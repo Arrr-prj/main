@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\user\.gradle\caches\transforms-3\d488f2c4c46007d73eddcd94b832f4ea\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\user\.gradle\caches\transforms-3\3229d8dbfb0c633e276edfd3e6294908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\user\.gradle\caches\transforms-3\bc14915fedc1798a01b1f6b5d446b360\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
@@ -60,27 +60,27 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\user\.gradle\caches\transforms
 MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\user\.gradle\caches\transforms-3\eb81fb53378604cc0225f33f394c7ec0\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
 MERGED from [io.grpc:grpc-android:1.52.1] C:\Users\user\.gradle\caches\transforms-3\c8f6b63a1e8db641b8cc227c41b4fdf2\transformed\grpc-android-1.52.1\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\user\.gradle\caches\transforms-3\303c89b29b1f94f8856e637193912e8d\transformed\protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
-INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
+INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
 	package
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-45:12
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:1-50:12
 		INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:5:5-43:19
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:5:5-48:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\user\.gradle\caches\transforms-3\d488f2c4c46007d73eddcd94b832f4ea\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\user\.gradle\caches\transforms-3\d488f2c4c46007d73eddcd94b832f4ea\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\user\.gradle\caches\transforms-3\3229d8dbfb0c633e276edfd3e6294908\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -131,60 +131,72 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\us
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:12:9-68
 	android:dataExtractionRules
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:7:9-65
-activity#com.example.skgudwls.DetailActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:14:9-17:66
-	android:parentActivityName
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:17:13-64
+activity#com.example.skgudwls.ModifyActivity
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:14:9-16:40
 	android:exported
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:16:13-37
 	android:name
 		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:15:13-43
+activity#com.example.skgudwls.MypageActivity
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:17:9-19:40
+	android:exported
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:19:13-37
+	android:name
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:18:13-43
+activity#com.example.skgudwls.DetailActivity
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:20:9-23:67
+	android:parentActivityName
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:23:13-64
+	android:exported
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:22:13-37
+	android:name
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:21:13-43
 activity#com.example.skgudwls.Goods
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:19:9-21:40
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:21:13-37
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:20:13-34
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:25:13-34
 activity#com.example.skgudwls.MainpageActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:23:9-25:40
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:25:13-37
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:24:13-45
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:28:13-45
 activity#com.example.skgudwls.RegisterActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:26:9-28:40
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:30:9-32:40
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:28:13-37
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:27:13-45
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:31:13-45
 activity#com.example.skgudwls.loginActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:29:9-31:40
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:33:9-35:40
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:31:13-37
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:30:13-42
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:34:13-42
 activity#com.example.skgudwls.MainActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:32:9-40:20
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:36:9-44:20
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:34:13-36
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:38:13-36
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:33:13-41
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:37:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:35:13-39:29
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:36:17-69
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:36:25-66
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:38:17-77
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:42:17-77
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:38:27-74
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:42:27-74
 activity#com.example.skgudwls.PublicauctionActivity
-ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:41:9-42:38
+ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:45:9-47:39
 	android:exported
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:42:13-36
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:47:13-36
 	android:name
-		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:41:19-56
+		ADDED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml:46:13-50
 uses-sdk
 INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\user\Documents\GitHub\main\skgudwls\app\src\main\AndroidManifest.xml

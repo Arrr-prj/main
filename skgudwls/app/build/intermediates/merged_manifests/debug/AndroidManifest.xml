@@ -30,6 +30,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
         <activity
+            android:name="com.example.skgudwls.ModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.skgudwls.MypageActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.skgudwls.DetailActivity"
             android:exported="false"
             android:parentActivityName="com.example.skgudwls.PublicauctionActivity" />
