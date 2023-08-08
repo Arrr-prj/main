@@ -4,6 +4,25 @@
             "outputFile": "com.example.skgudwls.app-mergeDebugResources-32:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\user\\Documents\\GitHub\\main\\skgudwls\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "100",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "797"
+                    },
+                    "to": {
+                        "startLines": "34",
+                        "startColumns": "4",
+                        "startOffsets": "3448",
+                        "endLines": "46",
+                        "endColumns": "12",
+                        "endOffsets": "4024"
+                    }
+                },
+                {
                     "source": "C:\\Users\\user\\.gradle\\caches\\transforms-3\\4a8fc8d4cffe1deef03672f2112cd6a4\\transformed\\appcompat-1.6.1\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
@@ -35,25 +54,6 @@
                         "startOffsets": "687,762,873,962,1063,1170,1277,1376,1483,1586,1674,1798,1900,2002,2118,2220,2334,2462,2578,2700,2836,2956,3090,3210,3322,4118,4235,4359,4489,4611,4749,4883,4999",
                         "endColumns": "74,110,88,100,106,106,98,106,102,87,123,101,101,115,101,113,127,115,121,135,119,133,119,111,125,116,123,129,121,137,133,115,119",
                         "endOffsets": "757,868,957,1058,1165,1272,1371,1478,1581,1669,1793,1895,1997,2113,2215,2329,2457,2573,2695,2831,2951,3085,3205,3317,3443,4230,4354,4484,4606,4744,4878,4994,5114"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\user\\Documents\\AnPr\\skgudwls\\app\\src\\main\\res\\values-night\\themes.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "100",
-                        "endLines": "14",
-                        "endColumns": "12",
-                        "endOffsets": "797"
-                    },
-                    "to": {
-                        "startLines": "34",
-                        "startColumns": "4",
-                        "startOffsets": "3448",
-                        "endLines": "46",
-                        "endColumns": "12",
-                        "endOffsets": "4024"
                     }
                 }
             ]
