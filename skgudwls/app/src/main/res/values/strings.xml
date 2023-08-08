@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">skgudwls</string>
+    <string name="app_name">Dialog</string>
+
+    <string-array name="goods">
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+    </string-array>
 </resources>

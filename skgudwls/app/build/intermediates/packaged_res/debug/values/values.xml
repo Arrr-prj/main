@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="goods">
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+        <item>차</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -7,7 +20,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
-    <string name="app_name">skgudwls</string>
+    <string name="app_name">Dialog</string>
     <string name="default_web_client_id" translatable="false">1077173275943-kgppuknqdnlqfaqumtglo673ll07fgob.apps.googleusercontent.com</string>
     <string name="gcm_defaultSenderId" translatable="false">1077173275943</string>
     <string name="google_api_key" translatable="false">AIzaSyDpZtVWmrEeJeYcoGizKU6wsKXp3mRVBlk</string>

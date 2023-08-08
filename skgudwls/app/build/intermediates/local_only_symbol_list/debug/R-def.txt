@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array goods
 color black
 color purple_200
 color purple_500
@@ -7,13 +8,20 @@ color purple_700
 color teal_200
 color teal_700
 color white
+drawable car
+drawable ceramic
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable menu_icon
 drawable notification_icon
 drawable person_icon
+drawable photoframe
 drawable search_icon
+drawable shoes
+drawable watch
 id btn_Identification
 id btn_back
+id btn_dialog
 id btn_kakaoLoginScreen
 id btn_login
 id btn_loginScreen
@@ -35,6 +43,14 @@ id et_sex
 id floatingActionButton
 id floatingActionButton2
 id floatingActionButton3
+id goods_detail_image
+id goods_image
+id goods_listView
+id goods_name
+id goods_search_view
+id menu
+id next_toolbar
+id search
 id textView
 id textView2
 id textView3
@@ -46,10 +62,14 @@ id textView9
 id toolbar
 id toolbar2
 id toolbar4
+layout activity_detail
 layout activity_login
 layout activity_main
 layout activity_mainpage
+layout activity_publicauction
 layout activity_register
+layout goods_item
+menu menu_top
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

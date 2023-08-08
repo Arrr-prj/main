@@ -75,6 +75,7 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array goods
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -2937,6 +2938,8 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable car
+drawable ceramic
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -2998,6 +3001,7 @@ drawable material_ic_keyboard_arrow_previous_black_24dp
 drawable material_ic_keyboard_arrow_right_black_24dp
 drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
+drawable menu_icon
 drawable mtrl_bottomsheet_drag_handle
 drawable mtrl_checkbox_button
 drawable mtrl_checkbox_button_checked_unchecked
@@ -3050,10 +3054,13 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable person_icon
+drawable photoframe
 drawable search_icon
+drawable shoes
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable watch
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3161,6 +3168,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_Identification
 id btn_back
+id btn_dialog
 id btn_kakaoLoginScreen
 id btn_login
 id btn_loginScreen
@@ -3286,6 +3294,11 @@ id fullscreen_header
 id ghost_view
 id ghost_view_holder
 id gone
+id goods_detail_image
+id goods_image
+id goods_listView
+id goods_name
+id goods_search_view
 id graph
 id graph_wrap
 id group_divider
@@ -3351,6 +3364,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id menu
 id message
 id middle
 id mini
@@ -3395,6 +3409,7 @@ id navigation_header_container
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
+id next_toolbar
 id noScroll
 id noState
 id none
@@ -3446,6 +3461,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id search
 id search_badge
 id search_bar
 id search_bar_text_view
@@ -3706,9 +3722,11 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_detail
 layout activity_login
 layout activity_main
 layout activity_mainpage
+layout activity_publicauction
 layout activity_register
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
@@ -3728,6 +3746,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout goods_item
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3789,6 +3808,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu menu_top
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
