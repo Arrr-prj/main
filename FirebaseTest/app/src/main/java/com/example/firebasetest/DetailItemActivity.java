@@ -36,6 +36,7 @@ public class DetailItemActivity extends AppCompatActivity {
     private TextView itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
     BiddingItemAdapter biddingItemAdapter;
+    OpenAuctionAdapter openAuctionAdapter;
     BiddingItem item;
     Bitmap bitmap;
     @Override
@@ -52,6 +53,7 @@ public class DetailItemActivity extends AppCompatActivity {
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
         biddingItemAdapter = new BiddingItemAdapter(this, new ArrayList<>());
+        openAuctionAdapter = new OpenAuctionAdapter(this, new ArrayList<>());
 
         // 수정 or 삭제
         btnDelete = findViewById(R.id.btn_delete);
@@ -68,13 +70,12 @@ public class DetailItemActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String id = intent.getStringExtra("id");
                 BiddingItem selectedItem = null;
-                Log.d(TAG, "눌리긴 했음 id는 : "+id+" 이거임");
+                Item seletedOItem = null;
 
                 for(BiddingItem item: BiddingActivity.biddingItemList){
                     if(item.getId().equals(id)){
                         selectedItem = item;
-                        BiddingActivity.biddingItemList.remove(selectedItem);
-                        biddingItemAdapter.notifyDataSetChanged();
+
                         db.collection("BiddingItem").whereEqualTo("id",selectedItem.getId())
                                         .get()
                                                 .addOnCompleteListener(task -> {
@@ -84,8 +85,11 @@ public class DetailItemActivity extends AppCompatActivity {
                                                             db.collection("BiddingItem").document(documentId)
                                                                     .delete()
                                                                     .addOnSuccessListener(aVoid -> {
+                                                                        BiddingActivity.biddingItemList.remove(item);
+                                                                        biddingItemAdapter.notifyDataSetChanged();
                                                                         Toast.makeText(DetailItemActivity.this, "아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                                        finish();
+                                                                        Intent intent1 = new Intent(DetailItemActivity.this, BiddingActivity.class);
+                                                                        startActivity(intent1);
                                                                     });
                                                         }
                                                     }
@@ -98,6 +102,37 @@ public class DetailItemActivity extends AppCompatActivity {
                         Log.d(TAG, "일치하는 아이디가 없습니다.");
                     }
                 }
+                for(Item item: OpenAuctionActivity.openItemList){
+                    if(item.getId().equals(id)){
+                        seletedOItem = item;
+
+                        db.collection("OpenItem").whereEqualTo("id",seletedOItem.getId())
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if(task.isSuccessful()){
+                                        for(QueryDocumentSnapshot document : task.getResult()){
+                                            String documentId = document.getId();
+                                            db.collection("OpenItem").document(documentId)
+                                                    .delete()
+                                                    .addOnSuccessListener(aVoid -> {
+                                                        OpenAuctionActivity.openItemList.remove(item);
+                                                        openAuctionAdapter.notifyDataSetChanged();
+                                                        Toast.makeText(DetailItemActivity.this, "아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                                        Intent intent1 = new Intent(DetailItemActivity.this, OpenAuctionActivity.class);
+                                                        startActivity(intent1);
+                                                    });
+                                        }
+                                    }
+                                }).addOnFailureListener( e ->{
+                                    Toast.makeText(DetailItemActivity.this, "삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                });
+                        break;
+                    }
+                    else{
+                        Log.d(TAG, "일치하는 아이디가 없습니다.");
+                    }
+                }
+
 
             }
         });
