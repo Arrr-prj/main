@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -107,6 +110,9 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                             String uid = firebaseUser.getUid();
 
+                            DocumentReference userDocRef = database.collection("User").document(uid);
+
+
                             Map<String, Object> data = new HashMap<>();
 
                             data.put("name", strName);
@@ -116,14 +122,20 @@ public class RegisterActivity extends AppCompatActivity {
 //                            data.put("sex", finalStrSex);
                             data.put("address", strAddrees);
 
-                            database.collection("User").add(data) // test 라는 컬렉션에 등록
-                                    .addOnCompleteListener(documentReference -> {
-                                        Toast.makeText(RegisterActivity.this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                        startActivity(intent);
+                            userDocRef.set(data)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // 문서 생성 및 데이터 저장 성공
+                                            Toast.makeText(RegisterActivity.this, "회원가입에 성공.", Toast.LENGTH_SHORT).show();
+                                        }
                                     })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다1.", Toast.LENGTH_SHORT).show();
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // 문서 생성 및 데이터 저장 실패
+                                            Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                        }
                                     });
                         } else {
                             Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다2.", Toast.LENGTH_SHORT).show();
