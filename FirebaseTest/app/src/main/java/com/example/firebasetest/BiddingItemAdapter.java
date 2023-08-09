@@ -86,4 +86,9 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
         }
         return itemView;
     }
+
+    public void updateData(List<BiddingItem> newDataList){
+        bItem = newDataList;
+        notifyDataSetChanged();
+    }
 }

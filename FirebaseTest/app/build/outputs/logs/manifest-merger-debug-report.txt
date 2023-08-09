@@ -11,7 +11,7 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.1.3] C:\#NewTest\cache
 MERGED from [androidx.appcompat:appcompat:1.4.1] C:\#NewTest\caches\transforms-3\f06924b1c68cdd2ead8c8083e024adb6\transformed\appcompat-1.4.1\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-auth-ktx:22.1.1] C:\#NewTest\caches\transforms-3\51414c9afb12207d38442e55f0816bc2\transformed\firebase-auth-ktx-22.1.1\AndroidManifest.xml:2:1-17:12
 MERGED from [com.google.firebase:firebase-auth:22.1.1] C:\#NewTest\caches\transforms-3\994c4f6a264dc6d528aa5ea9d37deb82\transformed\firebase-auth-22.1.1\AndroidManifest.xml:17:1-75:12
-MERGED from [com.github.bumptech.glide:glide:4.10.0] C:\#NewTest\caches\transforms-3\cd741921f5e2bf9de2b28dea6d295a46\transformed\glide-4.10.0\AndroidManifest.xml:2:1-12:12
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\#NewTest\caches\transforms-3\6fc1ab3f412131bd3c136761dfda0b6b\transformed\glide-4.12.0\AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.7.0] C:\#NewTest\caches\transforms-3\24eb1d2b5a772fe5ec76a85b8817213c\transformed\firebase-firestore-ktx-24.7.0\AndroidManifest.xml:2:1-20:12
 MERGED from [com.google.firebase:firebase-firestore:24.7.0] C:\#NewTest\caches\transforms-3\e136d5c822caaaafe99f58bc7f33c3c4\transformed\firebase-firestore-24.7.0\AndroidManifest.xml:2:1-25:12
 MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\#NewTest\caches\transforms-3\4b58c9e02ad3c4a8d607d2cebc6ff447\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:2:1-7:12
@@ -52,7 +52,8 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\#NewTes
 MERGED from [androidx.savedstate:savedstate:1.1.0] C:\#NewTest\caches\transforms-3\e805f8598ca0a7b900df09c65c405687\transformed\savedstate-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\#NewTest\caches\transforms-3\674084f5d9bbd7bf9297fe63fe754427\transformed\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.cardview:cardview:1.0.0] C:\#NewTest\caches\transforms-3\4e8c60a4fc21ab43b90958c81694363f\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] C:\#NewTest\caches\transforms-3\4d0880b4aea3ecdd1d3c17e2b1e9d09d\transformed\gifdecoder-4.10.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\#NewTest\caches\transforms-3\bce9b17b7ceb01282819a7afcc5f5f8c\transformed\gifdecoder-4.12.0\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\#NewTest\caches\transforms-3\e17d02f5d64d43e93204a4330b1b4ad7\transformed\exifinterface-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\#NewTest\caches\transforms-3\ecac625faabffbb0784c9a9c31930ef0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] C:\#NewTest\caches\transforms-3\07045380a4466d96613ffa7c5b1ff2a1\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:17:1-37:12
 MERGED from [androidx.startup:startup-runtime:1.0.0] C:\#NewTest\caches\transforms-3\b9f22a99475fa924702a77cfc16cf44f\transformed\startup-runtime-1.0.0\AndroidManifest.xml:17:1-33:12
@@ -131,8 +132,8 @@ MERGED from [com.google.firebase:firebase-auth-ktx:22.1.1] C:\#NewTest\caches\tr
 MERGED from [com.google.firebase:firebase-auth-ktx:22.1.1] C:\#NewTest\caches\transforms-3\51414c9afb12207d38442e55f0816bc2\transformed\firebase-auth-ktx-22.1.1\AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-auth:22.1.1] C:\#NewTest\caches\transforms-3\994c4f6a264dc6d528aa5ea9d37deb82\transformed\firebase-auth-22.1.1\AndroidManifest.xml:28:5-73:19
 MERGED from [com.google.firebase:firebase-auth:22.1.1] C:\#NewTest\caches\transforms-3\994c4f6a264dc6d528aa5ea9d37deb82\transformed\firebase-auth-22.1.1\AndroidManifest.xml:28:5-73:19
-MERGED from [com.github.bumptech.glide:glide:4.10.0] C:\#NewTest\caches\transforms-3\cd741921f5e2bf9de2b28dea6d295a46\transformed\glide-4.10.0\AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:glide:4.10.0] C:\#NewTest\caches\transforms-3\cd741921f5e2bf9de2b28dea6d295a46\transformed\glide-4.10.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\#NewTest\caches\transforms-3\6fc1ab3f412131bd3c136761dfda0b6b\transformed\glide-4.12.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\#NewTest\caches\transforms-3\6fc1ab3f412131bd3c136761dfda0b6b\transformed\glide-4.12.0\AndroidManifest.xml:10:5-20
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.7.0] C:\#NewTest\caches\transforms-3\24eb1d2b5a772fe5ec76a85b8817213c\transformed\firebase-firestore-ktx-24.7.0\AndroidManifest.xml:10:5-18:19
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.7.0] C:\#NewTest\caches\transforms-3\24eb1d2b5a772fe5ec76a85b8817213c\transformed\firebase-firestore-ktx-24.7.0\AndroidManifest.xml:10:5-18:19
 MERGED from [com.google.firebase:firebase-firestore:24.7.0] C:\#NewTest\caches\transforms-3\e136d5c822caaaafe99f58bc7f33c3c4\transformed\firebase-firestore-24.7.0\AndroidManifest.xml:15:5-23:19
@@ -157,8 +158,8 @@ MERGED from [androidx.emoji2:emoji2:1.0.0] C:\#NewTest\caches\transforms-3\0b874
 MERGED from [androidx.emoji2:emoji2:1.0.0] C:\#NewTest\caches\transforms-3\0b8746d1e566349934a47be49a994306\transformed\emoji2-1.0.0\AndroidManifest.xml:25:5-35:19
 MERGED from [androidx.core:core:1.7.0] C:\#NewTest\caches\transforms-3\b60a3b59c005ee04befbe31ff6943472\transformed\core-1.7.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.7.0] C:\#NewTest\caches\transforms-3\b60a3b59c005ee04befbe31ff6943472\transformed\core-1.7.0\AndroidManifest.xml:24:5-89
-MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] C:\#NewTest\caches\transforms-3\4d0880b4aea3ecdd1d3c17e2b1e9d09d\transformed\gifdecoder-4.10.0\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] C:\#NewTest\caches\transforms-3\4d0880b4aea3ecdd1d3c17e2b1e9d09d\transformed\gifdecoder-4.10.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\#NewTest\caches\transforms-3\bce9b17b7ceb01282819a7afcc5f5f8c\transformed\gifdecoder-4.12.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\#NewTest\caches\transforms-3\bce9b17b7ceb01282819a7afcc5f5f8c\transformed\gifdecoder-4.12.0\AndroidManifest.xml:9:5-20
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\#NewTest\caches\transforms-3\ecac625faabffbb0784c9a9c31930ef0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\#NewTest\caches\transforms-3\ecac625faabffbb0784c9a9c31930ef0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] C:\#NewTest\caches\transforms-3\07045380a4466d96613ffa7c5b1ff2a1\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:25:5-35:19
@@ -277,8 +278,8 @@ MERGED from [com.google.firebase:firebase-auth-ktx:22.1.1] C:\#NewTest\caches\tr
 MERGED from [com.google.firebase:firebase-auth-ktx:22.1.1] C:\#NewTest\caches\transforms-3\51414c9afb12207d38442e55f0816bc2\transformed\firebase-auth-ktx-22.1.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth:22.1.1] C:\#NewTest\caches\transforms-3\994c4f6a264dc6d528aa5ea9d37deb82\transformed\firebase-auth-22.1.1\AndroidManifest.xml:21:5-23:64
 MERGED from [com.google.firebase:firebase-auth:22.1.1] C:\#NewTest\caches\transforms-3\994c4f6a264dc6d528aa5ea9d37deb82\transformed\firebase-auth-22.1.1\AndroidManifest.xml:21:5-23:64
-MERGED from [com.github.bumptech.glide:glide:4.10.0] C:\#NewTest\caches\transforms-3\cd741921f5e2bf9de2b28dea6d295a46\transformed\glide-4.10.0\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.bumptech.glide:glide:4.10.0] C:\#NewTest\caches\transforms-3\cd741921f5e2bf9de2b28dea6d295a46\transformed\glide-4.10.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\#NewTest\caches\transforms-3\6fc1ab3f412131bd3c136761dfda0b6b\transformed\glide-4.12.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\#NewTest\caches\transforms-3\6fc1ab3f412131bd3c136761dfda0b6b\transformed\glide-4.12.0\AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.7.0] C:\#NewTest\caches\transforms-3\24eb1d2b5a772fe5ec76a85b8817213c\transformed\firebase-firestore-ktx-24.7.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.7.0] C:\#NewTest\caches\transforms-3\24eb1d2b5a772fe5ec76a85b8817213c\transformed\firebase-firestore-ktx-24.7.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.firebase:firebase-firestore:24.7.0] C:\#NewTest\caches\transforms-3\e136d5c822caaaafe99f58bc7f33c3c4\transformed\firebase-firestore-24.7.0\AndroidManifest.xml:6:5-8:41
@@ -359,8 +360,10 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\#NewTest\caches\tr
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\#NewTest\caches\transforms-3\674084f5d9bbd7bf9297fe63fe754427\transformed\lifecycle-viewmodel-2.3.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cardview:cardview:1.0.0] C:\#NewTest\caches\transforms-3\4e8c60a4fc21ab43b90958c81694363f\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] C:\#NewTest\caches\transforms-3\4e8c60a4fc21ab43b90958c81694363f\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] C:\#NewTest\caches\transforms-3\4d0880b4aea3ecdd1d3c17e2b1e9d09d\transformed\gifdecoder-4.10.0\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] C:\#NewTest\caches\transforms-3\4d0880b4aea3ecdd1d3c17e2b1e9d09d\transformed\gifdecoder-4.10.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\#NewTest\caches\transforms-3\bce9b17b7ceb01282819a7afcc5f5f8c\transformed\gifdecoder-4.12.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\#NewTest\caches\transforms-3\bce9b17b7ceb01282819a7afcc5f5f8c\transformed\gifdecoder-4.12.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\#NewTest\caches\transforms-3\e17d02f5d64d43e93204a4330b1b4ad7\transformed\exifinterface-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\#NewTest\caches\transforms-3\e17d02f5d64d43e93204a4330b1b4ad7\transformed\exifinterface-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\#NewTest\caches\transforms-3\ecac625faabffbb0784c9a9c31930ef0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\#NewTest\caches\transforms-3\ecac625faabffbb0784c9a9c31930ef0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-process:2.4.0] C:\#NewTest\caches\transforms-3\07045380a4466d96613ffa7c5b1ff2a1\transformed\lifecycle-process-2.4.0\AndroidManifest.xml:21:5-23:41
