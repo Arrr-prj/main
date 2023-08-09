@@ -5,9 +5,11 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,13 +41,16 @@ public class OpenRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     TextView write_text;
-    EditText itemName, itemPrice, itemInfo, itemCategory;
+    EditText itemName, itemPrice, itemInfo;
+    Button itemCategory;
     private ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
 
     private Uri imageUrl;
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     private String sellerId = firebaseUser.getDisplayName();
+
+    private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,14 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/");
                 activityResult.launch(intent); // activityResult? launcher?
+            }
+        });
+
+        // 카테고리 클릭 시 이벤트
+        itemCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(view);
             }
         });
 
@@ -164,5 +177,20 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
+    }
+    public void showDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("카테고리 선택")
+                .setItems(categories, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedCategory = categories[which];
+                        // 선택한 카테고리 값을 TextView에 할당
+                        itemCategory.setText(selectedCategory);
+                    }
+                })
+                .setNegativeButton("취소", null); // 취소 버튼
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

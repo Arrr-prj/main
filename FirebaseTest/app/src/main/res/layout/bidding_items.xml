@@ -10,8 +10,8 @@
     <!--프로필 사진-->
     <ImageView
         android:id="@+id/ImgUrl"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:src="@drawable/ic_add_photo"/>
 
     <!--이름-->
