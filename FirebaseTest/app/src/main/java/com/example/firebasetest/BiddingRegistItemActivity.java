@@ -34,6 +34,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BiddingRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -83,14 +85,19 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
                 String seller = firebaseUser.getEmail();
+
+                // 현재 시간 가져오기
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = dateFormat.format(new Date());
+
                 // 쓰기
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
-                if(imageUrl != null){
-                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, seller);
+                if (imageUrl != null) {
+                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, seller, currentTime);
                     Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     Toast.makeText(BiddingRegistItemActivity.this, "사진을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
 
@@ -123,7 +130,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             });
     // 파이어베이스 이미지 업로드
 
-    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId){
+    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId, String currentTime){
         StorageReference fileRef = reference.child("image");
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -133,6 +140,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
+                data.put("uploadTime", currentTime);
                 // 성공 시
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
