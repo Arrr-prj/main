@@ -97,8 +97,8 @@ public class OpenAuctionActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("id")),
                                             Integer.valueOf(String.valueOf(document.getData().get("price"))),
                                             String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")
-                                            )
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("uploadTime"))
                                     )
                             );
 

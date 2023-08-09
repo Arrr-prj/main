@@ -75,8 +75,9 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("id")),
                                             Integer.valueOf(String.valueOf(document.getData().get("price"))),
                                             String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")
-                                            )
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("uploadTime"))
+
                                     )
                             );
 
@@ -102,7 +103,8 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("currentTime"))
                                     )
                             );
 

@@ -113,7 +113,8 @@ public class BiddingActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("uploadTime"))
                                             )
                                     );
 

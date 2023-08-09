@@ -34,6 +34,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class OpenRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -80,11 +83,16 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 String strPrice = itemPrice.getText().toString();
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
+
+                // 현재 시간 가져오기
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String currentTime = dateFormat.format(new Date());
+
                 // 쓰기
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
                 if(imageUrl != null){
-                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory);
+                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, currentTime);
                     Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                     startActivity(intent);
                 }else{
@@ -120,7 +128,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             });
     // 파이어베이스 이미지 업로드
 
-    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory){
+    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String currentTime){
         StorageReference fileRef = reference.child(System.currentTimeMillis()+"."+getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
