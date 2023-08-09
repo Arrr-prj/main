@@ -15,7 +15,7 @@ public class BiddingItem implements Serializable {
         this.imageUrl = imageUrl;
         this.category = category;
         this.info = info;
-        this.seller = getSeller();
+        this.seller = seller;
     }
     public String getImageUrl() {
         return imageUrl;

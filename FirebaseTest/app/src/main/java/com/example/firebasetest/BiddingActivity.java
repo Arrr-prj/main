@@ -46,7 +46,6 @@ import java.util.Map;
 public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
     ListView listView;
-
     private Button btnbck;
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
 
@@ -121,5 +120,4 @@ public class BiddingActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

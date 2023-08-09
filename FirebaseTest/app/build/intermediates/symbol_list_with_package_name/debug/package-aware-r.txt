@@ -3096,7 +3096,6 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_category
-id tv_categorys
 id tv_endPrice
 id tv_itemId
 id tv_itemInfo
@@ -3297,7 +3296,6 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
-layout ocategory_popup
 layout open_items
 layout select_dialog_item_material
 layout select_dialog_multichoice_material

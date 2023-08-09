@@ -89,7 +89,6 @@ id toolbar
 id toolbar2
 id toolbar4
 id tv_category
-id tv_categorys
 id tv_endPrice
 id tv_itemId
 id tv_itemInfo
@@ -111,7 +110,6 @@ layout activity_update_data
 layout bidding_items
 layout bitem_recyclerview
 layout item_list
-layout ocategory_popup
 layout open_items
 menu menu_top
 menu option_menu

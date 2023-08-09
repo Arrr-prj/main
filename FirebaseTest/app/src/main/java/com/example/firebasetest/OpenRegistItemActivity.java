@@ -131,8 +131,8 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                     }
                 }
             });
-    // 파이어베이스 이미지 업로드
 
+    // 파이어베이스 이미지 업로드
     private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory){
         StorageReference fileRef = reference.child(System.currentTimeMillis()+"."+getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
