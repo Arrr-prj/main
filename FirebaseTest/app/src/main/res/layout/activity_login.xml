@@ -27,7 +27,7 @@
         android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="비밀번호를 입력하세요"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColor="#4C4C4C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -87,4 +87,5 @@
         android:text="◀"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,8 @@ import java.util.Map;
 public class OpenAuctionActivity extends AppCompatActivity {
     private Button btnRegistItem;
     ListView listView;
+
+    private Button btnbck;
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
 
     @Override
@@ -41,6 +43,8 @@ public class OpenAuctionActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
+        btnbck = findViewById(R.id.btn_back);
+
         this.InitializeOpenItem();
 
         btnRegistItem = findViewById(R.id.btn_registItem);
@@ -49,6 +53,13 @@ public class OpenAuctionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OpenAuctionActivity.this, OpenRegistItemActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnbck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OpenAuctionActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

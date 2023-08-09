@@ -47,12 +47,15 @@ public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
     ListView listView;
 
+    private Button btnbck;
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bidding);
+
+        btnbck = findViewById(R.id.btn_back);
 
 //        setupEvents();
         listView = (ListView)findViewById(R.id.listView);
@@ -65,6 +68,13 @@ public class BiddingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BiddingActivity.this, BiddingRegistItemActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnbck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BiddingActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });

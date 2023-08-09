@@ -27,12 +27,15 @@ public class MyItemsActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
+    private Button btnbck;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_items);
 
         listView = (ListView)findViewById(R.id.listView);
+
+        btnbck = findViewById(R.id.btn_back);
 
         this.InitializeOpenItem();
         this.InitializeBiddingItem();
@@ -43,6 +46,13 @@ public class MyItemsActivity extends AppCompatActivity {
         listView.setAdapter(openAuctionAdapter);
         listView.setOnItemClickListener(listener);
 
+        btnbck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyItemsActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener(){
         @Override
