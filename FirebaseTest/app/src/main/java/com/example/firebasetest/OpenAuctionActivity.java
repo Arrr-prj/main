@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,10 +32,19 @@ import java.util.Map;
 
 public class OpenAuctionActivity extends AppCompatActivity {
     private Button btnRegistItem;
-    ListView listView;
+    private ListView listView;
 
+    private SearchView searchView;
+    private OpenAuctionAdapter adapter;
+    private boolean searching = false;
     private Button btnbck;
-    public static ArrayList<Item> openItemList = new ArrayList<Item>();
+    public static ArrayList<Item> openItemList ;
+    private List<Item> search_openItemList;
+    public OpenAuctionActivity(){
+        openItemList = new ArrayList<>();
+        search_openItemList = new ArrayList<>();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +53,39 @@ public class OpenAuctionActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listView);
 
+        adapter = new OpenAuctionAdapter(this, openItemList);
+        listView.setAdapter(adapter);
+
+
+
+
         btnbck = findViewById(R.id.btn_back);
 
         this.InitializeOpenItem();
+        listView.setAdapter(adapter);
+        searchView = findViewById(R.id.search_View2);
+
+        //검색창에 텍스트가 입력됐을경우
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()  {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // 사용자가 검색 버튼을 눌렀을 때의 동작
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // 검색창에 텍스트가 입력될 때의 동작
+                if (newText.length() > 0) {
+                    searching = true;
+                    filterItemList(newText);
+                } else {
+                    searching = false;
+                    updateListView(openItemList);
+                }
+                return false;
+            }
+        });
 
         btnRegistItem = findViewById(R.id.btn_registItem);
         // 아이템 등록 버튼 클릭 시 이벤트
@@ -107,5 +147,18 @@ public class OpenAuctionActivity extends AppCompatActivity {
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
+    }
+    public void filterItemList(String query){
+        search_openItemList.clear();
+        for(Item opitem : openItemList){
+            if(opitem.getId().toLowerCase().contains(query.toLowerCase())){
+                search_openItemList.add(opitem);
+            }
+            updateListView(search_openItemList);
+        }
+    }
+    public void updateListView(List<Item> itemList){
+        adapter = new OpenAuctionAdapter(this, itemList);
+        listView.setAdapter(adapter);
     }
 }

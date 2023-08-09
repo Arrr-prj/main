@@ -1,5 +1,6 @@
 package com.example.firebasetest;
 
+
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.speech.tts.TextToSpeech;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +23,7 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,10 +50,20 @@ import java.util.Map;
 
 public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
-    ListView listView;
+    private ListView listView;
 
     private Button btnbck;
-    public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
+    public static ArrayList<BiddingItem> biddingItemList;
+    private List<BiddingItem> search_biddingItemList;
+    private SearchView searchView;
+    private BiddingItemAdapter adapter;
+    private boolean searching = false;
+
+    public BiddingActivity(){
+        biddingItemList = new ArrayList<BiddingItem>();
+        search_biddingItemList = new ArrayList<>();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +76,39 @@ public class BiddingActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         // 저장되어있는 데이터 가져오기
         this.InitializeBiddingItem();
+
+
+
+        adapter = new BiddingItemAdapter(this, biddingItemList);
+        listView.setAdapter(adapter);
+
+
+
+        searchView = findViewById(R.id.search_View);
+
+
+        //검색창에 텍스트가 입력됐을경우
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()  {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // 사용자가 검색 버튼을 눌렀을 때의 동작
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // 검색창에 텍스트가 입력될 때의 동작
+                if (newText.length() > 0) {
+                    searching = true;
+                    filterItemList(newText);
+                } else {
+                    searching = false;
+                    updateListView(biddingItemList);
+                }
+                return false;
+            }
+        });
+
 
         btnRegistItem = findViewById(R.id.btn_registItem);
         // 아이템 등록 버튼 클릭 시 이벤트
@@ -114,15 +162,29 @@ public class BiddingActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
-                                            String.valueOf(document.getData().get("uploadTime"))
-                                            )
-                                    );
+                                            String.valueOf(document.getData().get("time"))
+                                    )
+                            );
 
                         }
                         BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });
+    }
+
+    public void filterItemList(String query){
+        search_biddingItemList.clear();
+        for(BiddingItem item : biddingItemList){
+            if(item.getId().toLowerCase().contains(query.toLowerCase())){
+                search_biddingItemList.add(item);
+            }
+            updateListView(search_biddingItemList);
+        }
+    }
+    public void updateListView(List<BiddingItem> itemList){
+        adapter = new BiddingItemAdapter(this, itemList);
+        listView.setAdapter(adapter);
     }
 
 }

@@ -32,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.text.SimpleDateFormat;
@@ -86,15 +87,20 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 String strCategory = itemCategory.getText().toString();
                 String seller = firebaseUser.getEmail();
 
-                // 현재 시간 가져오기
+                // 현재 시간 및 48시간 후의 시간 계산
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                String currentTime = dateFormat.format(new Date());
+                Calendar currentTime = Calendar.getInstance();
+                String strCurrentTime = dateFormat.format(currentTime.getTime());
+
+                Calendar futureTime = Calendar.getInstance();
+                futureTime.add(Calendar.HOUR_OF_DAY, 48);
+                String strFutureTime = dateFormat.format(futureTime.getTime());
 
                 // 쓰기
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
                 if (imageUrl != null) {
-                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, seller, currentTime);
+                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, seller, strCurrentTime, strFutureTime);
                     Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                     startActivity(intent);
                 } else {
@@ -130,29 +136,30 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             });
     // 파이어베이스 이미지 업로드
 
-    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId, String currentTime){
+    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId, String currentTime, String futureTime) {
         StorageReference fileRef = reference.child("image");
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Map<String, Object> data = new HashMap<>();
-                data.put("id",strName);
+                data.put("id", strName);
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
                 data.put("uploadTime", currentTime);
+                data.put("futureTime", futureTime);
+
                 // 성공 시
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
                         // 이미지 아이템에 담기
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
                         data.put("imgUrl", uri.toString());
 
                         database.collection("BiddingItem").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference){
+                            public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                                 startActivity(intent);
@@ -160,7 +167,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다."+e.getMessage(),
+                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다." + e.getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -169,6 +176,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             }
         });
     }
+
     // 파일 타입 가져오기
     private String getFileExtension(Uri uri){
         ContentResolver cr = getContentResolver();

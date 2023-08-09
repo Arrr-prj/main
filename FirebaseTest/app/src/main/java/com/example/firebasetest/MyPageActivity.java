@@ -1,6 +1,5 @@
 package com.example.firebasetest;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,8 +36,6 @@ public class MyPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_page);
 
 
-
-
         mBtnBackSpace = findViewById(R.id.btn_backSpace);
         mBtnModify = findViewById(R.id.btn_modify);
         mBtnLogout = findViewById(R.id.btn_logout);
@@ -54,14 +51,14 @@ public class MyPageActivity extends AppCompatActivity {
         loadUserData();
 
 
-        // 수정 버튼을 눌렀을 때
-//        mBtnModify.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////                Intent intent = new Intent(MyPageActivity.this, ModifyActivity.class);
-////                startActivity(intent);
-////            }
-//        });
+//         수정 버튼을 눌렀을 때
+        mBtnModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyPageActivity.this, ModifyActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 뒤로가기 버튼을 눌렀을 때
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
@@ -93,57 +90,35 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnWithdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String uid = UserManager.getInstance().getUserUid();
                 FirebaseUser user = mAuth.getCurrentUser();
+
+                deleteUserDataFromFirestore(uid);
+
                 if (user != null) {
-                    // Firebase Authentication에서 사용자 삭제
                     user.delete()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-
-                                        // Firestore에서 사용자 데이터 삭제
-                                        String uid = UserManager.getInstance().getUserUid(); // currentUser.getUid();
-                                        DocumentReference userRef = db.collection("User").document(uid);
-                                        userRef.delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Toast.makeText(MyPageActivity.this, "회원탈퇴 완료", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(MyPageActivity.this, LobyActivity.class));
-                                                        finish();
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(MyPageActivity.this, "회원탈퇴 실패", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-
-
-                                    } else {
-                                        Toast.makeText(MyPageActivity.this, "회원탈퇴 실패", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MyPageActivity.this, "회원탈퇴 완료", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MyPageActivity.this, LobyActivity.class));
+                                        finish();
                                     }
                                 }
                             });
                 }
             }
         });
-
     }
 
 
+    // firestore에서 데이터 가져오는 메서드
     private void loadUserData() {
         String uid = UserManager.getInstance().getUserUid(); // uid 가져오기
 
         if (uid != null) {
             DocumentReference userDocRef = db.collection("User").document(uid);
-
-            String hi = UserManager.getInstance().getUserUid();
-            Toast.makeText(MyPageActivity.this, hi, Toast.LENGTH_SHORT).show();
 
             userDocRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -155,13 +130,9 @@ public class MyPageActivity extends AppCompatActivity {
                                 String email = documentSnapshot.getString("email");
                                 String address = documentSnapshot.getString("address");
 
-                                Toast.makeText(MyPageActivity.this, "제발", Toast.LENGTH_SHORT).show();
-
                                 mTvName.setText("이름   :  " + name);
                                 mTvEmail.setText("이메일 :  " + email);
                                 mTvAddress.setText("주소   :  " + address);
-                            } else {
-                                Toast.makeText(MyPageActivity.this, "대체 왜?", Toast.LENGTH_SHORT).show();
                             }
                         }
                     })
@@ -173,5 +144,19 @@ public class MyPageActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+
+    private void deleteUserDataFromFirestore(String uid) {
+        DocumentReference userDocRef = db.collection("User").document(uid);
+
+        userDocRef.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Firestore에서 사용자 데이터 삭제 성공
+                    }
+                });
+
     }
 }
