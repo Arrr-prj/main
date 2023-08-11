@@ -34,6 +34,7 @@ public class OpenAuctionActivity extends AppCompatActivity {
     ListView listView;
 
     private Button btnbck;
+    private OpenAuctionAdapter oitemAdapter;
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
 
     @Override
@@ -42,11 +43,12 @@ public class OpenAuctionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_auction);
 
         listView = (ListView)findViewById(R.id.listView);
+        oitemAdapter = new OpenAuctionAdapter(this, openItemList);
+        listView.setAdapter(oitemAdapter);
+
 
         btnbck = findViewById(R.id.btn_back);
-
-        this.InitializeOpenItem();
-
+        this.InitializeBiddingItem();
         btnRegistItem = findViewById(R.id.btn_registItem);
         // 아이템 등록 버튼 클릭 시 이벤트
         btnRegistItem.setOnClickListener(new View.OnClickListener() {
@@ -77,35 +79,34 @@ public class OpenAuctionActivity extends AppCompatActivity {
             }
         });
     }
-    public void InitializeOpenItem(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public void InitializeBiddingItem(){
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-
-        // 기존 아이템 리스트 비워주기
+        // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         openItemList.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("OpenItem")
                 .get()
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : (task.getResult())){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
-                            openItemList.add(
-                                    new Item(
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            Integer.valueOf(String.valueOf(document.getData().get("price"))),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
-                                    )
-                            );
+                .addOnCompleteListener(task->{
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String title = document.getString("title");
+                            String id = document.getString("id");
+                            String info = document.getString("info");
+                            String category = document.getString("category");
+                            String seller = document.getString("seller");
+                            String imgUrl = document.getString("imgUrl");
+                            String price = document.getString("price"); // 정수형으로 변환
 
+                            // Item 생성자에 맞게 데이터 추가
+                            Item item = new Item(title, imgUrl, id, price, category, info, seller);
+                            openItemList.add(item);
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
-                        listView.setAdapter(openAuctionAdapter);
+                        oitemAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
     }
+
 }

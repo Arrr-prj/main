@@ -41,7 +41,6 @@ import java.util.List;
 
 public class OpenAuctionAdapter extends ArrayAdapter<Item> {
     private List<Item> oItem;
-
     private Context context;
     private Uri imageUrl;
     private ImageView imageView;
@@ -64,16 +63,16 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
         }
         Item data = getItem(position);
         if (data != null) {
-            ImageView imgView = (ImageView) itemView.findViewById(R.id.ImgUrl);
+            TextView title = (TextView) itemView.findViewById(R.id.otitle);
+            ImageView imgView = (ImageView) itemView.findViewById(R.id.oImgUrl);
             TextView id = (TextView) itemView.findViewById(R.id.id);
             TextView category = (TextView) itemView.findViewById(R.id.category);
             TextView info = (TextView) itemView.findViewById(R.id.info);
             TextView price = (TextView) itemView.findViewById(R.id.price);
-            TextView seller = (TextView) itemView.findViewById(R.id.seller);
 
             imageView = itemView.findViewById(R.id.ImgUrl);
 
-            seller.setText(data.getSeller());
+            title.setText(data.getTitle());
             id.setText(data.getId());
             category.setText(data.getCategory());
             info.setText(data.getInfo());
@@ -85,7 +84,6 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
 
         }
         return itemView;
-
     }
 
     @Override

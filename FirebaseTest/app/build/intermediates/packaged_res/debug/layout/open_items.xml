@@ -8,7 +8,7 @@
 
     <!--프로필 사진-->
     <ImageView
-        android:id="@+id/ImgUrl"
+        android:id="@+id/oImgUrl"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_add_photo"/>
@@ -26,18 +26,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id = "@+id/id"
+                android:id = "@+id/otitle"
                 android:layout_width="wrap_content"
                 android:layout_height ="wrap_content"
-                android:text="품명"
+                android:text="글 제목"
                 android:layout_margin="5dp"/>
 
-            <TextView
-                android:id = "@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height ="wrap_content"
-                android:text="카테고리"
-                android:layout_margin="5dp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -46,11 +40,19 @@
             android:layout_margin ="0dp"
             android:orientation="horizontal">
 
+
             <TextView
-                android:id = "@+id/seller"
+                android:id = "@+id/id"
                 android:layout_width="wrap_content"
                 android:layout_height ="wrap_content"
-                android:text="판매자 아이디"
+                android:text="상품명"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id = "@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height ="wrap_content"
+                android:text="카테고리"
                 android:layout_margin="5dp"/>
 
             <TextView

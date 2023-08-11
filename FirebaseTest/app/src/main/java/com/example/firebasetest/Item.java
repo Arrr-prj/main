@@ -3,15 +3,17 @@ package com.example.firebasetest;
 public class Item {
     private String imageUrl;
     private String id;
-    private Integer price;
+    private String price;
     private String category;
     private String info;
     private String seller;
+    private String title;
 
     public Item(){
 
     }
-    public Item(String imageUrl, String id, Integer price, String category, String info, String seller){
+    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller){
+        this.title = title;
         this.id = id;
         this.price = price;
         this.imageUrl = imageUrl;
@@ -19,6 +21,15 @@ public class Item {
         this.info = info;
         this.seller = seller;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -35,11 +46,11 @@ public class Item {
         this.id = id;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

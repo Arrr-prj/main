@@ -1,190 +1,214 @@
 [
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_person_icon.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/person_icon.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_ceramic.png.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\ceramic.png"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_bidding.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_bidding.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_watch.png.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\watch.png"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/menu_option_menu.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/menu/option_menu.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_open_regist_item.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_regist_item.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_search_icon.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/search_icon.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_bidding_items.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\bidding_items.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_bidding_regist_item.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_bidding_regist_item.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_main.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_open_auction.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_open_auction.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_my_items.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_items.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xxhdpi/ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable-v24/ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_ceramic.png.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/ceramic.png"
-    },
-    {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_backspace_icon.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/backspace_icon.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_shoes.png.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\shoes.png"
     },
     {
         "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_my_items.xml.flat",
         "source": "com.example.firebasetest.app-main-8:/layout/activity_my_items.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_menu_icon.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/menu_icon.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_bitem_recyclerview.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/bitem_recyclerview.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_bitem_recyclerview.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\bitem_recyclerview.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_main.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_main.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\xml\\data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\xml_backup_rules.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\xml\\backup_rules.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_edit_item.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_edit_item.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_photoframe.png.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/photoframe.png"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_home.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_home.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_notification_icon.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/notification_icon.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-mdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_open_regist_item.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_open_regist_item.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_detail_item.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_detail_item.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_baseline_person_24.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\baseline_person_24.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_watch.png.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/watch.png"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_login.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_login.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/xml/data_extraction_rules.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_register.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_register.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_ic_add_photo.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/ic_add_photo.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_my_page.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_page.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_open_items.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/open_items.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_menu_icon.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\menu_icon.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_login.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_login.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_item_list.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\item_list.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/ic_launcher_background.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_my_item_detail.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_item_detail.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_update_data.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_update_data.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_register.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_register.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\menu_option_menu.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\menu\\option_menu.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_car.png.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\car.png"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_bidding_items.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/bidding_items.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/menu_menu_top.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/menu/menu_top.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_notification_icon.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\notification_icon.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_detail_item.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_detail_item.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/xml_backup_rules.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/xml/backup_rules.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_loby.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_loby.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_home.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_home.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_open_items.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\open_items.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-anydpi-v33_ic_launcher.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-anydpi-v33/ic_launcher.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_ic_add_photo.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\ic_add_photo.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_baseline_person_24.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/baseline_person_24.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\menu_menu_top.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\menu\\menu_top.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_open_auction.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_auction.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_bidding.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_bidding.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_modify.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_modify.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_shoes.png.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/shoes.png"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_backspace_icon.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\backspace_icon.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_loby.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_loby.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\xml_network_security_config.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\xml\\network_security_config.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_item_list.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/item_list.xml"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_person_icon.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\person_icon.xml"
     },
     {
-        "merged": "com.example.firebasetest.app-merged_res-6:/drawable_car.png.flat",
-        "source": "com.example.firebasetest.app-main-8:/drawable/car.png"
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_photoframe.png.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\photoframe.png"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_bidding_regist_item.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_bidding_regist_item.xml"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_search_icon.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\search_icon.xml"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-anydpi-v33\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_update_data.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_update_data.xml"
+    },
+    {
+        "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\mipmap-anydpi-v26\\ic_launcher.xml"
     }
 ]

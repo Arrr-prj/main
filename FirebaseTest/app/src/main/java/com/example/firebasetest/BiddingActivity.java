@@ -45,6 +45,7 @@ import java.util.Map;
 
 public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
+    private BiddingItemAdapter bitemAdapter;
     ListView listView;
     private Button btnbck;
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
@@ -55,9 +56,10 @@ public class BiddingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bidding);
 
         btnbck = findViewById(R.id.btn_back);
-
-//        setupEvents();
+        
         listView = (ListView)findViewById(R.id.listView);
+        bitemAdapter = new BiddingItemAdapter(this, biddingItemList);
+        listView.setAdapter(bitemAdapter);
         // 저장되어있는 데이터 가져오기
         this.InitializeBiddingItem();
 
@@ -92,31 +94,32 @@ public class BiddingActivity extends AppCompatActivity {
             }
         });
     }
-
     public void InitializeBiddingItem(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         biddingItemList.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("BiddingItem")
                 .get()
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : task.getResult()){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl"));
-                            biddingItemList.add(
-                                    new BiddingItem(
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
-                                            )
-                                    );
+                .addOnCompleteListener(task->{
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String title = document.getString("title");
+                            String id = document.getString("id");
+                            String info = document.getString("info");
+                            String category = document.getString("category");
+                            String seller = document.getString("seller");
+                            String imgUrl = document.getString("imgUrl");
+                            String price = document.getString("price");
+
+                            // Item 생성자에 맞게 데이터 추가
+                            BiddingItem item = new BiddingItem(title, imgUrl, id, price, category, info, seller);
+                            biddingItemList.add(item);
                         }
-                        BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
-                        listView.setAdapter(biddingItemAdapter);
+                        bitemAdapter.notifyDataSetChanged();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
     }

@@ -68,16 +68,18 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
         }
         BiddingItem data = getItem(position);
         if(data != null){
+            TextView title = (TextView)itemView.findViewById(R.id.title);
             ImageView imgView = (ImageView)itemView.findViewById(R.id.ImgUrl);
             TextView id = (TextView)itemView.findViewById(R.id.id);
             TextView category = (TextView)itemView.findViewById(R.id.category);
             TextView info = (TextView)itemView.findViewById(R.id.info);
-            TextView seller = (TextView) itemView.findViewById(R.id.seller);
+            TextView price = (TextView)itemView.findViewById(R.id.price);
 
-            seller.setText(data.getSeller());
+            title.setText(data.getTitle());
             id.setText(data.getId());
             category.setText(data.getCategory());
             info.setText(data.getInfo());
+            price.setText(data.getPrice());
 
             Glide.with(getContext())
                     .load(data.getImageUrl())

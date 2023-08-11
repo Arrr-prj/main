@@ -41,15 +41,14 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView write_text;
-    EditText itemName, itemPrice, itemInfo;
+    EditText itemTitle, itemName, itemPrice, itemInfo;
     Button itemCategory;
     private ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
 
     private Uri imageUrl;
-    // 로그인된 사용자의 ID 가져오기
-    private String sellerId = firebaseUser.getDisplayName();
     private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
 
     @Override
@@ -57,6 +56,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bidding_regist_item);
         // 컴포넌트 객체에 담기
+        itemTitle = findViewById(R.id.input_title);
         itemName = findViewById(R.id.input_itemName);
         itemPrice = findViewById(R.id.input_itemPrice);
         itemInfo = findViewById(R.id.input_itemExplain);
@@ -65,7 +65,6 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.input_itemImg);
 
-        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -89,6 +88,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
         registBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String strTitle = itemTitle.getText().toString();
                 String strName = itemName.getText().toString();
                 String strPrice = itemPrice.getText().toString();
                 String strInfo = itemInfo.getText().toString();
@@ -96,9 +96,8 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 String seller = firebaseUser.getEmail();
                 // 쓰기
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("Items");
                 if(imageUrl != null){
-                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, seller);
+                    uploadToFirebase(strTitle, imageUrl, strName, strPrice, strInfo, strCategory, seller);
                     Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                     startActivity(intent);
                 }else{
@@ -134,42 +133,35 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             });
     // 파이어베이스 이미지 업로드
 
-    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId){
-        StorageReference fileRef = reference.child("image");
-        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Map<String, Object> data = new HashMap<>();
-                data.put("id",strName);
-                data.put("info", strInfo);
-                data.put("category", strCategory);
-                data.put("seller", sellerId);
-                // 성공 시
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // 이미지 아이템에 담기
-                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    private void uploadToFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
+        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            Map<String, Object> data = new HashMap<>();
+            data.put("title", strTitle);
+            data.put("id", strName);
+            data.put("price",strPrice);
+            data.put("info", strInfo);
+            data.put("category", strCategory);
+            data.put("seller", sellerId);
 
-                        data.put("imgUrl", uri.toString());
+            // 성공 시
+            fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
+                // 이미지 아이템에 담기
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                data.put("imgUrl", uriResult.toString());
 
-                        database.collection("BiddingItem").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference){
-                                Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
-                                startActivity(intent);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다."+e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            }
+                DocumentReference userDocRef = db.collection("BiddingItem").document(strTitle + "time");
+                userDocRef.set(data)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다." + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
                         });
-                    }
-                });
-            }
+            });
         });
     }
     // 파일 타입 가져오기

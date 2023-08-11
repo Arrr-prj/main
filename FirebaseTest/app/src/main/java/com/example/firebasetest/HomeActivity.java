@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         btnMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, MyItemsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MyPageActivity.class);
                 startActivity(intent);
             }
         });

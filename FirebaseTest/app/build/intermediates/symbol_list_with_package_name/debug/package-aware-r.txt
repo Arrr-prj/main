@@ -2670,6 +2670,7 @@ id browser_actions_menu_items
 id browser_actions_menu_view
 id btn_Identification
 id btn_back
+id btn_backSpace
 id btn_best
 id btn_bidding
 id btn_delete
@@ -2679,6 +2680,9 @@ id btn_itemRegist
 id btn_kakaoLoginScreen
 id btn_login
 id btn_loginScreen
+id btn_logout
+id btn_modify
+id btn_myItem
 id btn_mypage
 id btn_open
 id btn_regist
@@ -2687,6 +2691,7 @@ id btn_register
 id btn_registerScreen
 id btn_search
 id btn_sendCode
+id btn_withdrawal
 id button7
 id buttonPanel
 id cache_measures
@@ -2831,6 +2836,7 @@ id input_itemImg
 id input_itemName
 id input_itemPrice
 id input_pwd
+id input_title
 id invisible
 id inward
 id is_pooling_container_tag
@@ -2842,6 +2848,7 @@ id item3
 id item4
 id itemId
 id itemInfo
+id itemTitle
 id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
@@ -2858,8 +2865,6 @@ id linearLayout
 id listMode
 id listView
 id list_item
-id list_tv_name
-id list_tv_price
 id masked
 id match_constraint
 id match_parent
@@ -2935,9 +2940,11 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id oImgUrl
 id off
 id on
 id onInterceptTouchReturnSwipe
+id otitle
 id outline
 id outward
 id overshoot
@@ -3033,6 +3040,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id sw_bORo
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3095,12 +3103,16 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tv_address
 id tv_category
+id tv_email
 id tv_endPrice
 id tv_itemId
 id tv_itemInfo
+id tv_name
 id tv_seller
 id tv_startPrice
+id tv_title
 id unchecked
 id uniform
 id unlabeled
@@ -3214,11 +3226,15 @@ layout abc_tooltip
 layout activity_bidding
 layout activity_bidding_regist_item
 layout activity_detail_item
+layout activity_edit_item
 layout activity_home
 layout activity_loby
 layout activity_login
 layout activity_main
+layout activity_modify
+layout activity_my_item_detail
 layout activity_my_items
+layout activity_my_page
 layout activity_open_auction
 layout activity_open_regist_item
 layout activity_register
@@ -3243,7 +3259,6 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
-layout item_list
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4658,6 +4673,7 @@ styleable include constraintSet
 xml backup_rules
 xml data_extraction_rules
 xml image_share_filepaths
+xml network_security_config
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end
 xml standalone_badge_gravity_bottom_start

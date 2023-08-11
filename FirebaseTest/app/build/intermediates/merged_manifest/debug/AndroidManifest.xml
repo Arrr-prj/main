@@ -10,6 +10,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +25,12 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.FirebaseTest" >
+        <activity
+            android:name="com.example.firebasetest.MyItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.EditItemActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.firebasetest.LobyActivity"
             android:exported="true" >
@@ -40,6 +48,12 @@
             android:exported="false" />
         <activity
             android:name="com.example.firebasetest.MyItemsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.MyPageActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ModifyActivity"
             android:exported="false" />
         <activity
             android:name="com.example.firebasetest.OpenRegistItemActivity"
@@ -61,8 +75,7 @@
             android:exported="false" />
         <activity
             android:name="com.example.firebasetest.LoginActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
