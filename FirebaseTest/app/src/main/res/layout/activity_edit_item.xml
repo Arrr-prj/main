@@ -29,17 +29,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_photo" />
 
-    <EditText
-        android:id="@+id/input_itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/input_itemTitle"
+        android:layout_width="207dp"
+        android:layout_height="49dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:enabled = "false"
+        android:enabled="false"
         android:inputType="textPersonName"
+        android:text="글 제목"
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_itemImg" />
+
+    <EditText
+        android:id="@+id/input_itemId"
+        android:layout_width="206dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_itemTitle" />
 
     <EditText
         android:id="@+id/input_itemExplain"
@@ -70,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="카테고리"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

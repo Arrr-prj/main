@@ -29,6 +29,11 @@ public class MyItemDetailActivity extends AppCompatActivity {
     private ImageView imgUrl;
     BiddingItemAdapter biddingItemAdapter;
     OpenAuctionAdapter openAuctionAdapter;
+    public BiddingItemAdapter bitemAdapter;
+    public OpenAuctionAdapter oitemAdapter;
+
+    public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
+    public static ArrayList<Item> openItemList = new ArrayList<Item>();
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     BiddingItem item;
     Bitmap bitmap;
@@ -53,12 +58,21 @@ public class MyItemDetailActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
+        // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
+        biddingItemList.clear();
+        // 임시 클래스에 담아둔 firestore의 데이터들을 불러옴
+        biddingItemList.addAll(UserDataHolderBiddingItems.biddingItemList);
+        Log.d(TAG, ""+biddingItemList.size());
 
-        getSelectbItem(id);
-        getSelectoItem(id);
+        // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
+        openItemList.clear();
+        // 임시 클래스에 담아둔 firestore의 데이터들을 불러옴
+        openItemList.addAll(UserDataHolderOpenItems.openItemList);
+        Log.d(TAG, ""+openItemList.size());
 
+
+        getSelectbItem();
+        getSelectoItem();
         // 삭제 버튼 눌렀을 때
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +83,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
                 BiddingItem selectedItem = null;
                 Item seletedOItem = null;
 
-                for (BiddingItem item : BiddingActivity.biddingItemList) {
+                for (BiddingItem item : UserDataHolderBiddingItems.biddingItemList) {
                     if (item.getId().equals(id)) {
                         selectedItem = item;
-
                         db.collection("BiddingItem").whereEqualTo("id", selectedItem.getId())
                                 .get()
                                 .addOnCompleteListener(task -> {
@@ -84,8 +97,10 @@ public class MyItemDetailActivity extends AppCompatActivity {
                                                     .addOnSuccessListener(aVoid -> {
                                                         BiddingActivity.biddingItemList.remove(item);
                                                         biddingItemAdapter.notifyDataSetChanged();
+                                                        // 삭제된 리스트 새로 갱신
+                                                        UserDataHolderBiddingItems.loadBiddingItems();
                                                         Toast.makeText(MyItemDetailActivity.this, "아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                        Intent intent1 = new Intent(MyItemDetailActivity.this, BiddingActivity.class);
+                                                        Intent intent1 = new Intent(MyItemDetailActivity.this, MyItemsActivity.class);
                                                         startActivity(intent1);
                                                     });
                                         }
@@ -98,10 +113,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         Log.d(TAG, "일치하는 아이디가 없습니다.");
                     }
                 }
-                for (Item item : OpenAuctionActivity.openItemList) {
+                for (Item item : UserDataHolderOpenItems.openItemList) {
                     if (item.getId().equals(id)) {
                         seletedOItem = item;
-
                         db.collection("OpenItem").whereEqualTo("id", seletedOItem.getId())
                                 .get()
                                 .addOnCompleteListener(task -> {
@@ -111,10 +125,12 @@ public class MyItemDetailActivity extends AppCompatActivity {
                                             db.collection("OpenItem").document(documentId)
                                                     .delete()
                                                     .addOnSuccessListener(aVoid -> {
-                                                        OpenAuctionActivity.openItemList.remove(item);
+                                                        MyItemDetailActivity.openItemList.remove(item);
                                                         openAuctionAdapter.notifyDataSetChanged();
+                                                        // 삭제된 리스트 새로 갱신
+                                                        UserDataHolderOpenItems.loadOpenItems();
                                                         Toast.makeText(MyItemDetailActivity.this, "아이템이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                        Intent intent1 = new Intent(MyItemDetailActivity.this, OpenAuctionActivity.class);
+                                                        Intent intent1 = new Intent(MyItemDetailActivity.this, MyItemsActivity.class);
                                                         startActivity(intent1);
                                                     });
                                         }
@@ -137,63 +153,48 @@ public class MyItemDetailActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 String id = intent.getStringExtra("id");
                 BiddingItem selectedItem = null;
-                Item seletedOItem = null;
-
-                for (BiddingItem item : BiddingActivity.biddingItemList) {
-                    if (item.getId().equals(id)) {
-                        selectedItem = item;
-
-                        db.collection("BiddingItem").whereEqualTo("id", selectedItem.getId())
-                                .get()
-                                .addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            Intent showEditPage = new Intent(getApplicationContext(), EditItemActivity.class);
-                                            showEditPage.putExtra("id", item.getId());
-                                            startActivity(showEditPage);
-                                        }
-                                    }
-                                }).addOnFailureListener(e -> {
-                                    Toast.makeText(MyItemDetailActivity.this, "수정에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                });
-                        break;
-                    } else {
-                        Log.d(TAG, "일치하는 아이디가 없습니다.");
+                Item selectedoItem = null;
+// BiddingItem 목록에서 선택한 아이템 검색
+                for (BiddingItem item : UserDataHolderBiddingItems.biddingItemList) {
+                    if(item.getId() != null){
+                        if(item.getId().equals(id)){
+                            selectedItem = item;
+                            break;
+                        }
                     }
                 }
-                for (Item item : OpenAuctionActivity.openItemList) {
-                    if (item.getId().equals(id)) {
-                        seletedOItem = item;
 
-                        db.collection("OpenItem").whereEqualTo("id", seletedOItem.getId())
-                                .get()
-                                .addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            String documentId = document.getId();
-                                            Intent showEditPage = new Intent(getApplicationContext(), EditItemActivity.class);
-                                            showEditPage.putExtra("documentId", documentId);
-                                            startActivity(showEditPage);
-                                        }
-                                    }
-                                }).addOnFailureListener(e -> {
-                                    Toast.makeText(MyItemDetailActivity.this, "삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                });
-                        break;
-                    } else {
-                        Log.d(TAG, "일치하는 아이디가 없습니다.");
+                // openItemList에서 선택한 아이템 검색
+                for (Item item : UserDataHolderOpenItems.openItemList) {
+                    if(item.getId() != null){
+                        if(item.getId().equals(id)){
+                            selectedoItem = item;
+                            break;
+                        }
                     }
+                }
+                if (selectedItem != null) {
+                    Toast.makeText(MyItemDetailActivity.this, "비공개 아이템 수정 모드", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("id", selectedItem.getId());
+                    startActivity(intent1);
+                }
+                else if (selectedoItem != null) {
+                    Toast.makeText(MyItemDetailActivity.this, "공개 아이템 수정 모드", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("id", selectedoItem.getId());
+                    startActivity(intent1);
                 }
             }
         });
     }
 
-    private void setbValues(BiddingItem selectedItem){
-
+    private  void setbValues(BiddingItem selectedItem){
+        itemTitle.setText(selectedItem.getTitle());
         itemId.setText(selectedItem.getId());
         itemInfo.setText(selectedItem.getInfo());
         category.setText(selectedItem.getCategory());
-        startPrice.setText(selectedItem.getPrice());
+        startPrice.setText("0");
         endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
         seller.setText(selectedItem.getSeller());
         Glide.with(this)
@@ -201,6 +202,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                 .into(imgUrl);
     }
     private  void setoValues(Item selectedItem){
+        itemTitle.setText(selectedItem.getTitle());
         itemId.setText(selectedItem.getId());
         itemInfo.setText(selectedItem.getInfo());
         category.setText(selectedItem.getCategory());
@@ -213,16 +215,18 @@ public class MyItemDetailActivity extends AppCompatActivity {
     }
 
     // bidding Item 클릭 시 이벤트
-    private void getSelectbItem(String id){
-
-        Toast.makeText(MyItemDetailActivity.this, "id:"+id, Toast.LENGTH_SHORT).show();
+    private void getSelectbItem(){
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        Log.d(TAG, ""+id);
         BiddingItem selectedItem = null;
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
-        for(BiddingItem item: BiddingActivity.biddingItemList){
-            Toast.makeText(this, "bItem 검사"+item.getId(), Toast.LENGTH_SHORT).show();
-            if(item.getId().equals(id)){
-                selectedItem = item;
-                break;
+        for(BiddingItem item: UserDataHolderBiddingItems.biddingItemList){
+            if(item.getId() != null){
+                if(item.getId().equals(id)){
+                    selectedItem = item;
+                    break;
+                }
             }
         }
         if(selectedItem != null){
@@ -233,17 +237,22 @@ public class MyItemDetailActivity extends AppCompatActivity {
             // 해당 id와 일치하는 아이템이 없는 경우
         }
     }
-    private void getSelectoItem(String id){
-        Toast.makeText(MyItemDetailActivity.this, "id:"+id, Toast.LENGTH_SHORT).show();
+    private void getSelectoItem(){
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        Log.d(TAG, ""+id);
         Item selectedItem = null;
-//        item = BiddingActivity.biddingItemList.get().getId().equals(id);
-        for(Item item: OpenAuctionActivity.openItemList){
-            Toast.makeText(this, "oItem 검사"+item.getId(), Toast.LENGTH_SHORT).show();
-            if(item.getId().equals(id)){
-                selectedItem = item;
-                break;
+        for(Item item: UserDataHolderOpenItems.openItemList){
+            if(item.getId() != null){
+                if(item.getId().equals(id)){
+                    selectedItem = item;
+                    break;
+                }
             }
         }
+        Toast.makeText(MyItemDetailActivity.this, "openItemList size : "+OpenAuctionActivity.openItemList.size(), Toast.LENGTH_SHORT).show();
+
         if(selectedItem != null){
             // selectedItem 사용하기
             setoValues(selectedItem);

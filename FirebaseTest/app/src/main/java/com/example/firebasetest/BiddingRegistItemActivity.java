@@ -1,5 +1,7 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -13,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -64,6 +67,8 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
         write_text = findViewById(R.id.write_text);
 
         imageView = findViewById(R.id.input_itemImg);
+
+        Log.d(TAG, "<< 시작 가격 최소 금액은 100원입니다. >>");
 
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
@@ -139,7 +144,11 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             Map<String, Object> data = new HashMap<>();
             data.put("title", strTitle);
             data.put("id", strName);
-            data.put("price",strPrice);
+            if(Integer.parseInt(strPrice) >= 100){
+                data.put("price",strPrice);
+            }else{
+                data.put("price",100);
+            }
             data.put("info", strInfo);
             data.put("category", strCategory);
             data.put("seller", sellerId);
@@ -150,9 +159,11 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 data.put("imgUrl", uriResult.toString());
 
-                DocumentReference userDocRef = db.collection("BiddingItem").document(strTitle + "time");
+                DocumentReference userDocRef = db.collection("BiddingItem").document(strTitle + sellerId);
                 userDocRef.set(data)
                         .addOnSuccessListener(aVoid -> {
+                            // 등록된 리스트 새로 갱신
+                            UserDataHolderBiddingItems.loadBiddingItems();
                             Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                             startActivity(intent);

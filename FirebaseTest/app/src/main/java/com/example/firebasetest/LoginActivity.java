@@ -56,12 +56,15 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             // 로그인 성공
+                            
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String uid = user.getUid();
                             // UID를 어플리케이션 내에서 저장 및 관리
                             UserManager.getInstance().setUserUid(uid);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-
+                            // OpenItemList, BiddingItemList 세팅
+                            UserDataHolderBiddingItems.loadBiddingItems();
+                            UserDataHolderOpenItems.loadOpenItems();
                             startActivity(intent);
                             finish();
                         }
@@ -81,4 +84,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

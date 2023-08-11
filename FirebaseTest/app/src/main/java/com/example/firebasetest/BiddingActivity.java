@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
-    private BiddingItemAdapter bitemAdapter;
+    public BiddingItemAdapter bitemAdapter;
     ListView listView;
     private Button btnbck;
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
@@ -60,8 +60,9 @@ public class BiddingActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         bitemAdapter = new BiddingItemAdapter(this, biddingItemList);
         listView.setAdapter(bitemAdapter);
+
         // 저장되어있는 데이터 가져오기
-        this.InitializeBiddingItem();
+        InitializeBiddingItem();
 
         btnRegistItem = findViewById(R.id.btn_registItem);
         // 아이템 등록 버튼 클릭 시 이벤트
@@ -95,32 +96,11 @@ public class BiddingActivity extends AppCompatActivity {
         });
     }
     public void InitializeBiddingItem(){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference();
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         biddingItemList.clear();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("BiddingItem")
-                .get()
-                .addOnCompleteListener(task->{
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            String title = document.getString("title");
-                            String id = document.getString("id");
-                            String info = document.getString("info");
-                            String category = document.getString("category");
-                            String seller = document.getString("seller");
-                            String imgUrl = document.getString("imgUrl");
-                            String price = document.getString("price");
-
-                            // Item 생성자에 맞게 데이터 추가
-                            BiddingItem item = new BiddingItem(title, imgUrl, id, price, category, info, seller);
-                            biddingItemList.add(item);
-                        }
-                        bitemAdapter.notifyDataSetChanged();
-                    } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
+        // 임시 클래스에 담아둔 firestore의 데이터들을 불러와서 현재 페이지에 보여줌
+        biddingItemList.addAll(UserDataHolderBiddingItems.biddingItemList);
+        // 새로운 데이터 갱신
+        bitemAdapter.notifyDataSetChanged();
     }
 }

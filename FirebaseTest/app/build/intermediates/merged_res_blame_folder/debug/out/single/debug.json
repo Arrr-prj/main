@@ -8,6 +8,10 @@
         "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\watch.png"
     },
     {
+        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_edit_item.xml.flat",
+        "source": "com.example.firebasetest.app-main-8:/layout/activity_edit_item.xml"
+    },
+    {
         "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\layout_activity_open_regist_item.xml.flat",
         "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_regist_item.xml"
     },
@@ -30,10 +34,6 @@
     {
         "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\drawable_shoes.png.flat",
         "source": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\drawable\\shoes.png"
-    },
-    {
-        "merged": "com.example.firebasetest.app-merged_res-6:/layout_activity_my_items.xml.flat",
-        "source": "com.example.firebasetest.app-main-8:/layout/activity_my_items.xml"
     },
     {
         "merged": "C:\\#NewTest\\daemon\\7.5\\com.example.firebasetest.app-merged_res-6:\\mipmap-xxhdpi_ic_launcher.webp.flat",

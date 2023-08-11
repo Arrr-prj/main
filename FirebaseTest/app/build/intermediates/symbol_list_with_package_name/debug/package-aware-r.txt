@@ -2832,9 +2832,11 @@ id input_Name
 id input_id
 id input_itemCategory
 id input_itemExplain
+id input_itemId
 id input_itemImg
 id input_itemName
 id input_itemPrice
+id input_itemTitle
 id input_pwd
 id input_title
 id invisible

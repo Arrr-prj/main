@@ -14,6 +14,7 @@ public class BiddingItem implements Serializable {
     public BiddingItem(String title, String imageUrl, String price, String id, String category, String info, String seller){
         this.title = title;
         this.id = id;
+        this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
         this.info = info;
