@@ -82,26 +82,36 @@ public class RegisterActivity extends AppCompatActivity {
                 String strAddrees = mEtAddress.getText().toString();
 
 
-//                char x = strRrn.charAt(0);
-//                char y = strRrn.charAt(1);
-//                String year = String.valueOf(x) + String.valueOf(y);
+                char x = strRrn.charAt(0);
+                char y = strRrn.charAt(1);
+                String year = String.valueOf(x) + String.valueOf(y);
 
-//                if(Integer.valueOf(year))
 
-//                if ((strSex.charAt(0) == '1') || (strSex.charAt(0) == '3')) {
-//                    strSex = "남자";
-//                } else {
-//                    strSex = "여자";
-//                }
+
+                // 미성년자 구분
+                if(Integer.valueOf(year) > 04 && Integer.valueOf(year) < 23 ){
+                    Toast.makeText(RegisterActivity.this, "미성년자는 회원가입이 불가능합니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 남자 여자 구분
+                if ((strSex.charAt(0) == '1') || (strSex.charAt(0) == '3')) {
+                    strSex = "남자";
+                } else if ((strSex.charAt(0) == '2') || (strSex.charAt(0) == '4')){
+                    strSex = "여자";
+                }else{
+                    Toast.makeText(RegisterActivity.this, "주민등록 번호를 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 FirebaseFirestore database = FirebaseFirestore.getInstance();
-//지금 추가합니다
-//                if (!strPwd.equals(strPwd2)) { // 비밀번호 재입력이 다를 때
-//                    Toast.makeText(RegisterActivity.this, "입력하신 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+
+                if (!strPwd.equals(strPwd2)) { // 비밀번호 재입력이 다를 때
+                    Toast.makeText(RegisterActivity.this, "입력하신 비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Firebase Auth 진행
-//                String finalStrSex = strSex;
+                String finalStrSex = strSex;
                 mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
 
                     @Override
@@ -128,6 +138,10 @@ public class RegisterActivity extends AppCompatActivity {
                                         public void onSuccess(Void aVoid) {
                                             // 문서 생성 및 데이터 저장 성공
                                             Toast.makeText(RegisterActivity.this, "회원가입에 성공.", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(RegisterActivity.this, LobyActivity.class);
+                                            startActivity(intent);
+                                            finish();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {

@@ -5,7 +5,57 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailItemActivity">
+    tools:context=".DetailBiddingItemActivity">
+
+    <TextView
+        android:id="@+id/tv_endTime"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="392dp"
+        android:text="마감시간 : "
+        android:textColor="#FF0000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/endTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+
+    <TextView
+        android:id="@+id/endTime"
+        android:layout_width="227dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="172dp"
+        android:text="----"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemInfo"
+        app:layout_constraintTop_toBottomOf="@+id/seller" />
+
+    <TextView
+        android:id="@+id/startPrice2"
+        android:layout_width="227dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="124dp"
+        android:text="----"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemInfo"
+        app:layout_constraintTop_toBottomOf="@+id/seller" />
+
+    <TextView
+        android:id="@+id/tv_startPrice2"
+        android:layout_width="135dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="344dp"
+        android:text="시작가격 : "
+        android:textColor="#FF0000"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/endTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
 
     <TextView
         android:id="@+id/category"
@@ -28,16 +78,6 @@
         app:layout_constraintTop_toBottomOf="@+id/category" />
 
     <TextView
-        android:id="@+id/endPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:text="----"
-        app:layout_constraintStart_toEndOf="@+id/tv_endPrice"
-        app:layout_constraintTop_toBottomOf="@+id/startPrice" />
-
-    <TextView
         android:id="@+id/itemInfo"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
@@ -55,7 +95,7 @@
         android:layout_marginTop="10dp"
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_seller"
-        app:layout_constraintTop_toBottomOf="@+id/endPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/startPrice" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -66,29 +106,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btn_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_marginTop="30dp"
-            android:text="삭제"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="296dp" />
-
-        <Button
-            android:id="@+id/btn_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:text="수정"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="181dp" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/tv_itemId"
@@ -121,24 +139,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_category" />
 
     <TextView
-        android:id="@+id/tv_endPrice"
-        android:layout_width="81dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="10dp"
-        android:text="낙찰 가격 :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_startPrice" />
-
-    <TextView
         android:id="@+id/tv_seller"
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:text="판매자명 :"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_endPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_startPrice" />
 
     <TextView
         android:id="@+id/tv_itemInfo"
@@ -149,26 +157,6 @@
         android:text="상품 정보 : "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_seller" />
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="81dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="300dp"
-        android:text="남은 시간 : "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
-
-    <TextView
-        android:id="@+id/timeInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:text="----"
-        app:layout_constraintStart_toEndOf="@+id/tv_itemInfo"
-        app:layout_constraintTop_toBottomOf="@+id/seller" />
 
     <ImageView
         android:id="@+id/imgUrl"
@@ -189,5 +177,66 @@
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_itemId"
         app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+
+    <Button
+        android:id="@+id/biddng_bid"
+        android:layout_width="356dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="4dp"
+        android:text="입찰 하기"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="showBidPopup"/>
+
+    <LinearLayout
+        android:id="@+id/bidPopupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="16dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/biddng_bid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:id="@+id/bidAmountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="입찰 금액을 입력하세요."
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/confirmBidButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="확인"
+                android:onClick="onConfirmBidClick" />
+
+            <Button
+                android:id="@+id/cancelBidButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="취소"
+                android:onClick="onCancelBidClick" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

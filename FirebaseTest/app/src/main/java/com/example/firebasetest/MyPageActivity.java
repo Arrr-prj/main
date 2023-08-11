@@ -1,5 +1,6 @@
 package com.example.firebasetest;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -112,7 +113,6 @@ public class MyPageActivity extends AppCompatActivity {
         });
     }
 
-
     // firestore에서 데이터 가져오는 메서드
     private void loadUserData() {
         String uid = UserManager.getInstance().getUserUid(); // uid 가져오기
@@ -146,7 +146,6 @@ public class MyPageActivity extends AppCompatActivity {
         }
     }
 
-
     private void deleteUserDataFromFirestore(String uid) {
         DocumentReference userDocRef = db.collection("User").document(uid);
 
@@ -157,6 +156,5 @@ public class MyPageActivity extends AppCompatActivity {
                         // Firestore에서 사용자 데이터 삭제 성공
                     }
                 });
-
     }
 }

@@ -18,9 +18,6 @@
             android:name=".ModifyActivity"
             android:exported="false" />
         <activity
-            android:name=".BiddingDetailItemActivity"
-            android:exported="false" />
-        <activity
             android:name=".MyPageActivity"
             android:exported="false" />
         <activity
@@ -36,7 +33,7 @@
             android:name=".UpdateDataActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailItemActivity"
+            android:name=".OpenDetailItemActivity"
             android:exported="false" />
         <activity
             android:name=".MyItemsActivity"

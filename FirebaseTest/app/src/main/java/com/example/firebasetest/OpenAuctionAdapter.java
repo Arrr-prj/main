@@ -103,5 +103,10 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
         return oItem.get(position);
     }
 
+    public void updateData(List<Item> newDataList){
+        oItem = newDataList;
+        notifyDataSetChanged();
+    }
+
 }
 

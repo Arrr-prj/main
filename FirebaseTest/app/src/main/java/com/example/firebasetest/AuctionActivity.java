@@ -153,7 +153,7 @@ public class AuctionActivity extends AppCompatActivity {
                         Item item = new Item();
 //                        item.setImageUrl(downloadUrl.toString());
                         item.setId(InputItemName.getText().toString());
-                        item.setPrice(Integer.parseInt(InputItemPrice.getText().toString()));
+                        item.setPrice(InputItemPrice.getText().toString());
 
                         //image 라는 테이블에 json 형태로 담긴다.
                         //database.getReference().child("Profile").setValue(imageDTO);

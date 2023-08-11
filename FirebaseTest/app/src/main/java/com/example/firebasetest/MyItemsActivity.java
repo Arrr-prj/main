@@ -73,14 +73,15 @@ public class MyItemsActivity extends AppCompatActivity {
                                     new Item(
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
-                                            Integer.valueOf(String.valueOf(document.getData().get("price"))),
+                                            String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("uploadTime"))
-
+                                            String.valueOf(document.getData().get("title")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("futureMillis"))
                                     )
                             );
-
                         }
                         OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
                         listView.setAdapter(openAuctionAdapter);

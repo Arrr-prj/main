@@ -6,7 +6,6 @@ public class UserManager {
 
     private UserManager() {
     }
-
     public static synchronized UserManager getInstance() {
         if (instance == null) {
             instance = new UserManager();

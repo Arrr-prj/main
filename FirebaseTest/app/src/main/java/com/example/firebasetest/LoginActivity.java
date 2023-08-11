@@ -60,15 +60,11 @@ public class LoginActivity extends AppCompatActivity {
                             String uid = user.getUid();
                             // UID를 어플리케이션 내에서 저장 및 관리
                             UserManager.getInstance().setUserUid(uid);
-
-
-
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 
                             startActivity(intent);
                             finish();
                         }
-
                         else{
                             Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                         }

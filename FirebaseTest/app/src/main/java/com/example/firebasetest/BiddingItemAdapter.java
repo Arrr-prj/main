@@ -82,7 +82,6 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
             Glide.with(getContext())
                     .load(data.getImageUrl())
                     .into(imgView);
-
         }
         return itemView;
     }
