@@ -90,6 +90,7 @@ public class BiddingActivity extends AppCompatActivity {
                 Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), DetailBiddingItemActivity.class);
                 showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
+
                 startActivity(showDetail);
             }
         });
@@ -118,6 +119,7 @@ public class BiddingActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate"))
+
                                             )
                                     );
 

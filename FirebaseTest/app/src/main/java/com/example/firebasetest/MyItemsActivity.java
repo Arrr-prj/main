@@ -30,7 +30,7 @@ public class MyItemsActivity extends AppCompatActivity {
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    FirebaseUser firebaseUser;
+
     StorageReference storageReference = storage.getReference();
 
     private Button btnbck;
@@ -43,6 +43,16 @@ public class MyItemsActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
 
         btnbck = findViewById(R.id.btn_back);
+
+        this.InitializeOpenItem();
+        this.InitializeBiddingItem();
+        final BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
+        final OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
+
+        listView.setAdapter(biddingItemAdapter);
+        listView.setAdapter(openAuctionAdapter);
+        listView.setOnItemClickListener(listener);
+
         bORo = findViewById(R.id.sw_bORo);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String seller = firebaseUser.getEmail();
@@ -50,6 +60,7 @@ public class MyItemsActivity extends AppCompatActivity {
         // 기본 값은 bidding
         this.InitializeBiddingItem(seller);
         setOnClickbListener();
+
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +94,10 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate"))
+
                                     )
                             );
 
@@ -124,6 +137,9 @@ public class MyItemsActivity extends AppCompatActivity {
                     }
                 });
     }
+
+}
+
     // 상세 페이지 이벤트
     public void setOnClickoListener(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

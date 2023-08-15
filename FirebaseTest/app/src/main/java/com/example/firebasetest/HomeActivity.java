@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         btnBest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

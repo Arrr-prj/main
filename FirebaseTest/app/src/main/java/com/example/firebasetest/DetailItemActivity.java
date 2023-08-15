@@ -28,6 +28,7 @@ public class DetailItemActivity extends AppCompatActivity {
     private TextView itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
     Item item;
+
     Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,9 @@ public class DetailItemActivity extends AppCompatActivity {
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
                 Intent intent = new Intent(DetailItemActivity.this, BiddingActivity.class);
                 String id = intent.getStringExtra("id");
+
                 for(Item item: BiddingActivity.biddingItemList){
+
                     if(item.getId().equals(id)){
 
                         deleteDatabase(id);
@@ -81,6 +84,7 @@ public class DetailItemActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     private  void setbValues(Item selectedItem){
@@ -110,9 +114,11 @@ public class DetailItemActivity extends AppCompatActivity {
     private void getSelectbItem(){
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+
         Item selectedItem = null;
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
         for(Item item: BiddingActivity.biddingItemList){
+
             if(item.getId().equals(id)){
                 selectedItem = item;
                 break;

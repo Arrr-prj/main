@@ -48,8 +48,10 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
     TextView write_text;
     EditText itemTitle, itemName, itemPrice, itemInfo;
     Button itemCategory;
+
     private ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Uri imageUrl;
     private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
@@ -99,10 +101,14 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
                 String seller = firebaseUser.getEmail();
+
                 // 쓰기
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                if(imageUrl != null){
+                DatabaseReference myRef = database.getReference("Items");
+                if (imageUrl != null) {
+
                     uploadToFirebase(strTitle, imageUrl, strName, strPrice, strInfo, strCategory, seller);
+
                     Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                     startActivity(intent);
                 }else{
@@ -138,6 +144,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             });
     // 파이어베이스 이미지 업로드
 
+
     private void uploadToFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
         StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
@@ -148,6 +155,47 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 data.put("price",strPrice);
             }else{
                 data.put("price","100");
+
+                Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                String futureMillis = String.valueOf(calendar.getTimeInMillis()); //
+                // "yyyy-MM-dd HH:mm:ss" 포맷으로 변환
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = sdf.format(calendar.getTime());
+
+                data.put("title",strTitle);
+                data.put("id",strName);
+                data.put("info", strInfo);
+                data.put("category", strCategory);
+                data.put("seller", sellerId);
+                data.put("uploadTime", currentTime);
+                // 성공 시
+
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // 이미지 아이템에 담기
+                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+                        data.put("imgUrl", uri.toString());
+
+                        database.collection("BiddingItem").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference){
+                                Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다."+e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+
             }
             data.put("info", strInfo);
             data.put("category", strCategory);

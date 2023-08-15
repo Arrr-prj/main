@@ -22,7 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OpenDetailItemActivity extends AppCompatActivity {
-    private TextView itemId, startPrice, endPrice, itemInfo, seller, category;
+    private long remainingTimeMillis; // 전역 변수로 추가
+    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl;
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidButton; // 입찰하기 버튼
@@ -34,6 +35,8 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_detail_item);
         // 아이템 정보들
+        itmeTitle = findViewById(R.id.itemTitle);
+
         itemId = findViewById(R.id.itemId);
         startPrice = findViewById(R.id.startPrice);
         endPrice = findViewById(R.id.endPrice);
@@ -41,6 +44,10 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         seller = findViewById(R.id.seller);
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
+
+        timeinfo = findViewById(R.id.timeInfoinfo);
+        futureMillis = findViewById(R.id.futureMillis);
+
         database = FirebaseFirestore.getInstance();
         // 입력받은 입찰 가격
         mBtnBidButton = findViewById(R.id.btn_bidbutton); // 입찰하기 버튼
@@ -97,8 +104,10 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                                                         .addOnSuccessListener(aVoid -> {
                                                             updateHighestBidListener(auctionDocRef.collection("Bids"));
                                                         });
+
                                             }
                                             else {// 현재 입찰가보다 작은 가격이 입력되었을 때
+
                                                 Toast.makeText(OpenDetailItemActivity.this, "전 입찰가보다 높은 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 // 또는 전 입찰가보다 낮은 가격으로 입찰을 하고싶은지 물어보고 등록해주기
                                             }
@@ -156,12 +165,40 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     startPrice.setText(String.valueOf(selectedItem.getPrice()));
                     endPrice.setText(String.valueOf(highestBid));
                     seller.setText(selectedItem.getSeller());
+
+                    timeinfo.setText(selectedItem.getFutureDate());
+
+                    long currentTimeMillis = System.currentTimeMillis();
+                    String aa = selectedItem.getFutureMillis();
+                    Long futureMillisValue = Long.valueOf(aa); // 형변환
+                    remainingTimeMillis = futureMillisValue - currentTimeMillis;
+                    String remainingTime = formatRemainingTime(remainingTimeMillis);
+
+                    futureMillis.setText(remainingTime);
+
                     Glide.with(this)
                             .load(selectedItem.getImageUrl())
                             .into(imgUrl);
                 });
     }
 
+
+    private String formatRemainingTime(long remainingTimeMillis) {
+        if (remainingTimeMillis <= 0) {
+            return "경매가 종료되었습니다.";
+        }
+
+        long diffSeconds = remainingTimeMillis / 1000;
+        long diffMinutes = diffSeconds / 60;
+        long diffHours = diffMinutes / 60;
+        long diffDays = diffHours / 24;
+
+        diffHours = diffHours % 24;
+        diffMinutes = diffMinutes % 60;
+        diffSeconds = diffSeconds % 60;
+
+        return String.format("남은 시간: %d일 %02d시간 %02d분 %02d초", diffDays, diffHours, diffMinutes, diffSeconds);
+    }
     private void getSelectoItem() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");

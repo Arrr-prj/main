@@ -7,6 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".OpenDetailItemActivity">
 
+    <TextView
+        android:id="@+id/tv_itemTitle"
+        android:layout_width="81dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="70dp"
+        android:text="상품제목 : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+
+    <TextView
+        android:id="@+id/itemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="70dp"
+        android:text="----"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemId"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+
     <ImageView
         android:id="@+id/imgUrl"
         android:layout_width="115dp"
