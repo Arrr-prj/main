@@ -33,13 +33,10 @@ import java.util.Map;
 
 public class DetailBiddingItemActivity extends AppCompatActivity {
 
-
-    private long remainingTimeMillis; // 전역 변수로 추가
     private Button btnEdit, btnDelete;
     private Button btnBid;
     private EditText bidText;
-    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-
+    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
     private LinearLayout bidPopupLayout;
     private FirebaseFirestore db;
@@ -62,8 +59,6 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
         seller = findViewById(R.id.seller);
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
-        timeinfo = findViewById(R.id.endTime);
-        futureMillis = findViewById(R.id.futureMillis);
 
         //입찰하기 버튼
         btnBid = findViewById(R.id.biddng_bid);
@@ -76,17 +71,41 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
 
         getSelectbItem();
 
+        // 삭제 버튼 눌렀을 때
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////        item = BiddingActivity.biddingItemList.get().getId().equals(id);
+//                Intent intent = new Intent(DetailBiddingItemActivity.this, BiddingActivity.class);
+//                String id = intent.getStringExtra("id");
+//                for(Item item: BiddingActivity.biddingItemList){
+//                    if(item.getId().equals(id)){
+//
+//                        deleteDatabase(id);
+//                        startActivity(intent);
+//                        break;
+//                    }
+//                }
+//                // 아이템 정보를 다른 화면으로 전달하고 전환
+//
+//            }
+//        });
+//        // 수정 버튼 눌렀을 때
+//        btnEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//                Intent intent = new Intent(DetailBiddingItemActivity.this, MyItemsActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
-        // 입찰하기 버튼을 눌렀을 때 -> dialog 로 입력받을 수 있는 팝업창 띄움
-        btnBid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bidPopupLayout.setVisibility(View.VISIBLE);
-            }
-        });
         Button confirmBidButton = findViewById(R.id.confirmBidButton);
         Button cancelBidButton = findViewById(R.id.cancelBidButton);
 
+        // 입찰하기 버튼을 눌렀을 때 -> dialog 로 입력받을 수 있는 팝업창 띄움
         btnBid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,39 +155,10 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
         startPrice.setText("0");
 //        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
         seller.setText(selectedItem.getSeller());
-
-        timeinfo.setText(selectedItem.getFutureDate());
-
-        long currentTimeMillis = System.currentTimeMillis();
-        String aa = selectedItem.getFutureMillis();
-        Long futureMillisValue = Long.valueOf(aa); // 형변환
-        remainingTimeMillis = futureMillisValue - currentTimeMillis;
-        String remainingTime = formatRemainingTime(remainingTimeMillis);
-
-        futureMillis.setText(remainingTime);
-
         Glide.with(this)
                 .load(selectedItem.getImageUrl())
                 .into(imgUrl);
     }
-
-    private String formatRemainingTime(long remainingTimeMillis) {
-        if (remainingTimeMillis <= 0) {
-            return "경매가 종료되었습니다.";
-        }
-
-        long diffSeconds = remainingTimeMillis / 1000;
-        long diffMinutes = diffSeconds / 60;
-        long diffHours = diffMinutes / 60;
-        long diffDays = diffHours / 24;
-
-        diffHours = diffHours % 24;
-        diffMinutes = diffMinutes % 60;
-        diffSeconds = diffSeconds % 60;
-
-        return String.format("남은 시간: %d일 %02d시간 %02d분 %02d초", diffDays, diffHours, diffMinutes, diffSeconds);
-    }
-
 
     // bidding Item 클릭 시 이벤트
     private void getSelectbItem() {
@@ -222,13 +212,6 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
                                     Toast.makeText(DetailBiddingItemActivity.this,
                                             itemId+" 경매가 종료되었습니다.\n낙찰자: " + winningUserId + "\n입찰금액: " + winningBidAmount,
                                             Toast.LENGTH_LONG).show();
-
-                                    // remainingTimeMillis 값이 음수인 경우 입찰하기 버튼 비활성화
-                                    if (remainingTimeMillis <= 0) {
-                                        btnBid.setEnabled(false);
-                                        btnBid.setText("경매 종료");
-                                    }
-
                                 })
                                 .addOnFailureListener(e -> {
                                     // 업데이트 실패 시의 처리
