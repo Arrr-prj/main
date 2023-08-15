@@ -3,37 +3,24 @@ package com.example.firebasetest;
 public class Item {
     private String imageUrl;
     private String id;
-    private Integer price;
+    private String price;
     private String category;
     private String info;
     private String seller;
-<<<<<<< Updated upstream
-    private String time;
-=======
     private String title;
     private String futureMillis;
     private String futureDate;
->>>>>>> Stashed changes
 
     public Item(){
 
     }
-<<<<<<< Updated upstream
-    public Item(String imageUrl, String id, Integer price, String category, String info, String time){
-=======
     public Item(String title, String imageUrl, String id, String price, String category, String info, String seller, String futureMillis, String futureDate){
         this.title = title;
->>>>>>> Stashed changes
         this.id = id;
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
         this.info = info;
-<<<<<<< Updated upstream
-        this.seller = getSeller();
-        this.time = time;
-    }
-=======
         this.seller = seller;
         this.futureDate = futureDate;
         this.futureMillis = futureMillis;
@@ -61,7 +48,6 @@ public class Item {
         this.title = title;
     }
 
->>>>>>> Stashed changes
     public String getImageUrl() {
         return imageUrl;
     }
@@ -78,11 +64,11 @@ public class Item {
         this.id = id;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -126,14 +112,4 @@ public class Item {
         this.info = info;
     }
 
-<<<<<<< Updated upstream
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-=======
->>>>>>> Stashed changes
 }

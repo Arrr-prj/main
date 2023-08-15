@@ -72,15 +72,10 @@ public class OpenAuctionActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Item item = (Item) listView.getItemAtPosition(position);
-<<<<<<< Updated upstream
-                Intent showDetail = new Intent(getApplicationContext(), DetailItemActivity.class);
-                showDetail.putExtra("id", item.getId());
-=======
                 Intent showDetail = new Intent(getApplicationContext(), OpenDetailItemActivity.class);
                 showDetail.putExtra("id", item.getId());
                 showDetail.putExtra("title", item.getTitle());
                 showDetail.putExtra("seller", item.getSeller());
->>>>>>> Stashed changes
                 startActivity(showDetail);
             }
         });
@@ -101,15 +96,17 @@ public class OpenAuctionActivity extends AppCompatActivity {
                             // Firebase Storage에서 이미지 불러오기
                             openItemList.add(
                                     new Item(
+                                            String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
-                                            Integer.valueOf(String.valueOf(document.getData().get("price"))),
+                                            String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("uploadTime"))
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
                                     )
                             );
-
                         }
                         OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
                         listView.setAdapter(openAuctionAdapter);
