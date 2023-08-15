@@ -27,7 +27,11 @@ public class DetailItemActivity extends AppCompatActivity {
     private Button btnEdit, btnDelete;
     private TextView itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
+<<<<<<< Updated upstream
     BiddingItem item;
+=======
+    Item item;
+>>>>>>> Stashed changes
     Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,11 @@ public class DetailItemActivity extends AppCompatActivity {
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
                 Intent intent = new Intent(DetailItemActivity.this, BiddingActivity.class);
                 String id = intent.getStringExtra("id");
+<<<<<<< Updated upstream
                 for(BiddingItem item: BiddingActivity.biddingItemList){
+=======
+                for(Item item: BiddingActivity.biddingItemList){
+>>>>>>> Stashed changes
                     if(item.getId().equals(id)){
 
                         deleteDatabase(id);
@@ -83,7 +91,11 @@ public class DetailItemActivity extends AppCompatActivity {
     }
 
 
+<<<<<<< Updated upstream
     private  void setbValues(BiddingItem selectedItem){
+=======
+    private  void setbValues(Item selectedItem){
+>>>>>>> Stashed changes
         itemId.setText(selectedItem.getId());
         itemInfo.setText(selectedItem.getInfo());
         category.setText(selectedItem.getCategory());
@@ -110,9 +122,15 @@ public class DetailItemActivity extends AppCompatActivity {
     private void getSelectbItem(){
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+<<<<<<< Updated upstream
         BiddingItem selectedItem = null;
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
         for(BiddingItem item: BiddingActivity.biddingItemList){
+=======
+        Item selectedItem = null;
+//        item = BiddingActivity.biddingItemList.get().getId().equals(id);
+        for(Item item: BiddingActivity.biddingItemList){
+>>>>>>> Stashed changes
             if(item.getId().equals(id)){
                 selectedItem = item;
                 break;

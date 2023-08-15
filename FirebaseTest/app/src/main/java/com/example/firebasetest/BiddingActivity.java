@@ -87,9 +87,15 @@ public class BiddingActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+<<<<<<< Updated upstream
                 BiddingItem item = (BiddingItem) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), DetailItemActivity.class);
                 showDetail.putExtra("id", item.getId());
+=======
+                Item item = (Item) listView.getItemAtPosition(position);
+                Intent showDetail = new Intent(getApplicationContext(), DetailBiddingItemActivity.class);
+                showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
+>>>>>>> Stashed changes
                 startActivity(showDetail);
             }
         });
@@ -114,7 +120,12 @@ public class BiddingActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
+<<<<<<< Updated upstream
                                             String.valueOf(document.getData().get("uploadTime"))
+=======
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
+>>>>>>> Stashed changes
                                             )
                                     );
 

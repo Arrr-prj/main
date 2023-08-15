@@ -44,6 +44,17 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+<<<<<<< Updated upstream
+=======
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, ShareActivity.class);
+                startActivity(intent);
+            }
+        });
+>>>>>>> Stashed changes
         btnBest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

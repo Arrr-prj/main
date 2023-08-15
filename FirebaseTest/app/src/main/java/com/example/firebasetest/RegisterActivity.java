@@ -115,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
                             data.put("rrn", strRrn);
 //                            data.put("sex", finalStrSex);
                             data.put("address", strAddrees);
+                            data.put("membership",false); // 멤버십 기능 추가
 
                             database.collection("User").add(data) // test 라는 컬렉션에 등록
                                     .addOnCompleteListener(documentReference -> {

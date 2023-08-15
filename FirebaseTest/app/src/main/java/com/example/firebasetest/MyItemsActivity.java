@@ -26,6 +26,10 @@ public class MyItemsActivity extends AppCompatActivity {
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
+<<<<<<< Updated upstream
+=======
+    FirebaseUser firebaseUser;
+>>>>>>> Stashed changes
     StorageReference storageReference = storage.getReference();
     private Button btnbck;
     @Override
@@ -36,6 +40,7 @@ public class MyItemsActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
 
         btnbck = findViewById(R.id.btn_back);
+<<<<<<< Updated upstream
 
         this.InitializeOpenItem();
         this.InitializeBiddingItem();
@@ -45,6 +50,15 @@ public class MyItemsActivity extends AppCompatActivity {
         listView.setAdapter(biddingItemAdapter);
         listView.setAdapter(openAuctionAdapter);
         listView.setOnItemClickListener(listener);
+=======
+        bORo = findViewById(R.id.sw_bORo);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String seller = firebaseUser.getEmail();
+        bORo.setOnCheckedChangeListener(new bORoSwitchListener());
+        // 기본 값은 bidding
+        this.InitializeBiddingItem(seller);
+        setOnClickbListener();
+>>>>>>> Stashed changes
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +90,13 @@ public class MyItemsActivity extends AppCompatActivity {
                                             Integer.valueOf(String.valueOf(document.getData().get("price"))),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+<<<<<<< Updated upstream
                                             String.valueOf(document.getData().get("uploadTime"))
 
+=======
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
+>>>>>>> Stashed changes
                                     )
                             );
 
@@ -114,5 +133,53 @@ public class MyItemsActivity extends AppCompatActivity {
                     }
                 });
     }
+<<<<<<< Updated upstream
 }
 
+=======
+    // 상세 페이지 이벤트
+    public void setOnClickoListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // 항목을 가져옴
+                Item item = (Item) listView.getItemAtPosition(position);
+                Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
+                Log.d(TAG, ""+item.getSeller());
+                showDetail.putExtra("state", "On");
+                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+//                showDetail.putExtra("sellerId", )
+                startActivity(showDetail);
+            }
+        });
+    }
+    public void setOnClickbListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // 항목을 가져옴
+                Item item = (Item) listView.getItemAtPosition(position);
+                Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
+                showDetail.putExtra("state", "Off");
+                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+                startActivity(showDetail);
+            }
+        });
+    }
+    class bORoSwitchListener implements CompoundButton.OnCheckedChangeListener{
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+            String seller = firebaseUser.getEmail();
+            if(isChecked){
+                InitializeOpenItem(seller);
+                bORo.setText("오픈 경매 아이템");
+                setOnClickoListener();
+            }else{
+                InitializeBiddingItem(seller);
+                bORo.setText("비딩 경매 아이템");
+                setOnClickbListener();
+            }
+        }
+    }
+}
+>>>>>>> Stashed changes

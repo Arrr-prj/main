@@ -65,14 +65,22 @@ public class OpenAuctionActivity extends AppCompatActivity {
         });
         // DetailPage
         setUpOnClickListener();
+
     }
     private void setUpOnClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Item item = (Item) listView.getItemAtPosition(position);
+<<<<<<< Updated upstream
                 Intent showDetail = new Intent(getApplicationContext(), DetailItemActivity.class);
                 showDetail.putExtra("id", item.getId());
+=======
+                Intent showDetail = new Intent(getApplicationContext(), OpenDetailItemActivity.class);
+                showDetail.putExtra("id", item.getId());
+                showDetail.putExtra("title", item.getTitle());
+                showDetail.putExtra("seller", item.getSeller());
+>>>>>>> Stashed changes
                 startActivity(showDetail);
             }
         });
