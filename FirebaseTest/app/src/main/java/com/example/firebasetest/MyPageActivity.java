@@ -21,7 +21,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.auth.User;
+
+import java.util.ArrayList;
 
 public class MyPageActivity extends AppCompatActivity {
 
@@ -36,7 +37,6 @@ public class MyPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
-
 
         mBtnBackSpace = findViewById(R.id.btn_backSpace);
         mBtnModify = findViewById(R.id.btn_modify);
@@ -53,13 +53,12 @@ public class MyPageActivity extends AppCompatActivity {
 
         loadUserData();
 
-        Toast.makeText(this, "clear 전 size"+UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
-
         UserDataHolderOpenItems.openItemList.clear();
         // OpenItemList, BiddingItemList, 무료 나눔 세팅
         UserDataHolderBiddingItems.loadBiddingItems();
         UserDataHolderOpenItems.loadOpenItems();
         UserDataHolderShareItem.loadShareItems();
+
 //         수정 버튼을 눌렀을 때
         mBtnModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +71,7 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnMyItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyPageActivity.this, MyItemsActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, MyTransactionActivity.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +80,8 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(MyPageActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -135,6 +135,7 @@ public class MyPageActivity extends AppCompatActivity {
 
         if (uid != null) {
             DocumentReference userDocRef = db.collection("User").document(uid);
+
             userDocRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override

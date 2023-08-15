@@ -8,6 +8,20 @@
     android:orientation="vertical"
     tools:context=".BiddingRegistItemActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="#330099"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/goods_search_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/write_text"
         android:layout_width="match_parent"
@@ -15,7 +29,6 @@
         android:gravity="center"
         android:text="상품 등록"
         android:textSize="30sp" />
-
 
     <ImageView
         android:id="@+id/input_itemImg"
@@ -28,6 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_photo" />
+
     <EditText
         android:id="@+id/input_title"
         android:layout_width="wrap_content"
@@ -39,6 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_itemImg" />
+
     <EditText
         android:id="@+id/input_itemName"
         android:layout_width="wrap_content"

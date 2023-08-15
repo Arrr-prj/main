@@ -153,6 +153,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             data.put("info", strInfo);
             data.put("category", strCategory);
             data.put("seller", sellerId);
+            data.put("buyer", null); // 경매 끝났을때 uid 혹은 이메일 넣기
 
             // 성공 시
             fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
@@ -176,7 +177,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             });
         });
     }
-        // 파일 타입 가져오기
+    // 파일 타입 가져오기
     public String getFileExtension(Uri uri){
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();

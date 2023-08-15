@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class MyItemsActivity extends AppCompatActivity {
     ListView listView;
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
-    public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
+    public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseUser firebaseUser;
@@ -54,7 +54,7 @@ public class MyItemsActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemsActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MyItemsActivity.this, MyTransactionActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +83,8 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("uploadTime"))
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
                                     )
                             );
 
@@ -107,14 +108,15 @@ public class MyItemsActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id") + document.getData().get("imgUrl"));
                             biddingItemList.add(
-                                    new BiddingItem(
+                                    new Item(
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
-                                            String.valueOf(document.getData().get("currentTime"))
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
                                     ));
                         }
                         BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
@@ -143,7 +145,7 @@ public class MyItemsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // 항목을 가져옴
-                BiddingItem item = (BiddingItem) listView.getItemAtPosition(position);
+                Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 showDetail.putExtra("state", "Off");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());

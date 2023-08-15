@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,19 +15,13 @@
         android:theme="@style/Theme.FirebaseTest"
         tools:targetApi="31">
         <activity
-            android:name=".ShareAdapterActivity"
+            android:name=".MyShareDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ShareRegistItemActivity"
+            android:name=".MyShareActivity"
             android:exported="false" />
         <activity
-            android:name=".ShareActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MyItemDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EditItemActivity"
+            android:name=".MyTransactionActivity"
             android:exported="false" />
         <activity
             android:name=".LobyActivity"
@@ -41,6 +33,30 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ShareDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailBiddingItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateDataActivity"
             android:exported="false" />
         <activity
@@ -50,13 +66,10 @@
             android:name=".MyItemsActivity"
             android:exported="false" />
         <activity
-            android:name=".MyPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ModifyActivity"
-            android:exported="false" />
-        <activity
             android:name=".OpenRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OpenDetailItemActivity"
             android:exported="false" />
         <activity
             android:name=".BiddingRegistItemActivity"

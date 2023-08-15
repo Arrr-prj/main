@@ -45,10 +45,10 @@ import java.util.Map;
 
 public class BiddingActivity extends AppCompatActivity {
     private Button btnRegistItem;
-    public BiddingItemAdapter bitemAdapter;
     ListView listView;
+
     private Button btnbck;
-    public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
+    public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,10 @@ public class BiddingActivity extends AppCompatActivity {
 
         btnbck = findViewById(R.id.btn_back);
 
+//        setupEvents();
         listView = (ListView)findViewById(R.id.listView);
-        bitemAdapter = new BiddingItemAdapter(this, biddingItemList);
-        listView.setAdapter(bitemAdapter);
-
         // 저장되어있는 데이터 가져오기
-        InitializeBiddingItem();
+        this.InitializeBiddingItem();
 
         btnRegistItem = findViewById(R.id.btn_registItem);
         // 아이템 등록 버튼 클릭 시 이벤트
@@ -82,49 +80,52 @@ public class BiddingActivity extends AppCompatActivity {
         });
         // DetailPage
         setUpOnClickListener();
+
     }
     // 상세 페이지 이벤트
     private void setUpOnClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                BiddingItem item = (BiddingItem) listView.getItemAtPosition(position);
-                Intent showDetail = new Intent(getApplicationContext(), DetailItemActivity.class);
+                Item item = (Item) listView.getItemAtPosition(position);
+                Intent showDetail = new Intent(getApplicationContext(), DetailBiddingItemActivity.class);
                 showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
             }
         });
     }
+
     public void InitializeBiddingItem(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         biddingItemList.clear();
-
         db.collection("BiddingItem")
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : (task.getResult())){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
+                        for (QueryDocumentSnapshot document : task.getResult()){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl"));
                             biddingItemList.add(
-                                    new BiddingItem(
+                                    new Item(
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
-                                    )
-                            );
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
+                                            )
+                                    );
+
                         }
                         BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });
     }
+
 }

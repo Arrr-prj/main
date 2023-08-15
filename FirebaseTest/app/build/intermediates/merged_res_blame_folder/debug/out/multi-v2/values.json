@@ -4,6 +4,23 @@
             "outputFile": "com.example.firebasetest.app-mergeDebugResources-4:/values/values.xml",
             "map": [
                 {
+                    "source": "C:\\#AndroidProject\\update\\FirebaseTest\\app\\build\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,200,283,387,497,617,711",
+                        "endColumns": "144,82,103,109,119,93,70",
+                        "endOffsets": "195,278,382,492,612,706,777"
+                    },
+                    "to": {
+                        "startLines": "1639,1647,1648,1649,1650,1651,1741",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "101555,102383,102466,102570,102680,102800,116099",
+                        "endColumns": "144,82,103,109,119,93,70",
+                        "endOffsets": "101695,102461,102565,102675,102795,102889,116165"
+                    }
+                },
+                {
                     "source": "C:\\#NewTest\\caches\\transforms-3\\3fa1ce7a780c387b612fcd2223c9b0b8\\transformed\\drawerlayout-1.1.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -95,7 +112,43 @@
                     }
                 },
                 {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\6fc1ab3f412131bd3c136761dfda0b6b\\transformed\\glide-4.12.0\\res\\values\\values.xml",
+                    "source": "C:\\#AndroidProject\\update\\FirebaseTest\\app\\src\\main\\res\\values\\themes.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "100",
+                        "endLines": "14",
+                        "endColumns": "12",
+                        "endOffsets": "801"
+                    },
+                    "to": {
+                        "startLines": "5581",
+                        "startColumns": "4",
+                        "startOffsets": "376899",
+                        "endLines": "5593",
+                        "endColumns": "12",
+                        "endOffsets": "377479"
+                    }
+                },
+                {
+                    "source": "C:\\#AndroidProject\\update\\FirebaseTest\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "286,55,102,149,196,241,328",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "323,97,144,191,236,281,365"
+                    },
+                    "to": {
+                        "startLines": "586,816,817,818,829,830,834",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "29680,46254,46301,46348,47092,47137,47345",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "29717,46296,46343,46390,47132,47177,47382"
+                    }
+                },
+                {
+                    "source": "C:\\#NewTest\\caches\\transforms-3\\cd741921f5e2bf9de2b28dea6d295a46\\transformed\\glide-4.10.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -128,23 +181,6 @@
                         "endLines": "86,7903,9789,9873",
                         "endColumns": "60,12,24,24",
                         "endOffsets": "4506,529373,597696,602212"
-                    }
-                },
-                {
-                    "source": "C:\\#AndroidProject\\Arr\\FirebaseTest\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "286,55,102,149,196,241,328",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "323,97,144,191,236,281,365"
-                    },
-                    "to": {
-                        "startLines": "586,816,817,818,829,830,834",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "29680,46254,46301,46348,47092,47137,47345",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "29717,46296,46343,46390,47132,47177,47382"
                     }
                 },
                 {
@@ -224,23 +260,6 @@
                     }
                 },
                 {
-                    "source": "C:\\#AndroidProject\\Arr\\FirebaseTest\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "49",
-                        "endOffsets": "61"
-                    },
-                    "to": {
-                        "startLines": "1611",
-                        "startColumns": "4",
-                        "startOffsets": "98160",
-                        "endColumns": "49",
-                        "endOffsets": "98205"
-                    }
-                },
-                {
                     "source": "C:\\#NewTest\\caches\\transforms-3\\ec1d0473320eafbc6e1a7cdc007dfb1a\\transformed\\play-services-basement-18.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,7",
@@ -255,25 +274,6 @@
                         "startOffsets": "93478,100194",
                         "endColumns": "67,166",
                         "endOffsets": "93541,100356"
-                    }
-                },
-                {
-                    "source": "C:\\#AndroidProject\\Arr\\FirebaseTest\\app\\src\\main\\res\\values\\themes.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "100",
-                        "endLines": "14",
-                        "endColumns": "12",
-                        "endOffsets": "801"
-                    },
-                    "to": {
-                        "startLines": "5581",
-                        "startColumns": "4",
-                        "startOffsets": "376899",
-                        "endLines": "5593",
-                        "endColumns": "12",
-                        "endOffsets": "377479"
                     }
                 },
                 {
@@ -310,6 +310,23 @@
                         "endLines": "11952",
                         "endColumns": "24",
                         "endOffsets": "675729"
+                    }
+                },
+                {
+                    "source": "C:\\#AndroidProject\\update\\FirebaseTest\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "49",
+                        "endOffsets": "61"
+                    },
+                    "to": {
+                        "startLines": "1611",
+                        "startColumns": "4",
+                        "startOffsets": "98160",
+                        "endColumns": "49",
+                        "endOffsets": "98205"
                     }
                 },
                 {
@@ -418,23 +435,6 @@
                         "startOffsets": "89336,89376,90570,90819,90874,92370,92424,92476,92525,92586",
                         "endColumns": "39,46,42,54,46,53,51,48,60,49",
                         "endOffsets": "89371,89418,90608,90869,90916,92419,92471,92520,92581,92631"
-                    }
-                },
-                {
-                    "source": "C:\\#AndroidProject\\Arr\\FirebaseTest\\app\\build\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,200,283,387,497,617,711",
-                        "endColumns": "144,82,103,109,119,93,70",
-                        "endOffsets": "195,278,382,492,612,706,777"
-                    },
-                    "to": {
-                        "startLines": "1639,1647,1648,1649,1650,1651,1741",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "101555,102383,102466,102570,102680,102800,116099",
-                        "endColumns": "144,82,103,109,119,93,70",
-                        "endOffsets": "101695,102461,102565,102675,102795,102889,116165"
                     }
                 },
                 {

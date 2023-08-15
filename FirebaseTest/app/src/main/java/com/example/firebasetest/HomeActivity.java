@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,19 +38,10 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         btnOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, OpenAuctionActivity.class);
-                startActivity(intent);
-            }
-        });
-        btnBest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, BiddingActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,7 +53,13 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btnBest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, BiddingActivity.class);
+                startActivity(intent);
+            }
+        });
         btnMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,5 +67,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // 검색했을때 해당 아이템 나오도록 -> ListActivity에 있음
+//        btnSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(HomeActivity.this, BiddingActivity.class);
+//            }
+//        });
     }
 }

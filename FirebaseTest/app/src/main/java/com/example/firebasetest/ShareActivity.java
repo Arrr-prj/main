@@ -4,7 +4,6 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -24,7 +21,7 @@ import java.util.ArrayList;
 
 public class ShareActivity extends AppCompatActivity {
 
-    public static ShareAdapterActivity saa;
+    public static ShareAdapter saa;
     private Button btnRegistItem;
     ListView listView;
     private Button btnbck;
@@ -35,12 +32,18 @@ public class ShareActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
+//
+//        shareItemList = UserDataHolderShareItem.shareItemList;
+
+
+        Log.d(TAG,"안녕" + shareItemList);
         listView = (ListView) findViewById(R.id.listView);
 
-        UserDataHolderShareItem.loadShareItems();
-        saa = new ShareAdapterActivity(this, UserDataHolderShareItem.shareItemList);
+
+        saa = new ShareAdapter(this, shareItemList);
         listView.setAdapter(saa);
-        saa.notifyDataSetChanged();
+        this.InitializeOpenItem();
+
 
         btnbck = findViewById(R.id.btn_back);
 
@@ -80,12 +83,37 @@ public class ShareActivity extends AppCompatActivity {
     }
 
 
-//    public void InitializeOpenItem() {
-//        // 예비 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
-//        shareItemList.clear();
-//        // 임시 클래스에 담아둔 firestore의 데이터들을 불러와서 현재 페이지에 보여줌
-//        shareItemList.addAll(UserDataHolderShareItem.shareItemList);
-//        // 새로운 데이터 갱신
-//        saa.notifyDataSetChanged();
-//    }
+    public void InitializeOpenItem(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+
+        // 기존 아이템 리스트 비워주기
+        shareItemList.clear();
+        db.collection("ShareItem")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+                            // Firebase Storage에서 이미지 불러오기
+                            shareItemList.add(
+                                    new Item(
+                                            String.valueOf(document.getData().get("title")),
+                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
+                                    )
+                            );
+                        }
+                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, shareItemList);
+                        listView.setAdapter(openAuctionAdapter);
+                    }
+                });
+    }
 }

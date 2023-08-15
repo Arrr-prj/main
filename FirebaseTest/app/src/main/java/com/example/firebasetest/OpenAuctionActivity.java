@@ -32,6 +32,7 @@ import java.util.Map;
 public class OpenAuctionActivity extends AppCompatActivity {
     private Button btnRegistItem;
     ListView listView;
+
     private Button btnbck;
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
 
@@ -40,12 +41,10 @@ public class OpenAuctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_auction);
 
-        btnbck = findViewById(R.id.btn_back);
-
         listView = (ListView)findViewById(R.id.listView);
 
-        // 추가된 코드
-        UserDataHolderOpenItems.loadOpenItems();
+        btnbck = findViewById(R.id.btn_back);
+
         this.InitializeOpenItem();
 
         btnRegistItem = findViewById(R.id.btn_registItem);
@@ -69,17 +68,17 @@ public class OpenAuctionActivity extends AppCompatActivity {
 
     }
     private void setUpOnClickListener() {
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                Item item = (Item) listView.getItemAtPosition(position);
-//                Intent showDetail = new Intent(getApplicationContext(), OpenDetailItemActivity.class);
-//                showDetail.putExtra("id", item.getId());
-//                showDetail.putExtra("title", item.getTitle());
-//                showDetail.putExtra("seller", item.getSeller());
-//                startActivity(showDetail);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Item item = (Item) listView.getItemAtPosition(position);
+                Intent showDetail = new Intent(getApplicationContext(), OpenDetailItemActivity.class);
+                showDetail.putExtra("id", item.getId());
+                showDetail.putExtra("title", item.getTitle());
+                showDetail.putExtra("seller", item.getSeller());
+                startActivity(showDetail);
+            }
+        });
     }
     public void InitializeOpenItem(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -103,7 +102,9 @@ public class OpenAuctionActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller"))
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate"))
                                     )
                             );
                         }

@@ -41,7 +41,11 @@ public class ShareDetailActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         // 입력받은 입찰 가격
-        mBtnBidButton = findViewById(R.id.btn_apply); // 입찰하기 버튼
+        mBtnBidButton = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
+
+
+
+
 
         getSelectoItem();
 
@@ -57,6 +61,7 @@ public class ShareDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String uid = UserManager.getInstance().getUserUid();
+                mETBidPrice = findViewById(R.id.et_bid); // 경매 가격 받기
                 DocumentReference userDocRef = database.collection("User").document(uid); // 유저의 이름 받아오기
                 Intent intent = getIntent();
                 String strTitle = intent.getStringExtra("title");

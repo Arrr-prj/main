@@ -8,9 +8,9 @@
 
     <!--프로필 사진-->
     <ImageView
-        android:id="@+id/oImgUrl"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:id="@+id/ImgUrl"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_add_photo"/>
 
     <!--이름-->
@@ -26,12 +26,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id = "@+id/otitle"
+                android:id = "@+id/id"
                 android:layout_width="wrap_content"
                 android:layout_height ="wrap_content"
-                android:text="글 제목"
+                android:text="품명"
                 android:layout_margin="5dp"/>
 
+            <TextView
+                android:id = "@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height ="wrap_content"
+                android:text="카테고리"
+                android:layout_margin="5dp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -40,19 +46,11 @@
             android:layout_margin ="0dp"
             android:orientation="horizontal">
 
-
             <TextView
-                android:id = "@+id/id"
+                android:id = "@+id/seller"
                 android:layout_width="wrap_content"
                 android:layout_height ="wrap_content"
-                android:text="상품명"
-                android:layout_margin="5dp"/>
-
-            <TextView
-                android:id = "@+id/category"
-                android:layout_width="wrap_content"
-                android:layout_height ="wrap_content"
-                android:text="카테고리"
+                android:text="판매자 아이디"
                 android:layout_margin="5dp"/>
 
             <TextView

@@ -8,25 +8,6 @@
     tools:context=".DetailItemActivity">
 
     <TextView
-        android:id="@+id/itemTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
-        android:text="----"
-        app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
-
-    <TextView
-        android:id="@+id/itemId"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:text="----"
-        app:layout_constraintStart_toEndOf="@+id/tv_itemId"
-        app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
-    <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
@@ -76,26 +57,48 @@
         app:layout_constraintStart_toEndOf="@+id/tv_seller"
         app:layout_constraintTop_toBottomOf="@+id/endPrice" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="81dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="100dp"
-        android:text="글 제목 : "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="30dp"
+            android:text="삭제"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="296dp" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:text="수정"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="181dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_itemId"
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
         android:text="상품명 : "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
 
     <TextView
         android:id="@+id/tv_category"
@@ -157,5 +160,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_photo" />
 
+    <TextView
+        android:id="@+id/itemId"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        android:text="----"
+        app:layout_constraintStart_toEndOf="@+id/tv_itemId"
+        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

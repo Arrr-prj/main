@@ -10,7 +10,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 
 public class UserDataHolderBiddingItems {
-    public static ArrayList<BiddingItem> biddingItemList = new ArrayList<>();
+    public static ArrayList<Item> biddingItemList = new ArrayList<>();
     public static void loadBiddingItems(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("BiddingItem")
@@ -25,9 +25,11 @@ public class UserDataHolderBiddingItems {
                             String seller = document.getString("seller");
                             String imgUrl = document.getString("imgUrl");
                             String price = document.getString("price");
+                            String futureMillis = document.getString("futureMillis");
+                            String futureDate = document.getString("futureDate");
 
                             // Item 생성자에 맞게 데이터 추가
-                            BiddingItem item = new BiddingItem(title, imgUrl, id, price, category, info, seller);
+                            Item item = new Item(title, imgUrl, id, price, category, info, seller,futureMillis, futureDate);
                             biddingItemList.add(item);
                         }
                     } else {

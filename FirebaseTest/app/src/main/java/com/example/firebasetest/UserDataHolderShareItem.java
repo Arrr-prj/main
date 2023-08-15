@@ -24,9 +24,11 @@ public class UserDataHolderShareItem {
                             String category = document.getString("category");
                             String seller = document.getString("seller");
                             String imgUrl = document.getString("imgUrl");
+                            String futureDate = document.getString("futureDate");
+                            String futureMillis = document.getString("futureMillis");
 
                             // Item 생성자에 맞게 데이터 추가
-                            Item item = new Item(title, imgUrl, id, category, info, seller);
+                            Item item = new Item(title, imgUrl, id, category, info, seller, futureDate, futureMillis);
                             shareItemList.add(item);
                         }
                     } else {

@@ -33,8 +33,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
-    List<BiddingItem> bItem;
+public class BiddingItemAdapter extends ArrayAdapter<Item> {
+    List<Item> bItem;
 
     private Context context;
     private Uri imageUrl;
@@ -42,7 +42,7 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
     LayoutInflater layoutInflater = null;
     ImageView load;
     Bitmap bitmap;
-    public BiddingItemAdapter(Context context, List<BiddingItem> dataList){
+    public BiddingItemAdapter(Context context, List<Item> dataList){
         super(context, 0, dataList);
         this.bItem = dataList;
         this.context = context;
@@ -56,7 +56,7 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
         return position;
     }
     @Override
-    public BiddingItem getItem(int position){
+    public Item getItem(int position){
         return bItem.get(position);
     }
     @NonNull
@@ -66,20 +66,18 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
         if(itemView == null){
             itemView = LayoutInflater.from(getContext()).inflate(R.layout.bidding_items, parent, false);
         }
-        BiddingItem data = getItem(position);
+        Item data = getItem(position);
         if(data != null){
-            TextView title = (TextView)itemView.findViewById(R.id.title);
             ImageView imgView = (ImageView)itemView.findViewById(R.id.ImgUrl);
             TextView id = (TextView)itemView.findViewById(R.id.id);
             TextView category = (TextView)itemView.findViewById(R.id.category);
             TextView info = (TextView)itemView.findViewById(R.id.info);
-            TextView price = (TextView)itemView.findViewById(R.id.price);
+            TextView seller = (TextView) itemView.findViewById(R.id.seller);
 
-            title.setText(data.getTitle());
+            seller.setText(data.getSeller());
             id.setText(data.getId());
             category.setText(data.getCategory());
             info.setText(data.getInfo());
-            price.setText(data.getPrice());
 
             Glide.with(getContext())
                     .load(data.getImageUrl())
@@ -87,10 +85,5 @@ public class BiddingItemAdapter extends ArrayAdapter<BiddingItem> {
 
         }
         return itemView;
-    }
-
-    public void updateData(List<BiddingItem> newDataList){
-        bItem = newDataList;
-        notifyDataSetChanged();
     }
 }

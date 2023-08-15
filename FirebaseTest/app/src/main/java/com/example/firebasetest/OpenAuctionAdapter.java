@@ -41,6 +41,7 @@ import java.util.List;
 
 public class OpenAuctionAdapter extends ArrayAdapter<Item> {
     private List<Item> oItem;
+
     private Context context;
     private Uri imageUrl;
     private ImageView imageView;
@@ -63,16 +64,16 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
         }
         Item data = getItem(position);
         if (data != null) {
-            TextView title = (TextView) itemView.findViewById(R.id.otitle);
-            ImageView imgView = (ImageView) itemView.findViewById(R.id.oImgUrl);
+            ImageView imgView = (ImageView) itemView.findViewById(R.id.ImgUrl);
             TextView id = (TextView) itemView.findViewById(R.id.id);
             TextView category = (TextView) itemView.findViewById(R.id.category);
             TextView info = (TextView) itemView.findViewById(R.id.info);
             TextView price = (TextView) itemView.findViewById(R.id.price);
+            TextView seller = (TextView) itemView.findViewById(R.id.seller);
 
             imageView = itemView.findViewById(R.id.ImgUrl);
 
-            title.setText(data.getTitle());
+            seller.setText(data.getSeller());
             id.setText(data.getId());
             category.setText(data.getCategory());
             info.setText(data.getInfo());
@@ -84,6 +85,7 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
 
         }
         return itemView;
+
     }
 
     @Override
@@ -99,11 +101,6 @@ public class OpenAuctionAdapter extends ArrayAdapter<Item> {
     @Override
     public Item getItem(int position) {
         return oItem.get(position);
-    }
-
-    public void updateData(List<Item> newDataList){
-        oItem = newDataList;
-        notifyDataSetChanged();
     }
 
 }

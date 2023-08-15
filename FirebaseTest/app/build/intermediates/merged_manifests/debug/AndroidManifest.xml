@@ -10,8 +10,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,19 +24,13 @@
         android:testOnly="true"
         android:theme="@style/Theme.FirebaseTest" >
         <activity
-            android:name="com.example.firebasetest.ShareAdapterActivity"
+            android:name="com.example.firebasetest.MyShareDetailActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.firebasetest.ShareRegistItemActivity"
+            android:name="com.example.firebasetest.MyShareActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.firebasetest.ShareActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.firebasetest.MyItemDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.firebasetest.EditItemActivity"
+            android:name="com.example.firebasetest.MyTransactionActivity"
             android:exported="false" />
         <activity
             android:name="com.example.firebasetest.LobyActivity"
@@ -50,6 +42,30 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.example.firebasetest.ShareDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.MyPageActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ShareRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.DetailBiddingItemActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ShareActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.MyItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.EditItemActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.firebasetest.UpdateDataActivity"
             android:exported="false" />
         <activity
@@ -59,13 +75,10 @@
             android:name="com.example.firebasetest.MyItemsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.firebasetest.MyPageActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.example.firebasetest.ModifyActivity"
-            android:exported="false" />
-        <activity
             android:name="com.example.firebasetest.OpenRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.OpenDetailItemActivity"
             android:exported="false" />
         <activity
             android:name="com.example.firebasetest.BiddingRegistItemActivity"
@@ -91,9 +104,6 @@
             android:directBootAware="true"
             android:exported="false" >
             <meta-data
-                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-                android:value="com.google.firebase.components.ComponentRegistrar" />
-            <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
@@ -101,6 +111,9 @@
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
             <meta-data
                 android:name="com.google.firebase.components:com.google.firebase.firestore.ktx.FirebaseFirestoreKtxRegistrar"

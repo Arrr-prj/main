@@ -96,13 +96,9 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
                 if (imageUrl != null) {
-                    // 등록된 리스트 새로 갱신
-                    UserDataHolderBiddingItems.loadBiddingItems();
-
                     uploadToFirebase(strTitle, imageUrl, strName, "share item", strInfo, strCategory, sellerId);
                     Intent intent = new Intent(ShareRegistItemActivity.this, ShareActivity.class);
                     startActivity(intent);
-                    finish();
                 } else {
                     Toast.makeText(ShareRegistItemActivity.this, "사진을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
@@ -157,7 +153,8 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                         DocumentReference userDocRef = database.collection("ShareItem").document(strTitle + sellerId); // 생성되는 문서 이름 정해주기
                         data.put("imgUrl", uri.toString());
-
+                        UserDataHolderShareItem.shareItemList.clear();
+                        UserDataHolderShareItem.loadShareItems();
                         userDocRef.set(data)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -188,7 +185,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
-    // 카테고리 클릭 시 이벤트
+
     public void showDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("카테고리 선택")

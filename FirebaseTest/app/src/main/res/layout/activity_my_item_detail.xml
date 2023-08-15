@@ -88,24 +88,34 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btn_delete"
+            android:id="@+id/btn_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:text="삭제"
+            android:text="목록"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="296dp" />
+            />
+
 
         <Button
             android:id="@+id/btn_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
             android:text="수정"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="181dp" />
+            />
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:text="삭제"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
     </LinearLayout>
     <TextView

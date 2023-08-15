@@ -54,22 +54,21 @@ public class LoginActivity extends AppCompatActivity {
                 mFirebaseAuth.signInWithEmailAndPassword(strId, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        UserDataHolderBiddingItems.loadBiddingItems();
+                        UserDataHolderShareItem.loadShareItems();
+                        UserDataHolderOpenItems.loadOpenItems();
+
                         if (task.isSuccessful()){
                             // 로그인 성공
-                            
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String uid = user.getUid();
-                            // UID를 어플리케이션 내에서 저장 및 관리
                             UserManager.getInstance().setUserUid(uid);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-
-                            UserDataHolderBiddingItems.loadBiddingItems();
-                            UserDataHolderOpenItems.loadOpenItems();
-                            UserDataHolderShareItem.loadShareItems();
-
                             startActivity(intent);
                             finish();
                         }
+
                         else{
                             Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                         }
@@ -86,5 +85,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 }

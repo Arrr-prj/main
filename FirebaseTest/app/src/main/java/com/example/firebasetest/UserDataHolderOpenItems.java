@@ -8,12 +8,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-
 public class UserDataHolderOpenItems {
-    public static ArrayList<Item> openItemList;
+    public static ArrayList<Item> openItemList = new ArrayList<>();
     public static void loadOpenItems(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        openItemList= new ArrayList<>();
         db.collection("OpenItem")
                 .get()
                 .addOnCompleteListener(task->{
@@ -26,9 +24,11 @@ public class UserDataHolderOpenItems {
                             String seller = document.getString("seller");
                             String imgUrl = document.getString("imgUrl");
                             String price = document.getString("price");
+                            String futureMillis = document.getString("futureMillis");
+                            String futureDate = document.getString("futureDate");
 
                             // Item 생성자에 맞게 데이터 추가
-                            Item item = new Item(title, imgUrl, id, price, category, info, seller);
+                            Item item = new Item(title, imgUrl, id, price, category, info, seller, futureMillis, futureDate);
                             openItemList.add(item);
                         }
                     } else {
@@ -36,6 +36,4 @@ public class UserDataHolderOpenItems {
                     }
                 });
     }
-
-
 }

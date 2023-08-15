@@ -8,11 +8,13 @@ public class Item {
     private String info;
     private String seller;
     private String title;
+    private String futureMillis;
+    private String futureDate;
 
     public Item(){
 
     }
-    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller){
+    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller, String futureMillis, String futureDate){
         this.title = title;
         this.id = id;
         this.price = price;
@@ -20,9 +22,11 @@ public class Item {
         this.category = category;
         this.info = info;
         this.seller = seller;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
     }
 
-    public Item(String title, String imageUrl, String id, String category, String info, String seller){ // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
+    public Item(String title, String imageUrl, String id, String category, String info, String seller, String futureMillis, String futureDate){ // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
         this.title = title;
         this.id = id;
         this.price = "share item";
@@ -30,6 +34,9 @@ public class Item {
         this.category = category;
         this.info = info;
         this.seller = seller;
+
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
     }
 
 
@@ -81,11 +88,28 @@ public class Item {
         this.category = category;
     }
 
+    public String getFutureMillis() {
+        return futureMillis;
+    }
+
+    public void setFutureMillis(String futureMillis) {
+        this.futureMillis = futureMillis;
+    }
+
     public String getInfo() {
         return info;
+    }
+
+    public String getFutureDate() {
+        return futureDate;
+    }
+
+    public void setFutureDate(String futureDate) {
+        this.futureDate = futureDate;
     }
 
     public void setInfo(String info) {
         this.info = info;
     }
+
 }
