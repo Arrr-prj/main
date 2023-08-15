@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,9 @@ public class MyPageActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private TextView mTvName, mTvEmail, mTvAddress;
 
-    private Button mBtnBackSpace, mBtnModify, mBtnLogout, mBtnWithdrawal, mBtnMyItem;
+
+    private Button mBtnBackSpace, mBtnModify, mBtnLogout, mBtnWithdrawal, mBtnMyItem, mBtnMembership;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,9 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnWithdrawal = findViewById(R.id.btn_withdrawal);
         mBtnMyItem = findViewById(R.id.btn_myItem);
 
+        mBtnMembership = findViewById(R.id.btn_membership);
+
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -52,11 +60,13 @@ public class MyPageActivity extends AppCompatActivity {
 
         loadUserData();
 
+
         UserDataHolderOpenItems.openItemList.clear();
         // OpenItemList, BiddingItemList, 무료 나눔 세팅
         UserDataHolderBiddingItems.loadBiddingItems();
         UserDataHolderOpenItems.loadOpenItems();
         UserDataHolderShareItem.loadShareItems();
+
 
 //         수정 버튼을 눌렀을 때
         mBtnModify.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +89,10 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                Intent intent = new Intent(MyPageActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+
             }
         });
 
@@ -125,6 +138,17 @@ public class MyPageActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // 멤버십 가입하기 버튼을 눌렀을 때
+        mBtnMembership.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyPageActivity.this, MembershipActivity.class));
+                finish();
+
+            }
+        });
+
     }
 
     // firestore에서 데이터 가져오는 메서드

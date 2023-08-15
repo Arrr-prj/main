@@ -15,13 +15,25 @@
         android:theme="@style/Theme.FirebaseTest"
         tools:targetApi="31">
         <activity
+            android:name=".EventAuctionRegisterItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventAuctionDetailItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventAuctionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MembershipActivity"
+            android:exported="false" />
+        <activity
             android:name=".LobyActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 <<<<<<< Updated upstream
 =======
@@ -50,6 +62,30 @@
             android:name=".EditItemActivity"
             android:exported="false" />
 >>>>>>> Stashed changes
+        <activity
+            android:name=".ShareDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailBiddingItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyItemDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditItemActivity"
+            android:exported="false" />
         <activity
             android:name=".UpdateDataActivity"
             android:exported="false" />
@@ -82,8 +118,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

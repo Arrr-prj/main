@@ -33,11 +33,13 @@ import java.util.Map;
 
 public class DetailBiddingItemActivity extends AppCompatActivity {
 
+
     private long remainingTimeMillis; // 전역 변수로 추가
     private Button btnEdit, btnDelete;
     private Button btnBid;
     private EditText bidText;
     private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
+
     private ImageView imgUrl;
     private LinearLayout bidPopupLayout;
     private FirebaseFirestore db;
@@ -73,6 +75,7 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
         Toast.makeText(DetailBiddingItemActivity.this, String.valueOf(UserDataHolderBiddingItems.biddingItemList.size()), Toast.LENGTH_SHORT).show();
 
         getSelectbItem();
+
 
         // 입찰하기 버튼을 눌렀을 때 -> dialog 로 입력받을 수 있는 팝업창 띄움
         btnBid.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +136,7 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
         startPrice.setText("0");
 //        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
         seller.setText(selectedItem.getSeller());
+
         timeinfo.setText(selectedItem.getFutureDate());
 
         long currentTimeMillis = System.currentTimeMillis();
@@ -142,10 +146,12 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
         String remainingTime = formatRemainingTime(remainingTimeMillis);
 
         futureMillis.setText(remainingTime);
+
         Glide.with(this)
                 .load(selectedItem.getImageUrl())
                 .into(imgUrl);
     }
+
     private String formatRemainingTime(long remainingTimeMillis) {
         if (remainingTimeMillis <= 0) {
             return "경매가 종료되었습니다.";
@@ -162,6 +168,7 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
 
         return String.format("남은 시간: %d일 %02d시간 %02d분 %02d초", diffDays, diffHours, diffMinutes, diffSeconds);
     }
+
 
     // bidding Item 클릭 시 이벤트
     private void getSelectbItem() {
@@ -215,11 +222,13 @@ public class DetailBiddingItemActivity extends AppCompatActivity {
                                     Toast.makeText(DetailBiddingItemActivity.this,
                                             itemId+" 경매가 종료되었습니다.\n낙찰자: " + winningUserId + "\n입찰금액: " + winningBidAmount,
                                             Toast.LENGTH_LONG).show();
+
                                     // remainingTimeMillis 값이 음수인 경우 입찰하기 버튼 비활성화
                                     if (remainingTimeMillis <= 0) {
                                         btnBid.setEnabled(false);
                                         btnBid.setText("경매 종료");
                                     }
+
                                 })
                                 .addOnFailureListener(e -> {
                                     // 업데이트 실패 시의 처리

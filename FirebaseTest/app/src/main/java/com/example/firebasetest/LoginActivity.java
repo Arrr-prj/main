@@ -61,15 +61,12 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             // 로그인 성공
-<<<<<<< Updated upstream
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 
-=======
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String uid = user.getUid();
                             UserManager.getInstance().setUserUid(uid);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
->>>>>>> Stashed changes
+
                             startActivity(intent);
                             finish();
                         }

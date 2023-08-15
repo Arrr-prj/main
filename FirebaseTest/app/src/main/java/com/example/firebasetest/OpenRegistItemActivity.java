@@ -1,16 +1,21 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -32,37 +37,33 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-<<<<<<< Updated upstream
-=======
+
 import java.util.Calendar;
->>>>>>> Stashed changes
 import java.util.HashMap;
 import java.util.Map;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class OpenRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     TextView write_text;
-<<<<<<< Updated upstream
-    EditText itemName, itemPrice, itemInfo, itemCategory;
-=======
-    EditText itemTitle, itemName, itemPrice, itemInfo, itemCategory;
->>>>>>> Stashed changes
+    EditText itemTitle, itemName, itemPrice, itemInfo;
+    Button itemCategory;
+
     private ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Uri imageUrl;
-    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-    private String sellerId = firebaseUser.getDisplayName();
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+    private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_regist_item);
         // 컴포넌트 객체에 담기
+        itemTitle = findViewById(R.id.input_title);
         itemName = findViewById(R.id.input_itemName);
         itemPrice = findViewById(R.id.input_itemPrice);
         itemInfo = findViewById(R.id.input_itemExplain);
@@ -70,6 +71,8 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         write_text = findViewById(R.id.write_text);
 
         imageView = findViewById(R.id.input_itemImg);
+
+        Log.d(TAG, "<< 시작 가격 최소 금액은 100원입니다. >>");
 
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
@@ -82,19 +85,29 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             }
         });
 
+        // 카테고리 클릭 시 이벤트
+        itemCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog(view);
+            }
+        });
+
         // 등록 클릭 이벤트
         Button registBtn = findViewById(R.id.btn_itemRegist);
         registBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String strTitle = itemTitle.getText().toString();
                 String strName = itemName.getText().toString();
                 String strPrice = itemPrice.getText().toString();
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
-<<<<<<< Updated upstream
-=======
-                String seller = firebaseUser.getEmail();
->>>>>>> Stashed changes
+                String sellerId = firebaseUser.getEmail();
+                Log.d(TAG, ""+sellerId);
+                if(imageUrl != null){
+                    uploadToFirebase(strTitle, imageUrl, strName, strPrice, strInfo, strCategory, sellerId);
+
 
                 // 현재 시간 가져오기
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -104,11 +117,9 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
                 if(imageUrl != null){
-<<<<<<< Updated upstream
-                    uploadToFirebase(imageUrl, strName, strPrice, strInfo, strCategory, currentTime);
-=======
+
                     uploadToFirebase(strTitle, imageUrl, strName, strPrice, strInfo, strCategory, seller);
->>>>>>> Stashed changes
+
                     Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                     startActivity(intent);
                 }else{
@@ -142,20 +153,26 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                     }
                 }
             });
-    // 파이어베이스 이미지 업로드
 
-<<<<<<< Updated upstream
-    private void uploadToFirebase(Uri uri, String strName, String strPrice, String strInfo, String strCategory, String currentTime){
-=======
-    private void uploadToFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId){
->>>>>>> Stashed changes
+
+    // 파이어베이스 이미지 업로드
+    private void uploadToFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
+        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            Map<String, Object> data = new HashMap<>();
+            data.put("title", strTitle);
+            data.put("id", strName);
+            if(Integer.parseInt(strPrice) >= 100){
+                data.put("price",strPrice);
+            }else{
+                data.put("price","100");
+
         StorageReference fileRef = reference.child(System.currentTimeMillis()+"."+getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Map<String, Object> data = new HashMap<>();
-<<<<<<< Updated upstream
-=======
+
 
                 Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -165,48 +182,22 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 String formattedDate = sdf.format(calendar.getTime());
 
                 data.put("title",strTitle);
->>>>>>> Stashed changes
                 data.put("id",strName);
                 data.put("price", strPrice);
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
-<<<<<<< Updated upstream
-=======
+
 
                 data.put("futureMillis", futureMillis); // long 포맷
                 data.put("futureDate", formattedDate); // "yyyy-MM-dd HH:mm:ss" 포맷으로 저장
->>>>>>> Stashed changes
                 // 성공 시
-//                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                    @Override
-//                    public void onSuccess(Uri uri) {
-//                        // 이미지 아이템에 담기
-//                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-//                        data.put("imgUrl", uri.toString());
-//
-//                        database.collection("OpenItem").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference){
-//                                Toast.makeText(OpenRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다."+e.getMessage(),
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//                });
+
                 fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
                     // 이미지 아이템에 담기
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     data.put("imgUrl", uriResult.toString());
 
-<<<<<<< Updated upstream
                         data.put("imgUrl", uri.toString());
 
                         database.collection("OpenItem").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -224,28 +215,55 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                             }
                         });
                     }
-=======
-                    DocumentReference userDocRef = database.collection("OpenItem").document(strTitle + sellerId);
-                    userDocRef.set(data).addOnSuccessListener(aVoid -> {
-                                // 등록된 리스트 새로 갱신
-                                UserDataHolderOpenItems.loadOpenItems();
-                                Toast.makeText(OpenRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
-                                startActivity(intent);
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다." + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                            });
->>>>>>> Stashed changes
+
                 });
             }
+            data.put("info", strInfo);
+            data.put("category", strCategory);
+            data.put("seller", sellerId);
+
+            // 성공 시
+            fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
+                // 이미지 아이템에 담기
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                data.put("imgUrl", uriResult.toString());
+
+                DocumentReference userDocRef = db.collection("OpenItem").document(strTitle + sellerId);
+                userDocRef.set(data)
+                        .addOnSuccessListener(aVoid -> {
+                            // 등록된 리스트 새로 갱신
+                            UserDataHolderOpenItems.loadOpenItems();
+                            Toast.makeText(OpenRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다." + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        });
+            });
         });
     }
     // 파일 타입 가져오기
-    private String getFileExtension(Uri uri){
+    public String getFileExtension(Uri uri){
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
+    public void showDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("카테고리 선택")
+                .setItems(categories, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String selectedCategory = categories[which];
+                        // 선택한 카테고리 값을 TextView에 할당
+                        itemCategory.setText(selectedCategory);
+                    }
+                })
+                .setNegativeButton("취소", null); // 취소 버튼
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 }

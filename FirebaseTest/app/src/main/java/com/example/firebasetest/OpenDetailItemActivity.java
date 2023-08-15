@@ -36,6 +36,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_detail_item);
         // 아이템 정보들
         itmeTitle = findViewById(R.id.itemTitle);
+
         itemId = findViewById(R.id.itemId);
         startPrice = findViewById(R.id.startPrice);
         endPrice = findViewById(R.id.endPrice);
@@ -43,6 +44,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         seller = findViewById(R.id.seller);
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
+
         timeinfo = findViewById(R.id.timeInfoinfo);
         futureMillis = findViewById(R.id.futureMillis);
 
@@ -102,7 +104,10 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                                                         .addOnSuccessListener(aVoid -> {
                                                             updateHighestBidListener(auctionDocRef.collection("Bids"));
                                                         });
-                                            } else {// 현재 입찰가보다 작은 가격이 입력되었을 때
+
+                                            }
+                                            else {// 현재 입찰가보다 작은 가격이 입력되었을 때
+
                                                 Toast.makeText(OpenDetailItemActivity.this, "전 입찰가보다 높은 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 // 또는 전 입찰가보다 낮은 가격으로 입찰을 하고싶은지 물어보고 등록해주기
                                             }
@@ -160,6 +165,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     startPrice.setText(String.valueOf(selectedItem.getPrice()));
                     endPrice.setText(String.valueOf(highestBid));
                     seller.setText(selectedItem.getSeller());
+
                     timeinfo.setText(selectedItem.getFutureDate());
 
                     long currentTimeMillis = System.currentTimeMillis();
@@ -169,11 +175,13 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     String remainingTime = formatRemainingTime(remainingTimeMillis);
 
                     futureMillis.setText(remainingTime);
+
                     Glide.with(this)
                             .load(selectedItem.getImageUrl())
                             .into(imgUrl);
                 });
     }
+
 
     private String formatRemainingTime(long remainingTimeMillis) {
         if (remainingTimeMillis <= 0) {
@@ -191,7 +199,6 @@ public class OpenDetailItemActivity extends AppCompatActivity {
 
         return String.format("남은 시간: %d일 %02d시간 %02d분 %02d초", diffDays, diffHours, diffMinutes, diffSeconds);
     }
-
     private void getSelectoItem() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
