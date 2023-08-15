@@ -54,10 +54,17 @@ public class LoginActivity extends AppCompatActivity {
                 mFirebaseAuth.signInWithEmailAndPassword(strId, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        UserDataHolderBiddingItems.loadBiddingItems();
+                        UserDataHolderShareItem.loadShareItems();
+                        UserDataHolderOpenItems.loadOpenItems();
+
                         if (task.isSuccessful()){
                             // 로그인 성공
+                            FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                            String uid = user.getUid();
+                            UserManager.getInstance().setUserUid(uid);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-
                             startActivity(intent);
                             finish();
                         }

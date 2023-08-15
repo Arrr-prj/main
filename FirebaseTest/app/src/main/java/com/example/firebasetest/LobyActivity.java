@@ -27,6 +27,7 @@ public class LobyActivity extends AppCompatActivity {
                 // 회원가입 인텐트 생성 후 이동
                 Intent intent = new Intent(LobyActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -37,6 +38,7 @@ public class LobyActivity extends AppCompatActivity {
                 // 로그인 인텐트 생성 후 이동
                 Intent intent = new Intent(LobyActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
