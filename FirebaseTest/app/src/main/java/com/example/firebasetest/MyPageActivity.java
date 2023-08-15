@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.auth.User;
 
 public class MyPageActivity extends AppCompatActivity {
 
@@ -52,7 +53,13 @@ public class MyPageActivity extends AppCompatActivity {
 
         loadUserData();
 
+        Toast.makeText(this, "clear 전 size"+UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
 
+        UserDataHolderOpenItems.openItemList.clear();
+        // OpenItemList, BiddingItemList, 무료 나눔 세팅
+        UserDataHolderBiddingItems.loadBiddingItems();
+        UserDataHolderOpenItems.loadOpenItems();
+        UserDataHolderShareItem.loadShareItems();
 //         수정 버튼을 눌렀을 때
         mBtnModify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +135,6 @@ public class MyPageActivity extends AppCompatActivity {
 
         if (uid != null) {
             DocumentReference userDocRef = db.collection("User").document(uid);
-
             userDocRef.get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override

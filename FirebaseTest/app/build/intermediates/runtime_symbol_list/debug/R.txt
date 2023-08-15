@@ -2668,6 +2668,7 @@ int id browser_actions_menu_item_text 0x7f080067
 int id browser_actions_menu_items 0x7f080068
 int id browser_actions_menu_view 0x7f080069
 int id btn_Identification 0x7f08006a
+int id btn_apply 0x7f080243
 int id btn_back 0x7f08006b
 int id btn_backSpace 0x7f080233
 int id btn_best 0x7f08006c
@@ -2690,6 +2691,7 @@ int id btn_register 0x7f080079
 int id btn_registerScreen 0x7f08007a
 int id btn_search 0x7f08007b
 int id btn_sendCode 0x7f08007c
+int id btn_share 0x7f080246
 int id btn_withdrawal 0x7f080236
 int id button7 0x7f08007d
 int id buttonPanel 0x7f08007e
@@ -3068,6 +3070,7 @@ int id textSpacerNoTitle 0x7f0801ed
 int id textStart 0x7f0801ee
 int id textTop 0x7f0801ef
 int id textView 0x7f0801f0
+int id textView11 0x7f080244
 int id textView2 0x7f0801f1
 int id textView3 0x7f0801f2
 int id textView4 0x7f0801f3
@@ -3093,6 +3096,7 @@ int id toggle 0x7f080206
 int id toolbar 0x7f080207
 int id toolbar2 0x7f080208
 int id toolbar4 0x7f080209
+int id toolbar5 0x7f080245
 int id top 0x7f08020a
 int id topPanel 0x7f08020b
 int id touch_outside 0x7f08020c
@@ -3239,6 +3243,9 @@ int layout activity_my_page 0x7f0b0087
 int layout activity_open_auction 0x7f0b0024
 int layout activity_open_regist_item 0x7f0b0025
 int layout activity_register 0x7f0b0026
+int layout activity_share 0x7f0b0089
+int layout activity_share_detail 0x7f0b008a
+int layout activity_share_regist_item 0x7f0b008b
 int layout activity_update_data 0x7f0b0027
 int layout bidding_items 0x7f0b0028
 int layout bitem_recyclerview 0x7f0b0029

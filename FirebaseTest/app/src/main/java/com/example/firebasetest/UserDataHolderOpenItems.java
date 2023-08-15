@@ -10,9 +10,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 
 public class UserDataHolderOpenItems {
-    public static ArrayList<Item> openItemList = new ArrayList<>();
+    public static ArrayList<Item> openItemList;
     public static void loadOpenItems(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        openItemList= new ArrayList<>();
         db.collection("OpenItem")
                 .get()
                 .addOnCompleteListener(task->{

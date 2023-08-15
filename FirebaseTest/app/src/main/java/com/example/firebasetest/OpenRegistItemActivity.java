@@ -148,7 +148,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             if(Integer.parseInt(strPrice) >= 100){
                 data.put("price",strPrice);
             }else{
-                data.put("price",100);
+                data.put("price","100");
             }
             data.put("info", strInfo);
             data.put("category", strCategory);

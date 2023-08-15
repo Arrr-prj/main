@@ -26,6 +26,15 @@
         android:testOnly="true"
         android:theme="@style/Theme.FirebaseTest" >
         <activity
+            android:name="com.example.firebasetest.ShareAdapterActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ShareRegistItemActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.firebasetest.ShareActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.firebasetest.MyItemDetailActivity"
             android:exported="false" />
         <activity

@@ -62,9 +62,11 @@ public class LoginActivity extends AppCompatActivity {
                             // UID를 어플리케이션 내에서 저장 및 관리
                             UserManager.getInstance().setUserUid(uid);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            // OpenItemList, BiddingItemList 세팅
+
                             UserDataHolderBiddingItems.loadBiddingItems();
                             UserDataHolderOpenItems.loadOpenItems();
+                            UserDataHolderShareItem.loadShareItems();
+
                             startActivity(intent);
                             finish();
                         }

@@ -91,12 +91,13 @@ public class DetailItemActivity extends AppCompatActivity {
     // bidding Item 클릭 시 이벤트
     private void getSelectbItem(){
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        Log.d(TAG, ""+id);
+        String documentId = intent.getStringExtra("documentId");
+        Log.d(TAG, ""+documentId);
         BiddingItem selectedItem = null;
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
-        for(BiddingItem item: BiddingActivity.biddingItemList){
-            if(item.getId().equals(id)){
+        for(BiddingItem item: UserDataHolderBiddingItems.biddingItemList){
+            String doc = item.getTitle()+item.getSeller();
+            if(doc.equals(documentId)){
                 selectedItem = item;
                 break;
             }
@@ -112,10 +113,11 @@ public class DetailItemActivity extends AppCompatActivity {
     private void getSelectoItem(){
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
+        String documentId = intent.getStringExtra("documentId");
         Item selectedItem = null;
-        for(Item item: OpenAuctionActivity.openItemList){
-            if(item.getId().equals(id)){
+        for(Item item: UserDataHolderOpenItems.openItemList){
+            String doc = item.getTitle()+item.getSeller();
+            if(doc.equals(documentId)){
                 selectedItem = item;
                 break;
             }

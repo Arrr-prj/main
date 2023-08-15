@@ -56,7 +56,7 @@ public class BiddingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bidding);
 
         btnbck = findViewById(R.id.btn_back);
-        
+
         listView = (ListView)findViewById(R.id.listView);
         bitemAdapter = new BiddingItemAdapter(this, biddingItemList);
         listView.setAdapter(bitemAdapter);
@@ -90,17 +90,41 @@ public class BiddingActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 BiddingItem item = (BiddingItem) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), DetailItemActivity.class);
-                showDetail.putExtra("id", item.getId());
+                showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
             }
         });
     }
     public void InitializeBiddingItem(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         biddingItemList.clear();
-        // 임시 클래스에 담아둔 firestore의 데이터들을 불러와서 현재 페이지에 보여줌
-        biddingItemList.addAll(UserDataHolderBiddingItems.biddingItemList);
-        // 새로운 데이터 갱신
-        bitemAdapter.notifyDataSetChanged();
+
+        db.collection("BiddingItem")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+                            // Firebase Storage에서 이미지 불러오기
+                            biddingItemList.add(
+                                    new BiddingItem(
+                                            String.valueOf(document.getData().get("title")),
+                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller"))
+                                    )
+                            );
+                        }
+                        BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
+                        listView.setAdapter(biddingItemAdapter);
+                    }
+                });
     }
 }

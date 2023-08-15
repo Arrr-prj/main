@@ -23,6 +23,7 @@ drawable shoes
 drawable watch
 id ImgUrl
 id btn_Identification
+id btn_apply
 id btn_back
 id btn_backSpace
 id btn_best
@@ -45,6 +46,7 @@ id btn_register
 id btn_registerScreen
 id btn_search
 id btn_sendCode
+id btn_share
 id btn_withdrawal
 id button7
 id category
@@ -87,6 +89,7 @@ id seller
 id startPrice
 id sw_bORo
 id textView
+id textView11
 id textView2
 id textView3
 id textView4
@@ -99,6 +102,7 @@ id title
 id toolbar
 id toolbar2
 id toolbar4
+id toolbar5
 id tv_address
 id tv_category
 id tv_email
@@ -125,6 +129,9 @@ layout activity_my_page
 layout activity_open_auction
 layout activity_open_regist_item
 layout activity_register
+layout activity_share
+layout activity_share_detail
+layout activity_share_regist_item
 layout activity_update_data
 layout bidding_items
 layout bitem_recyclerview

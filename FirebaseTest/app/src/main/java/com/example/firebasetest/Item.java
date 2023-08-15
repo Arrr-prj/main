@@ -22,6 +22,17 @@ public class Item {
         this.seller = seller;
     }
 
+    public Item(String title, String imageUrl, String id, String category, String info, String seller){ // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
+        this.title = title;
+        this.id = id;
+        this.price = "share item";
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+    }
+
+
     public String getTitle() {
         return title;
     }

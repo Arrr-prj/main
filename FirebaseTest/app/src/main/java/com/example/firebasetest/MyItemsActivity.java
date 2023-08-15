@@ -30,7 +30,7 @@ public class MyItemsActivity extends AppCompatActivity {
     public static ArrayList<BiddingItem> biddingItemList = new ArrayList<BiddingItem>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseUser firebaseUser;
     StorageReference storageReference = storage.getReference();
 
     private Button btnbck;
@@ -44,9 +44,9 @@ public class MyItemsActivity extends AppCompatActivity {
 
         btnbck = findViewById(R.id.btn_back);
         bORo = findViewById(R.id.sw_bORo);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String seller = firebaseUser.getEmail();
         bORo.setOnCheckedChangeListener(new bORoSwitchListener());
-
         // 기본 값은 bidding
         this.InitializeBiddingItem(seller);
         setOnClickbListener();
@@ -63,7 +63,6 @@ public class MyItemsActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id){
             Toast.makeText(MyItemsActivity.this, "Clicked position: " + parent, Toast.LENGTH_SHORT).show();
-
         }
     };
     public void InitializeOpenItem(String seller){
@@ -122,17 +121,8 @@ public class MyItemsActivity extends AppCompatActivity {
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // 항목을 가져옴
-                Item item = (Item) listView.getItemAtPosition(position);
-                Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
-                showDetail.putExtra("id", item.getId());
-                startActivity(showDetail);
-            }
-        });
     }
+    // 상세 페이지 이벤트
     public void setOnClickoListener(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,7 +130,10 @@ public class MyItemsActivity extends AppCompatActivity {
                 // 항목을 가져옴
                 Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
-                showDetail.putExtra("id", item.getId());
+                Log.d(TAG, ""+item.getSeller());
+                showDetail.putExtra("state", "On");
+                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+//                showDetail.putExtra("sellerId", )
                 startActivity(showDetail);
             }
         });
@@ -152,7 +145,8 @@ public class MyItemsActivity extends AppCompatActivity {
                 // 항목을 가져옴
                 BiddingItem item = (BiddingItem) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
-                showDetail.putExtra("id", item.getId());
+                showDetail.putExtra("state", "Off");
+                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
                 startActivity(showDetail);
             }
         });
