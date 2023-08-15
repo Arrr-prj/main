@@ -31,18 +31,15 @@ import java.util.ArrayList;
 
 public class MyItemDetailActivity extends AppCompatActivity {
 
-    private Button btnEdit, btnDelete;
+    private Button btnEdit, btnDelete, btnList;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
     BiddingItemAdapter biddingItemAdapter;
     FirebaseUser firebaseUser;
 
-    FirebaseUser user;
 
     private FirebaseFirestore db;
     OpenAuctionAdapter openAuctionAdapter;
-    public BiddingItemAdapter bitemAdapter;
-    public OpenAuctionAdapter oitemAdapter;
 
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
@@ -72,6 +69,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         // 수정 or 삭제
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
+        btnList = findViewById(R.id.btn_list);
 
         // 페이지 접속 시 새로 로딩해준다.
         Toast.makeText(this, "clear 전 size" + UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
@@ -99,6 +97,16 @@ public class MyItemDetailActivity extends AppCompatActivity {
         }else{
             getSelectbItem();
         }
+
+        // 목록 버튼 클릭 시 이벤트
+        btnList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyItemDetailActivity.this, MyItemsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // 삭제 버튼 눌렀을 때
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,38 +207,11 @@ public class MyItemDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void setbValues(Item selectedItem) {
-        itemTitle.setText(selectedItem.getTitle());
-        itemId.setText(selectedItem.getId());
-        itemInfo.setText(selectedItem.getInfo());
-        category.setText(selectedItem.getCategory());
-        startPrice.setText("0");
-        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
-        seller.setText(selectedItem.getSeller());
-        Glide.with(this)
-                .load(selectedItem.getImageUrl())
-                .into(imgUrl);
-    }
-
-    private void setoValues(Item selectedItem) {
-        itemTitle.setText(selectedItem.getTitle());
-        itemId.setText(selectedItem.getId());
-        itemInfo.setText(selectedItem.getInfo());
-        category.setText(selectedItem.getCategory());
-        startPrice.setText(String.valueOf(selectedItem.getPrice()));
-        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
-        seller.setText(selectedItem.getSeller());
-        Glide.with(this)
-                .load(selectedItem.getImageUrl())
-                .into(imgUrl);
-    }
-
     // bidding Item 클릭 시 이벤트
     private void getSelectbItem() {
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
         Log.d(TAG, "" + documentId);
-        Item selectedItem = null;
         biddingItemList.clear();
         UserDataHolderBiddingItems.loadBiddingItems();
 
@@ -312,5 +293,6 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 }

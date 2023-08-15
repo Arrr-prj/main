@@ -54,7 +54,7 @@ public class MyItemsActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemsActivity.this, HomeActivity.class);
+                Intent intent = new Intent(MyItemsActivity.this, MyTransactionActivity.class);
                 startActivity(intent);
             }
         });

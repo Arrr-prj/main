@@ -53,12 +53,11 @@ public class MyPageActivity extends AppCompatActivity {
         mTvAddress = findViewById(R.id.tv_address);
 
         loadUserData();
-//
-//        UserDataHolderOpenItems.openItemList.clear();
-//        // OpenItemList, BiddingItemList, 무료 나눔 세팅
-//        UserDataHolderBiddingItems.loadBiddingItems();
-//        UserDataHolderOpenItems.loadOpenItems();
-//        UserDataHolderShareItem.loadShareItems();
+        UserDataHolderOpenItems.openItemList.clear();
+        // OpenItemList, BiddingItemList, 무료 나눔 세팅
+        UserDataHolderBiddingItems.loadBiddingItems();
+        UserDataHolderOpenItems.loadOpenItems();
+        UserDataHolderShareItem.loadShareItems();
 
 //         수정 버튼을 눌렀을 때
         mBtnModify.setOnClickListener(new View.OnClickListener() {
@@ -72,11 +71,10 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnMyItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyPageActivity.this, MyItemsActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, MyTransactionActivity.class);
                 startActivity(intent);
             }
         });
-
         // 뒤로가기 버튼을 눌렀을 때
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override

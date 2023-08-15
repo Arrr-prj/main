@@ -52,8 +52,6 @@ public class EditItemActivity extends AppCompatActivity {
     TextView write_text, itemTitle;
     EditText itemId, itemPrice, itemInfo;
     Button itemCategory;
-    BiddingItemAdapter biddingItemAdapter;
-    OpenAuctionAdapter openAuctionAdapter;
     private Uri imageUrl;
     String url;
     ImageView imageView;
@@ -77,6 +75,7 @@ public class EditItemActivity extends AppCompatActivity {
 
         getSelectbItem();
         getSelectoItem();
+        getSelectsItem();
 
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
@@ -113,6 +112,7 @@ public class EditItemActivity extends AppCompatActivity {
         String documentId= intent.getStringExtra("documentId");
         Item selectedItem = null;
         Item selectedoItem = null;
+        Item selectedsItem = null;
 
         // BiddingItem 목록에서 선택한 아이템 검색
         for (Item item : UserDataHolderBiddingItems.biddingItemList) {
@@ -132,6 +132,15 @@ public class EditItemActivity extends AppCompatActivity {
             }
         }
 
+        // shareItemList에서 선택한 아이템 검색
+        for (Item item : UserDataHolderShareItem.shareItemList) {
+            String doc = item.getTitle()+firebaseUser.getEmail();
+            if(doc.equals(documentId)){
+                selectedsItem = item;
+                break;
+            }
+        }
+
         if (selectedItem != null) {
             // BiddingItem을 Firestore에서 업데이트
             uploadToBFirebase(selectedItem.getTitle() , imageUrl, selectedItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
@@ -139,7 +148,9 @@ public class EditItemActivity extends AppCompatActivity {
             Log.d(TAG, ""+imageUrl);
             // OpenItem을 Firestore에서 업데이트
             uploadToOFirebase(selectedoItem.getTitle() , imageUrl, selectedoItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
-        } else {
+        } else if(selectedsItem != null){
+            uploadToSFirebase(selectedsItem.getTitle(), imageUrl, selectedsItem.getId(), "share item", itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
+        }else {
             Toast.makeText(EditItemActivity.this, "선택한 아이템을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
@@ -172,33 +183,12 @@ public class EditItemActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private  void setbValues(Item selectedItem){
-        itemTitle.setText(selectedItem.getTitle());
-        itemId.setText(selectedItem.getId());
-        itemInfo.setHint(selectedItem.getInfo());
-        itemCategory.setText(selectedItem.getCategory());
-        itemPrice.setHint(selectedItem.getPrice());
-        Glide.with(this)
-                .load(selectedItem.getImageUrl())
-                .into(imageView);
-    }
-    private void setoValues(Item selectedItem){
-        itemTitle.setText(selectedItem.getTitle());
-        itemId.setText(selectedItem.getId());
-        itemInfo.setHint(selectedItem.getInfo());
-        itemCategory.setText(selectedItem.getCategory());
-        itemPrice.setHint(selectedItem.getPrice());
-        Glide.with(this)
-                .load(selectedItem.getImageUrl())
-                .into(imageView);
-    }
 
     // bidding Item 클릭 시 이벤트
     private void getSelectbItem(){
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
         Log.d(TAG, ""+documentId);
-        Item selectedItem = null;
 //        item = BiddingActivity.biddingItemList.get().getId().equals(id);
         db.collection("BiddingItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -213,10 +203,10 @@ public class EditItemActivity extends AppCompatActivity {
                         String get_url = document.getString("imgUrl");
 
                         itemTitle.setText(get_itemTitle);
-                        itemId.setText(get_id);
-                        itemInfo.setText(get_info);
+                        itemId.setHint(get_id);
+                        itemInfo.setHint(get_info);
                         itemCategory.setText(get_category);
-                        itemPrice.setText(get_price);
+                        itemPrice.setHint(get_price);
 
                         Glide.with(EditItemActivity.this)
                                 .load(get_url)
@@ -224,13 +214,6 @@ public class EditItemActivity extends AppCompatActivity {
 
                     }
                 });
-        if(selectedItem != null){
-            // selectedItem 사용하기
-            setbValues(selectedItem);
-        }
-        else{
-            // 해당 id와 일치하는 아이템이 없는 경우
-        }
     }
     private void getSelectoItem(){
 
@@ -250,8 +233,41 @@ public class EditItemActivity extends AppCompatActivity {
                         String get_url = document.getString("imgUrl");
 
                         itemTitle.setText(get_itemTitle);
-                        itemId.setText(get_id);
-                        itemInfo.setText(get_info);
+                        itemId.setHint(get_id);
+                        itemInfo.setHint(get_info);
+                        itemCategory.setText(get_category);
+                        itemPrice.setHint(get_price);
+
+                        Glide.with(EditItemActivity.this)
+                                .load(get_url)
+                                .into(imageView);
+
+                    }
+                });
+    }
+
+    // share Item 클릭 시 이벤트
+    private void getSelectsItem(){
+        Intent intent = getIntent();
+        String documentId = intent.getStringExtra("documentId");
+        Log.d(TAG, ""+documentId);
+        itemPrice.setText("share item");
+        itemPrice.setEnabled(false);
+        db.collection("ShareItem").document(documentId).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        String get_itemTitle = document.getString("title");
+                        String get_category = document.getString("category");
+                        String get_id = document.getString("id");
+                        String get_info = document.getString("info");
+                        String get_price = document.getString("price");
+                        String get_url = document.getString("imgUrl");
+
+                        itemTitle.setText(get_itemTitle);
+                        itemId.setHint(get_id);
+                        itemInfo.setHint(get_info);
                         itemCategory.setText(get_category);
                         itemPrice.setText(get_price);
 
@@ -261,16 +277,8 @@ public class EditItemActivity extends AppCompatActivity {
 
                     }
                 });
-        Toast.makeText(EditItemActivity.this, "openItemList size : "+OpenAuctionActivity.openItemList.size(), Toast.LENGTH_SHORT).show();
-
-        if(selectedItem != null){
-            // selectedItem 사용하기
-            setoValues(selectedItem);
-        }
-        else{
-            // 해당 id와 일치하는 아이템이 없는 경우
-        }
     }
+
     private void uploadToBFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
         StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
@@ -335,6 +343,41 @@ public class EditItemActivity extends AppCompatActivity {
                 data.put("imgUrl", uriResult.toString());
 
                 DocumentReference userDocRef = db.collection("OpenItem").document(strTitle + sellerId);
+                userDocRef.update(data)
+                        .addOnSuccessListener(aVoid -> {
+                            // 등록된 리스트 새로 갱신
+                            UserDataHolderOpenItems.loadOpenItems();
+                            Toast.makeText(EditItemActivity.this, "상품 수정에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditItemActivity.this, MyItemsActivity.class);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getApplicationContext(), "상품 수정에 실패했습니다." + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        });
+            });
+        });
+    }
+    // 무료 아이템
+    private void uploadToSFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
+        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            Map<String, Object> data = new HashMap<>();
+            data.put("title", strTitle);
+            data.put("id", strName);
+            data.put("price", "share item");
+            data.put("info", strInfo);
+            data.put("category", strCategory);
+            data.put("seller", sellerId);
+
+            // 성공 시
+            fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
+                // 이미지 아이템에 담기
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                data.put("imgUrl", uriResult.toString());
+
+                DocumentReference userDocRef = db.collection("ShareItem").document(strTitle + sellerId);
                 userDocRef.update(data)
                         .addOnSuccessListener(aVoid -> {
                             // 등록된 리스트 새로 갱신
