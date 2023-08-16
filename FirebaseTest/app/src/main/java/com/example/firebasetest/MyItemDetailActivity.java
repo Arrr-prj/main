@@ -90,12 +90,27 @@ public class MyItemDetailActivity extends AppCompatActivity {
         openItemList.addAll(UserDataHolderOpenItems.openItemList);
         Log.d(TAG, "" + openItemList.size());
 
+
+
         Intent intent = getIntent();
         String state = intent.getStringExtra("state");
         if(state.equals("On")){
             getSelectoItem();
-        }else{
+        }else if(state.equals("Off")){
             getSelectbItem();
+            // 이벤트 아이템인 경우
+        }else if(state.equals("Event")){
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+            getSelecteItem();
+        }
+
+        // 구매한 아이템 수정 삭제 막기
+        String isBuy = intent.getStringExtra("isBuy");
+        if(isBuy.equals("Buy")){
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+        }else{
         }
 
         // 목록 버튼 클릭 시 이벤트
@@ -194,12 +209,16 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     UserDataHolderBiddingItems.loadBiddingItems();
                     Toast.makeText(MyItemDetailActivity.this, "비공개 아이템 수정", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("state", "bidding");
+                    // 여기서 해당 유저의 이메일을 불러와서 해당 아이템의 글 제목과 이메일이 documentId와 일치하는지 넘겨서 확인해줌
                     intent1.putExtra("documentId", selectedItem.getTitle() + firebaseUser.getEmail());
                     startActivity(intent1);
                 } else if (selectedoItem != null) {
                     UserDataHolderOpenItems.loadOpenItems();
+                    Log.d(TAG, "selectedoItem.getSeller()의 값 : "+selectedoItem.getSeller());
                     Toast.makeText(MyItemDetailActivity.this, "공개 아이템 수정", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("state", "open");
                     intent1.putExtra("documentId", selectedoItem.getTitle() + firebaseUser.getEmail());
                     startActivity(intent1);
                 }
@@ -281,11 +300,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         category.setText(get_category);
                         startPrice.setText(get_price);
                         endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
-
-
                         seller.setText(firebaseUser.getEmail());
-
-
                         Glide.with(MyItemDetailActivity.this)
                                 .load(get_url)
                                 .into(imgUrl);
@@ -293,6 +308,41 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     }
                 });
     }
+    // event Item
+    private void getSelecteItem() {
+        Intent intent = getIntent();
+        String documentId = intent.getStringExtra("documentId");
+        Log.d(TAG, "" + documentId);
+        Item selectedItem = null;
+        // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
+        openItemList.clear();
+        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
+        UserDataHolderOpenItems.loadOpenItems();
+        db.collection("EventItem").document(documentId).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        String get_itemTitle = document.getString("title");
+                        String get_category = document.getString("category");
+                        String get_id = document.getString("id");
+                        String get_info = document.getString("info");
+                        String get_price = document.getString("price");
+                        String get_url = document.getString("imgUrl");
 
+                        itemTitle.setText(get_itemTitle);
+                        itemId.setText(get_id);
+                        itemInfo.setText(get_info);
+                        category.setText(get_category);
+                        startPrice.setText(get_price);
+                        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
+                        seller.setText(firebaseUser.getEmail());
+                        Glide.with(MyItemDetailActivity.this)
+                                .load(get_url)
+                                .into(imgUrl);
+
+                    }
+                });
+    }
 
 }

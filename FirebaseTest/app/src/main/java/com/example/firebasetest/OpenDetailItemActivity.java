@@ -1,5 +1,6 @@
 package com.example.firebasetest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,7 +29,9 @@ public class OpenDetailItemActivity extends AppCompatActivity {
     private ImageView imgUrl;
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidButton; // 입찰하기 버튼
-    String document;
+    String document, strBuyer;
+
+    private FirebaseFirestore db;
     FirebaseFirestore database;
 
     @Override
@@ -45,9 +50,10 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         // 입력받은 입찰 가격
         mBtnBidButton = findViewById(R.id.btn_bidbutton); // 입찰하기 버튼
 
-        /*
-        30초가 지났을 때 경매 종료 메서드
-         */
+        db = FirebaseFirestore.getInstance();
+
+
+
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -68,7 +74,6 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                 mETBidPrice = findViewById(R.id.et_bid); // 경매 가격 받기
                 String bidPrice = mETBidPrice.getText().toString(); // 경매 가격 초기화하기
                 DocumentReference userDocRef = database.collection("User").document(uid); // 유저의 이름 받아오기
-
                 DocumentReference auctionDocRef = database.collection("OpenAuctionInProgress").document(documentId); // 공개 경매 중인 것들 참조하기
 
                 // 이미 해당 사용자의 입찰 정보가 있는지 확인
@@ -97,8 +102,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                                                         .addOnSuccessListener(aVoid -> {
                                                             updateHighestBidListener(auctionDocRef.collection("Bids"));
                                                         });
-                                            }
-                                            else {// 현재 입찰가보다 작은 가격이 입력되었을 때
+                                            } else {// 현재 입찰가보다 작은 가격이 입력되었을 때
                                                 Toast.makeText(OpenDetailItemActivity.this, "전 입찰가보다 높은 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 // 또는 전 입찰가보다 낮은 가격으로 입찰을 하고싶은지 물어보고 등록해주기
                                             }
@@ -125,6 +129,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                         });
             }
         });
+
     }
 
     private void setoValues(Item selectedItem) {
@@ -196,22 +201,28 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     }
                     // 가장 큰 입찰가 찾기
                     int highestBid = 0;
+                    String highestBidderId = null;
+
                     boolean hasBids = false; // 입찰자가 있는지
                     if (value != null && !value.isEmpty()) {
                         for (QueryDocumentSnapshot doc : value) {
                             Map<String, Object> bidData = doc.getData();
                             String bidPriceStr = (String) bidData.get("입찰 가격");
+                            String bidderId = (String) bidData.get("입찰자 아이디");
                             if (bidPriceStr != null) {
                                 try {
                                     int bidPrice = Integer.parseInt(bidPriceStr);
-                                    highestBid = Math.max(highestBid, bidPrice);
-                                    hasBids = true;
+                                    if (bidPrice > highestBid) {
+                                        highestBid = bidPrice;
+                                        highestBidderId = bidderId;
+                                    }
                                 } catch (NumberFormatException e) {
-                                    // 유효하지 않은 입찰 가격 캐치
+                                    // 유효하지 않은 입찰 가격 처리
                                 }
                             }
                         }
                     }
+                    String strBuyer = highestBidderId; // 수정된 부분
                     if (hasBids) {
                         endPrice.setText(String.valueOf(highestBid));
                     } else {

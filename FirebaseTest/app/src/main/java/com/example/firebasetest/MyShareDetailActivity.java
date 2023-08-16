@@ -55,6 +55,17 @@ public class MyShareDetailActivity extends AppCompatActivity {
         btnEdit = findViewById(R.id.btn_edit);
         btnList = findViewById(R.id.btn_list);
 
+        Intent intent = getIntent();
+        String state = intent.getStringExtra("state");
+        // 나눔 받은 아이템인 경우
+        if(state.equals("On")){
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+        // 나눔한 아이템인 경우
+        }else if(state.equals("Off")) {
+        }else{
+        }
+
         // 페이지 접속 시 새로 로딩해준다.
         Toast.makeText(this, "clear 전 size" + UserDataHolderShareItem.shareItemList.size(), Toast.LENGTH_SHORT).show();
 
@@ -130,6 +141,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
                     UserDataHolderShareItem.loadShareItems();
                     Toast.makeText(MyShareDetailActivity.this, "무료 아이템 수정", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("state", "share");
                     intent1.putExtra("documentId", selectedItem.getTitle() + firebaseUser.getEmail());
                     startActivity(intent1);
                 }

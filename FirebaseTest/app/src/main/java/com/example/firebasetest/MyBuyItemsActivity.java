@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,49 +23,46 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MyItemsActivity extends AppCompatActivity {
+public class MyBuyItemsActivity extends AppCompatActivity {
     ListView listView;
-    public static ArrayList<Item> openItemList = new ArrayList<Item>();
-    public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static ArrayList<Item> openItemList;
+    public static ArrayList<Item> biddingItemList;
+    FirebaseFirestore db;
     FirebaseUser firebaseUser;
-
     private Button btnbck;
     private Switch bORo;
+    String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_items);
+        setContentView(R.layout.activity_my_buy_items);
 
         listView = (ListView)findViewById(R.id.listView);
+        openItemList = new ArrayList<Item>();
+        biddingItemList = new ArrayList<Item>();
+        uid = UserManager.getInstance().getUserUid();
+        db = FirebaseFirestore.getInstance();
 
         btnbck = findViewById(R.id.btn_back);
         bORo = findViewById(R.id.sw_bORo);
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String seller = firebaseUser.getEmail();
-        bORo.setOnCheckedChangeListener(new bORoSwitchListener());
-        // 기본 값은 bidding 으로 해줄건데 open으로 임시 저장해둠
-        this.InitializeBiddingItem(seller);
+        bORo.setOnCheckedChangeListener(new MyBuyItemsActivity.bORoSwitchListener());
+        // 기본 값은 bidding
+        this.InitializeBiddingItem();
         setOnClickbListener();
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemsActivity.this, MyTransactionActivity.class);
+                Intent intent = new Intent(MyBuyItemsActivity.this, MyTransactionActivity.class);
                 startActivity(intent);
             }
         });
     }
-    AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener(){
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-            Toast.makeText(MyItemsActivity.this, "Clicked position: " + parent, Toast.LENGTH_SHORT).show();
-        }
-    };
-    public void InitializeOpenItem(String seller){
+    public void InitializeOpenItem(){
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         openItemList.clear();
-        db.collection("OpenItem").whereEqualTo("seller", seller)
+        db.collection("OpenItem").whereEqualTo("buyer", uid)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -81,6 +77,7 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate"))
                                     )
@@ -93,23 +90,24 @@ public class MyItemsActivity extends AppCompatActivity {
                 });
 
     }
-    public void InitializeBiddingItem(String seller){
+    public void InitializeBiddingItem(){
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         biddingItemList.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-        db.collection("BiddingItem").whereEqualTo("seller", seller)
+        db.collection("BiddingItem").whereEqualTo("buyer", uid)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id") + document.getData().get("imgUrl"));
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("seller"));
                             biddingItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
@@ -130,11 +128,12 @@ public class MyItemsActivity extends AppCompatActivity {
                 // 항목을 가져옴
                 Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
-                Log.d(TAG, ""+item.getSeller());
+                Log.d(TAG, "seller를 확인해보자. "+item.getSeller());
+                Log.d(TAG, "info를 확인해보자. "+item.getInfo());
                 showDetail.putExtra("state", "On");
-                showDetail.putExtra("isBuy", "Sell");
-                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
-//                showDetail.putExtra("sellerId", )
+                showDetail.putExtra("isBuy","Buy");
+                // item.getSeller() 에서 error 생길 수 있음 ***********
+                showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
             }
         });
@@ -147,8 +146,8 @@ public class MyItemsActivity extends AppCompatActivity {
                 Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 showDetail.putExtra("state", "Off");
-                showDetail.putExtra("isBuy", "Sell");
-                showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+                showDetail.putExtra("isBuy","Buy");
+                showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
             }
         });
@@ -156,14 +155,13 @@ public class MyItemsActivity extends AppCompatActivity {
     class bORoSwitchListener implements CompoundButton.OnCheckedChangeListener{
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-            String seller = firebaseUser.getEmail();
             if(isChecked){
-                InitializeOpenItem(seller);
+                InitializeOpenItem();
                 bORo.setText("오픈 경매 아이템");
                 setOnClickoListener();
             }else{
-                InitializeBiddingItem(seller);
-                bORo.setText("비딩 경매 아이템");
+                InitializeBiddingItem();
+                bORo.setText("비공개 경매 아이템");
                 setOnClickbListener();
             }
         }

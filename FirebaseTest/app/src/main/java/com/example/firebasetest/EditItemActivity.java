@@ -72,10 +72,15 @@ public class EditItemActivity extends AppCompatActivity {
         write_text = findViewById(R.id.write_text);
 
         imageView = findViewById(R.id.input_itemImg);
-
-        getSelectbItem();
-        getSelectoItem();
-        getSelectsItem();
+        Intent intent = getIntent();
+        String state = intent.getStringExtra("state");
+        if(state.equals("bidding")){
+            getSelectbItem();
+        }else if(state.equals("open")){
+            getSelectoItem();
+        }else{
+            getSelectsItem();
+        }
 
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
@@ -215,8 +220,8 @@ public class EditItemActivity extends AppCompatActivity {
                     }
                 });
     }
+    // openItemList 클릭 시 이벤트
     private void getSelectoItem(){
-
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
         Item selectedItem = null;
