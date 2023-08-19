@@ -33,10 +33,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +56,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
     private Uri imageUrl;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
+    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +104,17 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
                 String sellerId = firebaseUser.getEmail();
+
+                if(strCategory.isEmpty()){
+                    Toast.makeText(OpenRegistItemActivity.this, "카테고리를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Log.d(TAG, ""+sellerId);
                 if(imageUrl != null){
                     uploadToFirebase(strTitle, imageUrl, strName, strPrice, strInfo, strCategory, sellerId);
+
+
+
                     Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                     startActivity(intent);
                 }else{
@@ -143,6 +154,15 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
             Map<String, Object> data = new HashMap<>();
+
+            Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
+            String uploadMillis = String.valueOf(calendar.getTimeInMillis());
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            String futureMillis = String.valueOf(calendar.getTimeInMillis()); //
+            // "yyyy-MM-dd HH:mm:ss" 포맷으로 변환
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = sdf.format(calendar.getTime());
+
             data.put("title", strTitle);
             data.put("id", strName);
             if(Integer.parseInt(strPrice) >= 100){
@@ -150,10 +170,21 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             }else{
                 data.put("price","100");
             }
+            if(Integer.parseInt(strPrice) >= 100){
+                data.put("endPrice",strPrice);
+            }else{
+                data.put("endPrice","100");
+            }
             data.put("info", strInfo);
             data.put("category", strCategory);
             data.put("seller", sellerId);
-
+            data.put("buyer", null); // 경매 끝났을때 uid 혹은 이메일 넣기
+            data.put("futureMillis", futureMillis);
+            data.put("futureDate", formattedDate);
+            data.put("uploadMillis", uploadMillis);
+            data.put("confirm", false);
+            data.put("itemType", "OpenItem");
+            data.put("views", 0);
             // 성공 시
             fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
                 // 이미지 아이템에 담기
@@ -166,6 +197,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                             // 등록된 리스트 새로 갱신
                             UserDataHolderOpenItems.loadOpenItems();
                             Toast.makeText(OpenRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            sendMessage(strName,strCategory,firebaseUser, strTitle+sellerId);
                             Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                             startActivity(intent);
                         })
@@ -196,6 +228,67 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 .setNegativeButton("취소", null); // 취소 버튼
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void sendMessage(String strName, String strCategory, FirebaseUser firebaseUser, String title){
+        db.collection("User").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        if (documentSnapshot.contains(strCategory) && documentSnapshot.contains("membership")) {
+                            boolean member = documentSnapshot.getBoolean("membership");
+                            if (member) {
+                                boolean user = documentSnapshot.getBoolean(strCategory);
+                                if (user) {
+                                    String userID = documentSnapshot.getId();
+                                    if(!userID.equals(firebaseUser.getUid())) {
+                                        sendFCMToUsersForItem(strName, userID, title, strCategory);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+    }
+    private void sendFCMToUsersForItem(String itemName, String userID, String title, String category) {
+
+        FirebaseUser fb = firebaseAuth.getInstance().getCurrentUser();
+        Calendar calendar = Calendar.getInstance(); // 현재 시간 가져옴
+        String millis = String.valueOf(calendar.getTimeInMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = sdf.format(calendar.getTime());
+
+
+        db.collection("FCMTOKEN").document(userID).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String userToken = documentSnapshot.getString("token");// 로그인시에 저장되는 FCM토큰
+                        if (userToken != null) {
+                            // FCM 메시지 생성
+                            Map<String, String> messageData = new HashMap<>();
+                            messageData.put("title", category +" 경매알림");
+                            messageData.put("body", itemName + "이(가) 공개 경매에 올라왔습니다!");
+                            Map<String, String> data = new HashMap<>();
+                            data.put("title", messageData.get("title"));
+                            data.put("message", messageData.get("body"));
+                            data.put("uid", userToken);
+                            data.put("time", formattedDate);
+                            data.put("userId", userID);
+                            data.put("itemTitle", title);
+                            data.put("itemType", "OpenItem" );
+
+                            db.collection("notifications")           // 문서 ID를 userID로 설정하여 문서에 접근 (컬렉션도 생성됨)
+                                    .add(data)                  // 데이터를 문서에 저장
+                                    .addOnSuccessListener(aVoid -> {
+                                        Log.d("FCM", "메시지 저장 성공: " + userID);
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.e("FCM", "메시지 저장 실패: " + e.getMessage());
+                                    });
+                        } else {
+                            Log.d("FCM", "해당 사용자의 FCM 토큰이 없습니다.");
+                        }
+                    }
+                });
     }
 
 }

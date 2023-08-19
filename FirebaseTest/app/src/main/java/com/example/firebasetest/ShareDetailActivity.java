@@ -1,9 +1,13 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +22,23 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ShareDetailActivity extends AppCompatActivity {
-    private TextView itemId, startPrice, endPrice, itemInfo, seller, category;
+    private long remainingTimeMillis;
+    private CountDownTimer countDownTimer;
+    private TextView itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl;
     private EditText mETBidPrice; // 입찰가
-    private Button mBtnBidButton; // 입찰하기 버튼
+    private Button mBtnBidJoin, mBtnAgain, mBtnCong; // 입찰하기 버튼
+    private String sellerName, bidAmount;
+    String buyer, document;
     FirebaseFirestore database;
+    FirebaseFirestore db;
+    boolean open;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +50,96 @@ public class ShareDetailActivity extends AppCompatActivity {
         seller = findViewById(R.id.seller);
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
+        timeinfo = findViewById(R.id.timeInfoinfo);
+        futureMillis = findViewById(R.id.futureMillis);
         database = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+        String seller = intent.getStringExtra("seller");
+        String buyerUid = intent.getStringExtra("buyer");
+        // 두번째 매개변수는 값을 잘 불러오지 못했을때 할당해줄 기본 값
+        String confirm = intent.getStringExtra("confirm");
+        String futureMillis = intent.getStringExtra("futureMillis");
+        String documentId = title + seller;
+        String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
+
+        Calendar calendar = Calendar.getInstance();
+        String currentMillis = String.valueOf(calendar.getTimeInMillis());
+
+        open = false;
 
         // 입력받은 입찰 가격
-        mBtnBidButton = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
+        mBtnBidJoin = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
+        mBtnCong = findViewById(R.id.btn_Cong); // 당첨
+        mBtnAgain = findViewById(R.id.btn_Again); // 당첨x
 
 
-
+        buyer = " ";
 
 
         getSelectoItem();
 
-        // 신청하기를 눌렀을 때
-        mBtnBidButton.setOnClickListener(new View.OnClickListener() {
+        if(buyerUid.equals(uid)){
+            Log.d(TAG, "uid값 : "+uid+"confirm 값 : "+ confirm);
+            // 당첨자가 나인 경우
+            mBtnCong.setVisibility(View.VISIBLE);
+            mBtnBidJoin.setVisibility(View.GONE);
+            mBtnAgain.setVisibility(View.GONE);
+        }else if(Long.parseLong(currentMillis) >= Long.parseLong(futureMillis)){
+            // 낙찰자가 생겼지만 내가 아닌 경우
+            mBtnAgain.setVisibility(View.VISIBLE);
+            mBtnCong.setVisibility(View.GONE);
+            mBtnBidJoin.setVisibility(View.GONE);
+        }else if(Long.parseLong(currentMillis) < Long.parseLong(futureMillis)){
+            // 경매가 진행중인 경우
+            mBtnBidJoin.setVisibility(View.VISIBLE);
+            mBtnCong.setVisibility(View.GONE);
+            mBtnAgain.setVisibility(View.GONE);
+        }
 
-            Intent intent = getIntent();
-            String title = intent.getStringExtra("title");
-            String seller = intent.getStringExtra("seller");
-            String documentId = title+ seller;
+        DocumentReference docRef = database.collection("ShareItem").document(documentId);
+        // 문서 읽기
+        docRef.get().addOnCompleteListener(task -> {
+            if (true) {
+                DocumentSnapshot document = task.getResult();
+                if (open) {
+                    String buyer = document.getString("buyer");
+                    db.collection("User")
+                            .document(buyer)
+                            .get()
+                            .addOnSuccessListener(userDocument -> {
+                                if (userDocument.exists()) {
+                                    String winningUserEmail = userDocument.getString("email");
+                                    Toast.makeText(ShareDetailActivity.this,
+                                            "경매가 종료되었습니다.\n나눔받은 사람: " + winningUserEmail,
+                                            Toast.LENGTH_LONG).show();
+
+                                    // Rest of the code...
+                                } else {
+                                    // Handle the case where the user document doesn't exist
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle the failure to fetch user document
+                            });
+
+
+//                            Toast.makeText(OpenDetailItemActivity.this, "경매가 종료되었습니다.\n낙찰자: " + buyerId + "\n입찰금액: " + strEndPrice, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+            } else {
+                // futureMillis 필드가 null인 경우
+            }
+        });
+
+
+        // 신청하기를 눌렀을 때
+        mBtnBidJoin.setOnClickListener(new View.OnClickListener() {
+
+
             private String document;
 
             @Override
@@ -97,6 +181,7 @@ public class ShareDetailActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setValues(Item selectedItem) {
         database.collection("ShareItemInProgress")
                 .addSnapshotListener((value, error) -> {
@@ -107,17 +192,87 @@ public class ShareDetailActivity extends AppCompatActivity {
                     itemInfo.setText(selectedItem.getInfo());
                     category.setText(selectedItem.getCategory());
                     seller.setText(selectedItem.getSeller());
+                    timeinfo.setText(selectedItem.getFutureMillis());
+
+                    String title = selectedItem.getTitle();
+                    String sellerName = selectedItem.getSeller();
+
+                    String documentId1 = title + sellerName;
+
+                    this.document = documentId1;
+
+                    long currentTimeMillis = System.currentTimeMillis();
+                    String futureMillisStr = selectedItem.getFutureMillis();
+                    Long futureMillisValue = Long.valueOf(futureMillisStr);
+                    long futureTimeMillis = futureMillisValue - currentTimeMillis;
+                    String remainingTime = formatRemainingTime(futureTimeMillis);
+                    if (futureTimeMillis <= 0) {
+                        btnBid();
+                        selbuyer();
+                        //여기에 뭐 넣기
+                    }
+                    futureMillis.setText(remainingTime);
                     Glide.with(this)
                             .load(selectedItem.getImageUrl())
                             .into(imgUrl);
+                    startCountdownTimer(futureTimeMillis);
                 });
     }
+
+    private void btnBid() {
+        mBtnBidJoin.setVisibility(View.GONE);
+    }
+
+    private void updateCountdownText() {
+        String remainingTime = formatRemainingTime(remainingTimeMillis);
+        futureMillis.setText(remainingTime);
+    }
+
+    private String formatRemainingTime(long remainingTimeMillis) {
+        if (remainingTimeMillis <= 0) {
+            return "경매가 종료되었습니다.";
+        }
+
+        long diffSeconds = remainingTimeMillis / 1000;
+        long diffMinutes = diffSeconds / 60;
+        long diffHours = diffMinutes / 60;
+        long diffDays = diffHours / 24;
+
+        diffHours = diffHours % 24;
+        diffMinutes = diffMinutes % 60;
+        diffSeconds = diffSeconds % 60;
+
+        return String.format("남은 시간: %d일 %02d시간 %02d분 %02d초", diffDays, diffHours, diffMinutes, diffSeconds);
+    }
+
+    private void startCountdownTimer(long futureTimeMillis) {
+        CountDownTimer timer = new CountDownTimer(futureTimeMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                remainingTimeMillis = millisUntilFinished;
+                updateCountdownText();
+                if (millisUntilFinished <= 0) {
+                    btnBid();
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                open = true;
+                // 타이머가 종료될 때의 동작을 여기에 추가하면 됩니다.
+                // 예를 들어, 경매 종료 처리 등을 수행할 수 있습니다.
+            }
+        };
+
+        timer.start();
+    }
+
     private void getSelectoItem() {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         Item selectedItem = null;
         for (Item item : UserDataHolderShareItem.shareItemList) {
-            if(item.getId() != null){
+            if (item.getId() != null) {
                 if (item.getId().equals(id)) {
 
                     selectedItem = item;
@@ -132,5 +287,55 @@ public class ShareDetailActivity extends AppCompatActivity {
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }
+    }
+
+    private void selbuyer() {
+        DocumentReference auctionDocRef = database.collection("ShareInProgress").document(document);
+
+        auctionDocRef.collection("Share")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        ArrayList<String> bidderUids = new ArrayList<>();
+                        for (QueryDocumentSnapshot docu : task.getResult()) {
+                            bidderUids.add(docu.getId());
+                        }
+
+//                        if (!bidderUids.isEmpty()) {
+//                            int randomIndex = (int) (Math.random() * bidderUids.size());
+//                            String selectedBidderUid = bidderUids.get(randomIndex);
+//
+//                            // 선택된 입찰자 uid를 이용하여 유저의 이름 등을 가져오는 등의 로직을 추가할 수 있습니다.
+//                            // 이 부분에서 필요한 데이터를 가져와서 처리하면 됩니다.
+//                            // 예: database.collection("User").document(selectedBidderUid).get() 등
+//                            // 선택된 입찰자 uid를 전역 변수 buyer에 할당합니다.
+//                            buyer = selectedBidderUid;
+//                            Map<String, Object> updateData = new HashMap<>();
+//                            updateData.put("buyer", buyer);
+//
+//                            database.collection("ShareItem").document(document)
+//                                    .update(updateData)
+//                                    .addOnSuccessListener(aVoid -> {
+//                                        // 업데이트 성공 시의 처리
+//                                        Toast.makeText(ShareDetailActivity.this,
+//                                                itemId + " 경매가 종료되었습니다.\n낙찰자: " + buyer,
+//                                                Toast.LENGTH_LONG).show();
+//
+//                                    })
+//                                    .addOnFailureListener(e -> {
+//                                        // 업데이트 실패 시의 처리
+//                                        Toast.makeText(ShareDetailActivity.this,
+//                                                "낙찰자를 결정하는 중에 오류가 발생했습니다.",
+//                                                Toast.LENGTH_SHORT).show();
+//                                        Log.d(TAG, document);
+//                                    });
+//                        }
+                    }
+                });
+    }
+    @Override
+    public void onBackPressed(){
+//        startActivity(new Intent(ShareDetailActivity.this, ShareActivity.class));
+        finish();
     }
 }

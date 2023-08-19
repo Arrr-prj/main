@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -21,13 +23,23 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EventAuctionActivity extends AppCompatActivity {
-    private Button btnRegistItem;
+    private ImageButton btnRegistItem;
     ListView listView;
     private Button btnbck;
     private FirebaseFirestore db;
     public static ArrayList<Item> EventAuctionItemList = new ArrayList<Item>();
+    private ArrayList<Item> search_EventItemList = new ArrayList<>();
+    private SearchView searchView;
+    private boolean searching = false;
+    private ListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,7 @@ public class EventAuctionActivity extends AppCompatActivity {
                                 public void onClick(View view) {// 이벤트 경매 등록
                                     Intent intent = new Intent(EventAuctionActivity.this, EventAuctionRegisterItemActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             });
                         } else { // admin 계정이 아닐 때
@@ -66,12 +79,31 @@ public class EventAuctionActivity extends AppCompatActivity {
                         }
                     }
                 });
+        searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.length()>0){
+                    searching = true;
+                    filterItemList(newText);
+                } else {
+                    searching = false;
+                    updateListView(EventAuctionItemList);
+                }
+                return false;
+            }
+        });
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventAuctionActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         // DetailPage
@@ -82,10 +114,24 @@ public class EventAuctionActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Item item = (Item) listView.getItemAtPosition(position);
+
+                // 조회수 카운팅
+                String documentId = item.getTitle()+item.getSeller();
+                DocumentReference docRef = db.collection("EventItem").document(documentId);
+                Map<String, Object> updates = new HashMap<>();
+                updates.put("views", item.getViews()+1);
+                // 문서 수정
+                docRef.update(updates);
+                // 수정된 내용 갱신
+                UserDataHolderEventItems.loadEventItems();
+
                 Intent showDetail = new Intent(getApplicationContext(), EventAuctionDetailItemActivity.class);
                 showDetail.putExtra("id", item.getId());
                 showDetail.putExtra("title", item.getTitle());
                 showDetail.putExtra("seller", item.getSeller());
+                showDetail.putExtra("buyer", item.getBuyer());
+                showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
+                showDetail.putExtra("futureMillis", item.getFutureMillis());
                 startActivity(showDetail);
             }
         });
@@ -110,17 +156,65 @@ public class EventAuctionActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("buyer")),
                                             String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("uploadMillis")),
+                                            String.valueOf(calMillis(String.valueOf(document.getData().get("uploadMillis")))), // 오늘이랑 업로드한 날짜 차이
+                                            Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
+                                            String.valueOf(document.getData().get("itemType")),
+                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
                                     )
                             );
                         }
-                        EventItemAdapter eventItemAdapter = new EventItemAdapter(this, EventAuctionItemList);
+                        // 정렬
+                        Comparator<Item> calDaysComparator = new Comparator<Item>() {
+                            @Override
+                            public int compare(Item item1, Item item2) {
+                                Integer days1 = Integer.parseInt(item1.getDifferenceDays());
+                                Integer days2 = Integer.parseInt(item2.getDifferenceDays());
+                                return days1.compareTo(days2);
+                            }
+                        };
+                        // endItemList을 calDays 함수의 결과를 기준으로 정렬
+                        Collections.sort(EventAuctionItemList, calDaysComparator);
+                        Collections.sort(EventAuctionItemList, calDaysComparator);
+
+                        ListAdapter eventItemAdapter = new ListAdapter(this, EventAuctionItemList);
                         listView.setAdapter(eventItemAdapter);
                     }
                 });
+    }
+    public String calMillis(String upload){
+        Log.d(TAG, "uploadMillis의 값 : "+upload);
+        // upload한 날짜의 Millis
+        Long uploadMillis = Long.parseLong(upload);
+        // 오늘 날짜의 Millis
+        Calendar now = Calendar.getInstance();
+        Long nowMillis = Long.parseLong(String.valueOf(now.getTimeInMillis()));
+        // 오늘 Millis - upload Millis의 값이 작을수록 최근에 올린 것.
+        Long differenceMillis = nowMillis - uploadMillis;
+        return String.valueOf(differenceMillis);
+    }
+    public void filterItemList(String query){
+        search_EventItemList.clear();
+        for(Item item : EventAuctionItemList){
+            if(item.getId().toLowerCase().contains(query.toLowerCase())){
+                search_EventItemList.add(item);
+            }
+            updateListView(search_EventItemList);
+        }
+    }
+    public void updateListView(List<Item> itemList){
+        adapter = new ListAdapter(this, itemList);
+        listView.setAdapter(adapter);
+    }
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(EventAuctionActivity.this, HomeActivity.class));
     }
 }

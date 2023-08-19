@@ -3,8 +3,10 @@ package com.example.firebasetest;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,6 +23,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -28,21 +32,23 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyItemDetailActivity extends AppCompatActivity {
 
-    private Button btnEdit, btnDelete, btnList;
+    private Button btnEdit, btnDelete, btnList, btnConfirm, btnCancle;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
-    BiddingItemAdapter biddingItemAdapter;
+    ListAdapter listAdapter;
     FirebaseUser firebaseUser;
 
 
     private FirebaseFirestore db;
-    OpenAuctionAdapter openAuctionAdapter;
 
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
+    public static ArrayList<Item> eventItemList = new ArrayList<Item>();
 
     Item item;
     Bitmap bitmap;
@@ -61,8 +67,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
         seller = findViewById(R.id.seller);
         imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
-        biddingItemAdapter = new BiddingItemAdapter(this, new ArrayList<>());
-        openAuctionAdapter = new OpenAuctionAdapter(this, new ArrayList<>());
+
+        listAdapter = new ListAdapter(this, new ArrayList<>());
+        listAdapter = new ListAdapter(this, new ArrayList<>());
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         db = FirebaseFirestore.getInstance();
@@ -70,6 +77,8 @@ public class MyItemDetailActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
         btnList = findViewById(R.id.btn_list);
+        btnConfirm = findViewById(R.id.btn_confirm);
+        btnCancle = findViewById(R.id.btn_cancle);
 
         // 페이지 접속 시 새로 로딩해준다.
         Toast.makeText(this, "clear 전 size" + UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
@@ -90,20 +99,180 @@ public class MyItemDetailActivity extends AppCompatActivity {
         openItemList.addAll(UserDataHolderOpenItems.openItemList);
         Log.d(TAG, "" + openItemList.size());
 
+        String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
+        db = FirebaseFirestore.getInstance();
+
+
         Intent intent = getIntent();
         String state = intent.getStringExtra("state");
         if(state.equals("On")){
             getSelectoItem();
-        }else{
+        }else if(state.equals("Off")){
             getSelectbItem();
+            // 이벤트 아이템인 경우
+        }else if(state.equals("Event")){
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+            getSelecteItem();
         }
+
+        // 구매한 아이템 수정 삭제 막기
+        String isBuy = intent.getStringExtra("isBuy");
+        if(isBuy.equals("Buy")){
+            btnDelete.setVisibility(View.GONE);
+            btnEdit.setVisibility(View.GONE);
+        }else if(isBuy.equals("Confirm")){
+            btnConfirm.setVisibility(View.VISIBLE);
+            btnCancle.setVisibility(View.VISIBLE);
+        }
+        else{
+        }
+
+        // 낙찰 확인 버튼 클릭 시 이벤트
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                // 전달받은 documentId를 변수에 저장
+                Intent intent = getIntent();
+                String documentId = intent.getStringExtra("documentId");
+
+                // 비공개 아이템 리스트 중 글 제목+판매자 이메일 같으면 선택된 아이템을 변수에 담아둔다
+                for (Item item : UserDataHolderBiddingItems.biddingItemList) {
+                    if (documentId.equals(item.getTitle() + item.getSeller())) {
+                        CollectionReference biddingItemCollection = db.collection("BiddingItem");
+                        // update() 이용하여 해당 데이터 confirm : false -> true
+                        biddingItemCollection.whereEqualTo("buyer", uid)
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for(QueryDocumentSnapshot document : task.getResult()){
+                                            // 해당 문서의 참조 가져오기
+                                            DocumentReference documentReference = biddingItemCollection.document(document.getId());
+
+                                            // 업데이트할 데이터 생성
+                                            Map<String, Object> updates = new HashMap<>();
+                                            updates.put("confirm", true);
+
+                                            // 문서 업데이트
+                                            documentReference.update(updates)
+                                                    .addOnSuccessListener(aVoid ->{
+                                                        btnConfirm.setVisibility(View.GONE);
+                                                        btnCancle.setVisibility(View.VISIBLE);
+                                                        // notify도 해줘야하나?
+                                                        listAdapter.notifyDataSetChanged();
+                                                        // 수정된 리스트 새로 갱신
+                                                        UserDataHolderBiddingItems.loadBiddingItems();
+                                                        Toast.makeText(MyItemDetailActivity.this, "상품이 낙찰되었습니다.", Toast.LENGTH_SHORT).show();
+                                                        btnConfirm.setText("구매 완료");
+
+                                                        startActivity(new Intent(MyItemDetailActivity.this, MyConfirmItemActivity.class));
+                                                        finish();
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(MyItemDetailActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                                    });
+                                        }
+                                    }
+                                });
+                    } else {
+                    }
+                }
+                // 공개 아이템 리스트 중 글 제목+판매자 이메일 같으면 선택된 아이템을 변수에 담아둔다
+                for (Item item : UserDataHolderOpenItems.openItemList) {
+                    if (documentId.equals(item.getTitle() + item.getSeller())) {
+                        CollectionReference openItemCollection = db.collection("OpenItem");
+                        // update() 이용하여 해당 데이터 confirm : false -> true
+                        openItemCollection.whereEqualTo("buyer", uid)
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for(QueryDocumentSnapshot document : task.getResult()){
+                                            // 해당 문서의 참조 가져오기
+                                            DocumentReference documentReference = openItemCollection.document(document.getId());
+
+                                            // 업데이트할 데이터 생성
+                                            Map<String, Object> updates = new HashMap<>();
+                                            updates.put("confirm", true);
+
+                                            // 문서 업데이트
+                                            documentReference.update(updates)
+                                                    .addOnSuccessListener(aVoid ->{
+                                                        btnConfirm.setVisibility(View.GONE);
+                                                        btnCancle.setVisibility(View.GONE);
+                                                        // notify도 해줘야하나?
+                                                        listAdapter.notifyDataSetChanged();
+                                                        // 수정된 리스트 새로 갱신
+                                                        UserDataHolderOpenItems.loadOpenItems();
+                                                        Toast.makeText(MyItemDetailActivity.this, "상품이 낙찰되었습니다.", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(MyItemDetailActivity.this, MyConfirmItemActivity.class));
+                                                        finish();
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(MyItemDetailActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                                    });
+                                        }
+                                    }
+                                });
+
+                    } else {
+                    }
+                }
+                // 이벤트 아이템 리스트 중 글 제목+판매자 이메일 같으면 선택된 아이템을 변수에 담아둔다
+                for (Item item : UserDataHolderEventItems.eventItemList) {
+                    if (documentId.equals(item.getTitle() + item.getSeller())) {
+                        CollectionReference biddingItemCollection = db.collection("BiddingItem");
+                        // update() 이용하여 해당 데이터 confirm : false -> true
+                        biddingItemCollection.whereEqualTo("buyer", uid)
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for(QueryDocumentSnapshot document : task.getResult()){
+                                            // 해당 문서의 참조 가져오기
+                                            DocumentReference documentReference = biddingItemCollection.document(document.getId());
+
+                                            // 업데이트할 데이터 생성
+                                            Map<String, Object> updates = new HashMap<>();
+                                            updates.put("confirm", true);
+
+                                            // 문서 업데이트
+                                            documentReference.update(updates)
+                                                    .addOnSuccessListener(aVoid ->{
+                                                        btnConfirm.setVisibility(View.GONE);
+                                                        btnCancle.setVisibility(View.GONE);
+                                                        // notify도 해줘야하나?
+                                                        listAdapter.notifyDataSetChanged();
+                                                        // 수정된 리스트 새로 갱신
+                                                        UserDataHolderEventItems.loadEventItems();
+                                                        Toast.makeText(MyItemDetailActivity.this, "상품이 낙찰되었습니다.", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(MyItemDetailActivity.this, MyEventActivity.class));
+                                                        finish();
+                                                    })
+                                                    .addOnFailureListener(e -> {
+                                                        Toast.makeText(MyItemDetailActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                                    });
+                                        }
+                                    }
+                                });
+                    } else {
+                    }
+                }
+            }
+        });
+
+        // 낙찰 포기 버튼 클릭 시 이벤트
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MyItemDetailActivity.this, "낙찰을 포기했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // 목록 버튼 클릭 시 이벤트
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemDetailActivity.this, MyItemsActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -128,7 +297,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                                 .delete()
                                 .addOnSuccessListener(aVoid -> {
                                     BiddingActivity.biddingItemList.remove(item);
-                                    biddingItemAdapter.notifyDataSetChanged();
+                                    listAdapter.notifyDataSetChanged();
                                     // 삭제된 리스트 새로 갱신
                                     UserDataHolderBiddingItems.loadBiddingItems();
                                     Toast.makeText(MyItemDetailActivity.this, "상품이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
@@ -151,7 +320,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                                 .delete()
                                 .addOnSuccessListener(aVoid -> {
                                     MyItemDetailActivity.openItemList.remove(item);
-                                    openAuctionAdapter.notifyDataSetChanged();
+                                    listAdapter.notifyDataSetChanged();
                                     // 삭제된 리스트 새로 갱신
                                     UserDataHolderOpenItems.loadOpenItems();
                                     Toast.makeText(MyItemDetailActivity.this, "상품이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
@@ -194,12 +363,16 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     UserDataHolderBiddingItems.loadBiddingItems();
                     Toast.makeText(MyItemDetailActivity.this, "비공개 아이템 수정", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("state", "bidding");
+                    // 여기서 해당 유저의 이메일을 불러와서 해당 아이템의 글 제목과 이메일이 documentId와 일치하는지 넘겨서 확인해줌
                     intent1.putExtra("documentId", selectedItem.getTitle() + firebaseUser.getEmail());
                     startActivity(intent1);
                 } else if (selectedoItem != null) {
                     UserDataHolderOpenItems.loadOpenItems();
+                    Log.d(TAG, "selectedoItem.getSeller()의 값 : "+selectedoItem.getSeller());
                     Toast.makeText(MyItemDetailActivity.this, "공개 아이템 수정", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
+                    intent1.putExtra("state", "open");
                     intent1.putExtra("documentId", selectedoItem.getTitle() + firebaseUser.getEmail());
                     startActivity(intent1);
                 }
@@ -281,11 +454,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         category.setText(get_category);
                         startPrice.setText(get_price);
                         endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
-
-
                         seller.setText(firebaseUser.getEmail());
-
-
                         Glide.with(MyItemDetailActivity.this)
                                 .load(get_url)
                                 .into(imgUrl);
@@ -293,6 +462,41 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     }
                 });
     }
+    // event Item
+    private void getSelecteItem() {
+        Intent intent = getIntent();
+        String documentId = intent.getStringExtra("documentId");
+        Log.d(TAG, "" + documentId);
+        Item selectedItem = null;
+        // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
+        eventItemList.clear();
+        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
+        UserDataHolderOpenItems.loadOpenItems();
+        db.collection("EventItem").document(documentId).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        String get_itemTitle = document.getString("title");
+                        String get_category = document.getString("category");
+                        String get_id = document.getString("id");
+                        String get_info = document.getString("info");
+                        String get_price = document.getString("price");
+                        String get_url = document.getString("imgUrl");
 
+                        itemTitle.setText(get_itemTitle);
+                        itemId.setText(get_id);
+                        itemInfo.setText(get_info);
+                        category.setText(get_category);
+                        startPrice.setText(get_price);
+                        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
+                        seller.setText(firebaseUser.getEmail());
+                        Glide.with(MyItemDetailActivity.this)
+                                .load(get_url)
+                                .into(imgUrl);
+
+                    }
+                });
+    }
 
 }

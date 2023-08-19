@@ -56,7 +56,7 @@ public class EditItemActivity extends AppCompatActivity {
     String url;
     ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
-    private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
+    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +72,15 @@ public class EditItemActivity extends AppCompatActivity {
         write_text = findViewById(R.id.write_text);
 
         imageView = findViewById(R.id.input_itemImg);
-
-        getSelectbItem();
-        getSelectoItem();
-        getSelectsItem();
+        Intent intent = getIntent();
+        String state = intent.getStringExtra("state");
+        if(state.equals("bidding")){
+            getSelectbItem();
+        }else if(state.equals("open")){
+            getSelectoItem();
+        }else{
+            getSelectsItem();
+        }
 
         // 이미지 클릭 이벤트
         imageView.setOnClickListener(new View.OnClickListener(){
@@ -215,8 +220,8 @@ public class EditItemActivity extends AppCompatActivity {
                     }
                 });
     }
+    // openItemList 클릭 시 이벤트
     private void getSelectoItem(){
-
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
         Item selectedItem = null;

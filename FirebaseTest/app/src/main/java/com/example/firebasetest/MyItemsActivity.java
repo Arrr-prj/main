@@ -29,9 +29,7 @@ public class MyItemsActivity extends AppCompatActivity {
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseStorage storage = FirebaseStorage.getInstance();
     FirebaseUser firebaseUser;
-    StorageReference storageReference = storage.getReference();
 
     private Button btnbck;
     private Switch bORo;
@@ -47,15 +45,14 @@ public class MyItemsActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String seller = firebaseUser.getEmail();
         bORo.setOnCheckedChangeListener(new bORoSwitchListener());
-        // 기본 값은 bidding
+        // 기본 값은 bidding 으로 해줄건데 open으로 임시 저장해둠
         this.InitializeBiddingItem(seller);
         setOnClickbListener();
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemsActivity.this, MyTransactionActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -75,21 +72,24 @@ public class MyItemsActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
-                            openItemList.add(
-                                    new Item(
-                                            String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
-                                    )
-                            );
-
+                            if(Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))) {
+                                openItemList.add(
+                                        new Item(
+                                                String.valueOf(document.getData().get("title")),
+                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("id")),
+                                                String.valueOf(document.getData().get("endPrice")),
+                                                String.valueOf(document.getData().get("category")),
+                                                String.valueOf(document.getData().get("info")),
+                                                String.valueOf(document.getData().get("seller")),
+                                                String.valueOf(document.getData().get("futureMillis")),
+                                                String.valueOf(document.getData().get("futureDate")),
+                                                Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))
+                                        )
+                                );
+                            }
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
+                        ListAdapter openAuctionAdapter = new ListAdapter(this, openItemList);
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
@@ -107,19 +107,24 @@ public class MyItemsActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id") + document.getData().get("imgUrl"));
-                            biddingItemList.add(
-                                    new Item(
-                                            String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller")),
-                                            String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
-                                    ));
+                            if(Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))){
+                                biddingItemList.add(
+                                        new Item(
+                                                String.valueOf(document.getData().get("title")),
+                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("id")),
+                                                String.valueOf(document.getData().get("endPrice")),
+                                                String.valueOf(document.getData().get("category")),
+                                                String.valueOf(document.getData().get("info")),
+                                                String.valueOf(document.getData().get("seller")),
+                                                String.valueOf(document.getData().get("futureMillis")),
+                                                String.valueOf(document.getData().get("futureDate")),
+                                                Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))
+                                        )
+                                );
+                            }
                         }
-                        BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
+                        ListAdapter biddingItemAdapter = new ListAdapter(this, biddingItemList);
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });
@@ -134,6 +139,7 @@ public class MyItemsActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("state", "On");
+                showDetail.putExtra("isBuy", "Sell");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
 //                showDetail.putExtra("sellerId", )
                 startActivity(showDetail);
@@ -148,6 +154,7 @@ public class MyItemsActivity extends AppCompatActivity {
                 Item item = (Item) listView.getItemAtPosition(position);
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 showDetail.putExtra("state", "Off");
+                showDetail.putExtra("isBuy", "Sell");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
                 startActivity(showDetail);
             }

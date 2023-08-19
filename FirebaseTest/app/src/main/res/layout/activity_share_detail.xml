@@ -15,15 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_add_photo" />
 
-    <TextView
-        android:id="@+id/tv_category"
-        android:layout_width="81dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
-        android:text="카테고리 :"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_itemId" />
 
     <TextView
         android:id="@+id/category"
@@ -54,6 +45,47 @@
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_itemInfo"
         app:layout_constraintTop_toBottomOf="@+id/seller" />
+
+    <TextView
+        android:id="@+id/tv_timeInfo"
+        android:layout_width="81dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="60dp"
+        android:text="마감 시간 : "
+        android:textColor="#E80000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_seller" />
+
+    <TextView
+        android:id="@+id/timeInfoinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="5dp"
+        android:text="----"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timeInfo" />
+
+    <TextView
+        android:id="@+id/futureMillis"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="30dp"
+        android:text="----"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timeInfo" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="81dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="12dp"
+        android:text="카테고리 :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_itemId" />
 
     <TextView
         android:id="@+id/tv_seller"
@@ -101,6 +133,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="신청하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_Cong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:enabled="false"
+        android:text="당첨되었습니다 !"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/btn_Again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:enabled="false"
+        android:text="다음 기회에..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

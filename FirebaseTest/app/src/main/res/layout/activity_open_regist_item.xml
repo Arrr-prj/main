@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="글 제목"
+        android:hint="상품제목"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_title" />
+        app:layout_constraintTop_toBottomOf="@+id/input_itemImg" />
 
     <EditText
         android:id="@+id/input_itemExplain"
@@ -78,6 +78,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_itemExplain" />
+
     <Button
         android:id="@+id/input_itemCategory"
         android:layout_width="wrap_content"
