@@ -19,7 +19,5 @@ public class UserManager {
     public String getUserUid() {
         return userUid;
     }
-    public void clearUserUid() {
-        userUid = null;
-    }
+    public void clearUserUid() {userUid = null;}
 }

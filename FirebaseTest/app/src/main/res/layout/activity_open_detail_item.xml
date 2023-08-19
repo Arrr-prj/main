@@ -12,31 +12,43 @@
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:text="상품제목 : "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
     <TextView
         android:id="@+id/itemTitle"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_itemId"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
 
-    <ImageView
-        android:id="@+id/imgUrl"
-        android:layout_width="115dp"
-        android:layout_height="114dp"
-        android:layout_marginTop="120dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/sliderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_photo" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+    <Button
+        android:id="@+id/btn_bigbutton"
+        android:layout_width="94dp"
+        android:layout_height="38dp"
+        android:text="크게보기"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager"/>
 
     <TextView
         android:id="@+id/tv_seller"
@@ -57,6 +69,7 @@
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_itemInfo"
         app:layout_constraintTop_toBottomOf="@+id/seller" />
+
     <TextView
         android:id="@+id/tv_timeInfo"
         android:layout_width="81dp"
@@ -173,20 +186,20 @@
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="40dp"
         android:text="상품명 : "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
     <TextView
         android:id="@+id/itemId"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="40dp"
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_itemId"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
     <EditText
         android:id="@+id/et_bid"
@@ -206,12 +219,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
+        android:backgroundTint="#8A4DFF"
         android:text="입찰하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_bid" />
 
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="구매하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_bid" />
 
+    <Button
+        android:id="@+id/btn_buyConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:enabled="false"
+        android:text="구매 완료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_bid" />
+    <Button
+        android:id="@+id/btn_bidEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:enabled="false"
+        android:text="경매 종료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_bid" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
