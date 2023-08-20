@@ -64,7 +64,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
+    private String[] categories = {"나이키", "아디다스", "애플", "삼성", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 / 인테리어", "가구 / 인테리어", "스포츠 / 레저", "취미 / 게임", "기타"};
 
 
     private Uri imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
@@ -180,10 +180,10 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                     return;
                 }
                 if (imageUrl1 != null && imageUrl2 != null && imageUrl3 != null && imageUrl4 != null && imageUrl5 != null && imageUrl6 != null) {
-                    uploadToFirebase(strTitle, imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6, strName, strPrice, strInfo, strCategory, sellerId);
+                    uploadToFirebase(strTitle, imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6, strName, strPrice, strInfo, strCategory, seller);
                     Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                     startActivity(intent);
-                }else {
+                } else {
                     Toast.makeText(BiddingRegistItemActivity.this, "사진을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
 
@@ -283,7 +283,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
 
     // 파이어베이스 이미지 업로드
 
-    private void uploadToFirebase(String strTitle, Uri uri1, Uri uri2, Uri uri3, Uri uri4, Uri uri5, Uri uri6, String strName, String strPrice, String strInfo, String strCategory, String sellerId ){
+    private void uploadToFirebase(String strTitle, Uri uri1, Uri uri2, Uri uri3, Uri uri4, Uri uri5, Uri uri6, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
         // 각 이미지의 StorageReference 생성
         StorageReference fileRef1 = reference.child(System.currentTimeMillis() + "_1." + getFileExtension(uri1));
         StorageReference fileRef2 = reference.child(System.currentTimeMillis() + "_2." + getFileExtension(uri2));
@@ -323,15 +323,15 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 data.put("buyer", null); // 경매 끝났을때 uid 혹은 이메일 넣기
                 data.put("futureMillis", futureMillis);
                 data.put("futureDate", formattedDate);
-                if(Integer.parseInt(strPrice) >= 100){
-                    data.put("price",strPrice);
-                }else{
-                    data.put("price","100");
+                if (Integer.parseInt(strPrice) >= 100) {
+                    data.put("price", strPrice);
+                } else {
+                    data.put("price", "100");
                 }
-                if(Integer.parseInt(strPrice) >= 100){
-                    data.put("endPrice",strPrice);
-                }else{
-                    data.put("endPrice","100");
+                if (Integer.parseInt(strPrice) >= 100) {
+                    data.put("endPrice", strPrice);
+                } else {
+                    data.put("endPrice", "100");
                 }
 
                 data.put("uploadMillis", uploadMillis);
@@ -374,6 +374,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
             }
         });
     }
+
     private Task<Uri> uploadImageAndGetUrl(StorageReference fileRef, Uri uri) {
         final TaskCompletionSource<Uri> taskCompletionSource = new TaskCompletionSource<>();
 
@@ -387,8 +388,9 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
 
         return taskCompletionSource.getTask();
     }
+
     // 파일 타입 가져오기
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
@@ -409,7 +411,8 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-    private void sendMessage(String strName, String strCategory, FirebaseUser firebaseUser,String title){
+
+    private void sendMessage(String strName, String strCategory, FirebaseUser firebaseUser, String title) {
         db.collection("User").get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
@@ -419,8 +422,8 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                                 boolean user = documentSnapshot.getBoolean(strCategory);
                                 if (user) {
                                     String userID = documentSnapshot.getId();
-                                    if(!userID.equals(firebaseUser.getUid())) {
-                                        sendFCMToUsersForItem(strName, userID,title,strCategory);
+                                    if (!userID.equals(firebaseUser.getUid())) {
+                                        sendFCMToUsersForItem(strName, userID, title, strCategory);
                                     }
                                 }
                             }
@@ -428,6 +431,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void sendFCMToUsersForItem(String itemName, String userID, String title, String category) {
 
         FirebaseUser fb = firebaseAuth.getInstance().getCurrentUser();
@@ -444,7 +448,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                         if (userToken != null) {
                             // FCM 메시지 생성
                             Map<String, String> messageData = new HashMap<>();
-                            messageData.put("title", category+" 경매알림");
+                            messageData.put("title", category + " 경매알림");
                             messageData.put("body", itemName + "이(가) 비공개 경매에 올라왔습니다!");
                             Map<String, String> data = new HashMap<>();
                             data.put("title", messageData.get("title"));

@@ -61,8 +61,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
     private Uri imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
 
 
-    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
-
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가방", "가구 / 인테리어", "스포츠 / 레저", "취미 / 게임", "기타"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -290,7 +289,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
                 String uploadMillis = String.valueOf(calendar.getTimeInMillis());
-                calendar.add(Calendar.SECOND, 50);
+                calendar.add(Calendar.SECOND, 30);
                 String futureMillis = String.valueOf(calendar.getTimeInMillis()); //
                 // "yyyy-MM-dd HH:mm:ss" 포맷으로 변환
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -302,7 +301,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
-                data.put("buyer", null); // 경매 끝났을때 uid 혹은 이메일 넣기
+                data.put("buyer", ""); // 경매 끝났을때 uid 혹은 이메일 넣기
                 data.put("futureMillis", futureMillis);
                 data.put("futureDate", formattedDate);
                 data.put("uploadMillis", uploadMillis);

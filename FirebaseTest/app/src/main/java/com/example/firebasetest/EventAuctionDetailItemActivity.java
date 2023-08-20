@@ -34,7 +34,7 @@ import java.util.Map;
 public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
-    private TextView itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
+    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton; // 입찰하기 버튼
@@ -54,7 +54,12 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_auction_detail_item);
+
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+        sliderViewPager.setOffscreenPageLimit(1);
+
         // 아이템 정보들
+        itmeTitle = findViewById(R.id.itemTitle);
         itemId = findViewById(R.id.itemId);
         startPrice = findViewById(R.id.startPrice);
         endPrice = findViewById(R.id.endPrice);
@@ -284,6 +289,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    itmeTitle.setText(selectedItem.getTitle());
                     itemId.setText(selectedItem.getId());
                     itemInfo.setText(selectedItem.getInfo());
                     category.setText(selectedItem.getCategory());

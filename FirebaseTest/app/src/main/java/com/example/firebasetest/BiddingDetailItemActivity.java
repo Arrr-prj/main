@@ -39,7 +39,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long remainingTimeMillis; // 전역 변수로 추가
     private Button btnEdit, btnDelete;
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd;
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton;
     private EditText bidText;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
@@ -95,6 +95,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         if (imageUrl6 != null && !imageUrl6.isEmpty()) {
             images[5] = imageUrl6;
         }
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
         remainingTimeMillis = 0;
 
         buyer = " ";
@@ -105,6 +106,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         bidText = findViewById(R.id.bidAmountEditText);
         mBtnBuy = findViewById(R.id.btn_buy);
         mBtnConfirm = findViewById(R.id.btn_buyConfirm);
+        mBtnBigButton = findViewById(R.id.btn_bigbutton);
 
         db = FirebaseFirestore.getInstance();
 
@@ -177,7 +179,14 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BiddingDetailItemActivity.this, LargeImageActivity.class);
+                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                startActivity(intent);
+            }
+        });
         // 입찰하기 버튼을 눌렀을 때 -> dialog 로 입력받을 수 있는 팝업창 띄움
         mBtnBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,12 +197,12 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         Button confirmBidButton = findViewById(R.id.confirmBidButton);
         Button cancelBidButton = findViewById(R.id.cancelBidButton);
 
-        mBtnBidButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bidPopupLayout.setVisibility(View.VISIBLE);
-            }
-        });
+//        mBtnBidButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bidPopupLayout.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         confirmBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,35 +213,32 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 if (!bidAmount.isEmpty()) {
                     // 컬렉션만들고 로직만들자리
                     long userBidAmount = Long.parseLong(bidAmount);
-                    long currentHighestBid = Long.parseLong(startPrice.getText().toString());
-
+                    long currentHighestBid =Long.parseLong(startPrice.getText().toString());
+//                    long startAount = Long.parseLong(price.getText().toString());
+                    Toast.makeText(BiddingDetailItemActivity.this, bidAmount+"\n"+startPrice.getText().toString(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(BiddingDetailItemActivity.this, document, Toast.LENGTH_SHORT).show();
-
 
                     if (userBidAmount > currentHighestBid) {
                         // 비딩금액이 컬렉션에 저장된금액보다 크면 데이터베이스 업데이트
                         updateBidData(String.valueOf(userBidAmount));
                         // 경매타이머 설정후에 performAuctionEnd()메소드로 낙찰기능
                         //performAuctionEnd(itemId);
-                    }
-                    else {
-                        Map<String, Object> data = new HashMap<>();
-                        data.put("buyer", buyer);
-
-                        DocumentReference userDocRef = db.collection("BiddingItem").document(document);
-                        userDocRef.update(data)
-                                .addOnSuccessListener(aVoid -> {
-                                    // 등록된 리스트 새로 갱신
-                                    UserDataHolderBiddingItems.loadBiddingItems();
-                                    Toast.makeText(BiddingDetailItemActivity.this, "종료 시간이 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(getApplicationContext(), "종료 시간 업데이트에 실패했습니다." + e.getMessage(),
-                                            Toast.LENGTH_SHORT).show();
-                                });
-                        Toast.makeText(BiddingDetailItemActivity.this,
-                                "입찰이 성공적으로 처리되었습니다.",
-                                Toast.LENGTH_SHORT).show();
+                    } else {
+//                        Map<String, Object> data = new HashMap<>();
+//                        data.put("buyer", buyer);
+//
+//                        DocumentReference userDocRef = db.collection("BiddingItem").document(document);
+//                        userDocRef.update(data)
+//                                .addOnSuccessListener(aVoid -> {
+//                                    // 등록된 리스트 새로 갱신
+//                                    UserDataHolderBiddingItems.loadBiddingItems();
+//                                    Toast.makeText(BiddingDetailItemActivity.this, "종료 시간이 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
+//                                })
+//                                .addOnFailureListener(e -> {
+//                                    Toast.makeText(getApplicationContext(), "종료 시간 업데이트에 실패했습니다." + e.getMessage(),
+//                                            Toast.LENGTH_SHORT).show();
+//                                });
+                        Toast.makeText(BiddingDetailItemActivity.this, "시작 가격보다 높은 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 bidPopupLayout.setVisibility(View.GONE);
@@ -280,7 +286,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         itemId.setText(selectedItem.getId());
         itemInfo.setText(selectedItem.getInfo());
         category.setText(selectedItem.getCategory());
-        startPrice.setText("0");
+        startPrice.setText(selectedItem.getPrice());
 //        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
         seller.setText(selectedItem.getSeller());
         timeinfo.setText(selectedItem.getFutureDate());

@@ -63,8 +63,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
-
+    private String[] categories = {"나이키", "아디다스", "애플", "삼성", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가방", "가구 / 인테리어", "스포츠 / 레저", "취미 / 게임", "기타"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -50,7 +50,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     private Button btnbck;
     private ImageButton btnCategory;
     private LinearLayout categoryLayout;
-    Switch car,acc,home,art,clo,cur,food,furn;
+    private Switch nike, adidas, apple, samsung, car, acc, clo, limi, pre, shoes, goods, furn, sports, game, another, bag;
     private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +66,33 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         LinearLayout rightArea = findViewById(R.id.rr_right_area);
         rightArea.setOnClickListener((View.OnClickListener)this);
 
-        car = findViewById(R.id.sw_1); // 차량 카테고리 스위치
-        acc = findViewById(R.id.sw_2); // 액세서리 스위치
-        home = findViewById(R.id.sw_3); // 가전제품 스위치
-        art = findViewById(R.id.sw_4); // 예술품 스위치
-        clo = findViewById(R.id.sw_5); // 의류 스위치
-        cur = findViewById(R.id.sw_6); // 골동품 스위치
-        food = findViewById(R.id.sw_7); // 식품 스위치
-        furn = findViewById(R.id.sw_8); // 가구 스위치
+        nike = findViewById(R.id.sw_1);
+        adidas = findViewById(R.id.sw_2);
+        apple = findViewById(R.id.sw_3);
+        samsung = findViewById(R.id.sw_4);
+        car = findViewById(R.id.sw_5);
+        limi = findViewById(R.id.sw_6);
+        pre = findViewById(R.id.sw_7);
+        furn = findViewById(R.id.sw_8);
+        clo = findViewById(R.id.sw_9);
+        acc = findViewById(R.id.sw_10);
+        shoes = findViewById(R.id.sw_11);
+        bag = findViewById(R.id.sw_12);
+        sports = findViewById(R.id.sw_13);
+        goods = findViewById(R.id.sw_14);
+        game = findViewById(R.id.sw_15);
+        another = findViewById(R.id.sw_16);
+
+
+
+
 
         // Firebase Firestore 인스턴스 초기화
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // 사용자 UID 가져오기
-        String uid = UserManager.getInstance().getUserUid();
+        String uid = FirebaseAuth.getInstance().getUid();
+
 
         // 사용자 문서에 접근
         DocumentReference userDocRef = db.collection("User").document(uid);
@@ -96,12 +109,27 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                     // 스위치 상태를 가져와서 각 스위치에 적용
                     car.setChecked(snapshot.getBoolean("차량"));
                     acc.setChecked(snapshot.getBoolean("액세서리"));
-                    home.setChecked(snapshot.getBoolean("가전제품"));
-                    art.setChecked(snapshot.getBoolean("예술품"));
                     clo.setChecked(snapshot.getBoolean("의류"));
-                    cur.setChecked(snapshot.getBoolean("골동품"));
-                    food.setChecked(snapshot.getBoolean("식품"));
-                    furn.setChecked(snapshot.getBoolean("가구"));
+                    furn.setChecked(snapshot.getBoolean("가구 / 인테리어"));
+
+                    nike.setChecked(snapshot.getBoolean("나이키"));
+                    adidas.setChecked(snapshot.getBoolean("아디다스"));
+                    apple.setChecked(snapshot.getBoolean("애플"));
+                    samsung.setChecked(snapshot.getBoolean("삼성"));
+
+                    limi.setChecked(snapshot.getBoolean("한정판"));
+                    pre.setChecked(snapshot.getBoolean("프리미엄"));
+                    shoes.setChecked(snapshot.getBoolean("신발"));
+                    goods.setChecked(snapshot.getBoolean("굿즈"));
+
+                    bag.setChecked(snapshot.getBoolean("가방"));
+                    sports.setChecked(snapshot.getBoolean("스포츠 / 레저"));
+                    game.setChecked(snapshot.getBoolean("취미 / 게임"));
+                    another.setChecked(snapshot.getBoolean("기타"));
+
+
+
+
                     boolean membership = snapshot.getBoolean("membership");
                     if (membership) {
                         // 어떤 처리를 수행
@@ -155,45 +183,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("가전제품", true)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {}});
-                } else { // 차량 카테고리 off
-                    userDocRef.update("가전제품", false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {}});
-                }
-            }
-        });
-
-        art.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("예술품", true)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {}});
-                } else { // 차량 카테고리 off
-                    userDocRef.update("예술품", false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {}});
-                }
-            }
-        });
 
         clo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -215,58 +204,19 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        cur.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("골동품", true)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {}});
-                } else { // 차량 카테고리 off
-                    userDocRef.update("골동품", false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {}});
-                }
-            }
-        });
-
-        food.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("식품", true)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {}});
-                } else { // 차량 카테고리 off
-                    userDocRef.update("식품", false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {}});
-                }
-            }
-        });
 
         furn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("가구", true)
+                    userDocRef.update("가구 / 인테리어", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("가구", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("가구 / 인테리어", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -274,6 +224,239 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+
+
+
+
+        nike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("나이키", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("나이키", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        adidas.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("아디다스", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("아디다스", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        apple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("애플", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("애플", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        samsung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("삼성", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("삼성", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        limi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("한정판", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("한정판", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        pre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("프리미엄", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("프리미엄", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        shoes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("신발", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("신발", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        bag.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("가방", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("가방", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        sports.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("스포츠 / 레저", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("스포츠 / 레저", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        goods.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("굿즈", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("굿즈", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        game.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("취미 / 게임", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("취미 / 게임", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+        another.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) { // 차량 카테고리 on
+                    userDocRef.update("기타", true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {}});
+                } else { // 차량 카테고리 off
+                    userDocRef.update("기타", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {}});
+                }
+            }
+        });
+
 
 
         // alarmList 초기화
@@ -500,34 +683,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                         });
             }
         });
-        home.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("가전제품", isChecked)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {}
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {}
-                        });
-            }
-        });
-        art.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("예술품", isChecked)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {}
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {}
-                        });
-            }
-        });
         clo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -542,38 +697,164 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                         });
             }
         });
-        cur.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("골동품", isChecked)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {}
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {}
-                        });
-            }
-        });
-        food.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("식품", isChecked)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {}
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {}
-                        });
-            }
-        });
         furn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("가구", isChecked)
+                userDocRef.update("가구 / 인테리어", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        nike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("나이키", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        adidas.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("아디다스", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        apple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("애플", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        samsung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("삼성", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        limi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("한정판", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        pre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("프리미엄", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        shoes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("신발", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        bag.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("가방", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        sports.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("스포츠 / 레저", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        game.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("취미 / 게임", isChecked)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {}
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {}
+                        });
+            }
+        });
+        another.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                userDocRef.update("기타", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -585,8 +866,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        // 나머지 스위치들도 동일하게 설정
-        // ...
+
     }
 
 

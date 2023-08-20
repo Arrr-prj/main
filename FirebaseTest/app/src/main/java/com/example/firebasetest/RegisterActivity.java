@@ -141,6 +141,23 @@ public class RegisterActivity extends AppCompatActivity {
 //                            data.put("sex", finalStrSex);
                             data.put("address", strAddrees);
                             data.put("membership",false); // 멤버십 기능 추가
+                            data.put("membership", false);
+                            data.put("나이키", false);
+                            data.put("아디다스", false);
+                            data.put("애플", false);
+                            data.put("삼성", false);
+                            data.put("차량", false);
+                            data.put("액세서리", false);
+                            data.put("의류", false);
+                            data.put("한정판", false);
+                            data.put("프리미엄", false);
+                            data.put("신발", false);
+                            data.put("굿즈", false);
+                            data.put("가방", false);
+                            data.put("가구 / 인테리어", false);
+                            data.put("스포츠 / 레저", false);
+                            data.put("취미 / 게임", false);
+                            data.put("기타", false);
 
                             userDocRef.set(data)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {

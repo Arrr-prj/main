@@ -44,7 +44,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageButton btnBidding, btnOpen, btnBest, btnShare, btnEvent, btnAlarm, btnMypage, btnMembership;
 
-    private ImageButton btnCateCar, btnCateAcc, btnCateHome, btnCateArt, btnCateClo, btnCateCur, btnCateFood, btnCateFurn; // 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
+    private ImageButton btnCateCar, btnCateAcc, btnCateClo, btnCatelimited , btnCatePremium, btnCateShoes, btnCateGoods, btnCateFurn,btnCateSport, btnCateGame, btnCateAnotOther, btnCateBag; // 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
+    private ImageButton btnCateNike, btnCateAdidas, btnCateApple, btnCateSamsung; // 브랜드 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
 
     private ImageView buyItem, saleItem, shareItem, waitingBuy, eventItem, btnAnnounce; // 슬라이드한 곳에 있는 버튼
     private TextView textName;
@@ -80,12 +81,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // 필요하실때 가져다가 쓰시면 됩니다.
         btnCateCar = findViewById(R.id.btn_cateCar); // 차량 카테고리 버튼
         btnCateAcc = findViewById(R.id.btn_cateAcc); // 액세서리 카테고리 버튼
-        btnCateHome = findViewById(R.id.btn_cateHome); // 가전제품 카테고리 버튼
-        btnCateArt = findViewById(R.id.btn_cateArt); // 예술품 카테고리 버튼
         btnCateClo = findViewById(R.id.btn_cateClo); // 의류 카테고리 버튼
-        btnCateCur = findViewById(R.id.btn_cateCur); // 골동품 카테고리 버튼
-        btnCateFood = findViewById(R.id.btn_cateFood); // 식품 카테고리 버튼
-        btnCateFurn = findViewById(R.id.btn_cateFurn); // 가구 카테고리 버튼
+        btnCateFurn = findViewById(R.id.btn_cateFurn); // 가구 / 인테리어 카테고리 버튼
+        btnCatelimited = findViewById(R.id.btn_cateLim); // 한정판 카테고리 버튼
+        btnCateAnotOther = findViewById(R.id.btn_cateAnot); // 기타 카테고리 버튼
+        btnCateShoes = findViewById(R.id.btn_cateSho); // 신발 카테고리 버튼
+        btnCateGoods = findViewById(R.id.btn_cateGoo); // 굿즈 카테고리 버튼
+        btnCatePremium = findViewById(R.id.btn_catePre); // 프리미엄 카테고리 버튼
+        btnCateSport = findViewById(R.id.btn_cateSpo); // 스포츠 / 레저 카테고리 버튼
+        btnCateGame = findViewById(R.id.btn_cateHob); // 게임 / 취미 카테고리 버튼
+        btnCateBag = findViewById(R.id.btn_cateBag);
+
+
+
+        btnCateNike = findViewById(R.id.btn_cateNike); // 나이키 브랜드 카테고리 버튼
+        btnCateAdidas = findViewById(R.id.btn_cateAdi); // 아디다스 브랜드 카테고리 버튼
+        btnCateApple = findViewById(R.id.btn_cateApp); // 애플 브랜드 카테고리 버튼
+        btnCateSamsung = findViewById(R.id.btn_cateSam); // 삼성 브랜드 카테고리 버튼
+
+
 
         buyItem = findViewById(R.id.IV_buyItem); // 구매한 아이템 이미지뷰
         saleItem = findViewById(R.id.IV_saleItem); // 판매한 아이템 이미지뷰
@@ -113,7 +127,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
+        btnCateBag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "가방");
+                startActivity(intent);
+            }
+        });
         btnCateCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,21 +154,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        btnCateHome.setOnClickListener(new View.OnClickListener() {
+        btnCatelimited.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "가전제품");
+                intent.putExtra("category", "한정판");
                 startActivity(intent);
             }
         });
-        btnCateArt.setOnClickListener(new View.OnClickListener() {
+        btnCateAnotOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "예술품");
+                intent.putExtra("category", "기타");
                 startActivity(intent);
             }
         });
@@ -159,21 +181,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        btnCateCur.setOnClickListener(new View.OnClickListener() {
+        btnCateShoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "골동품");
+                intent.putExtra("category", "신발");
                 startActivity(intent);
             }
         });
-        btnCateFood.setOnClickListener(new View.OnClickListener() {
+        btnCateGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "식품");
+                intent.putExtra("category", "굿즈");
                 startActivity(intent);
             }
         });
@@ -186,6 +208,71 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+        btnCatePremium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "프리미엄");
+                startActivity(intent);
+            }
+        });
+        btnCateSport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "스포츠 / 레저");
+                startActivity(intent);
+            }
+        });
+        btnCateGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "게임 / 취미");
+                startActivity(intent);
+            }
+        });
+
+        btnCateNike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "Nike");
+                startActivity(intent);
+            }
+        });
+        btnCateAdidas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "Adidas");
+                startActivity(intent);
+            }
+        });
+        btnCateApple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "Apple");
+                startActivity(intent);
+            }
+        });
+        btnCateSamsung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+                intent.putExtra("category", "Samsung");
+                startActivity(intent);
+            }
+        });
+
 
 
 
