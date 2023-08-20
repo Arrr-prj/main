@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class MembershipActivity extends AppCompatActivity {
 
     private Button mBtnRegister, mBtnMembershipWithdrawal, mBtnBackSpace;
+    private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private DocumentReference userDocRef;
 
@@ -37,8 +39,9 @@ public class MembershipActivity extends AppCompatActivity {
         mBtnRegister = findViewById(R.id.btn_membershipRegister); // 멤버십 가입 버튼
         mBtnMembershipWithdrawal = findViewById(R.id.btn_membershipWithdrawal); // 멤버십 탈퇴 버튼
         mBtnBackSpace = findViewById(R.id.btn_backSpace);
+        mAuth = FirebaseAuth.getInstance();
 
-        String uid = UserManager.getInstance().getUserUid();
+        String uid = mAuth.getUid();
         db = FirebaseFirestore.getInstance();
         userDocRef = db.collection("User").document(uid);
 
@@ -67,14 +70,22 @@ public class MembershipActivity extends AppCompatActivity {
                                                             if (membershipValue) { // 멤버십 회원일 때
                                                                 Map<String, Object> updates = new HashMap<>();
                                                                 updates.put("membership", false);
+                                                                updates.put("나이키", false);
+                                                                updates.put("아디다스", false);
+                                                                updates.put("애플", false);
+                                                                updates.put("삼성", false);
                                                                 updates.put("차량", false);
                                                                 updates.put("액세서리", false);
-                                                                updates.put("가전제품", false);
-                                                                updates.put("예술품", false);
                                                                 updates.put("의류", false);
-                                                                updates.put("골동품", false);
-                                                                updates.put("식품", false);
-                                                                updates.put("가구", false);
+                                                                updates.put("한정판", false);
+                                                                updates.put("프리미엄", false);
+                                                                updates.put("신발", false);
+                                                                updates.put("굿즈", false);
+                                                                updates.put("가방", false);
+                                                                updates.put("가구 / 인테리어", false);
+                                                                updates.put("스포츠 / 레저", false);
+                                                                updates.put("취미 / 게임", false);
+                                                                updates.put("기타", false);
 
                                                                 userDocRef.update(updates)
                                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -111,14 +122,22 @@ public class MembershipActivity extends AppCompatActivity {
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                         Map<String, Object> updates = new HashMap<>();
                                                         updates.put("membership", true);
+                                                        updates.put("나이키", false);
+                                                        updates.put("아디다스", false);
+                                                        updates.put("애플", false);
+                                                        updates.put("삼성", false);
                                                         updates.put("차량", false);
                                                         updates.put("액세서리", false);
-                                                        updates.put("가전제품", false);
-                                                        updates.put("예술품", false);
                                                         updates.put("의류", false);
-                                                        updates.put("골동품", false);
-                                                        updates.put("식품", false);
-                                                        updates.put("가구", false);
+                                                        updates.put("한정판", false);
+                                                        updates.put("프리미엄", false);
+                                                        updates.put("신발", false);
+                                                        updates.put("굿즈", false);
+                                                        updates.put("가방", false);
+                                                        updates.put("가구 / 인테리어", false);
+                                                        updates.put("스포츠 / 레저", false);
+                                                        updates.put("취미 / 게임", false);
+                                                        updates.put("기타", false);
 
                                                         boolean membershipValue = documentSnapshot.getBoolean("membership");
                                                         if (membershipValue == false) { // 멤버십에 가입이 안돼있을 때 가입시키기

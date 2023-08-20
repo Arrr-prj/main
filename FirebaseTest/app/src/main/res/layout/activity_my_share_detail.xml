@@ -12,10 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:text="----"
-        app:layout_constraintStart_toEndOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintStart_toEndOf="@+id/tv_itemId"
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
+    <Button
+        android:id="@+id/btn_bigbutton"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:text="크게보기"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager"/>
 
     <TextView
         android:id="@+id/itemId"
@@ -123,10 +132,10 @@
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:text="글 제목 : "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgUrl" />
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
     <TextView
         android:id="@+id/tv_itemId"
@@ -188,14 +197,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_seller" />
 
-    <ImageView
-        android:id="@+id/imgUrl"
-        android:layout_width="115dp"
-        android:layout_height="114dp"
-        android:layout_marginTop="50dp"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/sliderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_photo" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

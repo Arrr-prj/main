@@ -83,7 +83,115 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="나이키"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="아디다스"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="애플"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="삼성"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#EEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -97,9 +205,9 @@
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_1"
+                    android:id="@+id/sw_5"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
 
@@ -110,7 +218,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -119,14 +227,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="악세사리"
+                    android:text="한정판"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_2"
+                    android:id="@+id/sw_6"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
 
@@ -137,7 +245,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -146,14 +254,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="가전제품"
+                    android:text="프리미엄"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_3"
+                    android:id="@+id/sw_7"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
 
@@ -164,7 +272,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -173,25 +281,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="예술품"
+                    android:text="가구 / 인테리어"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_4"
+                    android:id="@+id/sw_8"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEE" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -205,20 +307,14 @@
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_5"
+                    android:id="@+id/sw_9"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEE" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -227,25 +323,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="골동품"
+                    android:text="악세사리"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_6"
+                    android:id="@+id/sw_10"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEE" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -254,25 +344,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="식품"
+                    android:text="신발"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_7"
+                    android:id="@+id/sw_11"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#EEE" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp">
 
@@ -281,14 +365,98 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="가구"
+                    android:text="가방"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
                 <Switch
-                    android:id="@+id/sw_8"
+                    android:id="@+id/sw_12"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="스포츠 / 레저"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="굿즈"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="취미 / 게임"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="기타"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Switch
+                    android:id="@+id/sw_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
         </LinearLayout>
