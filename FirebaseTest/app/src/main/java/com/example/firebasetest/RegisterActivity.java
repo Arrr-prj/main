@@ -73,6 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (isEmpty(mEtName) || isEmpty(mEtEmail) || isEmpty(mEtPwd) || isEmpty(mEtPwd2) || isEmpty(mEtRrn) || isEmpty(mEtSex) || isEmpty(mEtAddress)) {
+                    Toast.makeText(RegisterActivity.this, "빈칸을 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String strName = mEtName.getText().toString();
                 String strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
@@ -80,6 +85,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String strRrn = mEtRrn.getText().toString();
                 String strSex = mEtSex.getText().toString();
                 String strAddrees = mEtAddress.getText().toString();
+
+
+
+
 
 
                 char x = strRrn.charAt(0);
@@ -132,17 +141,35 @@ public class RegisterActivity extends AppCompatActivity {
 //                            data.put("sex", finalStrSex);
                             data.put("address", strAddrees);
                             data.put("membership",false); // 멤버십 기능 추가
+                            data.put("Nike", false);
+                            data.put("Adidas", false);
+                            data.put("Apple", false);
+                            data.put("Samsung", false);
+                            data.put("차량", false);
+                            data.put("액세서리", false);
+                            data.put("의류", false);
+                            data.put("한정판", false);
+                            data.put("프리미엄", false);
+                            data.put("신발", false);
+                            data.put("굿즈", false);
+                            data.put("가방", false);
+                            data.put("가구 인테리어", false);
+                            data.put("스포츠 레저", false);
+                            data.put("취미 게임", false);
+                            data.put("기타", false);
 
                             userDocRef.set(data)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             // 문서 생성 및 데이터 저장 성공
-                                            Toast.makeText(RegisterActivity.this, "회원가입에 성공.", Toast.LENGTH_SHORT).show();
-
+                                            Intent resultIntent = new Intent();
+                                            resultIntent.putExtra("result_key", "작업 완료 결과");
+                                            setResult(RESULT_OK, resultIntent);
                                             Intent intent = new Intent(RegisterActivity.this, LobyActivity.class);
+                                            intent.putExtra("firstVisit","yes");
                                             startActivity(intent);
-                                            finish();
+                                            finish(); // 현재 액티비티 종료
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -153,15 +180,14 @@ public class RegisterActivity extends AppCompatActivity {
                                         }
                                     });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "회원가입에 실패했습니다2.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "이메일을 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         });
-
-
-
-
+    }
+    private boolean isEmpty(EditText editText) {
+        return editText.getText().toString().trim().isEmpty();
     }
 }

@@ -54,8 +54,7 @@ public class MyBuyItemsActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyBuyItemsActivity.this, MyTransactionActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -67,24 +66,30 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : (task.getResult())){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+
+                            Log.d(TAG, "구매한 open 아이템 id : "+String.valueOf(document.getData().get("id")));
+                            Log.d(TAG, "구매한 open 아이템 confirm : "+Boolean.getBoolean(String.valueOf(document.getData().get("confirm"))));
+
                             // Firebase Storage에서 이미지 불러오기
-                            openItemList.add(
-                                    new Item(
-                                            String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller")),
-                                            String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
-                                    )
-                            );
+                            if(Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))){
+                                openItemList.add(
+                                        new Item(
+                                                String.valueOf(document.getData().get("title")),
+                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("id")),
+                                                String.valueOf(document.getData().get("endPrice")),
+                                                String.valueOf(document.getData().get("category")),
+                                                String.valueOf(document.getData().get("info")),
+                                                String.valueOf(document.getData().get("seller")),
+                                                String.valueOf(document.getData().get("futureMillis")),
+                                                String.valueOf(document.getData().get("futureDate")),
+                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))
+                                        )
+                                );
+                            }
 
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
+                        ListAdapter openAuctionAdapter = new ListAdapter(this, openItemList);
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
@@ -101,21 +106,28 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("seller"));
-                            biddingItemList.add(
-                                    new Item(
-                                            String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
-                                            String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
-                                            String.valueOf(document.getData().get("category")),
-                                            String.valueOf(document.getData().get("info")),
-                                            String.valueOf(document.getData().get("seller")),
-                                            String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
-                                    ));
+                            Log.d(TAG, "구매한 bidding 아이템 id : "+String.valueOf(document.getData().get("id")));
+                            Log.d(TAG, "구매한 bidding 아이템 confirm : "+Boolean.getBoolean(String.valueOf(document.getData().get("confirm"))));
+
+                            if(Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))){
+
+                                biddingItemList.add(
+                                        new Item(
+                                                String.valueOf(document.getData().get("title")),
+                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("id")),
+                                                String.valueOf(document.getData().get("endPrice")),
+                                                String.valueOf(document.getData().get("category")),
+                                                String.valueOf(document.getData().get("info")),
+                                                String.valueOf(document.getData().get("seller")),
+                                                String.valueOf(document.getData().get("futureMillis")),
+                                                String.valueOf(document.getData().get("futureDate")),
+                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))
+                                        )
+                                );
+                            }
                         }
-                        BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
+                        ListAdapter biddingItemAdapter = new ListAdapter(this, biddingItemList);
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });

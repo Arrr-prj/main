@@ -4,41 +4,7 @@
             "outputFile": "com.example.firebasetest.app-mergeDebugResources-4:/values-uk/values-uk.xml",
             "map": [
                 {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\4a7f83fd254fa05cc8acd7d644c57a96\\transformed\\play-services-base-18.1.0\\res\\values-uk\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,297,456,579,685,835,960,1071,1172,1336,1438,1596,1717,1860,1998,2064,2121",
-                        "endColumns": "103,158,122,105,149,124,110,100,163,101,157,120,142,137,65,56,83",
-                        "endOffsets": "296,455,578,684,834,959,1070,1171,1335,1437,1595,1716,1859,1997,2063,2120,2204"
-                    },
-                    "to": {
-                        "startLines": "39,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3486,3594,3757,3884,3994,4148,4277,4392,4643,4811,4917,5079,5204,5351,5493,5563,5624",
-                        "endColumns": "107,162,126,109,153,128,114,104,167,105,161,124,146,141,69,60,87",
-                        "endOffsets": "3589,3752,3879,3989,4143,4272,4387,4492,4806,4912,5074,5199,5346,5488,5558,5619,5707"
-                    }
-                },
-                {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\ec1d0473320eafbc6e1a7cdc007dfb1a\\transformed\\play-services-basement-18.1.0\\res\\values-uk\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "141",
-                        "endOffsets": "336"
-                    },
-                    "to": {
-                        "startLines": "47",
-                        "startColumns": "4",
-                        "startOffsets": "4497",
-                        "endColumns": "145",
-                        "endOffsets": "4638"
-                    }
-                },
-                {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\72ca278d2ea29c144d43af7500e03f82\\transformed\\material-1.5.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\72ca278d2ea29c144d43af7500e03f82\\transformed\\material-1.5.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -57,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\f06924b1c68cdd2ead8c8083e024adb6\\transformed\\appcompat-1.4.1\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\f06924b1c68cdd2ead8c8083e024adb6\\transformed\\appcompat-1.4.1\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -74,7 +40,41 @@
                     }
                 },
                 {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\d202b99fdcb0faf422c374addae72b3c\\transformed\\browser-1.4.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\4a7f83fd254fa05cc8acd7d644c57a96\\transformed\\play-services-base-18.1.0\\res\\values-uk\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,297,456,579,685,835,960,1071,1172,1336,1438,1596,1717,1860,1998,2064,2121",
+                        "endColumns": "103,158,122,105,149,124,110,100,163,101,157,120,142,137,65,56,83",
+                        "endOffsets": "296,455,578,684,834,959,1070,1171,1335,1437,1595,1716,1859,1997,2063,2120,2204"
+                    },
+                    "to": {
+                        "startLines": "39,40,41,42,43,44,45,46,48,49,50,51,52,53,54,55,56",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3486,3594,3757,3884,3994,4148,4277,4392,4643,4811,4917,5079,5204,5351,5493,5563,5624",
+                        "endColumns": "107,162,126,109,153,128,114,104,167,105,161,124,146,141,69,60,87",
+                        "endOffsets": "3589,3752,3879,3989,4143,4272,4387,4492,4806,4912,5074,5199,5346,5488,5558,5619,5707"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\ec1d0473320eafbc6e1a7cdc007dfb1a\\transformed\\play-services-basement-18.1.0\\res\\values-uk\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "141",
+                        "endOffsets": "336"
+                    },
+                    "to": {
+                        "startLines": "47",
+                        "startColumns": "4",
+                        "startOffsets": "4497",
+                        "endColumns": "145",
+                        "endOffsets": "4638"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\d202b99fdcb0faf422c374addae72b3c\\transformed\\browser-1.4.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -91,7 +91,7 @@
                     }
                 },
                 {
-                    "source": "C:\\#NewTest\\caches\\transforms-3\\b60a3b59c005ee04befbe31ff6943472\\transformed\\core-1.7.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\koo11\\.gradle\\caches\\transforms-3\\b60a3b59c005ee04befbe31ff6943472\\transformed\\core-1.7.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

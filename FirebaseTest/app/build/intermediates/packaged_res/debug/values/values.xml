@@ -15,7 +15,7 @@
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDpZtVWmrEeJeYcoGizKU6wsKXp3mRVBlk</string>
     <string name="google_storage_bucket" translatable="false">arrr-48e3f.appspot.com</string>
     <string name="project_id" translatable="false">arrr-48e3f</string>
-    <style name="Theme.FirebaseTest" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.FirebaseTest" parent="Theme.MaterialComponents.Light.NoActionBar">
         
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

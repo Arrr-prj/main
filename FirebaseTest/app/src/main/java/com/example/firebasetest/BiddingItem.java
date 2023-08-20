@@ -1,34 +1,22 @@
 package com.example.firebasetest;
 import  java.io.Serializable;
 public class BiddingItem implements Serializable {
-    private String title;
     private String imageUrl;
     private String id;
     private String category;
     private String info;
     private String seller;
     private String time;
-    private String price;
 
     public BiddingItem(){    }
-    public BiddingItem(String title, String imageUrl, String price, String id, String category, String info, String seller){
-        this.title = title;
+    public BiddingItem(String imageUrl, String id, String category, String info, String seller, String time){
         this.id = id;
-        this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
         this.info = info;
-        this.seller = seller;
+        this.seller = getSeller();
+        this.time = time;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -51,14 +39,6 @@ public class BiddingItem implements Serializable {
 
     public void setSeller(String seller) {
         this.seller = seller;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getCategory() {

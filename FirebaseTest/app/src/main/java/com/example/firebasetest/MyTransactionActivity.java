@@ -13,7 +13,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MyTransactionActivity extends AppCompatActivity {
-    private Button mBtnBackSpace, mBtnSell, mBtnBuy, mBtnFree, mBtnEvent;
+    private Button mBtnBackSpace, mBtnSell, mBtnBuy, mBtnFree, mBtnEvent, mBtnConfirm;
     private FirebaseFirestore db;
 
     @Override
@@ -26,14 +26,15 @@ public class MyTransactionActivity extends AppCompatActivity {
         mBtnBuy = findViewById(R.id.btn_myBuy);
         mBtnFree = findViewById(R.id.btn_myFree);
         mBtnEvent = findViewById(R.id.btn_mevent);
+        mBtnConfirm = findViewById(R.id.btn_confirm);
         db = FirebaseFirestore.getInstance();
 
         // 뒤로가기 버튼을 눌렀을 때
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyTransactionActivity.this, MyPageActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MyTransactionActivity.this, MyPageActivity.class));
+                finish();
             }
         });
         // 판매한 아이템 클릭 시 이벤트
@@ -61,6 +62,14 @@ public class MyTransactionActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // 구매해야하는 아이템 클릭 시 이벤트
+        mBtnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyTransactionActivity.this, MyConfirmItemActivity.class);
+                startActivity(intent);
+            }
+        });
 
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
         db = FirebaseFirestore.getInstance();
@@ -85,5 +94,10 @@ public class MyTransactionActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(MyTransactionActivity.this, MyPageActivity.class));
+        finish();
     }
 }

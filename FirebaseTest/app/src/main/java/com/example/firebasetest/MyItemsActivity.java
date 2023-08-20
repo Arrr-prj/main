@@ -52,8 +52,7 @@ public class MyItemsActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyItemsActivity.this, MyTransactionActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }
@@ -78,16 +77,18 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))
                                     )
                             );
 
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, openItemList);
+                        ListAdapter openAuctionAdapter = new ListAdapter(this, openItemList);
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
@@ -110,14 +111,18 @@ public class MyItemsActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
                                             String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
-                                            String.valueOf(document.getData().get("futureDate"))
-                                    ));
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            Boolean.getBoolean(String.valueOf(document.getData().get("confirm")))
+                                    )
+                            );
+
                         }
-                        BiddingItemAdapter biddingItemAdapter = new BiddingItemAdapter(this, biddingItemList);
+                        ListAdapter biddingItemAdapter = new ListAdapter(this, biddingItemList);
                         listView.setAdapter(biddingItemAdapter);
                     }
                 });

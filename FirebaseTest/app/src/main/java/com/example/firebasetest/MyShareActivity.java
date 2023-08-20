@@ -31,7 +31,7 @@ public class MyShareActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_free_items);
+        setContentView(R.layout.activity_my_share);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUser = firebaseUser.getEmail();
@@ -49,8 +49,7 @@ public class MyShareActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyShareActivity.this, MyTransactionActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 
@@ -102,16 +101,16 @@ public class MyShareActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate"))
                                     )
                             );
 
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, freeItemList);
+                        ListAdapter openAuctionAdapter = new ListAdapter(this, freeItemList);
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
@@ -133,16 +132,16 @@ public class MyShareActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("title")),
                                             String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
-                                            String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate"))
                                     )
                             );
 
                         }
-                        OpenAuctionAdapter openAuctionAdapter = new OpenAuctionAdapter(this, freeItemList);
+                        ListAdapter openAuctionAdapter = new ListAdapter(this, freeItemList);
                         listView.setAdapter(openAuctionAdapter);
                     }
                 });
@@ -152,8 +151,9 @@ public class MyShareActivity extends AppCompatActivity {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
             String currentUser = firebaseUser.getEmail();
+            String uid = UserManager.getInstance().getUserUid();
             if(isChecked){
-                InitializSharegivenItem(currentUser);
+                InitializSharegivenItem(uid);
                 bORo.setText("나눔 받은 아이템");
                 setOnClicksgListener();
             }else{

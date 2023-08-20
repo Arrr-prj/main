@@ -15,8 +15,47 @@
         android:theme="@style/Theme.FirebaseTest"
         tools:targetApi="31">
         <activity
-<<<<<<< Updated upstream
-=======
+            android:name=".BestItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".LargeImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyConfirmItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TotalAuctionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AnnounceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AnnounceDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AnnounceEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AnnounceRegistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AlarmActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyEventActivity"
             android:exported="false" />
         <activity
@@ -26,14 +65,22 @@
             android:name=".MyTransactionActivity"
             android:exported="false" />
         <activity
->>>>>>> Stashed changes
             android:name=".MyShareDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MyShareActivity"
             android:exported="false" />
         <activity
-            android:name=".MyTransactionActivity"
+            android:name=".EventAuctionRegisterItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventAuctionDetailItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EventAuctionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MembershipActivity"
             android:exported="false" />
         <activity
             android:name=".LobyActivity"
@@ -57,7 +104,7 @@
             android:name=".ShareRegistItemActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailBiddingItemActivity"
+            android:name=".BiddingDetailItemActivity"
             android:exported="false" />
         <activity
             android:name=".ShareActivity"
@@ -70,9 +117,6 @@
             android:exported="false" />
         <activity
             android:name=".UpdateDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DetailItemActivity"
             android:exported="false" />
         <activity
             android:name=".MyItemsActivity"

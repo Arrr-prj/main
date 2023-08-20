@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnnounceEditActivity">
+
+    <TextView
+        android:id="@+id/write_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="공지사항 수정"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/input_title"
+        android:layout_width="207dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="글 제목"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/write_text" />
+
+    <EditText
+        android:id="@+id/input_content"
+        android:layout_width="206dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="글 내용"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_title" />
+
+
+    <Button
+        android:id="@+id/btn_editA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="#540063FF"
+        android:text="등록"
+        app:iconTint="#540063FF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_listA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_listA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#540063FF"
+        android:text="리스트"
+        app:iconTint="#54006300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btn_editA" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

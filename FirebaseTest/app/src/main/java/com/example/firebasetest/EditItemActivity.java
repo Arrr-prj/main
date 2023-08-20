@@ -56,7 +56,7 @@ public class EditItemActivity extends AppCompatActivity {
     String url;
     ImageView imageView;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
-    private String[] categories = {"카테고리 1", "카테고리 2", "카테고리 3"};
+    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,7 +249,7 @@ public class EditItemActivity extends AppCompatActivity {
 
                     }
                 });
-       }
+    }
 
     // share Item 클릭 시 이벤트
     private void getSelectsItem(){

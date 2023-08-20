@@ -177,8 +177,6 @@ public class ModifyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ModifyActivity.this, "뒤로가기", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ModifyActivity.this, MyPageActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

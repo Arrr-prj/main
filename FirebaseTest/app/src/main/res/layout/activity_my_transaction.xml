@@ -17,7 +17,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -45,12 +45,12 @@
         android:id="@+id/btn_myBuy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="30dp"
         android:text="구매한 아이템"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_confirm" />
 
     <Button
         android:id="@+id/btn_myFree"
@@ -72,9 +72,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_myBuy" />
 
-<<<<<<< Updated upstream
-    </androidx.constraintlayout.widget.ConstraintLayout>
-=======
     <Button
         android:id="@+id/btn_mevent"
         android:layout_width="wrap_content"
@@ -85,5 +82,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_myFree" />
 
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="구매해야하는 아이템"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> Stashed changes

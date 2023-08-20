@@ -31,8 +31,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl;
     FirebaseUser firebaseUser;
-
-    ShareAdapter shareAdapter;
+    ListAdapter shareAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +81,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MyShareDetailActivity.this, MyShareActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
