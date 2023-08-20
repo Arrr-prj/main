@@ -59,7 +59,6 @@ public class AnnounceActivity extends AppCompatActivity {
                                 public void onClick(View view) {// 공지 사항 등록
                                     Intent intent = new Intent(AnnounceActivity.this, AnnounceRegistActivity.class);
                                     startActivity(intent);
-                                    finish();
                                 }
                             });
                         } else { // admin 계정이 아닐 때

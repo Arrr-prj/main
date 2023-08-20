@@ -3,7 +3,7 @@ package com.example.firebasetest;
 import com.google.api.Billing;
 
 public class Item {
-    private String imageUrl;
+    private String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     private String id;
     private String price;
     private String category;
@@ -30,12 +30,17 @@ public class Item {
     private Integer views;
 
 
-    public Item(String title, String imageUrl, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views){
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6,  String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views){
         this.title = title;
         this.id = id;
         this.price = price;
         this.endPrice = endPrice;
-        this.imageUrl = imageUrl;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.imageUrl3 = imageUrl3;
+        this.imageUrl4 = imageUrl4;
+        this.imageUrl5 = imageUrl5;
+        this.imageUrl6 = imageUrl6;
         this.category = category;
         this.info = info;
         this.seller = seller;
@@ -49,12 +54,17 @@ public class Item {
         this.views = views;
     }
 
-    public Item(String title, String imageUrl, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm){
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm){
         this.title = title;
         this.id = id;
         this.price = price;
         this.endPrice = endPrice;
-        this.imageUrl = imageUrl;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.imageUrl3 = imageUrl3;
+        this.imageUrl4 = imageUrl4;
+        this.imageUrl5 = imageUrl5;
+        this.imageUrl6 = imageUrl6;
         this.category = category;
         this.info = info;
         this.seller = seller;
@@ -73,7 +83,7 @@ public class Item {
         this.title = title;
         this.id = id;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.imageUrl1 = imageUrl;
         this.category = category;
         this.info = info;
         this.seller = seller;
@@ -86,7 +96,7 @@ public class Item {
         this.title = title;
         this.id = id;
         this.price = "share item";
-        this.imageUrl = imageUrl;
+        this.imageUrl1 = imageUrl;
         this.category = category;
         this.info = info;
         this.seller = seller;
@@ -148,13 +158,7 @@ public class Item {
         this.title = title;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String profile) {
-        this.imageUrl = imageUrl;
-    }
 
     public String getId() {
         return id;
@@ -212,4 +216,51 @@ public class Item {
         this.info = info;
     }
 
+    public String getImageUrl1() {
+        return imageUrl1;
+    }
+
+    public void setImageUrl1(String imageUrl1) {
+        this.imageUrl1 = imageUrl1;
+    }
+
+    public String getImageUrl2() {
+        return imageUrl2;
+    }
+
+    public void setImageUrl2(String imageUrl2) {
+        this.imageUrl2 = imageUrl2;
+    }
+
+    public String getImageUrl3() {
+        return imageUrl3;
+    }
+
+    public void setImageUrl3(String imageUrl3) {
+        this.imageUrl3 = imageUrl3;
+    }
+
+    public String getImageUrl4() {
+        return imageUrl4;
+    }
+
+    public void setImageUrl4(String imageUrl4) {
+        this.imageUrl4 = imageUrl4;
+    }
+
+    public String getImageUrl5() {
+        return imageUrl5;
+    }
+
+    public void setImageUrl5(String imageUrl5) {
+        this.imageUrl5 = imageUrl5;
+    }
+
+    public String getImageUrl6() {
+        return imageUrl6;
+    }
+
+    public void setImageUrl6(String imageUrl6) {
+        this.imageUrl6 = imageUrl6;
+    }
 }

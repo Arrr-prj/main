@@ -162,11 +162,16 @@ public class BiddingActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl"));
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl1"));
                             biddingItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl2")),
+                                            String.valueOf(document.getData().get("imgUrl3")),
+                                            String.valueOf(document.getData().get("imgUrl4")),
+                                            String.valueOf(document.getData().get("imgUrl5")),
+                                            String.valueOf(document.getData().get("imgUrl6")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),

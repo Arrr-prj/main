@@ -92,8 +92,7 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                                                 // 삭제된 리스트 새로 갱신
                                                 UserDataHolderAnnouncements.loadAnnouncement();
                                                 Toast.makeText(AnnounceDetailActivity.this, "공지사항이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                Intent intent1 = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
-                                                startActivity(intent1);
+                                                finish();
                                             })
                                             .addOnFailureListener(e -> {
                                                 Toast.makeText(AnnounceDetailActivity.this, "삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -109,8 +108,6 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                     btnList.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
-                            startActivity(intent);
                             finish();
                         }
                     });

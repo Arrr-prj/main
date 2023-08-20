@@ -141,6 +141,22 @@ public class RegisterActivity extends AppCompatActivity {
 //                            data.put("sex", finalStrSex);
                             data.put("address", strAddrees);
                             data.put("membership",false); // 멤버십 기능 추가
+                            data.put("Nike", false);
+                            data.put("Adidas", false);
+                            data.put("Apple", false);
+                            data.put("Samsung", false);
+                            data.put("차량", false);
+                            data.put("액세서리", false);
+                            data.put("의류", false);
+                            data.put("한정판", false);
+                            data.put("프리미엄", false);
+                            data.put("신발", false);
+                            data.put("굿즈", false);
+                            data.put("가방", false);
+                            data.put("가구 인테리어", false);
+                            data.put("스포츠 레저", false);
+                            data.put("취미 게임", false);
+                            data.put("기타", false);
 
                             userDocRef.set(data)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -151,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             resultIntent.putExtra("result_key", "작업 완료 결과");
                                             setResult(RESULT_OK, resultIntent);
                                             Intent intent = new Intent(RegisterActivity.this, LobyActivity.class);
+                                            intent.putExtra("firstVisit","yes");
                                             startActivity(intent);
                                             finish(); // 현재 액티비티 종료
                                         }

@@ -6,18 +6,24 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp"
+
     tools:context=".LargeImageActivity">
-<!--    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView-->
-<!--        android:id="@+id/largeImageView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:adjustViewBounds="true"-->
-<!--        android:scaleType="fitCenter" />-->
-    <ImageView
-        android:id="@+id/largeImageView"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/sliderViewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
+    <!--    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView-->
+    <!--        android:id="@+id/largeImageView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:adjustViewBounds="true"-->
+    <!--        android:scaleType="fitCenter" />-->
+
 </LinearLayout>

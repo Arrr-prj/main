@@ -28,15 +28,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <activity
-            android:name=".OpenDetailItemtestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OpenRegistItemtestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OpenAuctiontestActivity"
+            android:name=".LargeImageActivity"
             android:exported="false" />
         <activity
             android:name=".MyConfirmItemActivity"
