@@ -125,7 +125,56 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         showUsername();
 
+        Intent itent = getIntent();
+        String firstVisit = itent.getStringExtra("firstVisit");
 
+//        if(firstVisit.equals("yes")){
+//            // 팝업 창 띄워서 어플
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setTitle("< Arrr 사용 안내 >").setMessage("\n" +
+//
+//                    "\n" +
+//                    "공개 경매:\n" +
+//                    "\n" +
+//                    "공개 경매는 사용자들이 실시간으로 접속하여 입찰가를 입력하는 방식의 경매입니다.\n" +
+//                    "경매에 올라온 아이템 중 가장 높은 입찰가를 제출한 사용자가 낙찰되어 아이템을 가져가게 됩니다.\n" +
+//                    "비공개 경매:\n" +
+//                    "\n" +
+//                    "비공개 경매는 경매에 올라온 아이템이 24시간 후에 마감되는 형식의 경매입니다.\n" +
+//                    "사용자들은 경매가 마감되기 전에 최고가를 모르며 입찰을 진행합니다.\n" +
+//                    "경매 마감 후 최고 입찰가 사용자가 아이템을 낙찰받습니다.\n" +
+//                    "무료 나눔:\n" +
+//                    "\n" +
+//                    "무료 나눔은 사용자들이 랜덤으로 당첨될 수 있는 이벤트입니다.\n" +
+//                    "무료 나눔에 올라온 아이템에 신청하면 추첨을 통해 당첨될 수 있습니다.\n" +
+//                    "이벤트 경매:\n" +
+//                    "\n" +
+//                    "이벤트 경매는 멤버쉽 회원들에게 제공되는 비밀 경매입니다.\n" +
+//                    "Arr어플 내에서 특별한 이벤트에 참여하면 아이템을 얻을 수 있는 기회를 제공합니다.\n" +
+//                    "위 안내사항을 참고하여 Arrr 어플을 즐겨보세요! 추가적인 문의나 도움이 필요하면 언제든 문의해주세요."); // 다이얼로그 제목
+//            builder.setCancelable(false);   // 다이얼로그 화면 밖 터치 방지
+//            builder.setPositiveButton("예", new AlertDialog.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    mAuth.signOut();
+//
+//                    // 로그인 인텐트 생성 후 이동
+//
+//                    FirebaseUser user = mAuth.getCurrentUser();
+//
+//                    UserManager.getInstance().clearUserUid();
+//                    startActivity(new Intent(HomeActivity.this, LobyActivity.class));
+//                    finish();
+//                }
+//            });
+//
+//            builder.setNegativeButton("아니요", new AlertDialog.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                }
+//            });
+//
+//            builder.show(); // 다이얼로그 보이기
+//        }
 
         btnCateBag.setOnClickListener(new View.OnClickListener() {
             @Override
