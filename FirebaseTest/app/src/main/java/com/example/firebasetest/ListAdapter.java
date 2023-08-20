@@ -73,7 +73,7 @@ public class ListAdapter extends ArrayAdapter<Item> {
             }
 
             Glide.with(getContext())
-                    .load(data.getImageUrl())
+                    .load(data.getImageUrl1())
                     .into(imgView);
         }
         return itemView;

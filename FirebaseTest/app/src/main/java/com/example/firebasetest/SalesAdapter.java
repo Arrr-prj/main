@@ -86,7 +86,7 @@ public class SalesAdapter extends ArrayAdapter<Item> {
                 days.setText(String.valueOf(data.getDifferenceDays())+"일 전");
             }
             Glide.with(getContext())
-                    .load(data.getImageUrl())
+                    .load(data.getImageUrl1())
                     .into(imgView);
         }
         return itemView;

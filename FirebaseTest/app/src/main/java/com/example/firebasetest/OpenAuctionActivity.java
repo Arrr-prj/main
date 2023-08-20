@@ -55,8 +55,6 @@ public class OpenAuctionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_auction);
 
-
-
         db = FirebaseFirestore.getInstance();
         listView = (ListView)findViewById(R.id.listView);
 
@@ -131,6 +129,7 @@ public class OpenAuctionActivity extends AppCompatActivity {
                 showDetail.putExtra("seller", item.getSeller());
                 showDetail.putExtra("buyer", item.getBuyer());
                 showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
+                showDetail.putExtra("futureMillis", item.getFutureMillis());
                 startActivity(showDetail);
             }
         });
@@ -152,7 +151,12 @@ public class OpenAuctionActivity extends AppCompatActivity {
                             openItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl2")),
+                                            String.valueOf(document.getData().get("imgUrl3")),
+                                            String.valueOf(document.getData().get("imgUrl4")),
+                                            String.valueOf(document.getData().get("imgUrl5")),
+                                            String.valueOf(document.getData().get("imgUrl6")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),

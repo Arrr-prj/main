@@ -3,6 +3,7 @@ package com.example.firebasetest;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,29 +36,42 @@ import java.util.Map;
 public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
-    private TextView itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl;
+    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
+    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice; // 입찰가
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd; // 입찰하기 버튼
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton; // 입찰하기 버튼
 
     private String sellerName ,bidAmount;
+    private ViewPager2 sliderViewPager;
+    private PhotoView photoViewSlider;
+    private LinearLayout layoutIndicator;
+    private String[] images = new String[6];
     String buyer, document;
 
     boolean membershipValue;
     FirebaseFirestore database;
+    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
 
+    String userEmail; // 현재 유저의 이메일
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_auction_detail_item);
+
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+        sliderViewPager.setOffscreenPageLimit(1);
+
         // 아이템 정보들
+        itmeTitle = findViewById(R.id.itemTitle);
         itemId = findViewById(R.id.itemId);
         startPrice = findViewById(R.id.startPrice);
         endPrice = findViewById(R.id.endPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
-        imgUrl = findViewById(R.id.imgUrl);
+
         category = findViewById(R.id.category);
         timeinfo = findViewById(R.id.timeInfoinfo);
         futureMillis = findViewById(R.id.futureMillis);
@@ -62,7 +80,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         mBtnBuy = findViewById(R.id.btn_buy);            // 구매하기
         mBtnConfirm = findViewById(R.id.btn_buyConfirm); // 구매 완료
         mETBidPrice = findViewById(R.id.et_bid); // 경매 가격 받기
-
+        mBtnBigButton = findViewById(R.id.btn_bigbutton);
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
         database = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = database.collection("User").document(uid);
@@ -83,8 +101,31 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
 
         String documentId = title + seller;
         this.document = documentId;
+        if (user != null) {
+            userEmail = user.getEmail(); // 현재 사용자의 이메일
+            UserManager.getInstance().setUserEmail(userEmail); // UserManager에 이메일 저장
+        }
         getSelectoItem(); // 최고가를 업데이트하도록 수정한 부분
-
+// 이미지 URL을 한국 관련 이미지 URL로 대체하거나 이미지 URL이 있는 경우에만 추가
+        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
+            images[0] = imageUrl1;
+        }
+        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
+            images[1] = imageUrl2;
+        }
+        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
+            images[2] = imageUrl3;
+        }
+        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
+            images[3] = imageUrl4;
+        }
+        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
+            images[4] = imageUrl5;
+        }
+        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
+            images[5] = imageUrl6;
+        }
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
         userDocRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -92,8 +133,11 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                         membershipValue = documentSnapshot.getBoolean("membership");
                     }
                 });
+
         Calendar calendar = Calendar.getInstance();
-        String currentMillis = String.valueOf(calendar.getTimeInMillis());
+        Long nowMillis = calendar.getTimeInMillis();
+        Long llfutureMillis = Long.valueOf(intent.getStringExtra("futureMillis"));
+        Long isEnd = llfutureMillis - nowMillis;
 
         // 이미 구매가 완료된 경우
         if(buyerUid.equals(uid) && confirm.equals("true")){
@@ -104,26 +148,20 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
             // 낙찰자가 생겼지만 구매가 완료되지 않은 경우
-        }else if(buyerUid.equals(uid) && confirm.equals("false")){
+        }else if(buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0){
             // 구매 버튼만 보이게
             mBtnBuy.setVisibility(View.VISIBLE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
 
-        }else if(!buyerUid.equals(uid) && confirm.equals("true")){
-            // 내가 구매한건 아니지만 다른 유저가 구매했을 때
+            // 누군가 구매를 해서 경매가 종료되었을 때
+        }else if(confirm.equals("true") && isEnd <= 0){
             mBtnBidEnd.setVisibility(View.VISIBLE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
-        }else if(Long.parseLong(currentMillis) >= Long.parseLong(futureMillis)){
-            mBtnBidButton.setVisibility(View.GONE);
-            mBtnConfirm.setVisibility(View.GONE);
-            mBtnBuy.setVisibility(View.GONE);
-            mBtnBidEnd.setVisibility(View.VISIBLE);
-        }
-        else{
+        }else{
             // 경매중인 경우
             // 입찰 버튼만 보이게
             mBtnBidButton.setVisibility(View.VISIBLE);
@@ -131,6 +169,20 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
         }
+// 만약 판매자의 이메일과 현재 로그인한 사용자의 이메일이 같다면, 신청하기 버튼을 숨김
+        if (seller.equals(userEmail)) {
+            mBtnBidButton.setVisibility(View.GONE);
+        } else {
+            mBtnBidButton.setVisibility(View.VISIBLE);
+        }
+        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventAuctionDetailItemActivity.this, LargeImageActivity.class);
+                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                startActivity(intent);
+            }
+        });
 
         // 구매 버튼 클릭 시 이벤트
         mBtnBuy.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +301,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    itmeTitle.setText(selectedItem.getTitle());
                     itemId.setText(selectedItem.getId());
                     itemInfo.setText(selectedItem.getInfo());
                     category.setText(selectedItem.getCategory());
@@ -267,9 +320,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                         performAuctionEnd(document);
                     }
                     futureMillis.setText(remainingTime);
-                    Glide.with(this)
-                            .load(selectedItem.getImageUrl())
-                            .into(imgUrl);
+
                     startCountdownTimer(futureTimeMillis);
                 });
     }
@@ -280,8 +331,8 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     }
 
     private void btnBid() {
-        mBtnBidButton.setEnabled(false);
-        mBtnBidButton.setText("경매 종료");
+        mBtnBidButton.setVisibility(View.GONE);
+        mBtnBidEnd.setVisibility(View.VISIBLE);
     }
 
     private String formatRemainingTime(long remainingTimeMillis) {
@@ -335,6 +386,12 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         if (selectedItem != null) {
             // selectedItem 사용하기
             setoValues(selectedItem);
+            imageUrl1 = selectedItem.getImageUrl1();
+            imageUrl2 = selectedItem.getImageUrl2();
+            imageUrl3 = selectedItem.getImageUrl3();
+            imageUrl4 = selectedItem.getImageUrl4();
+            imageUrl5 = selectedItem.getImageUrl5();
+            imageUrl6 = selectedItem.getImageUrl6();
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }

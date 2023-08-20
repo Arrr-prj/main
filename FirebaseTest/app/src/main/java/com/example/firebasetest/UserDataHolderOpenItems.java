@@ -25,7 +25,12 @@ public class UserDataHolderOpenItems {
                             String category = document.getString("category");
                             String seller = document.getString("seller");
                             String buyer = document.getString("buyer");
-                            String imgUrl = document.getString("imgUrl");
+                            String imgUrl1 = document.getString("imgUrl1");
+                            String imgUrl2 = document.getString("imgUrl2");
+                            String imgUrl3 = document.getString("imgUrl3");
+                            String imgUrl4 = document.getString("imgUrl4");
+                            String imgUrl5 = document.getString("imgUrl5");
+                            String imgUrl6 = document.getString("imgUrl6");
                             String price = document.getString("price");
                             String endPrice = document.getString("endPrice");
                             String futureMillis = document.getString("futureMillis");
@@ -36,7 +41,7 @@ public class UserDataHolderOpenItems {
                             String differenceDays = document.getString("differenceDays");
                             String uploadMillis = document.getString("uploadMillis");
                             // Item 생성자에 맞게 데이터 추가
-                            Item item = new Item(title, imgUrl, id, price, endPrice, category, info, seller, buyer, futureMillis, futureDate, uploadMillis, differenceDays, confirm, itemType, views);
+                            Item item = new Item(title,  imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, id, price, endPrice, category, info, seller, buyer, futureMillis, futureDate, uploadMillis, differenceDays, confirm, itemType, views);
                             openItemList.add(item);
                         }
                     } else {

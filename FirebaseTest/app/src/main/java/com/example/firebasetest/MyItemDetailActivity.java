@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,10 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -39,25 +42,33 @@ public class MyItemDetailActivity extends AppCompatActivity {
 
     private Button btnEdit, btnDelete, btnList, btnConfirm, btnCancle;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
-    private ImageView imgUrl;
+    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     ListAdapter listAdapter;
     FirebaseUser firebaseUser;
+    private ViewPager2 sliderViewPager;
+    private PhotoView photoViewSlider;
+    private LinearLayout layoutIndicator;
 
 
-    private FirebaseFirestore db;
 
+    private String[] images = new String[6];
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
     public static ArrayList<Item> eventItemList = new ArrayList<Item>();
-
+    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     Item item;
     Bitmap bitmap;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final StorageReference reference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item_detail);
+        sliderViewPager = findViewById(R.id.sliderViewPager);
 
+        sliderViewPager.setOffscreenPageLimit(1);
         // 아이템 정보들
         itemTitle = findViewById(R.id.itemTitle);
         itemId = findViewById(R.id.itemId);
@@ -65,7 +76,6 @@ public class MyItemDetailActivity extends AppCompatActivity {
         endPrice = findViewById(R.id.endPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
-        imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
 
         listAdapter = new ListAdapter(this, new ArrayList<>());
@@ -115,7 +125,24 @@ public class MyItemDetailActivity extends AppCompatActivity {
             btnEdit.setVisibility(View.GONE);
             getSelecteItem();
         }
-
+        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
+            images[0] = imageUrl1;
+        }
+        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
+            images[1] = imageUrl2;
+        }
+        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
+            images[2] = imageUrl3;
+        }
+        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
+            images[3] = imageUrl4;
+        }
+        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
+            images[4] = imageUrl5;
+        }
+        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
+            images[5] = imageUrl6;
+        }
         // 구매한 아이템 수정 삭제 막기
         String isBuy = intent.getStringExtra("isBuy");
         if(isBuy.equals("Buy")){
@@ -399,8 +426,24 @@ public class MyItemDetailActivity extends AppCompatActivity {
                             String get_id = document.getString("id");
                             String get_info = document.getString("info");
                             String get_price = document.getString("price");
-                            String get_url = document.getString("imgUrl");
                             if (true/*document.exists()*/) {
+                                // 이미지 URL들을 images 배열에 저장
+                                imageUrl1 = document.getString("imgUrl1");
+                                imageUrl2 = document.getString("imgUrl2");
+                                imageUrl3 = document.getString("imgUrl3");
+                                imageUrl4 = document.getString("imgUrl4");
+                                imageUrl5 = document.getString("imgUrl5");
+                                imageUrl6 = document.getString("imgUrl6");
+                                // 이미지 URL들을 images 배열에 저장
+                                images[0] = imageUrl1;
+                                images[1] = imageUrl2;
+                                images[2] = imageUrl3;
+                                images[3] = imageUrl4;
+                                images[4] = imageUrl5;
+                                images[5] = imageUrl6;
+                                // 이미지 슬라이더 어댑터 업데이트
+                                ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
+                                sliderViewPager.setAdapter(imageSliderAdapter);
                                 itemTitle.setText(get_itemTitle);
                                 itemId.setText(get_id);
                                 itemInfo.setText(get_info);
@@ -408,9 +451,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                                 startPrice.setText(get_price);
                                 endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
                                 seller.setText(firebaseUser.getEmail());
-                                Glide.with(MyItemDetailActivity.this)
-                                        .load(get_url)
-                                        .into(imgUrl);
+
 
                             } else {
                                 Toast.makeText(MyItemDetailActivity.this, "데이터 없음", Toast.LENGTH_SHORT).show();
@@ -447,7 +488,24 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         String get_info = document.getString("info");
                         String get_price = document.getString("price");
                         String get_url = document.getString("imgUrl");
+                        // 이미지 URL들을 images 배열에 저장
+                        imageUrl1 = document.getString("imgUrl1");
+                        imageUrl2 = document.getString("imgUrl2");
+                        imageUrl3 = document.getString("imgUrl3");
+                        imageUrl4 = document.getString("imgUrl4");
+                        imageUrl5 = document.getString("imgUrl5");
+                        imageUrl6 = document.getString("imgUrl6");
+                        // 이미지 URL들을 images 배열에 저장
+                        images[0] = imageUrl1;
+                        images[1] = imageUrl2;
+                        images[2] = imageUrl3;
+                        images[3] = imageUrl4;
+                        images[4] = imageUrl5;
+                        images[5] = imageUrl6;
+                        // 이미지 슬라이더 어댑터 업데이트
+                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
 
+                        sliderViewPager.setAdapter(imageSliderAdapter);
                         itemTitle.setText(get_itemTitle);
                         itemId.setText(get_id);
                         itemInfo.setText(get_info);
@@ -455,9 +513,6 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         startPrice.setText(get_price);
                         endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
                         seller.setText(firebaseUser.getEmail());
-                        Glide.with(MyItemDetailActivity.this)
-                                .load(get_url)
-                                .into(imgUrl);
 
                     }
                 });
@@ -483,7 +538,24 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         String get_info = document.getString("info");
                         String get_price = document.getString("price");
                         String get_url = document.getString("imgUrl");
+                        // 이미지 URL들을 images 배열에 저장
+                        imageUrl1 = document.getString("imgUrl1");
+                        imageUrl2 = document.getString("imgUrl2");
+                        imageUrl3 = document.getString("imgUrl3");
+                        imageUrl4 = document.getString("imgUrl4");
+                        imageUrl5 = document.getString("imgUrl5");
+                        imageUrl6 = document.getString("imgUrl6");
+                        // 이미지 URL들을 images 배열에 저장
+                        images[0] = imageUrl1;
+                        images[1] = imageUrl2;
+                        images[2] = imageUrl3;
+                        images[3] = imageUrl4;
+                        images[4] = imageUrl5;
+                        images[5] = imageUrl6;
+                        // 이미지 슬라이더 어댑터 업데이트
+                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
 
+                        sliderViewPager.setAdapter(imageSliderAdapter);
                         itemTitle.setText(get_itemTitle);
                         itemId.setText(get_id);
                         itemInfo.setText(get_info);
@@ -491,9 +563,6 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         startPrice.setText(get_price);
                         endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
                         seller.setText(firebaseUser.getEmail());
-                        Glide.with(MyItemDetailActivity.this)
-                                .load(get_url)
-                                .into(imgUrl);
 
                     }
                 });

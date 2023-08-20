@@ -1,5 +1,7 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -24,11 +26,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,23 +42,26 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShareRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView write_text;
     EditText itemTitle, itemName, itemInfo;
     Button itemCategory;
-    private ImageView imageView;
+    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
-    private Uri imageUrl;
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private Uri imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
 
-    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
 
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠레저", "취미 게임", "기타"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,17 +72,72 @@ public class ShareRegistItemActivity extends AppCompatActivity {
         itemInfo = findViewById(R.id.input_itemExplain);
         itemCategory = findViewById(R.id.input_itemCategory);
         write_text = findViewById(R.id.write_text);
-        imageView = findViewById(R.id.input_itemImg);
 
+        imageView1 = findViewById(R.id.input_itemImg1);
+        imageView2 = findViewById(R.id.input_itemImg2);
+        imageView3 = findViewById(R.id.input_itemImg3);
+        imageView4 = findViewById(R.id.input_itemImg4);
+        imageView5 = findViewById(R.id.input_itemImg5);
+        imageView6 = findViewById(R.id.input_itemImg6);
 
         // 이미지 클릭 이벤트
-        imageView.setOnClickListener(new View.OnClickListener() {
+        imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/");
-                activityResult.launch(intent); // activityResult? launcher?
+                activityResult1.launch(intent); // activityResult? launcher?
+            }
+        });
+        // 이미지 클릭 이벤트
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/");
+                activityResult2.launch(intent); // activityResult? launcher?
+            }
+        });
+        // 이미지 클릭 이벤트
+        imageView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/");
+                activityResult3.launch(intent); // activityResult? launcher?
+            }
+        });
+        // 이미지 클릭 이벤트
+        imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/");
+                activityResult4.launch(intent); // activityResult? launcher?
+            }
+        });
+        // 이미지 클릭 이벤트
+        imageView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/");
+                activityResult5.launch(intent); // activityResult? launcher?
+            }
+        });
+        // 이미지 클릭 이벤트
+        imageView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/");
+                activityResult6.launch(intent); // activityResult? launcher?
             }
         });
 
@@ -99,15 +163,20 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("Items");
-                if (imageUrl != null) {
-                    uploadToFirebase(strTitle, imageUrl, strName, "share item", strInfo, strCategory, sellerId);
+                if (imageUrl1 != null && imageUrl2 != null && imageUrl3 != null && imageUrl4 != null && imageUrl5 != null && imageUrl6 != null) {
+                    uploadToFirebase(strTitle,  imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6, strName, "share item", strInfo, strCategory, sellerId);
                     Intent intent = new Intent(ShareRegistItemActivity.this, ShareActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(ShareRegistItemActivity.this, "사진을 선택해주세요", Toast.LENGTH_SHORT).show();
                 }
                 // 이미지 초기화
-                imageView.setImageResource(R.drawable.ic_add_photo);
+                imageView1.setImageResource(R.drawable.ic_add_photo);
+                imageView2.setImageResource(R.drawable.ic_add_photo);
+                imageView3.setImageResource(R.drawable.ic_add_photo);
+                imageView4.setImageResource(R.drawable.ic_add_photo);
+                imageView5.setImageResource(R.drawable.ic_add_photo);
+                imageView6.setImageResource(R.drawable.ic_add_photo);
             }
         });
 
@@ -123,29 +192,104 @@ public class ShareRegistItemActivity extends AppCompatActivity {
     } // onCreate
 
     // 사진 가져오기
-    ActivityResultLauncher<Intent> activityResult = registerForActivityResult(
+    ActivityResultLauncher<Intent> activityResult1 = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        imageUrl = result.getData().getData();
-                        imageView.setImageURI(imageUrl);
+                        imageUrl1 = result.getData().getData();
+                        imageView1.setImageURI(imageUrl1);
+                    }
+                }
+            });
+    ActivityResultLauncher<Intent> activityResult2 = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        imageUrl2 = result.getData().getData();
+                        imageView2.setImageURI(imageUrl2);
+                    }
+                }
+            });
+
+    ActivityResultLauncher<Intent> activityResult3 = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        imageUrl3 = result.getData().getData();
+                        imageView3.setImageURI(imageUrl3);
+                    }
+                }
+            });
+    ActivityResultLauncher<Intent> activityResult4 = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        imageUrl4 = result.getData().getData();
+                        imageView4.setImageURI(imageUrl4);
+                    }
+                }
+            });
+
+    ActivityResultLauncher<Intent> activityResult5 = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        imageUrl5 = result.getData().getData();
+                        imageView5.setImageURI(imageUrl5);
+                    }
+                }
+            });
+
+    ActivityResultLauncher<Intent> activityResult6 = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        imageUrl6 = result.getData().getData();
+                        imageView6.setImageURI(imageUrl6);
                     }
                 }
             });
 
     // 파이어베이스 이미지 업로드
-    private void uploadToFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
-        StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
-        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+    private void uploadToFirebase(String strTitle,  Uri uri1, Uri uri2, Uri uri3, Uri uri4, Uri uri5, Uri uri6, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
+        // 각 이미지의 StorageReference 생성
+        StorageReference fileRef1 = reference.child(System.currentTimeMillis() + "_1." + getFileExtension(uri1));
+        StorageReference fileRef2 = reference.child(System.currentTimeMillis() + "_2." + getFileExtension(uri2));
+        StorageReference fileRef3 = reference.child(System.currentTimeMillis() + "_3." + getFileExtension(uri3));
+        StorageReference fileRef4 = reference.child(System.currentTimeMillis() + "_4." + getFileExtension(uri4));
+        StorageReference fileRef5 = reference.child(System.currentTimeMillis() + "_5." + getFileExtension(uri5));
+        StorageReference fileRef6 = reference.child(System.currentTimeMillis() + "_6." + getFileExtension(uri6));
+        // 각 이미지 업로드 및 이미지 URL 가져오기 작업을 리스트로 생성
+        List<Task<Uri>> uploadTasks = new ArrayList<>();
+        uploadTasks.add(uploadImageAndGetUrl(fileRef1, uri1));
+        uploadTasks.add(uploadImageAndGetUrl(fileRef2, uri2));
+        uploadTasks.add(uploadImageAndGetUrl(fileRef3, uri3));
+        uploadTasks.add(uploadImageAndGetUrl(fileRef4, uri4));
+        uploadTasks.add(uploadImageAndGetUrl(fileRef5, uri5));
+        uploadTasks.add(uploadImageAndGetUrl(fileRef6, uri6));
+
+        // 모든 이미지 업로드 및 URL 가져오기 작업이 완료되면 Firestore에 데이터 업로드
+        Tasks.whenAllSuccess(uploadTasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            public void onSuccess(List<Object> results) {
+                // 모든 이미지의 URL을 가져온 후 Firestore 데이터 업로드
                 Map<String, Object> data = new HashMap<>();
 
                 Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
                 String uploadMillis = String.valueOf(calendar.getTimeInMillis());
-                calendar.add(Calendar.MINUTE, 1);
+                calendar.add(Calendar.SECOND, 50);
                 String futureMillis = String.valueOf(calendar.getTimeInMillis()); //
                 // "yyyy-MM-dd HH:mm:ss" 포맷으로 변환
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -165,35 +309,35 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                 data.put("itemType", "ShareItem");
                 data.put("views", 0);
 
-                // 성공 시
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        // 이미지 아이템에 담기
-                        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        DocumentReference userDocRef = database.collection("ShareItem").document(strTitle + sellerId); // 생성되는 문서 이름 정해주기
-                        data.put("imgUrl", uri.toString());
-                        UserDataHolderShareItem.shareItemList.clear();
-                        UserDataHolderShareItem.loadShareItems();
-                        userDocRef.set(data)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        // 문서 생성 및 데이터 저장 성공
-                                        Toast.makeText(ShareRegistItemActivity.this, "상품 등록에 성공했습니다", Toast.LENGTH_SHORT).show();
-                                        sendMessage(strName,strCategory,firebaseUser,strTitle+sellerId);
+                for (int i = 0; i < results.size(); i++) {
+                    data.put("imgUrl" + (i + 1), results.get(i).toString());
+                }
+                // Firestore에 데이터 업로드
+                DocumentReference userDocRef = db.collection("ShareItem").document(strTitle + sellerId);
+
+                userDocRef.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // 이미 해당 문서가 존재하므로 업데이트하지 않고 Toast 메시지를 표시
+                            Toast.makeText(ShareRegistItemActivity.this, "이미 해당 상품이 등록되어 있습니다.\n도배 게시글 방지를 위해 등록이 제한됩니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // 해당 문서가 존재하지 않으므로 데이터 업로드 수행
+                            userDocRef.set(data)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // 등록된 리스트 새로 갱신
+                                        UserDataHolderShareItem.loadShareItems();
+                                        Toast.makeText(ShareRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(ShareRegistItemActivity.this, ShareActivity.class);
                                         startActivity(intent);
-                                        finish();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // 문서 생성 및 데이터 저장 실패
-                                        Toast.makeText(ShareRegistItemActivity.this, "상품 등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(getApplicationContext(), "상품 등록에 실패했습니다." + e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    });
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
                     }
                 });
             }
@@ -206,7 +350,19 @@ public class ShareRegistItemActivity extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
+    private Task<Uri> uploadImageAndGetUrl(StorageReference fileRef, Uri uri) {
+        final TaskCompletionSource<Uri> taskCompletionSource = new TaskCompletionSource<>();
 
+        fileRef.putFile(uri).addOnSuccessListener(taskSnapshot -> {
+            // 이미지 업로드 성공 시 처리
+            // 이미지 다운로드 URL을 가져와서 TaskCompletionSource에 결과 저장
+            fileRef.getDownloadUrl().addOnSuccessListener(uriResult -> {
+                taskCompletionSource.setResult(uriResult);
+            });
+        });
+
+        return taskCompletionSource.getTask();
+    }
     public void showDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("카테고리 선택")

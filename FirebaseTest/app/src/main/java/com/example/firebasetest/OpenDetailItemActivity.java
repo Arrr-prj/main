@@ -3,6 +3,7 @@ package com.example.firebasetest;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,13 +40,18 @@ public class OpenDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
     private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl;
+    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice;
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd;
+    private ViewPager2 sliderViewPager;
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton;
+    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     String document, buyer, highPrice, buyerId;
     FirebaseFirestore database;
+    private String[] images = new String[6];
     boolean open;
-
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
+    String userEmail; // 현재 유저의 이메일
     private boolean highestBidUpdated = false;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -53,6 +61,9 @@ public class OpenDetailItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_detail_item);
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+
+        sliderViewPager.setOffscreenPageLimit(1);
 
         itmeTitle = findViewById(R.id.itemTitle);
         itemId = findViewById(R.id.itemId);
@@ -60,7 +71,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         endPrice = findViewById(R.id.endPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
-        imgUrl = findViewById(R.id.imgUrl);
+
         category = findViewById(R.id.category);
         timeinfo = findViewById(R.id.timeInfoinfo);
         futureMillis = findViewById(R.id.futureMillis);
@@ -75,6 +86,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
 
         mBtnBidButton = findViewById(R.id.btn_bidbutton);
+        mBtnBigButton = findViewById(R.id.btn_bigbutton);
         mBtnBidEnd = findViewById(R.id.btn_bidEnd);
         mBtnBuy = findViewById(R.id.btn_buy);
         mBtnConfirm = findViewById(R.id.btn_buyConfirm);
@@ -85,15 +97,51 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         String title = intent.getStringExtra("title");
         String sellerName = intent.getStringExtra("seller");
         String buyerUid = intent.getStringExtra("buyer");
-        // 두번째 매개변수는 값을 잘 불러오지 못했을때 할당해줄 기본 값
         String confirm = intent.getStringExtra("confirm");
 
         String documentId = title + sellerName;
         this.document = documentId;
-
+        database = FirebaseFirestore.getInstance();
+        DocumentReference docRef = database.collection("OpenItem").document(documentId);
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
+        if (user != null) {
+            userEmail = user.getEmail(); // 현재 사용자의 이메일
+            UserManager.getInstance().setUserEmail(userEmail); // UserManager에 이메일 저장
+        }
         getSelectedItem();
 
+        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
+            images[0] = imageUrl1;
+        }
+        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
+            images[1] = imageUrl2;
+        }
+        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
+            images[2] = imageUrl3;
+        }
+        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
+            images[3] = imageUrl4;
+        }
+        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
+            images[4] = imageUrl5;
+        }
+        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
+            images[5] = imageUrl6;
+        }
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+        sliderViewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OpenDetailItemActivity.this, LargeImageActivity.class);
+                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                startActivity(intent);
+            }
+        });
+
+        Calendar calendar1 = Calendar.getInstance();
+        Long nowMillis = calendar1.getTimeInMillis();
+        Long futureMillis = Long.valueOf(intent.getStringExtra("futureMillis"));
+        Long isEnd = futureMillis - nowMillis;
         // 이미 구매가 완료된 경우
         if(buyerUid.equals(uid) && confirm.equals("true")){
             Log.d(TAG, "uid값 : "+uid+"confirm 값 : "+ confirm);
@@ -102,16 +150,16 @@ public class OpenDetailItemActivity extends AppCompatActivity {
             mBtnBidButton.setVisibility(View.GONE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
-            // 낙찰자가 생겼지만 구매가 완료되지 않은 경우
-        }else if(buyerUid.equals(uid) && confirm.equals("false")){
+            // 경매가 종료되고 낙찰자가 나로 정해졌는데 아직 구매가 완료되지 않은 경우
+        }else if(buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0){
             // 구매 버튼만 보이게
             mBtnBuy.setVisibility(View.VISIBLE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
 
-            // 다른 유저에게 낙찰되었을 때
-        }else if(!buyerUid.equals(uid) && !buyerUid.equals("")){
+            // 누군가 구매를 해서 경매가 종료되었을 때
+        }else if(confirm.equals("true") && isEnd <= 0){
             mBtnBidEnd.setVisibility(View.VISIBLE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnConfirm.setVisibility(View.GONE);
@@ -142,10 +190,13 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                 finish();
             }
         });
+// 만약 판매자의 이메일과 현재 로그인한 사용자의 이메일이 같다면, 신청하기 버튼을 숨김
+        if (seller.equals(userEmail)) {
+            mBtnBidButton.setVisibility(View.GONE);
+        } else {
+            mBtnBidButton.setVisibility(View.VISIBLE);
+        }
 
-
-        // 문서의 참조 가져오기
-        DocumentReference docRef = database.collection("OpenItem").document(documentId);
         // 문서 읽기
         docRef.get().addOnCompleteListener(task -> {
             if (true) {
@@ -274,6 +325,14 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                 });
             }
         });
+        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OpenDetailItemActivity.this, LargeImageActivity.class);
+                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                startActivity(intent);
+            }
+        });
 
         // 이하 내용은 코드 조각입니다. (updateEndTime 및 getEndTime 메소드 호출 등)
     }
@@ -381,10 +440,9 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     }
 
                     futureMillis.setText(remainingTime);
-                    Glide.with(this)
-                            .load(selectedItem.getImageUrl())
-                            .into(imgUrl);
-
+//                    Glide.with(this)
+//                            .load(selectedItem.getImageUrl())
+//                            .into(imgUrl);
 
                     startCountdownTimer(futureTimeMillis, 1000);
                 });
@@ -398,6 +456,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
     private void btnBid() {
         mBtnBidButton.setVisibility(View.GONE);
         mETBidPrice.setVisibility(View.GONE);
+        mBtnBidEnd.setVisibility(View.VISIBLE);
     }
 
     private String formatRemainingTime(long remainingTimeMillis) {
@@ -461,6 +520,12 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         }
         if (selectedItem != null) {
             setItemValues(selectedItem);
+            imageUrl1 = selectedItem.getImageUrl1();
+            imageUrl2 = selectedItem.getImageUrl2();
+            imageUrl3 = selectedItem.getImageUrl3();
+            imageUrl4 = selectedItem.getImageUrl4();
+            imageUrl5 = selectedItem.getImageUrl5();
+            imageUrl6 = selectedItem.getImageUrl6();
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }

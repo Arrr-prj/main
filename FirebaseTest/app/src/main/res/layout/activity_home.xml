@@ -16,8 +16,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#210063"
-            android:backgroundTint="#210063"
+            android:background="@drawable/toolbar_gradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -79,7 +78,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -88,7 +87,7 @@
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager2"
                     android:layout_width="0dp"
-                    android:layout_height="70dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/rhdwl"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -133,99 +132,184 @@
                     app:layout_constraintTop_toBottomOf="@+id/viewPager2" />
 
                 <ImageButton
+                    android:id="@+id/btn_cateSam"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_samsung"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_bidding" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateApp"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_apple"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateSam"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_bidding" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateNike"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_nike"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateApp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_open" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateAdi"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/icon_adidas"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.172"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateNike"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_open" />
+
+                <ImageButton
                     android:id="@+id/btn_cateCar"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="36dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/car"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_bidding" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateSam" />
+
+                <ImageButton
+                    android:id="@+id/btn_catePre"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_premium"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateLim"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateNike" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateAnot"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_another"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.23"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateHob"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateBag" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateLim"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_limited"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateCar"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateApp" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateSpo"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_sports"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateClo" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateAcc"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/stuff"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateClo"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateLim" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateGoo"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_goods"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateSpo"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateAcc" />
+
+                <ImageButton
+                    android:id="@+id/btn_cateHob"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/icon_game"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateGoo"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateSho" />
 
                 <ImageButton
                     android:id="@+id/btn_cateClo"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="36dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/clothes"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_cateCar" />
 
                 <ImageButton
-                    android:id="@+id/btn_cateAcc"
+                    android:id="@+id/btn_cateSho"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/stuff"
-                    app:layout_constraintStart_toEndOf="@+id/btn_cateCar"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_bidding" />
-
-                <ImageButton
-                    android:id="@+id/btn_cateHome"
-                    android:layout_width="70dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/electronic"
+                    android:background="@drawable/icon_shoes"
                     app:layout_constraintStart_toEndOf="@+id/btn_cateAcc"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_open" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_catePre" />
 
                 <ImageButton
-                    android:id="@+id/btn_cateCur"
+                    android:id="@+id/btn_cateBag"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/curios"
-                    app:layout_constraintStart_toEndOf="@+id/btn_cateClo"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_cateAcc" />
-
-                <ImageButton
-                    android:id="@+id/btn_cateFood"
-                    android:layout_width="70dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/food"
-                    app:layout_constraintStart_toEndOf="@+id/btn_cateCur"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_cateHome" />
-
-                <ImageButton
-                    android:id="@+id/btn_cateArt"
-                    android:layout_width="70dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/art"
+                    android:background="@drawable/icon_bag"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/btn_cateHome"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_open" />
+                    app:layout_constraintHorizontal_bias="0.23"
+                    app:layout_constraintStart_toEndOf="@+id/btn_cateSho"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateFurn" />
 
                 <ImageButton
                     android:id="@+id/btn_cateFurn"
                     android:layout_width="70dp"
                     android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/furniture"
+                    android:background="@drawable/icon_furniture"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.217"
-                    app:layout_constraintStart_toEndOf="@+id/btn_cateFood"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_cateArt" />
+                    app:layout_constraintHorizontal_bias="0.23"
+                    app:layout_constraintStart_toEndOf="@+id/btn_catePre"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateAdi" />
 
                 <ImageButton
                     android:id="@+id/btn_eventAuction"
                     android:layout_width="325dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/eventimage"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.425"
+                    app:layout_constraintHorizontal_bias="0.43"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_cateFood" />
+                    app:layout_constraintTop_toBottomOf="@+id/btn_cateAnot" />
 
                 <ImageButton
                     android:id="@+id/btn_share"

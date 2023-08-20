@@ -82,7 +82,7 @@ public class SalesActivity extends AppCompatActivity {
 
         // 낙찰자가 있는 아이템을 불러오도록 함
         // Open Item
-        db.collection("OpenItem").whereNotEqualTo("buyer", null)
+        db.collection("OpenItem").whereEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -92,7 +92,12 @@ public class SalesActivity extends AppCompatActivity {
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl2")),
+                                            String.valueOf(document.getData().get("imgUrl3")),
+                                            String.valueOf(document.getData().get("imgUrl4")),
+                                            String.valueOf(document.getData().get("imgUrl5")),
+                                            String.valueOf(document.getData().get("imgUrl6")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -103,7 +108,7 @@ public class SalesActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate")),
                                             String.valueOf(document.getData().get("uploadDate")),
-                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            String.valueOf(calDays((String.valueOf(document.getData().get("futureDate"))))), // differenceDays
                                             Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
                                             String.valueOf(document.getData().get("itemType")),
                                             Integer.valueOf(String.valueOf(document.getData().get("views")))
@@ -114,7 +119,7 @@ public class SalesActivity extends AppCompatActivity {
                     }
                 });
         // Bidding Item
-        db.collection("BiddingItem").whereNotEqualTo("buyer", null)
+        db.collection("BiddingItem").whereEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -125,7 +130,12 @@ public class SalesActivity extends AppCompatActivity {
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl2")),
+                                            String.valueOf(document.getData().get("imgUrl3")),
+                                            String.valueOf(document.getData().get("imgUrl4")),
+                                            String.valueOf(document.getData().get("imgUrl5")),
+                                            String.valueOf(document.getData().get("imgUrl6")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -136,7 +146,7 @@ public class SalesActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate")),
                                             String.valueOf(document.getData().get("uploadDate")),
-                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            String.valueOf(calDays((String.valueOf(document.getData().get("futureDate"))))), // differenceDays
                                             Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
                                             String.valueOf(document.getData().get("itemType")),
                                             Integer.valueOf(String.valueOf(document.getData().get("views")))
@@ -147,7 +157,7 @@ public class SalesActivity extends AppCompatActivity {
                 });
 
         // EventItem
-        db.collection("EventItem").whereNotEqualTo("buyer", null)
+        db.collection("EventItem").whereEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -157,7 +167,12 @@ public class SalesActivity extends AppCompatActivity {
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl2")),
+                                            String.valueOf(document.getData().get("imgUrl3")),
+                                            String.valueOf(document.getData().get("imgUrl4")),
+                                            String.valueOf(document.getData().get("imgUrl5")),
+                                            String.valueOf(document.getData().get("imgUrl6")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -168,7 +183,7 @@ public class SalesActivity extends AppCompatActivity {
                                             String.valueOf(document.getData().get("futureMillis")),
                                             String.valueOf(document.getData().get("futureDate")),
                                             String.valueOf(document.getData().get("uploadDate")),
-                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            String.valueOf(calDays((String.valueOf(document.getData().get("futureDate"))))), // differenceDays
                                             Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
                                             String.valueOf(document.getData().get("itemType")),
                                             Integer.valueOf(String.valueOf(document.getData().get("views")))
@@ -181,6 +196,7 @@ public class SalesActivity extends AppCompatActivity {
                             public int compare(Item item1, Item item2) {
                                 Integer days1 = Integer.parseInt(item1.getDifferenceDays());
                                 Integer days2 = Integer.parseInt(item2.getDifferenceDays());
+                                // 오름차순 정렬
                                 return days1.compareTo(days2);
                             }
                         };
@@ -202,7 +218,7 @@ public class SalesActivity extends AppCompatActivity {
 
             // 낙찰자가 있는 아이템을 불러오도록 함
             // Open Item
-            db.collection("OpenItem").whereNotEqualTo("buyer", null)
+            db.collection("OpenItem").whereEqualTo("confirm", true)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -212,7 +228,12 @@ public class SalesActivity extends AppCompatActivity {
                                 endItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl2")),
+                                                String.valueOf(document.getData().get("imgUrl3")),
+                                                String.valueOf(document.getData().get("imgUrl4")),
+                                                String.valueOf(document.getData().get("imgUrl5")),
+                                                String.valueOf(document.getData().get("imgUrl6")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("price")),
                                                 String.valueOf(document.getData().get("endPrice")),
@@ -233,7 +254,7 @@ public class SalesActivity extends AppCompatActivity {
                         }
                     });
             // Bidding Item
-            db.collection("BiddingItem").whereNotEqualTo("buyer", null)
+            db.collection("BiddingItem").whereEqualTo("confirm", true)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -243,7 +264,12 @@ public class SalesActivity extends AppCompatActivity {
                                 endItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl2")),
+                                                String.valueOf(document.getData().get("imgUrl3")),
+                                                String.valueOf(document.getData().get("imgUrl4")),
+                                                String.valueOf(document.getData().get("imgUrl5")),
+                                                String.valueOf(document.getData().get("imgUrl6")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("price")),
                                                 String.valueOf(document.getData().get("endPrice")),
@@ -264,7 +290,7 @@ public class SalesActivity extends AppCompatActivity {
                         }
                     });
             // ShareItem
-            db.collection("ShareItem").whereNotEqualTo("buyer", null)
+            db.collection("ShareItem").whereEqualTo("confirm", true)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -274,7 +300,12 @@ public class SalesActivity extends AppCompatActivity {
                                 endItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl2")),
+                                                String.valueOf(document.getData().get("imgUrl3")),
+                                                String.valueOf(document.getData().get("imgUrl4")),
+                                                String.valueOf(document.getData().get("imgUrl5")),
+                                                String.valueOf(document.getData().get("imgUrl6")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("price")),
                                                 String.valueOf(document.getData().get("endPrice")),
@@ -296,7 +327,7 @@ public class SalesActivity extends AppCompatActivity {
                     });
 
             // EventItem
-            db.collection("EventItem").whereNotEqualTo("buyer", null)
+            db.collection("EventItem").whereEqualTo("confirm", true)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -306,7 +337,12 @@ public class SalesActivity extends AppCompatActivity {
                                 endItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl")),
+                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl2")),
+                                                String.valueOf(document.getData().get("imgUrl3")),
+                                                String.valueOf(document.getData().get("imgUrl4")),
+                                                String.valueOf(document.getData().get("imgUrl5")),
+                                                String.valueOf(document.getData().get("imgUrl6")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("price")),
                                                 String.valueOf(document.getData().get("endPrice")),
@@ -356,7 +392,6 @@ public class SalesActivity extends AppCompatActivity {
         public void setSalesChart(ArrayList<BarEntry> entries){
             // 문자열 x 축 데이터
             final String[] labels = {"5일 전", "4일 전", "3일 전", "2일 전", "1일 전", "오늘"};
-
 
             BarDataSet dataSet = new BarDataSet(entries, "최근 5일간 수익 현황");
             dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -409,7 +444,7 @@ public class SalesActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Calendar nowMillis = Calendar.getInstance();
-            long differenceInMillis = nowMillis.getTimeInMillis() - calendar.getTimeInMillis();
+            long differenceInMillis = calendar.getTimeInMillis() - nowMillis.getTimeInMillis();
             long differenceInDays = differenceInMillis / (24 * 60 * 60 * 1000);
 
             return String.valueOf(differenceInDays);

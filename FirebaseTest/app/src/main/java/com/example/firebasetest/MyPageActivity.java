@@ -45,7 +45,7 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnWithdrawal = findViewById(R.id.btn_withdrawal);
         mBtnMyItem = findViewById(R.id.btn_myItem);
         mBtnMembership = findViewById(R.id.btn_membership);
-        mBtnAnnounce = findViewById(R.id.btn_announce);
+//        mBtnAnnounce = findViewById(R.id.btn_announce);
         mBtnSales = findViewById(R.id.btn_sales);
         mBtnTotal = findViewById(R.id.btn_totalA);
 
@@ -130,12 +130,12 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
         // 공지사항 버튼 눌렀을 때
-        mBtnAnnounce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyPageActivity.this, AnnounceActivity.class));
-            }
-        });
+//        mBtnAnnounce.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MyPageActivity.this, AnnounceActivity.class));
+//            }
+//        });
 
 
     }
