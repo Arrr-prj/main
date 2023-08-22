@@ -43,7 +43,7 @@ public class MyPageActivity extends AppCompatActivity {
         mBtnModify = findViewById(R.id.btn_modify);
         mBtnLogout = findViewById(R.id.btn_logout);
         mBtnWithdrawal = findViewById(R.id.btn_withdrawal);
-        mBtnMyItem = findViewById(R.id.btn_myItem);
+//        mBtnMyItem = findViewById(R.id.btn_myItem);
         mBtnMembership = findViewById(R.id.btn_membership);
 //        mBtnAnnounce = findViewById(R.id.btn_announce);
         mBtnSales = findViewById(R.id.btn_sales);
@@ -73,13 +73,13 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
         // 경매 아이템 눌렀을 때
-        mBtnMyItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MyPageActivity.this, MyTransactionActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mBtnMyItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MyPageActivity.this, MyTransactionActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         // 뒤로가기 버튼을 눌렀을 때
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override

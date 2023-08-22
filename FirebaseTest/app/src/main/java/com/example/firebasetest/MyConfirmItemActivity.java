@@ -51,7 +51,6 @@ public class MyConfirmItemActivity extends AppCompatActivity {
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyConfirmItemActivity.this, MyTransactionActivity.class));
                 finish();
             }
         });
@@ -163,11 +162,11 @@ public class MyConfirmItemActivity extends AppCompatActivity {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
             if(isChecked){
                 InitializeOpenItem();
-                bORo.setText("오픈 경매 아이템");
+                bORo.setText("공개 대기 상품");
                 setOnClickoListener();
             }else{
                 InitializeBiddingItem();
-                bORo.setText("비공개 경매 아이템");
+                bORo.setText("비공개 대기 상품");
                 setOnClickbListener();
             }
         }

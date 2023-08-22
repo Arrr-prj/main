@@ -39,9 +39,9 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice; // 입찰가
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton; // 입찰하기 버튼
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback; // 입찰하기 버튼
 
-    private String sellerName ,bidAmount;
+    private String sellerName, bidAmount;
     private ViewPager2 sliderViewPager;
     private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
@@ -81,6 +81,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         mBtnConfirm = findViewById(R.id.btn_buyConfirm); // 구매 완료
         mETBidPrice = findViewById(R.id.et_bid); // 경매 가격 받기
         mBtnBigButton = findViewById(R.id.btn_bigbutton);
+        mBtnback = findViewById(R.id.btn_back);
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
         database = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = database.collection("User").document(uid);
@@ -97,7 +98,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         // 두번째 매개변수는 값을 잘 불러오지 못했을때 할당해줄 기본 값
         String confirm = intent.getStringExtra("confirm");
         String futureMillis = intent.getStringExtra("futureMillis");
-        Toast.makeText(this, "buyer"+buyerUid, Toast.LENGTH_SHORT).show();
+
 
         String documentId = title + seller;
         this.document = documentId;
@@ -140,15 +141,15 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         Long isEnd = llfutureMillis - nowMillis;
 
         // 이미 구매가 완료된 경우
-        if(buyerUid.equals(uid) && confirm.equals("true")){
-            Log.d(TAG, "uid값 : "+uid+"confirm 값 : "+ confirm);
+        if (buyerUid.equals(uid) && confirm.equals("true")) {
+            Log.d(TAG, "uid값 : " + uid + "confirm 값 : " + confirm);
             // 구매 완료 버튼만 보이게
             mBtnConfirm.setVisibility(View.VISIBLE);
             mBtnBidButton.setVisibility(View.GONE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
             // 낙찰자가 생겼지만 구매가 완료되지 않은 경우
-        }else if(buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0){
+        } else if (buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0) {
             // 구매 버튼만 보이게
             mBtnBuy.setVisibility(View.VISIBLE);
             mBtnConfirm.setVisibility(View.GONE);
@@ -156,12 +157,12 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             mBtnBidEnd.setVisibility(View.GONE);
 
             // 누군가 구매를 해서 경매가 종료되었을 때
-        }else if(confirm.equals("true") && isEnd <= 0){
+        } else if (confirm.equals("true") && isEnd <= 0) {
             mBtnBidEnd.setVisibility(View.VISIBLE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
-        }else{
+        } else {
             // 경매중인 경우
             // 입찰 버튼만 보이게
             mBtnBidButton.setVisibility(View.VISIBLE);
@@ -203,7 +204,14 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             }
         });
 
+        mBtnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventAuctionDetailItemActivity.this, EventAuctionActivity.class);
 
+                startActivity(intent);
+            }
+        });
         mBtnBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,58 +226,63 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                     DocumentReference userDocRef = database.collection("EventItem").document(uid); // 유저의 이름 받아오기
 
                     DocumentReference auctionDocRef = database.collection("EventAuctionInProgress").document(documentId); // 공개 경매 중인 것들 참조하기
+                    if (bidPrice.equals("") || bidPrice.equals(null)) {
+                        Toast.makeText(EventAuctionDetailItemActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        // 이미 해당 사용자의 입찰 정보가 있는지 확인
+                        auctionDocRef.collection("Bids").document(uid) // 경매중인 것들을 Bids라는 컬렉션을 새로 만들어서 유저들을 넣어주기
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
 
-                    // 이미 해당 사용자의 입찰 정보가 있는지 확인
-                    auctionDocRef.collection("Bids").document(uid) // 경매중인 것들을 Bids라는 컬렉션을 새로 만들어서 유저들을 넣어주기
-                            .get()
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            Map<String, Object> existingBidData = document.getData();
+                                            String existingBidPriceStr = (String) existingBidData.get("입찰 가격"); // 입력된 입찰 가격을 초기화시켜줌
+                                            if (existingBidPriceStr != null) {
+                                                try {
+                                                    int existingBidPrice = Integer.parseInt(existingBidPriceStr); // 입력된 입찰 가격을 int 형태로 바꿔줌
+                                                    int newBidPrice = Integer.parseInt(bidPrice); // 입력받은 입찰가격을 초기화해줌
+                                                    if (newBidPrice > existingBidPrice) { // 입력받은 가격이 이 전 가격보다 더 작으면
+                                                        // 새로운 입찰 정보 업데이트
+                                                        Map<String, Object> bidData = new HashMap<>();
+                                                        bidData.put("입찰자 아이디", userDocRef.getId());
+                                                        bidData.put("입찰 가격", bidPrice);
+                                                        bidData.put("경매 정보", documentId);
 
-                                    if (document.exists()) {
-                                        Map<String, Object> existingBidData = document.getData();
-                                        String existingBidPriceStr = (String) existingBidData.get("입찰 가격"); // 입력된 입찰 가격을 초기화시켜줌
-                                        if (existingBidPriceStr != null) {
-                                            try {
-                                                int existingBidPrice = Integer.parseInt(existingBidPriceStr); // 입력된 입찰 가격을 int 형태로 바꿔줌
-                                                int newBidPrice = Integer.parseInt(bidPrice); // 입력받은 입찰가격을 초기화해줌
-                                                if (newBidPrice > existingBidPrice) { // 입력받은 가격이 이 전 가격보다 더 작으면
-                                                    // 새로운 입찰 정보 업데이트
-                                                    Map<String, Object> bidData = new HashMap<>();
-                                                    bidData.put("입찰자 아이디", userDocRef.getId());
-                                                    bidData.put("입찰 가격", bidPrice);
-                                                    bidData.put("경매 정보", documentId);
-
-                                                    auctionDocRef.collection("Bids").document(uid)
-                                                            .set(bidData)
-                                                            .addOnSuccessListener(aVoid -> {
-                                                                updateHighestBidListener(auctionDocRef.collection("Bids"));
-                                                            });
-                                                } else {// 현재 입찰가보다 작은 가격이 입력되었을 때
-                                                    Toast.makeText(EventAuctionDetailItemActivity.this, "전 입찰가보다 높은 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                                                    // 또는 전 입찰가보다 낮은 가격으로 입찰을 하고싶은지 물어보고 등록해주기
+                                                        auctionDocRef.collection("Bids").document(uid)
+                                                                .set(bidData)
+                                                                .addOnSuccessListener(aVoid -> {
+                                                                    updateHighestBidListener(auctionDocRef.collection("Bids"));
+                                                                });
+                                                    } else {// 현재 입찰가보다 작은 가격이 입력되었을 때
+                                                        Toast.makeText(EventAuctionDetailItemActivity.this, "전 입찰가보다 높은 가격을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                                        // 또는 전 입찰가보다 낮은 가격으로 입찰을 하고싶은지 물어보고 등록해주기
+                                                    }
+                                                } catch (
+                                                        NumberFormatException e) {// 숫자로 변환할 수 없는 경우
+                                                    Toast.makeText(EventAuctionDetailItemActivity.this, "가격을 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
                                                 }
-                                            } catch (NumberFormatException e) {// 숫자로 변환할 수 없는 경우
-                                                Toast.makeText(EventAuctionDetailItemActivity.this, "가격을 제대로 입력해주세요.", Toast.LENGTH_SHORT).show();
                                             }
                                         }
-                                    }
-                                    // 해당 사용자의 입찰 정보가 없을 때
-                                    else {
-                                        // 경매 문서의 하위 컬렉션에 입찰 정보 저장
-                                        Map<String, Object> bidData = new HashMap<>();
-                                        bidData.put("입찰자 아이디", userDocRef.getId());
-                                        bidData.put("입찰 가격", bidPrice);
-                                        bidData.put("경매 정보", documentId);
+                                        // 해당 사용자의 입찰 정보가 없을 때
+                                        else {
+                                            // 경매 문서의 하위 컬렉션에 입찰 정보 저장
+                                            Map<String, Object> bidData = new HashMap<>();
+                                            bidData.put("입찰자 아이디", userDocRef.getId());
+                                            bidData.put("입찰 가격", bidPrice);
+                                            bidData.put("경매 정보", documentId);
 
-                                        auctionDocRef.collection("Bids").document(uid)
-                                                .set(bidData)
-                                                .addOnSuccessListener(aVoid -> {
-                                                    updateHighestBidListener(auctionDocRef.collection("Bids"));
-                                                });
+                                            auctionDocRef.collection("Bids").document(uid)
+                                                    .set(bidData)
+                                                    .addOnSuccessListener(aVoid -> {
+                                                        updateHighestBidListener(auctionDocRef.collection("Bids"));
+                                                    });
+                                        }
                                     }
-                                }
-                            });
+                                });
+                    }
                 }
             }
         });
@@ -282,7 +295,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                         return;
                     }
                     // 조회수 카운팅해주기
-                    selectedItem.setViews(selectedItem.getViews()+1);
+                    selectedItem.setViews(selectedItem.getViews() + 1);
 
                     // 가장 큰 입찰가 찾기
                     int highestBid = 0;
@@ -437,7 +450,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                 });
     }
 
-//    private void performAuctionEnd(String auctionItemId) {
+    //    private void performAuctionEnd(String auctionItemId) {
 //
 //
 //        // 해당 물품의 Bids 컬렉션에 저장된 입찰 정보 가져오기
@@ -485,78 +498,79 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
 //                    }
 //                });
 //    }
-private void performAuctionEnd(String auctionItemId) {
+    private void performAuctionEnd(String auctionItemId) {
 
-    // 해당 물품의 Bids 컬렉션에 저장된 입찰 정보 가져오기
-    database.collection("EventAuctionInProgress").document(auctionItemId)
-            .collection("Bids")
-            .orderBy("입찰 가격", Query.Direction.DESCENDING) // 내림차순으로 입찰금액 정렬
-            .limit(1) // 가장높은 금액 입찰자 1명 가져오기
-            .get()
-            .addOnCompleteListener(task -> {
-                if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                    DocumentSnapshot highestBidDoc = task.getResult().getDocuments().get(0);
-                    String winningUserId = highestBidDoc.getId();
-                    String winningBidAmount = highestBidDoc.getString("입찰 가격");
+        // 해당 물품의 Bids 컬렉션에 저장된 입찰 정보 가져오기
+        database.collection("EventAuctionInProgress").document(auctionItemId)
+                .collection("Bids")
+                .orderBy("입찰 가격", Query.Direction.DESCENDING) // 내림차순으로 입찰금액 정렬
+                .limit(1) // 가장높은 금액 입찰자 1명 가져오기
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        DocumentSnapshot highestBidDoc = task.getResult().getDocuments().get(0);
+                        String winningUserId = highestBidDoc.getId();
+                        String winningBidAmount = highestBidDoc.getString("입찰 가격");
 
-                    Map<String, Object> updateData = new HashMap<>();
-                    updateData.put("buyer", winningUserId);
-                    updateData.put("endPrice", winningBidAmount);
+                        Map<String, Object> updateData = new HashMap<>();
+                        updateData.put("buyer", winningUserId);
+                        updateData.put("endPrice", winningBidAmount);
 
-                    database.collection("EventItem").document(document)
-                            .update(updateData)
-                            .addOnSuccessListener(aVoid -> {
+                        database.collection("EventItem").document(document)
+                                .update(updateData)
+                                .addOnSuccessListener(aVoid -> {
 
 
-                                database.collection("User")
-                                        .document(winningUserId)
-                                        .get()
-                                        .addOnSuccessListener(userDocument -> {
-                                            if (userDocument.exists()) {
-                                                String winningUserEmail = userDocument.getString("email");
-                                                Toast.makeText(EventAuctionDetailItemActivity.this,
-                                                        "경매가 종료되었습니다.\n낙찰자: " + winningUserEmail + "\n입찰금액: " + winningBidAmount,
-                                                        Toast.LENGTH_LONG).show();
+                                    database.collection("User")
+                                            .document(winningUserId)
+                                            .get()
+                                            .addOnSuccessListener(userDocument -> {
+                                                if (userDocument.exists()) {
+                                                    String winningUserEmail = userDocument.getString("email");
+                                                    Toast.makeText(EventAuctionDetailItemActivity.this,
+                                                            "경매가 종료되었습니다.\n낙찰자: " + winningUserEmail + "\n입찰금액: " + winningBidAmount,
+                                                            Toast.LENGTH_LONG).show();
 
-                                                // Rest of the code...
-                                            } else {
-                                                // Handle the case where the user document doesn't exist
-                                            }
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            // Handle the failure to fetch user document
-                                        });
-                                // remainingTimeMillis 값이 음수인 경우 입찰하기 버튼 비활성화
-                                if (remainingTimeMillis <= 0) {
-                                    mBtnBidButton.setEnabled(false);
-                                    mBtnBidButton.setText("경매 종료");
-                                }
-                            })
-                            // 추가: 업데이트 실패 시 처리
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(EventAuctionDetailItemActivity.this,
-                                        "낙찰자 업데이트 실패: " + e.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                                Log.e(TAG, "낙찰자 업데이트 실패", e);
-                            });
-                } else {
+                                                    // Rest of the code...
+                                                } else {
+                                                    // Handle the case where the user document doesn't exist
+                                                }
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                // Handle the failure to fetch user document
+                                            });
+                                    // remainingTimeMillis 값이 음수인 경우 입찰하기 버튼 비활성화
+                                    if (remainingTimeMillis <= 0) {
+                                        mBtnBidButton.setEnabled(false);
+                                        mBtnBidButton.setText("경매 종료");
+                                    }
+                                })
+                                // 추가: 업데이트 실패 시 처리
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(EventAuctionDetailItemActivity.this,
+                                            "낙찰자 업데이트 실패: " + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "낙찰자 업데이트 실패", e);
+                                });
+                    } else {
+                        Toast.makeText(EventAuctionDetailItemActivity.this,
+                                "낙찰자를 결정하는 중에 오류가 발생했습니다.",
+                                Toast.LENGTH_SHORT).show();
+                        // 추가: 업데이트 실패 시 처리
+                        Log.e(TAG, "낙찰자를 결정하는 중에 오류가 발생했습니다.");
+                    }
+                })
+                // 추가: 업데이트 실패 시 처리
+                .addOnFailureListener(e -> {
                     Toast.makeText(EventAuctionDetailItemActivity.this,
-                            "낙찰자를 결정하는 중에 오류가 발생했습니다.",
+                            "입찰 정보 가져오기 실패: " + e.getMessage(),
                             Toast.LENGTH_SHORT).show();
-                    // 추가: 업데이트 실패 시 처리
-                    Log.e(TAG, "낙찰자를 결정하는 중에 오류가 발생했습니다.");
-                }
-            })
-            // 추가: 업데이트 실패 시 처리
-            .addOnFailureListener(e -> {
-                Toast.makeText(EventAuctionDetailItemActivity.this,
-                        "입찰 정보 가져오기 실패: " + e.getMessage(),
-                        Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "입찰 정보 가져오기 실패", e);
-            });
+                    Log.e(TAG, "입찰 정보 가져오기 실패", e);
+                });
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
 //        startActivity(new Intent(EventAuctionDetailItemActivity.this, EventAuctionActivity.class));
         finish();
     }

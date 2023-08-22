@@ -6,56 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".AnnounceRegistActivity">
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="공지사항 등록"
-        android:textSize="30sp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:background="#210063"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/write_text"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="공 지 사 항 등 록"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FF0000"
+        android:text="◀"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="?android:attr/borderlessButtonStyle"/>
+
     <EditText
         android:id="@+id/input_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="글 제목"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:enabled="false"
+        android:hint="제목 : "
+        android:background="@null"
         android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.031"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
         android:id="@+id/input_contents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="390dp"
+        android:layout_height="319dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="글 내용"
-        android:maxLines="5"
-        android:ellipsize="end"
-        android:inputType="textPersonName"
+        android:layout_marginStart="10dp"
+        android:gravity="top"
+        android:hint="내용"
+        android:background="@null"
+        android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_title" />
 
-
     <Button
         android:id="@+id/btn_registA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:background="#540063FF"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="128dp"
+        android:backgroundTint="#E6E6E6"
         android:text="등록"
-        app:iconTint="#540063FF"
-        app:layout_constraintTop_toBottomOf="@+id/input_contents"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,7 @@ public class AnnounceDetailActivity extends AppCompatActivity {
         // 수정 or 삭제
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
-        btnList = findViewById(R.id.btn_list);
+        btnList = findViewById(R.id.btn_back);
         announceAdapter = new AnnounceAdapter(this, new ArrayList<>());
 
         // 페이지 접속 시 새로 코딩해줌
@@ -108,7 +108,9 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                     btnList.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            finish();
+                            Intent intent = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
+                            startActivity(intent);
+
                         }
                     });
                     // 수정 버튼 눌렀을 때

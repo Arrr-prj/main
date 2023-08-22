@@ -68,7 +68,7 @@
         android:layout_height="38dp"
         android:backgroundTint="#E6E6E6"
         android:textColor="@color/black"
-        android:text="크게보기"
+        android:text="크게"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
 
@@ -79,6 +79,7 @@
         android:layout_marginTop="10dp"
         android:text="----"
         android:textColor="@color/white"
+        android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

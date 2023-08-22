@@ -91,7 +91,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         btnCancle = findViewById(R.id.btn_cancle);
 
         // 페이지 접속 시 새로 로딩해준다.
-        Toast.makeText(this, "clear 전 size" + UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
+
 
         UserDataHolderOpenItems.openItemList.clear();
         UserDataHolderBiddingItems.loadBiddingItems();
@@ -475,7 +475,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         Item selectedItem = null;
         // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
         openItemList.clear();
-        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
+
         UserDataHolderOpenItems.loadOpenItems();
         db.collection("OpenItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -525,7 +525,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         Item selectedItem = null;
         // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
         eventItemList.clear();
-        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
+
         UserDataHolderOpenItems.loadOpenItems();
         db.collection("EventItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

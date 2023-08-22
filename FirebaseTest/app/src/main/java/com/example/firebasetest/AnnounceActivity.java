@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +26,8 @@ import java.util.Comparator;
 
 public class AnnounceActivity extends AppCompatActivity {
     ListView listView;
-    Button mBtnregistAnnounce, mBtnBck;
+    Button mBtnBck;
+    ImageButton mBtnregistAnnounce;
     public static ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();

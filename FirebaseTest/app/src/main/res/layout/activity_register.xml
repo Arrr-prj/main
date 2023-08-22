@@ -155,7 +155,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="전화번호를 입력해주세요."
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:backgroundTint="@color/black"
         android:textColorHint="#C8C8C8"
         app:layout_constraintEnd_toEndOf="parent"

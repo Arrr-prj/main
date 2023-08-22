@@ -190,7 +190,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         });
 
         // 아이템 리스트 버튼 클릭 이벤트
-        Button listBtn = findViewById(R.id.btn_itemList);
+        Button listBtn = findViewById(R.id.btn_back);
         listBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -348,6 +348,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                                         // 등록된 리스트 새로 갱신
                                         UserDataHolderOpenItems.loadOpenItems();
                                         Toast.makeText(OpenRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                        sendMessage(strName,strCategory,firebaseUser,strTitle+sellerId);
                                         Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                                         startActivity(intent);
                                     })

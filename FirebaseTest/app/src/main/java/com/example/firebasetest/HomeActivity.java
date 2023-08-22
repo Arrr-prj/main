@@ -118,9 +118,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout); // Correct the ID
 
+
+
+        String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
+        db = FirebaseFirestore.getInstance();
+        DocumentReference userDocRef = db.collection("User").document(uid);
+
+        userDocRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        membershipValue = documentSnapshot.getBoolean("membership");
+                    }
+                });
+
+
+
         findViewById(R.id.iv_hamburger).setOnClickListener((View.OnClickListener) this);
         viewPager2 = findViewById(R.id.viewPager2);
-        initViewPager2();
+//        initViewPager2();
         textName = findViewById(R.id.text_name);
 
         showUsername();
@@ -271,7 +287,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "스포츠 / 레저");
+                intent.putExtra("category", "스포츠 레저");
                 startActivity(intent);
             }
         });
@@ -280,7 +296,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "게임 / 취미");
+                intent.putExtra("category", "게임 취미");
                 startActivity(intent);
             }
         });
@@ -345,12 +361,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                    }
 //                });
 
-
+        // btnAlarm 클릭 시
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (membershipValue) {
                     Intent intent = new Intent(HomeActivity.this, AlarmActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(HomeActivity.this, "알림 기능은 멤버십 회원만 사용가능합니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -365,11 +385,68 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        btnBidding = findViewById(R.id.btn_bidding);
-        btnOpen = findViewById(R.id.btn_open);
-        btnBest = findViewById(R.id.btn_best);
-        btnMypage = findViewById(R.id.btn_mypage);
-//        btnSearch = findViewById(R.id.btn_search);
+        btnMembership.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MembershipActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        // 구매한 아이템 눌렀을 때
+        buyItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyBuyItemsActivity.class);
+                startActivity(intent);
+            }
+        });
+        // 판매한 아이템 눌렀을 때
+        saleItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyItemsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 나눔 아이템 눌렀을 때
+        shareItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyShareActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 구매 대기 아이템 눌렀을 때
+        waitingBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyConfirmItemActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // 이벤트 아이템 눌렀을 때
+        eventItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, MyEventActivity.class);
+                startActivity(intent);
+            }
+        });
+        // 공지사항 버튼을 눌렀을 때
+        btnAnnounce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, AnnounceActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnBidding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -461,19 +538,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void initViewPager2() {
-        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
-        viewPager2.setAdapter(viewPagerAdapter);
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                viewModel.setCurrentPosition(position);
-            }
-        });
-
-
-    }
+//    private void initViewPager2() {
+//        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
+//        viewPager2.setAdapter(viewPagerAdapter);
+//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                viewModel.setCurrentPosition(position);
+//            }
+//        });
+//
+//
+//    }
 
     private void subscribeObservers() {
         viewModel.getBannerItemList().observe(this, new Observer<List<BannerItem>>() {

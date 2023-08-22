@@ -61,7 +61,7 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -91,24 +91,10 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
     <Button
-        android:id="@+id/btn_myItem"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="120dp"
-        android:backgroundTint="#E6E6E6"
-        android:text="내 경매 상품"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
-
-    <Button
         android:id="@+id/btn_modify"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="#E6E6E6"
         android:text="수정"
         android:textColor="@color/black"
@@ -117,7 +103,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -147,30 +134,16 @@
         app:layout_constraintStart_toEndOf="@+id/btn_logout" />
 
     <Button
-        android:id="@+id/btn_mybank"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:backgroundTint="#E6E6E6"
-        android:text="내 계좌"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_membership"
-        app:layout_constraintHorizontal_bias="0.746"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
-
-    <Button
         android:id="@+id/btn_membership"
-        android:layout_width="140dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#E6E6E6"
         android:text="멤버십 가입"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_address" />
 
     <Button
