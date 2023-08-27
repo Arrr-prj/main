@@ -53,7 +53,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     TextView write_text;
-    EditText itemTitle, itemName, itemPrice, itemInfo;
+    EditText itemTitle, itemName, itemPrice, itemmagamPrice, itemInfo;
     Button itemCategory;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
@@ -72,6 +72,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         itemTitle = findViewById(R.id.input_title);
         itemName = findViewById(R.id.input_itemName);
         itemPrice = findViewById(R.id.input_itemPrice);
+        itemmagamPrice = findViewById(R.id.input_itemendPrice);
         itemInfo = findViewById(R.id.input_itemExplain);
         itemCategory = findViewById(R.id.input_itemCategory);
         write_text = findViewById(R.id.write_text);
@@ -162,6 +163,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 String strTitle = itemTitle.getText().toString();
                 String strName = itemName.getText().toString();
                 String strPrice = itemPrice.getText().toString();
+                String strmagamPrice = itemmagamPrice.getText().toString();
                 String strInfo = itemInfo.getText().toString();
                 String strCategory = itemCategory.getText().toString();
                 String sellerId = firebaseUser.getEmail();
@@ -172,7 +174,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 }
                 Log.d(TAG, "" + sellerId);
                 if (imageUrl1 != null && imageUrl2 != null && imageUrl3 != null && imageUrl4 != null && imageUrl5 != null && imageUrl6 != null) {
-                    uploadToFirebase(strTitle, imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6, strName, strPrice, strInfo, strCategory, sellerId);
+                    uploadToFirebase(strTitle, imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6, strName, strPrice, strmagamPrice, strInfo, strCategory, sellerId);
                     Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                     startActivity(intent);
                 } else {
@@ -273,7 +275,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
 
 
     // 파이어베이스 이미지 업로드
-    private void uploadToFirebase(String strTitle, Uri uri1, Uri uri2, Uri uri3, Uri uri4, Uri uri5, Uri uri6, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
+    private void uploadToFirebase(String strTitle, Uri uri1, Uri uri2, Uri uri3, Uri uri4, Uri uri5, Uri uri6, String strName, String strPrice, String strmagamPrice, String strInfo, String strCategory, String sellerId) {
         // 각 이미지의 StorageReference 생성
         StorageReference fileRef1 = reference.child(System.currentTimeMillis() + "_1." + getFileExtension(uri1));
         StorageReference fileRef2 = reference.child(System.currentTimeMillis() + "_2." + getFileExtension(uri2));
@@ -317,6 +319,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 } else {
                     data.put("endPrice", "100");
                 }
+                data.put("magamPrice", strmagamPrice);
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);

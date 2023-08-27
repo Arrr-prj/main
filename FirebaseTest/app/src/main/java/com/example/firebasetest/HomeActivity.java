@@ -13,7 +13,9 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,6 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +52,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton btnCateCar, btnCateAcc, btnCateClo, btnCatelimited , btnCatePremium, btnCateShoes, btnCateGoods, btnCateFurn,btnCateSport, btnCateGame, btnCateAnotOther, btnCateBag; // 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
     private ImageButton btnCateNike, btnCateAdidas, btnCateApple, btnCateSamsung; // 브랜드 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
 
-    private ImageView buyItem, saleItem, shareItem, waitingBuy, eventItem, btnAnnounce; // 슬라이드한 곳에 있는 버튼
+    private ImageView buyItem, saleItem, shareItem, waitingBuy, eventItem, btnAnnounce, btnReport; // 슬라이드한 곳에 있는 버튼
     private TextView textName;
 
     private Boolean membershipValue;
@@ -76,6 +81,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         btnAnnounce = findViewById(R.id.btn_announce);
         currentUser = mAuth.getCurrentUser();
+        btnReport = findViewById(R.id.btn_report);
 
         // 카테고리 버튼들은 헷갈리지 않게 따로 선언해줬습니다
         // 필요하실때 가져다가 쓰시면 됩니다.
@@ -446,7 +452,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showReportDialog();
+            }
+        });
 
         btnBidding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -487,6 +498,63 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+    private void showReportDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("신고하기");
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_report, null);
+        builder.setView(dialogView);
+
+        EditText reportEditText = dialogView.findViewById(R.id.reportEditText);
+
+        builder.setPositiveButton("신고", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String reportText = reportEditText.getText().toString();
+                String userEmail = reportEditText.getText().toString();
+
+                updateReports(userEmail);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 취소 버튼을 눌렀을 때 실행할 동작을 여기에 추가
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void updateReports(String email) {
+        // 사용자의 이메일을 기반으로 문서를 찾아옴
+        db.collection("User")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            DocumentReference userRef = document.getReference();
+
+                            db.runTransaction(new Transaction.Function<Void>() {
+                                @Override
+                                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                                    DocumentSnapshot userSnapshot = transaction.get(userRef);
+                                    if (userSnapshot.exists()) {
+                                        long currentReports = userSnapshot.getLong("reports");
+                                        transaction.update(userRef, "reports", currentReports + 1);
+                                    }
+                                    return null;
+                                }
+                            });
+                        }
+                    } else {
+                        // 처리 실패 시 동작
+                    }
+                });
+    }
+
     // Home에서 뒤로가기 했을 때 경고 창 띄워주기
     @Override
     public void onBackPressed(){

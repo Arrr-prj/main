@@ -12,11 +12,12 @@ public class Item {
     private String title;
     private String futureMillis;
     private String futureDate;
-    private  String endPrice;
-    private  String uploadMillis;
+    private String endPrice;
+    private String uploadMillis;
     private Boolean confirm;
     private String buyer;
     private String itemType;
+    private String email, name, address, nickname, reports, membership;
 
     public String getDifferenceDays() {
         return differenceDays;
@@ -30,7 +31,7 @@ public class Item {
     private Integer views;
 
 
-    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6,  String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views){
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
         this.title = title;
         this.id = id;
         this.price = price;
@@ -54,7 +55,7 @@ public class Item {
         this.views = views;
     }
 
-    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm){
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm) {
         this.title = title;
         this.id = id;
         this.price = price;
@@ -76,10 +77,11 @@ public class Item {
         this.confirm = confirm;
     }
 
-    public Item(){
+    public Item() {
 
     }
-    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller, String futureMillis, String futureDate, Boolean confirm){
+
+    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller, String futureMillis, String futureDate, Boolean confirm) {
         this.title = title;
         this.id = id;
         this.price = price;
@@ -92,7 +94,7 @@ public class Item {
         this.confirm = confirm; // **
     }
 
-    public Item(String title, String imageUrl, String id, String category, String info, String seller, String futureMillis, String futureDate){ // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
+    public Item(String title, String imageUrl, String id, String category, String info, String seller, String futureMillis, String futureDate) { // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
         this.title = title;
         this.id = id;
         this.price = "share item";
@@ -103,9 +105,68 @@ public class Item {
         this.futureDate = futureDate;
         this.futureMillis = futureMillis;
     }
+
+    public Item(String email, String name, String address, String membership, String nickname, String reports) {
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.membership = membership;
+        this.nickname = nickname;
+        this.reports = reports;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getReports() {
+        return reports;
+    }
+
+    public void setReports(String reports) {
+        this.reports = reports;
+    }
+
+    public String getMembership() {
+        return membership;
+    }
+
+    public void setMembership(String membership) {
+        this.membership = membership;
+    }
+
     public Integer getViews() {
         return views;
     }
+
     public void setViews(Integer views) {
         this.views = views;
     }
@@ -157,7 +218,6 @@ public class Item {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
 
     public String getId() {

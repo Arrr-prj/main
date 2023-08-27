@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="20dp">
+
+    <!--프로필 사진-->
+
+
+    <!--이름-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height ="wrap_content"
+        android:layout_margin ="15dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height ="wrap_content"
+            android:layout_margin ="0dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="email" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height ="wrap_content"
+            android:layout_margin ="0dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="167dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="이름" />
+            <TextView
+                android:id="@+id/nickname"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="닉네임" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height ="wrap_content"
+            android:layout_margin ="0dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="주소" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height ="wrap_content"
+            android:layout_margin ="0dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/membershiptxt"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="멤버쉽" />
+
+            <TextView
+                android:id="@+id/membership"
+                android:layout_width="78dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="멤버쉽 가입" />
+
+            <TextView
+                android:id="@+id/reporttxt"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="신고 횟수" />
+
+            <TextView
+                android:id="@+id/report"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="신고 횟수" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

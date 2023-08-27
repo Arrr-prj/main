@@ -152,7 +152,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="36dp"
         android:text="매출현황"
-        android:textSize="10sp"
+        android:textSize="5sp"
         app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -162,7 +162,18 @@
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:text="전체매출"
-        android:textSize="10sp"
+        android:textSize="5sp"
+        app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sales" />
+
+    <Button
+        android:id="@+id/btn_member"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="28dp"
+        android:text="회원관리"
+        android:textSize="5sp"
         app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sales" />

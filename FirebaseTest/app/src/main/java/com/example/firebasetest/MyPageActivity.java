@@ -32,13 +32,14 @@ public class MyPageActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private TextView mTvName, mTvEmail, mTvAddress;
 
-    private Button mBtnBackSpace, mBtnModify, mBtnLogout, mBtnWithdrawal, mBtnMyItem, mBtnMembership, mBtnAnnounce, mBtnSales, mBtnTotal;
+    private Button mBtnBackSpace, mBtnModify, mBtnLogout, mBtnWithdrawal, mBtnMyItem, mBtnMembership, mBtnAnnounce, mBtnSales, mBtnTotal, mBtnMember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
 
+        mBtnMember = findViewById(R.id.btn_member);
         mBtnBackSpace = findViewById(R.id.btn_backSpace);
         mBtnModify = findViewById(R.id.btn_modify);
         mBtnLogout = findViewById(R.id.btn_logout);
@@ -163,8 +164,17 @@ public class MyPageActivity extends AppCompatActivity {
                                 mTvAddress.setText("주소   :  " + address);
                             }
                             if(adminValue != null && adminValue){
+                                mBtnMember.setVisibility(View.VISIBLE);
                                 mBtnSales.setVisibility(View.VISIBLE);
                                 mBtnTotal.setVisibility(View.VISIBLE);
+                                //회원관리
+                                mBtnMember.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(MyPageActivity.this, MemberActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
                                 // 매출 현황 눌렀을 때
                                 mBtnSales.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -183,6 +193,7 @@ public class MyPageActivity extends AppCompatActivity {
                             }else{
                                 mBtnSales.setVisibility(View.INVISIBLE);
                                 mBtnTotal.setVisibility(View.INVISIBLE);
+                                mBtnMember.setVisibility(View.INVISIBLE);
                             }
 
                         }
