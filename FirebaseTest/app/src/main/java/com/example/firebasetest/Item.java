@@ -17,7 +17,7 @@ public class Item {
     private Boolean confirm;
     private String buyer;
     private String itemType;
-    private String email, name, address, nickname, reports, membership;
+    private String email, name, address, nickname, reports, membership, magamPrice;
 
     public String getDifferenceDays() {
         return differenceDays;
@@ -30,7 +30,30 @@ public class Item {
     private String differenceDays;
     private Integer views;
 
-
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String magamPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
+        this.title = title;
+        this.id = id;
+        this.price = price;
+        this.endPrice = endPrice;
+        this.magamPrice = magamPrice;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.imageUrl3 = imageUrl3;
+        this.imageUrl4 = imageUrl4;
+        this.imageUrl5 = imageUrl5;
+        this.imageUrl6 = imageUrl6;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.uploadMillis = uploadMillis;
+        this.differenceDays = differenceDays;
+        this.confirm = confirm;
+        this.itemType = itemType;
+        this.views = views;
+    }
     public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
         this.title = title;
         this.id = id;
@@ -113,6 +136,14 @@ public class Item {
         this.membership = membership;
         this.nickname = nickname;
         this.reports = reports;
+    }
+
+    public String getMagamPrice() {
+        return magamPrice;
+    }
+
+    public void setMagamPrice(String magamPrice) {
+        this.magamPrice = magamPrice;
     }
 
     public String getEmail() {

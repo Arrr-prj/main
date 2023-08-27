@@ -92,7 +92,7 @@
         android:layout_width="81dp"
         android:layout_height="22dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:text="판매자명 :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_endPrice" />
@@ -113,7 +113,7 @@
         android:id="@+id/tv_timeInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="마감 시간 !!!"
         android:textColor="#FF0000"
         android:textSize="25sp"
@@ -173,6 +173,15 @@
         app:layout_constraintTop_toBottomOf="@+id/startPrice" />
 
     <TextView
+        android:id="@+id/magamPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:text="----"
+        app:layout_constraintStart_toEndOf="@+id/tv_endPrice"
+        app:layout_constraintTop_toBottomOf="@+id/startPrice" />
+    <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
@@ -187,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:text="----"
         app:layout_constraintStart_toEndOf="@+id/tv_seller"
         app:layout_constraintTop_toBottomOf="@+id/endPrice" />
@@ -199,6 +208,16 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:text="최고 가격 :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_startPrice" />
+
+    <TextView
+        android:id="@+id/tv_magamPrice"
+        android:layout_width="81dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="40dp"
+        android:text="최대 가격 :"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_startPrice" />
 

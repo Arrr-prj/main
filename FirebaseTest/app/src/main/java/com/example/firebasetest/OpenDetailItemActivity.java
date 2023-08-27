@@ -39,7 +39,7 @@ import java.util.Map;
 public class OpenDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
-    private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
+    private TextView itmeTitle, itemId, startPrice, endPrice, magamPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice;
     private ViewPager2 sliderViewPager;
@@ -69,6 +69,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         itemId = findViewById(R.id.itemId);
         startPrice = findViewById(R.id.startPrice);
         endPrice = findViewById(R.id.endPrice);
+        magamPrice = findViewById(R.id.magamPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
 
@@ -289,13 +290,18 @@ public class OpenDetailItemActivity extends AppCompatActivity {
 
                         if (document.exists()) {
                             String price = document.getString("price");
+                            String magamprice = document.getString("magamPrice");
                             if (price != null) {
                                 int priceValue = Integer.parseInt(price);
+                                int magampriceValue = Integer.parseInt(magamprice);
                                 int enterPrice = Integer.valueOf(bidPrice);
-
 
                                 if (enterPrice < priceValue) {
                                     Toast.makeText(OpenDetailItemActivity.this, "시작 가격보다 높은 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                } else if (enterPrice > 1000000000) {
+                                    Toast.makeText(OpenDetailItemActivity.this, "10억원보다 낮은 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                } else if (enterPrice > magampriceValue) {
+                                    Toast.makeText(OpenDetailItemActivity.this, "최대 가격보다 낮은 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     updateUserinfo(bidPrice);
                                     // buyer값 업데이트
@@ -431,6 +437,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     category.setText(selectedItem.getCategory());
                     startPrice.setText(String.valueOf(selectedItem.getPrice()));
                     endPrice.setText(String.valueOf(highestBid));
+                    magamPrice.setText(selectedItem.getMagamPrice());
                     seller.setText(selectedItem.getSeller());
 
                     timeinfo.setText(selectedItem.getFutureDate());
