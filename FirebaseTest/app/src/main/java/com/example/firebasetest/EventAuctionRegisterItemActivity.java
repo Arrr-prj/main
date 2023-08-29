@@ -65,7 +65,7 @@ public class EventAuctionRegisterItemActivity extends AppCompatActivity {
     private Uri imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    private String[] categories = {"나이키", "아디다스", "애플", "삼성", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가방", "가구 / 인테리어", "스포츠 / 레저", "취미 / 게임", "기타"};
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠 레저", "취미 게임", "기타"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +199,7 @@ public class EventAuctionRegisterItemActivity extends AppCompatActivity {
         });
 
         // 아이템 리스트 버튼 클릭 이벤트
-        Button listBtn = findViewById(R.id.btn_itemList);
+        Button listBtn = findViewById(R.id.btn_back);
         listBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -319,6 +319,11 @@ public class EventAuctionRegisterItemActivity extends AppCompatActivity {
                 } else {
                     data.put("price", "100");
                 }
+                if (Integer.parseInt(strPrice) >= 100) {
+                    data.put("endPrice", strPrice);
+                } else {
+                    data.put("endPrice", "100");
+                }
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
@@ -350,6 +355,7 @@ public class EventAuctionRegisterItemActivity extends AppCompatActivity {
                                         // 등록된 리스트 새로 갱신
                                         UserDataHolderEventItems.loadEventItems();
                                         Toast.makeText(EventAuctionRegisterItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                        sendMessage(strName,strCategory,firebaseUser,strTitle+sellerId);
                                         Intent intent = new Intent(EventAuctionRegisterItemActivity.this, EventAuctionActivity.class);
                                         startActivity(intent);
                                     })

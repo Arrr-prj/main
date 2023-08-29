@@ -1,11 +1,14 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class AnnounceAdapter extends ArrayAdapter<Announcement> {
@@ -25,6 +29,7 @@ public class AnnounceAdapter extends ArrayAdapter<Announcement> {
         super(context, 0, dataList);
         this.announcementList = dataList;
         this.context = context;
+
     }
 
     @NonNull
@@ -61,5 +66,4 @@ public class AnnounceAdapter extends ArrayAdapter<Announcement> {
     public Announcement getItem(int position) {
         return announcementList.get(position);
     }
-
 }

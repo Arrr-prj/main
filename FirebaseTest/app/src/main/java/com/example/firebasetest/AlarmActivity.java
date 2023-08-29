@@ -19,12 +19,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,15 +30,12 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 public class AlarmActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -85,8 +79,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-
-
         // Firebase Firestore 인스턴스 초기화
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -107,30 +99,30 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
                 if (snapshot != null && snapshot.exists()) {
                     // 스위치 상태를 가져와서 각 스위치에 적용
-                    car.setChecked(snapshot.getBoolean("차량"));
-                    acc.setChecked(snapshot.getBoolean("액세서리"));
-                    clo.setChecked(snapshot.getBoolean("의류"));
-                    furn.setChecked(snapshot.getBoolean("가구 / 인테리어"));
+                    car.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("차량")));
+                    acc.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("액세서리")));
+                    clo.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("의류")));
+                    furn.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("가구 인테리어")));
 
-                    nike.setChecked(snapshot.getBoolean("나이키"));
-                    adidas.setChecked(snapshot.getBoolean("아디다스"));
-                    apple.setChecked(snapshot.getBoolean("애플"));
-                    samsung.setChecked(snapshot.getBoolean("삼성"));
+                    nike.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("Nike")));
+                    adidas.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("Adidas")));
+                    apple.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("Apple")));
+                    samsung.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("Samsung")));
 
-                    limi.setChecked(snapshot.getBoolean("한정판"));
-                    pre.setChecked(snapshot.getBoolean("프리미엄"));
-                    shoes.setChecked(snapshot.getBoolean("신발"));
-                    goods.setChecked(snapshot.getBoolean("굿즈"));
+                    limi.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("한정판")));
+                    pre.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("프리미엄")));
+                    shoes.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("신발")));
+                    goods.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("굿즈")));
 
-                    bag.setChecked(snapshot.getBoolean("가방"));
-                    sports.setChecked(snapshot.getBoolean("스포츠 / 레저"));
-                    game.setChecked(snapshot.getBoolean("취미 / 게임"));
-                    another.setChecked(snapshot.getBoolean("기타"));
-
-
+                    bag.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("가방")));
+                    sports.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("스포츠 레저")));
+                    game.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("취미 게임")));
+                    another.setChecked(Boolean.TRUE.equals(snapshot.getBoolean("기타")));
 
 
-                    boolean membership = snapshot.getBoolean("membership");
+
+
+                    boolean membership = Boolean.TRUE.equals(snapshot.getBoolean("membership"));
                     if (membership) {
                         // 어떤 처리를 수행
                         setSwitchListeners(userDocRef);
@@ -209,14 +201,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("가구 / 인테리어", true)
+                    userDocRef.update("가구 인테리어", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("가구 / 인테리어", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("가구 인테리어", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -232,14 +224,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("나이키", true)
+                    userDocRef.update("Nike", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("나이키", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("Nike", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -251,14 +243,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("아디다스", true)
+                    userDocRef.update("Adidas", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("아디다스", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("Adidas", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -270,14 +262,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("애플", true)
+                    userDocRef.update("Apple", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("애플", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("Apple", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -289,14 +281,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("삼성", true)
+                    userDocRef.update("Samsung", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("삼성", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("Samsung", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -384,14 +376,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("스포츠 / 레저", true)
+                    userDocRef.update("스포츠 레저", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("스포츠 / 레저", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("스포츠 레저", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -422,14 +414,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) { // 차량 카테고리 on
-                    userDocRef.update("취미 / 게임", true)
+                    userDocRef.update("취미 게임", true)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {}});
                 } else { // 차량 카테고리 off
-                    userDocRef.update("취미 / 게임", false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    userDocRef.update("취미 게임", false).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {}}).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -470,7 +462,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
         listView.setAdapter(notificationAdapter);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout); // Correct the ID
+        drawerLayout = (DrawerLayout)findViewById(R.id._pay); // Correct the ID
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -700,7 +692,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         furn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("가구 / 인테리어", isChecked)
+                userDocRef.update("가구 인테리어", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -714,7 +706,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         nike.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("나이키", isChecked)
+                userDocRef.update("Nike", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -728,7 +720,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         adidas.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("아디다스", isChecked)
+                userDocRef.update("Adidas", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -742,7 +734,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         apple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("애플", isChecked)
+                userDocRef.update("Apple", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -756,7 +748,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         samsung.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("삼성", isChecked)
+                userDocRef.update("Samsung", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -826,7 +818,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         sports.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("스포츠 / 레저", isChecked)
+                userDocRef.update("스포츠 레저", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}
@@ -840,7 +832,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         game.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                userDocRef.update("취미 / 게임", isChecked)
+                userDocRef.update("취미 게임", isChecked)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {}

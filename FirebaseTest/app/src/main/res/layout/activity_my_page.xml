@@ -6,46 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".MyPageActivity">
 
-    <Button
-        android:id="@+id/btn_withdrawal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="회원탈퇴"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="411dp"
-        android:layout_height="72dp"
-        android:background="?attr/colorPrimary"
-        android:backgroundTint="#210063"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="#210063"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="마 이 페 이 지"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"/>
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.113" />
+
+    <ImageView
+        android:id="@+id/mypage_myimage"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/mypageimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btn_backSpace"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:backgroundTint="#210063"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:text="◀"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,20 +61,21 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:textSize="25sp"
+        android:layout_marginTop="80dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/mypage_myimage" />
 
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textSize="25sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
@@ -76,85 +84,87 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textSize="25sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
     <Button
         android:id="@+id/btn_modify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="수정하기"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="#E6E6E6"
+        android:text="수정"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="#fff"
+        android:text="로그아웃"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_withdrawal"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="44dp"
+        android:backgroundTint="#fff"
+        android:text="회원탈퇴"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toEndOf="@+id/btn_logout" />
+
+    <Button
+        android:id="@+id/btn_membership"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#E6E6E6"
+        android:text="멤버십 가입"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_address" />
 
     <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="로그아웃"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_myItem" />
-
-    <Button
-        android:id="@+id/btn_myItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="경매 아이템"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_modify" />
-
-    <Button
-        android:id="@+id/btn_membership"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="멤버십 가입하기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_withdrawal" />
-
-    <Button
-        android:id="@+id/btn_announce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="공지사항"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
-
-    <Button
         android:id="@+id/btn_sales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:text="매출 현황"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_announce"
-        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="36dp"
+        android:text="매출현황"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/btn_totalA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="10dp"
-        android:text="전체 경매"
-        app:layout_constraintEnd_toStartOf="@+id/btn_announce"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="전체매출"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sales" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,7 +66,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
         }
 
         // 페이지 접속 시 새로 로딩해준다.
-        Toast.makeText(this, "clear 전 size" + UserDataHolderShareItem.shareItemList.size(), Toast.LENGTH_SHORT).show();
+
 
         UserDataHolderShareItem.shareItemList.clear();
         UserDataHolderShareItem.loadShareItems();
@@ -157,7 +157,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
         Log.d(TAG, "" + documentId);
         // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
         shareItemList.clear();
-        Toast.makeText(this, "clear 후 size" + shareItemList.size(), Toast.LENGTH_SHORT).show();
+
         UserDataHolderShareItem.loadShareItems();
         db.collection("ShareItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -165,8 +165,7 @@ public class MyShareDetailActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                         DocumentSnapshot document = task.getResult();
-                        Toast.makeText(MyShareDetailActivity.this, "title : "+document.getString("title"), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MyShareDetailActivity.this, "info : "+document.getString("info"), Toast.LENGTH_SHORT).show();
+
 
                         String get_itemTitle = document.getString("title");
                         String get_category = document.getString("category");

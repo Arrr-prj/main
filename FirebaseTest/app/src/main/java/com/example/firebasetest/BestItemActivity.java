@@ -61,7 +61,7 @@ public class BestItemActivity extends AppCompatActivity {
 
         // 낙찰자가 있는 아이템을 불러오도록 함
         // Open Item
-        db.collection("OpenItem").whereNotEqualTo("buyer", null)
+        db.collection("OpenItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -97,7 +97,7 @@ public class BestItemActivity extends AppCompatActivity {
                     }
                 });
         // Bidding Item
-        db.collection("BiddingItem").whereNotEqualTo("buyer", null)
+        db.collection("BiddingItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -133,7 +133,7 @@ public class BestItemActivity extends AppCompatActivity {
                     }
                 });
         // ShareItem
-        db.collection("ShareItem").whereNotEqualTo("buyer", null)
+        db.collection("ShareItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -170,7 +170,7 @@ public class BestItemActivity extends AppCompatActivity {
                 });
 
         // EventItem
-        db.collection("EventItem").whereNotEqualTo("buyer", null)
+        db.collection("EventItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -300,6 +300,18 @@ public class BestItemActivity extends AppCompatActivity {
                     finish();
                 }else if(item.getItemType().equals("ShareItem")){
                     Intent showDetail = new Intent(BestItemActivity.this, ShareDetailActivity.class);
+
+                    // 조회수 카운팅
+                    String documentId = item.getTitle()+item.getSeller();
+                    DocumentReference docRef = db.collection("ShareItem").document(documentId);
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
+                    // 문서 수정
+                    docRef.update(updates);
+                    // 수정된 내용 갱신
+                    UserDataHolderShareItem.loadShareItems();
+
                     showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
@@ -311,6 +323,18 @@ public class BestItemActivity extends AppCompatActivity {
                     finish();
                 }else if(item.getItemType().equals("EventItem")){
                     Intent showDetail = new Intent(BestItemActivity.this, EventAuctionDetailItemActivity.class);
+
+                    // 조회수 카운팅
+                    String documentId = item.getTitle()+item.getSeller();
+                    DocumentReference docRef = db.collection("EventItem").document(documentId);
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
+                    // 문서 수정
+                    docRef.update(updates);
+                    // 수정된 내용 갱신
+                    UserDataHolderShareItem.loadShareItems();
+
                     showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());

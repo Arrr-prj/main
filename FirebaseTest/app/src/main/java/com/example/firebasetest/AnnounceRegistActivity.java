@@ -59,8 +59,6 @@ public class AnnounceRegistActivity extends AppCompatActivity {
                             public void onSuccess(Void aVoid) {
                                 // 문서 생성 및 데이터 저장 성공
                                 Toast.makeText(AnnounceRegistActivity.this, "공지사항 등록에 성공했습니다", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(AnnounceRegistActivity.this, AnnounceActivity.class);
-                                startActivity(intent);
                                 finish();
                             }
                         })
@@ -74,5 +72,10 @@ public class AnnounceRegistActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 }

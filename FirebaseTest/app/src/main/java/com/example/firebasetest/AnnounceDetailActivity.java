@@ -43,7 +43,7 @@ public class AnnounceDetailActivity extends AppCompatActivity {
         // 수정 or 삭제
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
-        btnList = findViewById(R.id.btn_list);
+        btnList = findViewById(R.id.btn_back);
         announceAdapter = new AnnounceAdapter(this, new ArrayList<>());
 
         // 페이지 접속 시 새로 코딩해줌
@@ -92,8 +92,7 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                                                 // 삭제된 리스트 새로 갱신
                                                 UserDataHolderAnnouncements.loadAnnouncement();
                                                 Toast.makeText(AnnounceDetailActivity.this, "공지사항이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                                                Intent intent1 = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
-                                                startActivity(intent1);
+                                                finish();
                                             })
                                             .addOnFailureListener(e -> {
                                                 Toast.makeText(AnnounceDetailActivity.this, "삭제에 실패했습니다.", Toast.LENGTH_SHORT).show();
@@ -111,7 +110,7 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             Intent intent = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
                             startActivity(intent);
-                            finish();
+
                         }
                     });
                     // 수정 버튼 눌렀을 때

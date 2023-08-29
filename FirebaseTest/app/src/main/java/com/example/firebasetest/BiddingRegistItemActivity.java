@@ -64,7 +64,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String[] categories = {"나이키", "아디다스", "애플", "삼성", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 / 인테리어", "가구 / 인테리어", "스포츠 / 레저", "취미 / 게임", "기타"};
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠 레저", "취미 게임", "기타"};
 
 
     private Uri imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
@@ -198,7 +198,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
         });
 
         // 아이템 리스트 버튼 클릭 이벤트
-        Button listBtn = findViewById(R.id.btn_itemList);
+        Button listBtn = findViewById(R.id.btn_back);
         listBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -320,7 +320,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                 data.put("info", strInfo);
                 data.put("category", strCategory);
                 data.put("seller", sellerId);
-                data.put("buyer", null); // 경매 끝났을때 uid 혹은 이메일 넣기
+                data.put("buyer", ""); // 경매 끝났을때 uid 혹은 이메일 넣기
                 data.put("futureMillis", futureMillis);
                 data.put("futureDate", formattedDate);
                 if (Integer.parseInt(strPrice) >= 100) {
@@ -358,6 +358,7 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                                         // 등록된 리스트 새로 갱신
                                         UserDataHolderBiddingItems.loadBiddingItems();
                                         Toast.makeText(BiddingRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                        sendMessage(strName,strCategory,firebaseUser,strTitle+sellerId);
                                         Intent intent = new Intent(BiddingRegistItemActivity.this, BiddingActivity.class);
                                         startActivity(intent);
                                     })
@@ -370,11 +371,9 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
                         Log.d(TAG, "get failed with ", task.getException());
                     }
                 });
-
             }
         });
     }
-
     private Task<Uri> uploadImageAndGetUrl(StorageReference fileRef, Uri uri) {
         final TaskCompletionSource<Uri> taskCompletionSource = new TaskCompletionSource<>();
 
@@ -388,14 +387,12 @@ public class BiddingRegistItemActivity extends AppCompatActivity {
 
         return taskCompletionSource.getTask();
     }
-
     // 파일 타입 가져오기
-    private String getFileExtension(Uri uri) {
+    private String getFileExtension(Uri uri){
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
-
     public void showDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("카테고리 선택")

@@ -129,6 +129,7 @@ public class OpenAuctionActivity extends AppCompatActivity {
                 showDetail.putExtra("seller", item.getSeller());
                 showDetail.putExtra("buyer", item.getBuyer());
                 showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
+                showDetail.putExtra("futureMillis", item.getFutureMillis());
                 startActivity(showDetail);
             }
         });

@@ -14,16 +14,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +57,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvPageNumber;
     private LinearLayout ll_left_area;
     private DrawerLayout drawerLayout;
+
+
+    private Button btn_pay;
 
 
     @Override
@@ -118,9 +120,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout); // Correct the ID
 
+
+
+
+        String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
+        db = FirebaseFirestore.getInstance();
+        DocumentReference userDocRef = db.collection("User").document(uid);
+
+        userDocRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        membershipValue = documentSnapshot.getBoolean("membership");
+                    }
+                });
+
+
+
         findViewById(R.id.iv_hamburger).setOnClickListener((View.OnClickListener) this);
         viewPager2 = findViewById(R.id.viewPager2);
-        initViewPager2();
+//        initViewPager2();
         textName = findViewById(R.id.text_name);
 
         showUsername();
@@ -180,9 +199,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
-                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "가방");
+//                Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+//                intent.putExtra("category", "가방");
+//                startActivity(intent);
+
+// 결제 시스템 확인
+                Intent intent = new Intent(HomeActivity.this, ArrrPayActivity.class);
                 startActivity(intent);
+
+
+
             }
         });
         btnCateCar.setOnClickListener(new View.OnClickListener() {
@@ -271,7 +297,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "스포츠 / 레저");
+                intent.putExtra("category", "스포츠 레저");
                 startActivity(intent);
             }
         });
@@ -280,7 +306,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
-                intent.putExtra("category", "게임 / 취미");
+                intent.putExtra("category", "게임 취미");
                 startActivity(intent);
             }
         });
@@ -345,12 +371,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                    }
 //                });
 
-
+        // btnAlarm 클릭 시
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (membershipValue) {
                     Intent intent = new Intent(HomeActivity.this, AlarmActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(HomeActivity.this, "알림 기능은 멤버십 회원만 사용가능합니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -426,8 +456,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        
-        
+
+
         btnBidding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -518,19 +548,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void initViewPager2() {
-        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
-        viewPager2.setAdapter(viewPagerAdapter);
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                viewModel.setCurrentPosition(position);
-            }
-        });
-
-
-    }
+//    private void initViewPager2() {
+//        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
+//        viewPager2.setAdapter(viewPagerAdapter);
+//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                viewModel.setCurrentPosition(position);
+//            }
+//        });
+//
+//
+//    }
 
     private void subscribeObservers() {
         viewModel.getBannerItemList().observe(this, new Observer<List<BannerItem>>() {

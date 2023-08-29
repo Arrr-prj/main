@@ -82,32 +82,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager2"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:background="@drawable/rhdwl"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:background="@drawable/white_rectangle_left_radius"
-                    android:paddingStart="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="2dp"
-                    android:paddingBottom="4dp"
-                    android:text="모두 보기>"
-                    android:textColor="#000"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/viewPager2"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout">
 
                 <ImageButton
                     android:id="@+id/btn_bidding"

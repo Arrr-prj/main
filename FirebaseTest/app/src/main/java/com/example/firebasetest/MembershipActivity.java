@@ -70,10 +70,10 @@ public class MembershipActivity extends AppCompatActivity {
                                                             if (membershipValue) { // 멤버십 회원일 때
                                                                 Map<String, Object> updates = new HashMap<>();
                                                                 updates.put("membership", false);
-                                                                updates.put("나이키", false);
-                                                                updates.put("아디다스", false);
-                                                                updates.put("애플", false);
-                                                                updates.put("삼성", false);
+                                                                updates.put("Nike", false);
+                                                                updates.put("Adidas", false);
+                                                                updates.put("Apple", false);
+                                                                updates.put("Samsung", false);
                                                                 updates.put("차량", false);
                                                                 updates.put("액세서리", false);
                                                                 updates.put("의류", false);
@@ -82,9 +82,9 @@ public class MembershipActivity extends AppCompatActivity {
                                                                 updates.put("신발", false);
                                                                 updates.put("굿즈", false);
                                                                 updates.put("가방", false);
-                                                                updates.put("가구 / 인테리어", false);
-                                                                updates.put("스포츠 / 레저", false);
-                                                                updates.put("취미 / 게임", false);
+                                                                updates.put("가구 인테리어", false);
+                                                                updates.put("스포츠 레저", false);
+                                                                updates.put("취미 게임", false);
                                                                 updates.put("기타", false);
 
                                                                 userDocRef.update(updates)
@@ -122,10 +122,10 @@ public class MembershipActivity extends AppCompatActivity {
                                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                         Map<String, Object> updates = new HashMap<>();
                                                         updates.put("membership", true);
-                                                        updates.put("나이키", false);
-                                                        updates.put("아디다스", false);
-                                                        updates.put("애플", false);
-                                                        updates.put("삼성", false);
+                                                        updates.put("Nike", false);
+                                                        updates.put("Adidas", false);
+                                                        updates.put("Apple", false);
+                                                        updates.put("Samsung", false);
                                                         updates.put("차량", false);
                                                         updates.put("액세서리", false);
                                                         updates.put("의류", false);
@@ -134,9 +134,9 @@ public class MembershipActivity extends AppCompatActivity {
                                                         updates.put("신발", false);
                                                         updates.put("굿즈", false);
                                                         updates.put("가방", false);
-                                                        updates.put("가구 / 인테리어", false);
-                                                        updates.put("스포츠 / 레저", false);
-                                                        updates.put("취미 / 게임", false);
+                                                        updates.put("가구 인테리어", false);
+                                                        updates.put("스포츠 레저", false);
+                                                        updates.put("취미 게임", false);
                                                         updates.put("기타", false);
 
                                                         boolean membershipValue = documentSnapshot.getBoolean("membership");
@@ -185,8 +185,14 @@ public class MembershipActivity extends AppCompatActivity {
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MembershipActivity.this, HomeActivity.class));
                 finish();
             }
         });
+    }
+    @Override
+    public void onBackPressed(){
+        startActivity(new Intent(MembershipActivity.this, HomeActivity.class));
+        finish();
     }
 }

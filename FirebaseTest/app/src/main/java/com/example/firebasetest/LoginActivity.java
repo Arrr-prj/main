@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String uid = user.getUid();
                             UserManager.getInstance().setUserUid(uid);
+                            UserManager.getInstance().setUserEmail(strId);
 
                             Intent resultIntent = new Intent();
                             resultIntent.putExtra("result_key", "작업 완료 결과");
