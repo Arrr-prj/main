@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="pixel_2" />
+        <device id="5.4in FWVGA" />
+        <option name="nonWearDeviceLastStateName" value="Portrait" />
+      </config>
+    </shared>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d52248b9-0d77-436a-863f-29ec14a46f9e" name="Changes" comment="merge complete">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ArrrPayActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/auctionbackground4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FirebaseTest.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AlarmActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AlarmActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceRegistActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/AnnounceRegistActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BestItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BestItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BiddingDetailItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BiddingDetailItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BiddingRegistItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/BiddingRegistItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/EventAuctionDetailItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/EventAuctionDetailItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/EventAuctionRegisterItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/EventAuctionRegisterItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ImageSliderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ImageSliderAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/LargeImageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/LargeImageActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MembershipActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MembershipActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyBuyItemsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyBuyItemsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyConfirmItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyConfirmItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyItemDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyItemDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyItemsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyItemsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyPageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyPageActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyShareActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyShareActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyShareDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/MyShareDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenAuctionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenAuctionActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenDetailItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenDetailItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenRegistItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/OpenRegistItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/SalesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/SalesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ShareDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ShareDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ShareRegistItemActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/ShareRegistItemActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/TotalAuctionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/firebasetest/TotalAuctionActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/mypageimage.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/mypageimage.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/toolbar_gradient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/toolbar_gradient.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_alarm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_alarm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_edit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_edit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_regist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_announce_regist.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_best_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_best_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bidding_regist_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bidding_regist_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_bidding_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_detail_bidding_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_event_auction_detail_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_event_auction_detail_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_loby.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_loby.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_membership.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_membership.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_modify.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modify.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_buy_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_buy_items.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_confirm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_confirm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_event.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_event.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_item_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_item_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_items.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_page.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_page.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_share.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_share.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_share_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_share_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_auctiontest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_arrr_pay.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_detail_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_detail_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_detail_itemtest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_regist_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_regist_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_open_regist_itemtest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sales.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sales.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_share_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_share_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_share_regist_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_share_regist_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_total_auction.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_total_auction.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bidding_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bidding_items.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_slide_category.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_slide_category.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_slide_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_slide_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/sales_items.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sales_items.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/androidTest/java/com/test/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/java/com/test/LoginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/java/com/test/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/java/com/test/PayActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/layout/activity_pay.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/app/src/test/java/com/test/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kakao/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/dependencies-accessors/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/executionHistory/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/executionHistory/executionHistory.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/fileHashes/resourceHashesCache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/7.5/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/file-system.probe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.gradle/vcs-1/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/generated/res/google-services/debug/values/values.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/generated/source/buildConfig/debug/com/example/skgudwls/BuildConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/annotation_processor_list/debug/annotationProcessors.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/apk/debug/app-debug.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/apk/debug/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/apk_ide_redirect_file/debug/redirect.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/app_metadata/debug/app-metadata.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/compatible_screen_manifest/debug/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_0/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_1/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_2/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_3/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_4/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_5/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_6/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/desugar_graph/debug/out/currentProject/dirs_bucket_7/graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/dex_number_of_buckets_file/debug/out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/0Zef_qDAno_BRAr+PnhAwtWQcII=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/0sUKC_jgw3HyhRqu6e1hYVZUs4Y=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/0tGFknnJ2ZhuBZ24xF1+94H3WcA=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/14EYXMYDQAHoYgDfXcBqs6yltBI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/2CjTsRBCtfDQAimtilW_2G7OV_0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/2MOYkHF5P+ur0ZXZuXa3mA1vgoo=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/3LxLP3euI3pXFJ7Eqh63ym8UqXA=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/3NXo1A+G_iX0XzRW1GWLryiaYeQ=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/4bCf3aBCm0wuwhlCgS1er+2_Gdg=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/5_Bg8WQ7exVJjvS7Mtq7vnyrWuw=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/5y7OsImI66Zl0iXwEwv8hrbuQ8A=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/84Q2FObiNEcPOk4lc_qvBujNnxk=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Azhefr3SAxkzCqtf_tTN7RzaMv4=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/F6hidVifZUvx_5kSnc39piyrXS8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/FicJUDZjMgR6x3EcEt1_bGIjscU=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/G52vw_eipOKGw71oAbhKVXalrSw=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/HDkl6hL0h+pk1QK7D0gGfj2GBMM=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/HIRn7Qcv2mvGxy5jQT3r3MzCX70=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/JrwxxAfe5V+Tkdnt+0esIth4rTc=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/KBe6SOhhRJUT9_lo1dm6TyEM_kI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/LN3NyUqXNUTmcP9Z4DR+vU9s_ek=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/MqaDQQsfFXVDqPXeZB3x5y2cijw=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/N8tdnjWu1KAoQ28UAn2s5CXheEc=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/NPBeQx9B6AgjvCRZn6yr9dDCXM8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/NhlZy4N27CYxJrP_bmqhhJeqwWk=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/NqbevKx0jGVfKhEiDjxLFbeOTvU=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/NwKY0VZuxbaAr0+b50eMyyR1+rs=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/OxWJqYJAYlYVd1lXprPX1OYl_LI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Ph_1tdBW7w_XeQbUCH6OEofnA9s=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Q+JiuGGtL5VRH6vD98JXH2um_0o=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/QJx+YBKDgkQVUnZFC2Jnsy1vFK0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/REyBlQJ0cOQzInEBWSj03Buw73k=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/T6sZqAeqN5xACmObC_2KNwen8AY=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/TypmcIMooyus7DHDAUnjeoIya0o=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Udy0MsQHUTwtzgzYKKcXEGQgDOg=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/UmUybiRUk2Cbncr0k_+brtdBZDI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/UoMAji8g_LKLeDNVFl5xxMdafso=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/WdtSLucUgtxfgDMbLqVPf9A+nZ0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Wlth6vtkXUJ3sre0JdRgm6BuZE8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/XL0kgYfxcI6fgnGh5RtXRNl8F68=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Xp6wMLejdXhvhRKE5zH4TsDJ2_w=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Y9VijGE7LO1Ryd6l2hejinQ4fPE=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/ZdAPA3Geuju3EuVTkU6HWiFlMh8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/Zx8iueLl7MUw4QzBqfqU15mOkP8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/_MQiCXCvUcCdhJ7Kd6MxY_9IIt8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/_spedel22KAMhGWWVaLUDsDCb3Q=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/awIn34912ysz9_GUaQLG+EQhu6A=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/cRxyMq07gVWBm65ajDe7RTADenk=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/cbarLiVmo0+lTHc59vLPIW2_elk=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dCbWLG53InU_Lt0rE6FJ7aM4YiQ=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dK6EQ1uY2unPCQ9qRDPzBthmQgM=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dRR3XY3Uy_azNQW6lWh2lzfb7Vs=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dXvW5_z3EA8Dt179zZHrlxMU_Yk=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dk5JzCDOwyNmDtEV9DXYbypJb80=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/dtOCngmrECnyXYl3XgZD4+kr0Q8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/e2lpU1+1DZMCTIBtXE7JjXMjKks=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/fl0W6xjIU+EwJ0O_qGKmfGvCriI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/gI7nk9qYCIFQuFcgVZop0QQz7Y8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/gLSAWRahzMQ+IQQK289r8gsCKb8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/g_43d7YmZYkb6PNjEC4NqRRqqvs=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/gniGABeUHI5cSSxdjM130CcznJU=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/grw1xa+a42vsGFWDBKtMkDh4nRA=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/h8vfepF2XkXS9CSJMh4XVMZvLxU=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/hKl6pWD4yUFXssaj45WrYKLaHZQ=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/hlepgTHkWNWUMlaYtLvhow1hstE=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/iFJEvkY+cU_Yezx8hifDjBqkacE=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/iFsQyjmBfgkBUJEUP8LjieV74Z0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/jKU2SNk52gieouwz00XE5OtQTiM=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/kTwTFVzwcTyBQ4PuYSf_dIeCwaM=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/mqCSx_Di+wbsLdNdZZn57cjyv4A=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/nfUdF7GraA0GLRCgqZG0mAmdGdQ=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/niLG2oQQCCKiD6F6zqhBhrmq5JY=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/p7fG7D5EDmQD71_ZvCImMfkJ3i0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/pNsKto+TMQumF_ofesJ_bq6fbo8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/pZNNuD8Ki6f0dohSzN+Iz0EYt7I=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/qdo1DnjenwrL4LBxfcM_2hbRH5Y=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/rCAoYh_b8EQvvIbbjCnlLOIbw4s=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/rQ4o9PXAT3iRVcu_jDqMZkJOCn0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/sWAPud09SBcuCBAgcDpWA2iQy2I=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/sdC1e+3uP0isMQwFcGb2mW+97qc=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/sjfILN5eeuAkGOtLkzaHM4R0_Q8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/ttN04RThMTBbck0pXcEeRJ31pR0=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/uDYkyJ1GGeuiP08n7v3S0fvVw3E=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/uYsomZOtpeei1zhzjuyeBHScGfI=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/vVoowH3koMPqt91EEXSqCJoYL30=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/vdvwRcykXxm1orsXh07oXZa82dg=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/wDOQrRUTs6SpwXSzQQ7V+7jg1Dw=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/wZl6L423oXkXWif+rKXWumF8C7M=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/weYkYn7APKCrIMy61o_Y1xYMyk8=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/xB3vp6Ebd9UyjvwWvdsYHTuZmRQ=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/yd99yoBvZN+H0Pzum_a3vvlU8hs=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/yf4WorzJEcyWVymWIs5+mASZgxE=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug-mergeJavaRes/zip-cache/zF46F+62qpLdXFInC32zLwm2Vtw=" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug/mergeDebugResources/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/debug/packageDebugResources/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/mergeDebugShaders/merger.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/javaResources0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/BuildConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/MainActivity$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/MainActivity$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/MainActivity$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/MainActivity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/RegisterActivity$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/RegisterActivity$2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/RegisterActivity$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/RegisterActivity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/loginActivity$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/loginActivity$2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/loginActivity$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/loginActivity$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/javac/debug/classes/com/example/skgudwls/loginActivity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/local_only_symbol_list/debug/R-def.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_java_res/debug/base.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_manifest/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_manifests/debug/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/drawable-v24_ic_launcher_foreground.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/drawable_ic_launcher_background.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/layout_activity_login.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/layout_activity_main.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/layout_activity_register.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-anydpi-v33_ic_launcher.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_round.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_round.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_round.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.webp.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-af_values-af.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-am_values-am.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ar_values-ar.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-as_values-as.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-az_values-az.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-b+es+419_values-b+es+419.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-b+sr+Latn_values-b+sr+Latn.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-be_values-be.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-bg_values-bg.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-bn_values-bn.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-bs_values-bs.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ca_values-ca.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-cs_values-cs.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-da_values-da.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-de_values-de.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-el_values-el.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-en-rAU_values-en-rAU.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-en-rCA_values-en-rCA.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-en-rGB_values-en-rGB.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-en-rIN_values-en-rIN.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-en-rXC_values-en-rXC.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-es-rUS_values-es-rUS.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-es_values-es.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-et_values-et.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-eu_values-eu.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-fa_values-fa.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-fi_values-fi.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-fr-rCA_values-fr-rCA.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-fr_values-fr.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-gl_values-gl.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-gu_values-gu.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-h320dp-port-v13_values-h320dp-port-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-h360dp-land-v13_values-h360dp-land-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-h480dp-land-v13_values-h480dp-land-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-h550dp-port-v13_values-h550dp-port-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-h720dp-v13_values-h720dp-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-hdpi-v4_values-hdpi-v4.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-hi_values-hi.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-hr_values-hr.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-hu_values-hu.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-hy_values-hy.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-in_values-in.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-is_values-is.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-it_values-it.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-iw_values-iw.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ja_values-ja.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ka_values-ka.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-kk_values-kk.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-km_values-km.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-kn_values-kn.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ko_values-ko.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ky_values-ky.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-land_values-land.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-large-v4_values-large-v4.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ldltr-v21_values-ldltr-v21.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ldrtl-v17_values-ldrtl-v17.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-lo_values-lo.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-lt_values-lt.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-lv_values-lv.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-mk_values-mk.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ml_values-ml.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-mn_values-mn.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-mr_values-mr.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ms_values-ms.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-my_values-my.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-nb_values-nb.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ne_values-ne.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-night-v8_values-night-v8.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-nl_values-nl.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-or_values-or.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-pa_values-pa.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-pl_values-pl.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-port_values-port.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-pt-rBR_values-pt-rBR.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-pt-rPT_values-pt-rPT.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-pt_values-pt.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ro_values-ro.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ru_values-ru.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-si_values-si.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sk_values-sk.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sl_values-sl.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-small-v4_values-small-v4.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sq_values-sq.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sr_values-sr.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sv_values-sv.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sw600dp-v13_values-sw600dp-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-sw_values-sw.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ta_values-ta.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-te_values-te.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-th_values-th.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-tl_values-tl.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-tr_values-tr.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-uk_values-uk.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-ur_values-ur.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-uz_values-uz.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v16_values-v16.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v17_values-v17.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v18_values-v18.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v21_values-v21.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v22_values-v22.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v23_values-v23.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v24_values-v24.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v25_values-v25.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v26_values-v26.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v28_values-v28.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-v31_values-v31.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-vi_values-vi.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-w320dp-land-v13_values-w320dp-land-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-w360dp-port-v13_values-w360dp-port-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-w480dp-port-v13_values-w480dp-port-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-w600dp-land-v13_values-w600dp-land-v13.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-watch-v20_values-watch-v20.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-watch-v21_values-watch-v21.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-xlarge-v4_values-xlarge-v4.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-zh-rCN_values-zh-rCN.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-zh-rHK_values-zh-rHK.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-zh-rTW_values-zh-rTW.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values-zu_values-zu.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/values_values.arsc.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/xml_backup_rules.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res/debug/xml_data_extraction_rules.xml.flat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/debug.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-af.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-am.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ar.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-as.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-az.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-b+es+419.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-b+sr+Latn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-be.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-bg.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-bn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-bs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ca.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-cs.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-da.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-de.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-el.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-en-rAU.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-en-rCA.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-en-rGB.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-en-rIN.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-en-rXC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-es-rUS.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-es.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-et.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-eu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-fa.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-fi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-fr-rCA.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-fr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-gl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-gu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-h320dp-port-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-h360dp-land-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-h480dp-land-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-h550dp-port-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-h720dp-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-hdpi-v4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-hi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-hr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-hu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-hy.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-in.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-is.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-it.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-iw.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ja.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ka.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-kk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-km.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-kn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ko.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ky.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-land.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-large-v4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ldltr-v21.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ldrtl-v17.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-lo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-lt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-lv.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-mk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ml.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-mn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-mr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ms.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-my.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-nb.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ne.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-night-v8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-nl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-or.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-pa.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-pl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-port.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-pt-rBR.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-pt-rPT.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-pt.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ro.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ru.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-si.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-small-v4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sq.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sv.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sw.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-sw600dp-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ta.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-te.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-th.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-tl.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-tr.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-uk.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-ur.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-uz.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v16.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v17.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v18.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v21.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v22.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v23.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v24.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v25.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v26.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v28.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-v31.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-vi.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-w320dp-land-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-w360dp-port-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-w480dp-port-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-w600dp-land-v13.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-watch-v20.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-watch-v21.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-xlarge-v4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-zh-rCN.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-zh-rHK.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-zh-rTW.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values-zu.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/multi-v2/values.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/merged_res_blame_folder/debug/out/single/debug.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/navigation_json/debug/navigation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_manifests/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_manifests/debug/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-anydpi-v33/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-hdpi-v4/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-hdpi-v4/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-mdpi-v4/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-mdpi-v4/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xxhdpi-v4/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xxhdpi-v4/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xxxhdpi-v4/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/mipmap-xxxhdpi-v4/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/values-night-v8/values-night-v8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/values/values.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/packaged_res/debug/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/processed_res/debug/out/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/BuildConfig.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/MainActivity$1.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/MainActivity$2.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/MainActivity$3.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/MainActivity.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/RegisterActivity$1.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/RegisterActivity$2$1.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/RegisterActivity$2.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/RegisterActivity.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/loginActivity$1.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/loginActivity$2$1.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/loginActivity$2.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/loginActivity$3.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/project_dex_archive/debug/out/com/example/skgudwls/loginActivity.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/runtime_symbol_list/debug/R.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/signing_config_versions/debug/signing-config-versions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/source_set_path_map/debug/file-map.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/stable_resource_ids_file/debug/stableIds.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/intermediates/variant_model/debug/variant_model.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/androidTest/java/com/example/skgudwls/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/google-services.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/DetailActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/Goods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/GoodsAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/MainpageActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/ModifyActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/MypageActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/PublicauctionActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/RegisterActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/java/com/example/skgudwls/loginActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/backspace_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/ceramic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/menu_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/notification_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/person_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/photoframe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/search_icon.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/shoes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/drawable/watch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_detail.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_login.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_mainpage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_modify.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_mypage.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_publicauction.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/activity_register.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/layout/goods_item.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/menu/menu_top.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-anydpi-v33/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/app/src/test/java/com/example/skgudwls/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/local.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../skgudwls/settings.gradle" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\skgud\.android\avd\Pixel_6_Pro_API_30.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2UFzG00iL8RMCdV3axGJOjoOEnd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_directory_selection": "C:/Users/user/Documents/AnPr/main/FirebaseTest/app/src/main/res/drawable",
+    "last_opened_file_path": "C:/The_Team_1 - 복사본/main",
+    "settings.editor.selected.configurable": "project.propVCSSupport.CommitDialog",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\The_Team_1\main\FirebaseTest\app\src" />
+      <recent name="C:\Users\user\Documents\AnPr\main\FirebaseTest\app\src\main\res\layout" />
+      <recent name="C:\Users\user\Documents\AnPr\main\FirebaseTest\app\src\main\res\drawable" />
+      <recent name="C:\Users\user\Documents\AnPr\main\FirebaseTest\app\src\main\java\com\example\firebasetest" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Documents\AnPr\main\FirebaseTest\app\src\main\res\drawable" />
+    </key>
+    <key name="android.template.-253425014">
+      <recent name="com.example.firebasetest" />
+    </key>
+    <key name="android.template.-1199301788">
+      <recent name="com.example.firebasetest" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="FirebaseTest.app.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d52248b9-0d77-436a-863f-29ec14a46f9e" name="Changes" comment="" />
+      <created>1692550017212</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692550017212</updated>
+    </task>
+    <task id="LOCAL-00001" summary="gogoogo">
+      <created>1692552747546</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1692552747548</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="gogoogo" />
+    <MESSAGE value="merge complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge complete" />
+  </component>
+</project>

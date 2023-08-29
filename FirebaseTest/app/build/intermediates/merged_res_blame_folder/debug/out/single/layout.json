@@ -1,0 +1,230 @@
+[
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_best_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_best_item.xml"
+    },
+    {
+        "merged": "com.example.firebasetest.app-mergeDebugResources-5:/layout/activity_alarm.xml",
+        "source": "com.example.firebasetest.app-main-8:/layout/activity_alarm.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_modify.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_modify.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_edit_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_edit_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\open_items.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\open_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\sales_items.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\sales_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\item_slider.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\item_slider.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\bidding_items.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\bidding_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_share_regist_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_share_regist_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_item_detail.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_item_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_auction.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_auction.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_share_detail.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_share_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_alarm.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_alarm.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\announcement_list.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\announcement_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_total_auction.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_total_auction.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_bidding.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_bidding.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_large_image.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_large_image.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_transaction.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_transaction.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_bidding_regist_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_bidding_regist_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_announce_edit.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_announce_edit.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_announce_detail.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_announce_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\item_list.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\item_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\bitem_recyclerview.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\bitem_recyclerview.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_arrr_pay.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_arrr_pay.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_category_car.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_category_car.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_items.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\alarm.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\alarm.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_event_auction_register_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_event_auction_register_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_share.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_share.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_event_auction.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_event_auction.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_announce.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_announce.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_open_regist_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_regist_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_detail_bidding_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_detail_bidding_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_open_detail_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_detail_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_detail_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_detail_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_membership.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_membership.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_share_detail.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_share_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_buy_items.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_buy_items.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_event.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_event.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_page.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_page.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_my_confirm.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_my_confirm.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_update_data.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_update_data.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_sales.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_sales.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_open_auction.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_open_auction.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\item_layout_banner.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\item_layout_banner.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\layout_slide_category.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\layout_slide_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_loby.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_loby.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_full_screen_image.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_full_screen_image.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_announce_regist.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_announce_regist.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_home.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\layout_slide_menu.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\layout_slide_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_share_adapter.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_share_adapter.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_event_auction_detail_item.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_event_auction_detail_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-mergeDebugResources-5:\\layout\\activity_share.xml",
+        "source": "C:\\Users\\skgud\\.gradle\\daemon\\7.5\\com.example.firebasetest.app-main-8:\\layout\\activity_share.xml"
+    }
+]
