@@ -18,6 +18,15 @@
             android:name=".ArrrPayActivity"
             android:exported="false" />
         <activity
+            android:name=".ChatActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="andoird.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".BestItemActivity"
             android:exported="false" />
         <activity

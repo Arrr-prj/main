@@ -181,7 +181,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
         });
 
         // 아이템 리스트 버튼 클릭 이벤트
-        Button listBtn = findViewById(R.id.btn_back);
+        Button listBtn = findViewById(R.id.btn_itemList);
         listBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,7 +289,7 @@ public class ShareRegistItemActivity extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance(); // 1일 후의 시간 계산
                 String uploadMillis = String.valueOf(calendar.getTimeInMillis());
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                calendar.add(Calendar.SECOND, 50);
                 String futureMillis = String.valueOf(calendar.getTimeInMillis()); //
                 // "yyyy-MM-dd HH:mm:ss" 포맷으로 변환
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -328,7 +328,6 @@ public class ShareRegistItemActivity extends AppCompatActivity {
                                         // 등록된 리스트 새로 갱신
                                         UserDataHolderShareItem.loadShareItems();
                                         Toast.makeText(ShareRegistItemActivity.this, "상품 등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                        sendMessage(strName,strCategory,firebaseUser,strTitle+sellerId);
                                         Intent intent = new Intent(ShareRegistItemActivity.this, ShareActivity.class);
                                         startActivity(intent);
                                     })

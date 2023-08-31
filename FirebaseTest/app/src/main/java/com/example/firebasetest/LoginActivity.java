@@ -1,5 +1,7 @@
 package com.example.firebasetest;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
@@ -29,6 +34,10 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private EditText mInputId, mInputPwd;
     private Button mBtnRegister, mBtnLogin, mBtnBack;
+    private FirebaseFirestore db;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseUser user = auth.getCurrentUser();
+    String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +95,32 @@ public class LoginActivity extends AppCompatActivity {
                             // 로그인 성공
                             FirebaseUser user = mFirebaseAuth.getCurrentUser();
                             String uid = user.getUid();
+                            db = FirebaseFirestore.getInstance();
+                            DocumentReference userDocRef = db.collection("User").document(uid);
+
+                            if (user != null) {
+                                userEmail = user.getEmail(); // 현재 사용자의 이메일
+                                UserManager.getInstance().setUserEmail(userEmail); // UserManager에 이메일 저장
+                            }
+                            // 문서 정보 가져오기
+                            userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            // 필드 값을 가져와서 사용
+                                            String nickname = document.getString("nickname"); // 필드명에 실제 필드 이름을 넣어주세요
+                                            Log.d(TAG, ""+nickname);
+                                            // 현재 로그인한 유저의 nickname
+                                            UserManager.getInstance().setUserNickName(nickname);
+                                        } else {
+                                        }
+                                    } else {
+                                    }
+                                }
+                            });
                             UserManager.getInstance().setUserUid(uid);
-                            UserManager.getInstance().setUserEmail(strId);
 
                             Intent resultIntent = new Intent();
                             resultIntent.putExtra("result_key", "작업 완료 결과");

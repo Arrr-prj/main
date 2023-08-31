@@ -40,7 +40,7 @@ public class ShareDetailActivity extends AppCompatActivity {
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice; // 입찰가
-    private Button mBtnBidJoin, mBtnAgain, mBtnCong, mBtnBigButton, mBtnback; // 입찰하기 버튼
+    private Button mBtnBidJoin, mBtnAgain, mBtnCong, mBtnBigButton; // 입찰하기 버튼
     private String sellerName, bidAmount;
     private ViewPager2 sliderViewPager;
     private PhotoView photoViewSlider;
@@ -73,7 +73,6 @@ public class ShareDetailActivity extends AppCompatActivity {
         category = findViewById(R.id.category);
         timeinfo = findViewById(R.id.timeInfoinfo);
         futureMillis = findViewById(R.id.futureMillis);
-        mBtnback = findViewById(R.id.btn_back);
         database = FirebaseFirestore.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -82,7 +81,7 @@ public class ShareDetailActivity extends AppCompatActivity {
         String seller = intent.getStringExtra("seller");
         String buyerUid = intent.getStringExtra("buyer");
         // 두번째 매개변수는 값을 잘 불러오지 못했을때 할당해줄 기본 값
-//        String confirm = intent.getStringExtra("confirm");
+        String confirm = intent.getStringExtra("confirm");
         String futureMillis = intent.getStringExtra("futureMillis");
         String documentId = title + seller;
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
@@ -121,14 +120,14 @@ public class ShareDetailActivity extends AppCompatActivity {
         mBtnBidJoin = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
         mBtnCong = findViewById(R.id.btn_Cong); // 당첨
         mBtnAgain = findViewById(R.id.btn_Again); // 당첨x
-        mBtnBigButton = findViewById(R.id.btn_bigbutton);
+//        mBtnBigButton = findViewById(R.id.btn_bigbutton);
         buyer = " ";
 
         getSelectoItem();
-
+        Toast.makeText(ShareDetailActivity.this, userEmail + "\n" + seller, Toast.LENGTH_SHORT).show();
 
         if (buyerUid.equals(uid)) {
-//            Log.d(TAG, "uid값 : " + uid + "confirm 값 : " + confirm);
+            Log.d(TAG, "uid값 : " + uid + "confirm 값 : " + confirm);
             // 당첨자가 나인 경우
             mBtnCong.setVisibility(View.VISIBLE);
             mBtnBidJoin.setVisibility(View.GONE);
@@ -155,16 +154,16 @@ public class ShareDetailActivity extends AppCompatActivity {
         docRef.get().addOnCompleteListener(task -> {
             if (true) {
                 DocumentSnapshot document = task.getResult();
-                if (open && buyer.equals("")) {
+                if (open) {
                     String buyer = document.getString("buyer");
                     db.collection("User")
                             .document(buyer)
                             .get()
                             .addOnSuccessListener(userDocument -> {
                                 if (userDocument.exists()) {
-                                    String winningUserEmail = userDocument.getString("email");
+
                                     Toast.makeText(ShareDetailActivity.this,
-                                            "경매가 종료되었습니다낙.\n나눔받은 사람: " + winningUserEmail,
+                                            "경매가 종료되었습니다.\n나눔받은 사람: " + buyer,
                                             Toast.LENGTH_LONG).show();
 
                                     // Rest of the code...
@@ -173,38 +172,27 @@ public class ShareDetailActivity extends AppCompatActivity {
                                 }
                             })
                             .addOnFailureListener(e -> {
-                                // Handle the failure to fetch user document`
+                                // Handle the failure to fetch user document
                             });
 
 
 //                            Toast.makeText(OpenDetailItemActivity.this, "경매가 종료되었습니다.\n낙찰자: " + buyerId + "\n입찰금액: " + strEndPrice, Toast.LENGTH_LONG).show();
                     return;
-                } else{
-                    Toast.makeText(ShareDetailActivity.this,
-                            "나눔을 신청한 사람이 없습니다.",
-                            Toast.LENGTH_LONG).show();
                 }
 
             } else {
                 // futureMillis 필드가 null인 경우
             }
         });
-        mBtnback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ShareDetailActivity.this, ShareActivity.class);
 
-                startActivity(intent);
-            }
-        });
-        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ShareDetailActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
-                startActivity(intent);
-            }
-        });
+//        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(ShareDetailActivity.this, LargeImageActivity.class);
+//                intent.putExtra("images", images); // 이미지 URL 배열 전달
+//                startActivity(intent);
+//            }
+//        });
         // 신청하기를 눌렀을 때
         mBtnBidJoin.setOnClickListener(new View.OnClickListener() {
 
@@ -262,7 +250,7 @@ public class ShareDetailActivity extends AppCompatActivity {
                     itemInfo.setText(selectedItem.getInfo());
                     category.setText(selectedItem.getCategory());
                     seller.setText(selectedItem.getSeller());
-                    timeinfo.setText(selectedItem.getFutureDate());
+                    timeinfo.setText(selectedItem.getFutureMillis());
 
                     String title = selectedItem.getTitle();
                     String sellerName = selectedItem.getSeller();

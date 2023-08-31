@@ -40,7 +40,7 @@ import java.util.Map;
 
 public class MyItemDetailActivity extends AppCompatActivity {
 
-    private Button btnEdit, btnDelete, btnList, btnConfirm, btnCancle;
+    private Button btnChat, btnEdit, btnDelete, btnList, btnConfirm, btnCancle;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     ListAdapter listAdapter;
@@ -89,9 +89,10 @@ public class MyItemDetailActivity extends AppCompatActivity {
         btnList = findViewById(R.id.btn_list);
         btnConfirm = findViewById(R.id.btn_confirm);
         btnCancle = findViewById(R.id.btn_cancle);
+        btnChat = findViewById(R.id.btn_chat);
 
         // 페이지 접속 시 새로 로딩해준다.
-
+        Toast.makeText(this, "clear 전 size" + UserDataHolderOpenItems.openItemList.size(), Toast.LENGTH_SHORT).show();
 
         UserDataHolderOpenItems.openItemList.clear();
         UserDataHolderBiddingItems.loadBiddingItems();
@@ -148,9 +149,10 @@ public class MyItemDetailActivity extends AppCompatActivity {
         if(isBuy.equals("Buy")){
             btnDelete.setVisibility(View.GONE);
             btnEdit.setVisibility(View.GONE);
-        }else if(isBuy.equals("Confirm")){
+        }else if(isBuy.equals("Confirm")){ // 그냥 디테일 쪽에서도 채팅 만들어 줘야함.
             btnConfirm.setVisibility(View.VISIBLE);
             btnCancle.setVisibility(View.VISIBLE);
+            btnChat.setVisibility(View.VISIBLE);
         }
         else{
         }
@@ -475,7 +477,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         Item selectedItem = null;
         // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
         openItemList.clear();
-
+        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
         UserDataHolderOpenItems.loadOpenItems();
         db.collection("OpenItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -525,7 +527,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
         Item selectedItem = null;
         // 기존 리스트 없애주고 다시 로드해준 뒤 for문 돌리도록
         eventItemList.clear();
-
+        Toast.makeText(this, "clear 후 size" + openItemList.size(), Toast.LENGTH_SHORT).show();
         UserDataHolderOpenItems.loadOpenItems();
         db.collection("EventItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

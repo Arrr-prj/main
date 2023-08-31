@@ -2,9 +2,12 @@ package com.example.firebasetest;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -20,8 +23,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,8 +45,8 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
     private long remainingTimeMillis; // 전역 변수로 추가
-    private Button btnEdit, btnDelete;
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback;
+    private Button  btnCancle, btnChat;
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd;
     private EditText bidText;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
@@ -50,17 +55,14 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
     private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
     //    private FirebaseFirestore db;
-    private String sellerName, bidAmount;
+    private String sellerName ,bidAmount;
     String buyer, document;
     Item item;
     Bitmap bitmap;
-    String userEmail; // 현재 유저의 이메일
     private String[] images = new String[6];
     String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseUser user = auth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         category = findViewById(R.id.category);
         timeinfo = findViewById(R.id.endTime);
         futureMillis = findViewById(R.id.futureMillis);
-        userEmail = UserManager.getInstance().getUserEmail(); // 현재 사용자의 이메일
+
         getSelectbItem();
 
         if (imageUrl1 != null && !imageUrl1.isEmpty()) {
@@ -101,8 +103,8 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         if (imageUrl6 != null && !imageUrl6.isEmpty()) {
             images[5] = imageUrl6;
         }
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
         remainingTimeMillis = 0;
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
 
         buyer = " ";
         //입찰하기 버튼
@@ -112,19 +114,23 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         bidText = findViewById(R.id.bidAmountEditText);
         mBtnBuy = findViewById(R.id.btn_buy);
         mBtnConfirm = findViewById(R.id.btn_buyConfirm);
-        mBtnBigButton = findViewById(R.id.btn_bigbutton);
-        mBtnback = findViewById(R.id.btn_back);
+        btnChat = findViewById(R.id.btn_chat);
+        btnCancle = findViewById(R.id.btn_cancle);
 
         db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         String documentId = getIntent().getStringExtra("documentId");
+        String title = intent.getStringExtra("title");
         String buyerUid = intent.getStringExtra("buyer");
-        // 두번째 매개변수는 값을 잘 불러오지 못했을때 할당해줄 기본 값
+        String seller = intent.getStringExtra("seller");
         String confirm = intent.getStringExtra("confirm");
+        String id = intent.getStringExtra("id");
+        String endPrice = intent.getStringExtra("endPrice");
+        Toast.makeText(this, "buyer"+buyerUid, Toast.LENGTH_SHORT).show();
 
-        String sellerdisName = intent.getStringExtra("seller");
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
+        String userEmail = UserManager.getInstance().getUserEmail(); // 현재 유저의 email
 
         getSelectbItem();
 
@@ -133,42 +139,127 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         Long futureMillis = Long.valueOf(intent.getStringExtra("futureMillis"));
         Long isEnd = futureMillis - nowMillis;
         // 이미 구매가 완료된 경우
-        if (buyerUid.equals(uid) && confirm.equals("true")) {
-            Log.d(TAG, "uid값 : " + uid + "confirm 값 : " + confirm);
+        if(buyerUid.equals(uid) && confirm.equals("true")){
+            Log.d(TAG, "uid값 : "+uid+"confirm 값 : "+ confirm);
             // 구매 완료 버튼만 보이게
             mBtnConfirm.setVisibility(View.VISIBLE);
             mBtnBidButton.setVisibility(View.GONE);
+            btnChat.setVisibility(View.GONE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
-            // 낙찰자가 생겼지만 구매가 완료되지 않은 경우
-        } else if (buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0) {
-            // 구매 버튼만 보이게
+            btnCancle.setVisibility(View.GONE);
+            // 낙찰자가 '나'지만 구매가 완료되지 않은 경우
+        }else if(buyerUid.equals(uid) && confirm.equals("false") && isEnd <= 0){
+            // 구매 버튼, 채팅 버튼 보이게
             mBtnBuy.setVisibility(View.VISIBLE);
+            btnChat.setVisibility(View.VISIBLE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
+            btnCancle.setVisibility(View.VISIBLE);
+
+            // 판매자가 '나'고 경매가 끝났지만 구매가 완료되지 않은 경우
+        }else if(userEmail.equals(seller) && confirm.equals("false") && isEnd <= 0) {
+            // 구매 버튼, 채팅 버튼 보이게
+            mBtnBuy.setVisibility(View.VISIBLE);
+            btnChat.setVisibility(View.VISIBLE);
+            mBtnConfirm.setVisibility(View.GONE);
+            mBtnBidButton.setVisibility(View.GONE);
+            mBtnBidEnd.setVisibility(View.GONE);
+            btnCancle.setVisibility(View.GONE);
 
             // 누군가 구매를 해서 경매가 종료되었을 때
-        } else if (confirm.equals("true") && isEnd <= 0) {
+        }else if(confirm.equals("true") && isEnd <= 0){
             mBtnBidEnd.setVisibility(View.VISIBLE);
             mBtnBuy.setVisibility(View.GONE);
+            btnChat.setVisibility(View.GONE);
             mBtnConfirm.setVisibility(View.GONE);
             mBtnBidButton.setVisibility(View.GONE);
-        } else {
+            btnCancle.setVisibility(View.GONE);
+        }else{
             // 경매중인 경우
             // 입찰 버튼만 보이게
             mBtnBidButton.setVisibility(View.VISIBLE);
             mBtnConfirm.setVisibility(View.GONE);
+            btnChat.setVisibility(View.GONE);
             mBtnBuy.setVisibility(View.GONE);
             mBtnBidEnd.setVisibility(View.GONE);
+            btnCancle.setVisibility(View.GONE);
         }
 
-        mBtnback.setOnClickListener(new View.OnClickListener() {
+        // 낙찰 포기 클릭 시
+        btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(BiddingDetailItemActivity.this, BiddingActivity.class);
+                // 팝업 창 띄워서 확인 눌렀을 때 낙찰 취소되도록
+                AlertDialog.Builder builder = new AlertDialog.Builder(BiddingDetailItemActivity.this);
+                builder.setTitle("낙찰을 취소 하시겠습니까?"); // 다이얼로그 제목
+                builder.setCancelable(false);   // 다이얼로그 화면 밖 터치 방지
+                builder.setPositiveButton("예", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which){
+                        // 취소 횟수 3회 이상이면 X
+                        db.collection("User").whereEqualTo("email", userEmail)
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : (task.getResult())){
+                                                    Integer cancleCnt = Integer.parseInt(String.valueOf(document.getData().get("cancleCnt")));
+                                                    if(cancleCnt >= 3){
+                                                        Toast.makeText(BiddingDetailItemActivity.this, "이미 낙찰 포기 횟수를 초과했습니다.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else{
+                                                        // 낙찰자 위임하는 코드
+                                                        // Bids에서 해당 유저의 문서를 지우면 될듯
+                                                        DocumentReference auctionDocRef = db.collection("BiddingAuctionItems").document(title+seller);
+                                                        DocumentReference delCurrentUser = auctionDocRef.collection("Bids").document(uid);
+                                                        delCurrentUser.delete()
+                                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                   @Override
+                                                                                                   public void onComplete(@NonNull Task<Void> task) {
+                                                                                                       if (task.isSuccessful()) {
+                                                                                                           // 삭제 성공 시 처리
+                                                                                                           performAuctionEnd(title + seller);
 
-                startActivity(intent);
+                                                                                                           // 취소 횟수 카운팅 ( +1 )
+                                                                                                           db.collection("User").document(uid).update("cancleCnt", cancleCnt+1);
+//                                                                                                           document.getData().put("cancleCnt", cancleCnt+1);
+                                                                                                           Toast.makeText(BiddingDetailItemActivity.this, "취소가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                                                                                       } else {
+                                                                                                           // 삭제 실패 시 처리
+                                                                                                           Toast.makeText(BiddingDetailItemActivity.this, "잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                                                                                       }
+                                                                                                   }
+                                                                                               });
+
+                                                    }
+                                                }
+                                            }
+                                        });
+
+
+                    }
+                });
+
+                builder.setNegativeButton("아니요", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.show(); // 다이얼로그 보이기
+            }
+        });
+
+        // 채팅 버튼 클릭 시 이벤트
+        btnChat.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent chat = new Intent(BiddingDetailItemActivity.this, ChatActivity.class);
+                chat.putExtra("seller", seller);
+                chat.putExtra("buyer", buyerUid); // buyer의 uid 전달
+                chat.putExtra("endPrice", endPrice);
+                chat.putExtra("id", id);
+                startActivity(chat);
             }
         });
         // 구매 버튼 클릭 시 이벤트
@@ -189,14 +280,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mBtnBigButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(BiddingDetailItemActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
-                startActivity(intent);
-            }
-        });
+
         // 입찰하기 버튼을 눌렀을 때 -> dialog 로 입력받을 수 있는 팝업창 띄움
         mBtnBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,13 +289,8 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
             }
         });
         Button confirmBidButton = findViewById(R.id.confirmBidButton);
-        Button cancelBidButton = findViewById(R.id.cancelBidButton);
-// 만약 판매자의 이메일과 현재 로그인한 사용자의 이메일이 같다면, 신청하기 버튼을 숨김
-        if (sellerdisName.equals(userEmail)) {
-            mBtnBidButton.setVisibility(View.GONE);
-        } else {
-            mBtnBidButton.setVisibility(View.VISIBLE);
-        }
+        Button cancelBidButton = findViewById(R.id.cancleBidButton);
+
         mBtnBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,38 +303,39 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String itemId = getIntent().getStringExtra("id");
                 bidAmount = bidText.getText().toString();
-                if (bidAmount.equals("") || bidAmount.equals((null))) {
-                    Toast.makeText(BiddingDetailItemActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
-                    return;
-                }else{
-                    if (!bidAmount.isEmpty()) {
-                        // 컬렉션만들고 로직만들자리
-                        long userBidAmount = Long.parseLong(bidAmount);
-                        long currentHighestBid = Long.parseLong(startPrice.getText().toString());
+
+                if (!bidAmount.isEmpty()) {
+                    // 컬렉션만들고 로직만들자리
+                    long userBidAmount = Long.parseLong(bidAmount);
+                    long currentHighestBid = Long.parseLong(startPrice.getText().toString());
+
+                    Toast.makeText(BiddingDetailItemActivity.this, document, Toast.LENGTH_SHORT).show();
 
 
-                        if (userBidAmount > currentHighestBid) {
-                            // 비딩금액이 컬렉션에 저장된금액보다 크면 데이터베이스 업데이트
-                            updateBidData(String.valueOf(userBidAmount));
-                            // 경매타이머 설정후에 performAuctionEnd()메소드로 낙찰기능
-                            //performAuctionEnd(itemId);
-                        } else {
-//                        Map<String, Object> data = new HashMap<>();
-//                        data.put("buyer", buyer);
-//
-//                        DocumentReference userDocRef = db.collection("BiddingItem").document(document);
-//                        userDocRef.update(data)
-//                                .addOnSuccessListener(aVoid -> {
-//                                    // 등록된 리스트 새로 갱신
-//                                    UserDataHolderBiddingItems.loadBiddingItems();
-//                                    Toast.makeText(BiddingDetailItemActivity.this, "종료 시간이 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
-//                                })
-//                                .addOnFailureListener(e -> {
-//                                    Toast.makeText(getApplicationContext(), "종료 시간 업데이트에 실패했습니다." + e.getMessage(),
-//                                            Toast.LENGTH_SHORT).show();
-//                                });
-                            Toast.makeText(BiddingDetailItemActivity.this, "시작 가격보다 높은 금액을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                        }
+                    if (userBidAmount > currentHighestBid) {
+                        // 비딩금액이 컬렉션에 저장된금액보다 크면 데이터베이스 업데이트
+                        updateBidData(String.valueOf(userBidAmount));
+                        // 경매타이머 설정후에 performAuctionEnd()메소드로 낙찰기능
+                        //performAuctionEnd(itemId);
+                    }
+                    else {
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("buyer", buyer);
+
+                        DocumentReference userDocRef = db.collection("BiddingItem").document(document);
+                        userDocRef.update(data)
+                                .addOnSuccessListener(aVoid -> {
+                                    // 등록된 리스트 새로 갱신
+                                    UserDataHolderBiddingItems.loadBiddingItems();
+                                    Toast.makeText(BiddingDetailItemActivity.this, "종료 시간이 업데이트되었습니다.", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(getApplicationContext(), "종료 시간 업데이트에 실패했습니다." + e.getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                });
+                        Toast.makeText(BiddingDetailItemActivity.this,
+                                "입찰이 성공적으로 처리되었습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
                 bidPopupLayout.setVisibility(View.GONE);
@@ -313,8 +393,6 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
 
         String documentId1 = title + sellerName;
 
-        db.collection("BiddingItem").document(documentId1).update("views", selectedItem.getViews() + 1);
-
         this.document = documentId1;
 
         long currentTimeMillis = System.currentTimeMillis();
@@ -333,13 +411,11 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
 
         startCountdownTimer(remainingTimeMillis);
     }
-
-    private void bidend() {
+    private void bidend(){
         mBtnBidButton.setVisibility(View.GONE);
         mBtnBidEnd.setVisibility(View.VISIBLE);
     }
-
-    private void highhigh(CollectionReference bidsCollectionRef) {
+    private void highhigh(CollectionReference bidsCollectionRef){
         bidsCollectionRef.orderBy("비딩금액", Query.Direction.DESCENDING)
                 .limit(1)
                 .addSnapshotListener((value, error) -> {
@@ -370,7 +446,6 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                     }
                 });
     }
-
     private String formatRemainingTime(long remainingTimeMillis) {
         if (remainingTimeMillis <= 0) {
             return "경매가 종료되었습니다.";
@@ -395,7 +470,6 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 remainingTimeMillis = millisUntilFinished;
                 updateCountdownText();
             }
-
             @Override
             public void onFinish() {
                 // 타이머가 종료될 때의 동작을 여기에 추가하면 됩니다.
@@ -406,7 +480,6 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
 
         timer.start();
     }
-
     private void updateCountdownText() {
         String remainingTime = formatRemainingTime(remainingTimeMillis);
         futureMillis.setText(remainingTime);
@@ -423,7 +496,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 break;
             }
         }
-        if (selectedItem != null) {
+        if(selectedItem != null){
             // selectedItem 사용하기
             setbValues(selectedItem);
             imageUrl1 = selectedItem.getImageUrl1();
@@ -432,13 +505,12 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
             imageUrl4 = selectedItem.getImageUrl4();
             imageUrl5 = selectedItem.getImageUrl5();
             imageUrl6 = selectedItem.getImageUrl6();
-        } else {
+        }
+        else{
             // 해당 id와 일치하는 아이템이 없는 경우
         }
     }
-
     private void performAuctionEnd(String auctionItemId) {
-
 
         String itemId = getIntent().getStringExtra("id");
 
@@ -485,6 +557,8 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                                             .addOnFailureListener(e -> {
                                                 // Handle the failure to fetch user document
                                             });
+
+
 
 
                                     // 업데이트 성공 시의 처리
@@ -601,9 +675,8 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 });
 
     }
-
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
 //        startActivity(new Intent(BiddingDetailItemActivity.this, BiddingActivity.class));
         finish();
     }

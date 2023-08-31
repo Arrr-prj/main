@@ -4,6 +4,8 @@ public class UserManager {
     private static UserManager instance;
     private String userUid;
     private String userEmail;
+    private String userNickName;
+    private Integer cancleCnt;
 
     private UserManager() {
     }
@@ -12,6 +14,22 @@ public class UserManager {
             instance = new UserManager();
         }
         return instance;
+    }
+
+    public Integer getCancleCnt() {
+        return cancleCnt;
+    }
+
+    public void setCancleCnt(Integer cancleCnt) {
+        this.cancleCnt = cancleCnt;
+    }
+
+    public String getUserNickName() {
+        return userNickName;
+    }
+
+    public void setUserNickName(String nickname) {
+        this.userNickName = userNickName;
     }
 
     public String getUserEmail() {

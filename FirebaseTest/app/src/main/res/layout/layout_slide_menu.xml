@@ -488,7 +488,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="대표 이사 김승호" />
+                    android:text="24시 연중무휴 고객센타" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -496,7 +496,7 @@
                     android:layout_marginStart="10dp"
                     android:text="010-8919-2090"
                     android:textColor="#000"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
@@ -520,6 +520,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"/>
+            android:layout_margin="20dp"/>
     </LinearLayout>
 </LinearLayout>

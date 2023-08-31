@@ -41,7 +41,7 @@ public class LargeImageActivity extends AppCompatActivity implements ImageSlider
         imageSliderAdapter.setImageClickListener(this); // 클릭 리스너 설정
 // 클릭 리스너 설정
         imageSliderAdapter.setImageClickListener(position -> {
-
+            Toast.makeText(this, "Image clicked at position: " + position, Toast.LENGTH_SHORT).show();
             // 이미지 클릭 시 전체 화면으로 이미지 보기 처리
             Intent intent = new Intent(LargeImageActivity.this, FullScreenImageActivity.class);
             intent.putExtra("images", images);
@@ -140,7 +140,7 @@ public class LargeImageActivity extends AppCompatActivity implements ImageSlider
     @Override
     public void onImageClick(int position) {
         // 이미지 클릭 시 실행할 동작을 여기에 구현
-
+        Toast.makeText(this, "Image clicked at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
 }
