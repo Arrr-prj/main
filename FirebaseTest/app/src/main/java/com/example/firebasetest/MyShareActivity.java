@@ -99,7 +99,7 @@ public class MyShareActivity extends AppCompatActivity {
                             freeItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
@@ -130,7 +130,7 @@ public class MyShareActivity extends AppCompatActivity {
                             freeItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),

@@ -142,9 +142,12 @@ public class BiddingActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), BiddingDetailItemActivity.class);
                 showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 showDetail.putExtra("seller", item.getSeller());
+                showDetail.putExtra("title", item.getTitle());
                 showDetail.putExtra("buyer", item.getBuyer());
                 showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                 showDetail.putExtra("futureMillis", item.getFutureMillis());
+                showDetail.putExtra("id", item.getId());
+                showDetail.putExtra("endPrice", item.getEndPrice());
                 startActivity(showDetail);
                 finish();
             }

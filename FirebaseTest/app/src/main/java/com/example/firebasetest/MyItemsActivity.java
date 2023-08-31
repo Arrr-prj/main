@@ -59,7 +59,7 @@ public class MyItemsActivity extends AppCompatActivity {
     AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-
+            Toast.makeText(MyItemsActivity.this, "Clicked position: " + parent, Toast.LENGTH_SHORT).show();
         }
     };
     public void InitializeOpenItem(String seller){
@@ -75,7 +75,7 @@ public class MyItemsActivity extends AppCompatActivity {
                             openItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
@@ -109,7 +109,7 @@ public class MyItemsActivity extends AppCompatActivity {
                             biddingItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            String.valueOf(document.getData().get("imgUrl")),
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
@@ -164,11 +164,11 @@ public class MyItemsActivity extends AppCompatActivity {
             String seller = firebaseUser.getEmail();
             if(isChecked){
                 InitializeOpenItem(seller);
-                bORo.setText("공개 상품");
+                bORo.setText("오픈 경매 아이템");
                 setOnClickoListener();
             }else{
                 InitializeBiddingItem(seller);
-                bORo.setText("비공개 상품");
+                bORo.setText("비딩 경매 아이템");
                 setOnClickbListener();
             }
         }

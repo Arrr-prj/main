@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/white"
     tools:context=".LobyActivity">
 
     <ImageView
         android:id="@+id/loby_image"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="359dp"
-        android:layout_height="323dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="315dp"
+        android:layout_height="295dp"
+        android:layout_marginTop="110dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/auctionbackground4"
+        android:src="@drawable/autionbackground2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,7 @@
         android:layout_height="29dp"
         android:layout_marginTop="160dp"
         android:text="어렵게만 생각했던 경매를 쉽게"
-        android:textColor="#232222"
+        android:textColor="#8F8F8F"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

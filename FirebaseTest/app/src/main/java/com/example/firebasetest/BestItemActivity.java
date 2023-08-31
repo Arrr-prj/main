@@ -61,7 +61,7 @@ public class BestItemActivity extends AppCompatActivity {
 
         // 낙찰자가 있는 아이템을 불러오도록 함
         // Open Item
-        db.collection("OpenItem").whereNotEqualTo("confirm", false)
+        db.collection("OpenItem").whereNotEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -97,7 +97,7 @@ public class BestItemActivity extends AppCompatActivity {
                     }
                 });
         // Bidding Item
-        db.collection("BiddingItem").whereNotEqualTo("confirm", false)
+        db.collection("BiddingItem").whereNotEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -133,7 +133,7 @@ public class BestItemActivity extends AppCompatActivity {
                     }
                 });
         // ShareItem
-        db.collection("ShareItem").whereNotEqualTo("confirm", false)
+        db.collection("ShareItem").whereNotEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -170,7 +170,7 @@ public class BestItemActivity extends AppCompatActivity {
                 });
 
         // EventItem
-        db.collection("EventItem").whereNotEqualTo("confirm", false)
+        db.collection("EventItem").whereNotEqualTo("confirm", true)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){

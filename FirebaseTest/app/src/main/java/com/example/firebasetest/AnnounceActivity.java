@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,8 +25,7 @@ import java.util.Comparator;
 
 public class AnnounceActivity extends AppCompatActivity {
     ListView listView;
-    Button mBtnBck;
-    ImageButton mBtnregistAnnounce;
+    Button mBtnregistAnnounce, mBtnBck;
     public static ArrayList<Announcement> announcements = new ArrayList<Announcement>();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -61,7 +59,6 @@ public class AnnounceActivity extends AppCompatActivity {
                                 public void onClick(View view) {// 공지 사항 등록
                                     Intent intent = new Intent(AnnounceActivity.this, AnnounceRegistActivity.class);
                                     startActivity(intent);
-                                    finish();
                                 }
                             });
                         } else { // admin 계정이 아닐 때

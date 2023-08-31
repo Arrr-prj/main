@@ -5,21 +5,21 @@
     android:id="@+id/input_Name"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/loby_image"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="315dp"
-        android:layout_height="295dp"
-        android:layout_marginTop="110dp"
+        android:layout_width="285dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="76dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/auctionbackground4"
+        android:src="@drawable/autionbackground2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -61,18 +61,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="261dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="160dp"
-        android:text="어렵게만 생각했던 경매를 쉽게"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/login_textarrr"
         android:layout_width="184dp"
         android:layout_height="110dp"
@@ -94,7 +82,8 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="28dp"
-
+        android:backgroundTint="@color/black"
+        android:ems="10"
         android:hint="이메일를 입력하세요."
         android:inputType="textPersonName"
         android:textColorHint="#C8C8C8"
@@ -107,7 +96,8 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_marginTop="28dp"
-
+        android:backgroundTint="@color/black"
+        android:ems="10"
         android:hint="비밀번호를 입력하세요"
         android:inputType="textPassword"
         android:textColorHint="#C8C8C8"

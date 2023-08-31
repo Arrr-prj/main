@@ -59,7 +59,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
                 if (position != RecyclerView.NO_POSITION && imageClickListener != null) {
                     imageClickListener.onImageClick(position);
                 } else {
-
+                    Toast.makeText(context, "Click listener is null", Toast.LENGTH_SHORT).show();
                 }
             });
         }

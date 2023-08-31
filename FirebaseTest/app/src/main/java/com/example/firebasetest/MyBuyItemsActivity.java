@@ -75,7 +75,7 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                                 openItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("endPrice")),
                                                 String.valueOf(document.getData().get("category")),
@@ -114,7 +114,7 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                                 biddingItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                String.valueOf(document.getData().get("imgUrl")),
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("endPrice")),
                                                 String.valueOf(document.getData().get("category")),
@@ -169,11 +169,11 @@ public class MyBuyItemsActivity extends AppCompatActivity {
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
             if(isChecked){
                 InitializeOpenItem();
-                bORo.setText("공개 상품");
+                bORo.setText("오픈 경매 아이템");
                 setOnClickoListener();
             }else{
                 InitializeBiddingItem();
-                bORo.setText("비공개 상품");
+                bORo.setText("비공개 경매 아이템");
                 setOnClickbListener();
             }
         }
