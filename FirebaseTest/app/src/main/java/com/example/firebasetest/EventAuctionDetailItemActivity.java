@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+//import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private ViewPager2 sliderViewPager;
     private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
-    private String[] images = new String[6];
+    private String[] imageUrls;
     String buyer, document;
 
     boolean membershipValue;
@@ -106,27 +107,16 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             userEmail = user.getEmail(); // 현재 사용자의 이메일
             UserManager.getInstance().setUserEmail(userEmail); // UserManager에 이메일 저장
         }
+        // 이미지 URL 배열을 받아옵니다.
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
+
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
         getSelectoItem(); // 최고가를 업데이트하도록 수정한 부분
 // 이미지 URL을 한국 관련 이미지 URL로 대체하거나 이미지 URL이 있는 경우에만 추가
-        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
-            images[0] = imageUrl1;
-        }
-        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
-            images[1] = imageUrl2;
-        }
-        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
-            images[2] = imageUrl3;
-        }
-        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
-            images[3] = imageUrl4;
-        }
-        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
-            images[4] = imageUrl5;
-        }
-        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
-            images[5] = imageUrl6;
-        }
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, imageUrls));
         userDocRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -180,7 +170,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventAuctionDetailItemActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                intent.putExtra("images", imageUrls); // 이미지 URL 배열 전달
                 startActivity(intent);
             }
         });

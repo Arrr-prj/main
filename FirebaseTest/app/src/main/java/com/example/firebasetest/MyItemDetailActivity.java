@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
+//import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -46,7 +46,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
     ListAdapter listAdapter;
     FirebaseUser firebaseUser;
     private ViewPager2 sliderViewPager;
-    private PhotoView photoViewSlider;
+//    private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
 
 

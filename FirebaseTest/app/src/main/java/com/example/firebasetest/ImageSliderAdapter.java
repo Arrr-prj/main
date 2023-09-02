@@ -33,13 +33,15 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
     @NonNull
     @Override
     public ImageSliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_slider, parent, false);
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slider, parent, false);
         return new ImageSliderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageSliderViewHolder holder, int position) {
-        holder.bindSliderImage(sliderImage[position]);
+        String imageUrl = sliderImage[position];
+        Glide.with(context).load(imageUrl).into(holder.imageView);
     }
 
     @Override

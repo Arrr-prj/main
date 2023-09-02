@@ -127,6 +127,7 @@ public class ShareActivity extends AppCompatActivity {
                 showDetail.putExtra("title", item.getTitle());
                 showDetail.putExtra("seller", item.getSeller());
                 showDetail.putExtra("buyer", item.getSeller());
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("futureMillis", item.getFutureMillis());
                 startActivity(showDetail);
             }
@@ -147,16 +148,15 @@ public class ShareActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+                            // 이 코드를 사용하여 이미지 URL 배열을 가져옵니다.
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             // Firebase Storage에서 이미지 불러오기
                             shareItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),

@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -50,7 +51,7 @@ public class BiddingActivity extends AppCompatActivity {
         btnbck = findViewById(R.id.btn_back);
 
 //        setupEvents();
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         // 저장되어있는 데이터 가져오기
         this.InitializeBiddingItem();
         btnRegistItem = findViewById(R.id.btn_registItem);
@@ -64,7 +65,7 @@ public class BiddingActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText.length()>0){
+                if (newText.length() > 0) {
                     searching = true;
                     filterItemList(newText);
                 } else {
@@ -120,6 +121,7 @@ public class BiddingActivity extends AppCompatActivity {
         // 팝업 창에서 "낙찰포기" 하면 buyer = null로 할당.
 
     }
+
     // 상세 페이지 이벤트
     private void setUpOnClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -130,19 +132,20 @@ public class BiddingActivity extends AppCompatActivity {
                 Item item = (Item) listView.getItemAtPosition(position);
 
                 // 조회 수 카운팅
-                String documentId = item.getTitle()+item.getSeller();
+                String documentId = item.getTitle() + item.getSeller();
                 DocumentReference docRef = db.collection("BiddingItem").document(documentId);
                 Map<String, Object> updates = new HashMap<>();
-                updates.put("views", item.getViews()+1);
+                updates.put("views", item.getViews() + 1);
                 // 문서 수정
                 docRef.update(updates);
                 // 수정된 내용 갱신
                 UserDataHolderBiddingItems.loadBiddingItems();
 
                 Intent showDetail = new Intent(getApplicationContext(), BiddingDetailItemActivity.class);
-                showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
+                showDetail.putExtra("documentId", item.getTitle() + item.getSeller());
                 showDetail.putExtra("seller", item.getSeller());
                 showDetail.putExtra("buyer", item.getBuyer());
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                 showDetail.putExtra("futureMillis", item.getFutureMillis());
                 startActivity(showDetail);
@@ -151,7 +154,7 @@ public class BiddingActivity extends AppCompatActivity {
         });
     }
 
-    public void InitializeBiddingItem(){
+    public void InitializeBiddingItem() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
@@ -160,18 +163,19 @@ public class BiddingActivity extends AppCompatActivity {
         db.collection("BiddingItem")
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document : task.getResult()){
-                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl1"));
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+//                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id")+document.getData().get("imgUrl1"));
+                            // 이 코드를 사용하여 이미지 URL을 가져오고 0번째 배열 요소로 설정합니다.
+                            // 이 코드를 사용하여 이미지 URL 배열을 가져옵니다.
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
+
                             biddingItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -188,6 +192,7 @@ public class BiddingActivity extends AppCompatActivity {
                                             Integer.valueOf(String.valueOf(document.getData().get("views")))
                                     )
                             );
+
 
                         }
                         // 정렬
@@ -207,8 +212,9 @@ public class BiddingActivity extends AppCompatActivity {
                     }
                 });
     }
-    public String calMillis(String upload){
-        Log.d(TAG, "uploadMillis의 값 : "+upload);
+
+    public String calMillis(String upload) {
+        Log.d(TAG, "uploadMillis의 값 : " + upload);
         // upload한 날짜의 Millis
         Long uploadMillis = Long.parseLong(upload);
         // 오늘 날짜의 Millis
@@ -218,21 +224,24 @@ public class BiddingActivity extends AppCompatActivity {
         Long differenceMillis = nowMillis - uploadMillis;
         return String.valueOf(differenceMillis);
     }
-    public void filterItemList(String query){
+
+    public void filterItemList(String query) {
         search_biddingItemList.clear();
-        for(Item item : biddingItemList){
-            if(item.getId().toLowerCase().contains(query.toLowerCase())){
+        for (Item item : biddingItemList) {
+            if (item.getId().toLowerCase().contains(query.toLowerCase())) {
                 search_biddingItemList.add(item);
             }
             updateListView(search_biddingItemList);
         }
     }
-    public void updateListView(List<Item> itemList){
+
+    public void updateListView(List<Item> itemList) {
         adapter = new ListAdapter(this, itemList);
         listView.setAdapter(adapter);
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         startActivity(new Intent(BiddingActivity.this, HomeActivity.class));
     }
 

@@ -64,96 +64,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.457" />
 
-    <LinearLayout
-        android:id="@+id/linearimage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/sliderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ImageView
-            android:id="@+id/input_itemImg1"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-        <ImageView
-            android:id="@+id/input_itemImg2"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-        <ImageView
-            android:id="@+id/input_itemImg3"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearimage1"
+    </androidx.viewpager2.widget.ViewPager2>
+    <Button
+        android:id="@+id/btn_selectImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
+        android:text="image"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="249dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearimage">
-
-        <ImageView
-            android:id="@+id/input_itemImg4"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-        <ImageView
-            android:id="@+id/input_itemImg5"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-        <ImageView
-            android:id="@+id/input_itemImg6"
-            android:layout_width="98dp"
-            android:layout_height="90dp"
-            android:background="#616161"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_add_photo" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager"/>
 
     <EditText
         android:id="@+id/input_itemName"
@@ -219,7 +148,7 @@
         android:id="@+id/input_title"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="-440dp"
         android:ems="10"
         android:hint="글 제목"
         android:inputType="textPersonName"
@@ -228,7 +157,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearimage1" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <Button
         android:id="@+id/btn_itemRegist"

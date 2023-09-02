@@ -42,11 +42,11 @@ public class MyShareDetailActivity extends AppCompatActivity {
         // 아이템 정보들
         itemTitle = findViewById(R.id.itemTitle);
         itemId = findViewById(R.id.itemId);
-        startPrice = findViewById(R.id.startPrice);
-        endPrice = findViewById(R.id.endPrice);
+//        startPrice = findViewById(R.id.startPrice);
+//        endPrice = findViewById(R.id.endPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
-        imgUrl = findViewById(R.id.imgUrl);
+//        imgUrl = findViewById(R.id.imgUrl);
         category = findViewById(R.id.category);
 
         // 수정 or 삭제

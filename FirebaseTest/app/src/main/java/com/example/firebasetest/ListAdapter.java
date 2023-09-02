@@ -85,10 +85,16 @@ public class ListAdapter extends ArrayAdapter<Item> {
             } else {
                 itemView.setBackgroundColor(Color.WHITE);
             }
+            String[] imageUrls = data.getImageUrls();
+            if (imageUrls != null && imageUrls.length > 0) {
+                Glide.with(getContext())
+                        .load(imageUrls[0])
+                        .into(imgView);
+            } else {
+                // 이미지 URL이 없는 경우 처리할 내용 추가
+            }
 
-            Glide.with(getContext())
-                    .load(data.getImageUrl1())
-                    .into(imgView);
+
         }
         ImageView mBtnMore = itemView.findViewById(R.id.moreicon);
 

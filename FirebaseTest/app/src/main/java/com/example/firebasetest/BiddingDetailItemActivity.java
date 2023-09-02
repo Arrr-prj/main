@@ -2,14 +2,17 @@ package com.example.firebasetest;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+//import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,8 +31,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -42,23 +48,22 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long remainingTimeMillis; // 전역 변수로 추가
     private Button btnEdit, btnDelete;
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback;
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback, mBtnreport;
 
     private EditText bidText;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private LinearLayout bidPopupLayout;
     private ViewPager2 sliderViewPager;
     private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
     //    private FirebaseFirestore db;
     private String sellerName, bidAmount;
-    String buyer, document;
+    String buyer, document, sellerr;
     Item item;
     Bitmap bitmap;
     String userEmail; // 현재 유저의 이메일
-    private String[] images = new String[6];
-    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+    private String[] imageUrls;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -83,27 +88,9 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         timeinfo = findViewById(R.id.endTime);
         futureMillis = findViewById(R.id.futureMillis);
         userEmail = UserManager.getInstance().getUserEmail(); // 현재 사용자의 이메일
-        getSelectbItem();
+//        getSelectbItem();
 
-        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
-            images[0] = imageUrl1;
-        }
-        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
-            images[1] = imageUrl2;
-        }
-        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
-            images[2] = imageUrl3;
-        }
-        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
-            images[3] = imageUrl4;
-        }
-        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
-            images[4] = imageUrl5;
-        }
-        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
-            images[5] = imageUrl6;
-        }
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+
         remainingTimeMillis = 0;
 
         buyer = " ";
@@ -116,6 +103,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         mBtnConfirm = findViewById(R.id.btn_buyConfirm);
         mBtnBigButton = findViewById(R.id.btn_bigbutton);
         mBtnback = findViewById(R.id.btn_back);
+        mBtnreport = findViewById(R.id.btn_report); //신고버튼
 
         db = FirebaseFirestore.getInstance();
 
@@ -127,7 +115,12 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
 
         String sellerdisName = intent.getStringExtra("seller");
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
+// 이미지 URL 배열을 받아옵니다.
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
 
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
         getSelectbItem();
 
         Calendar calendar = Calendar.getInstance();
@@ -195,7 +188,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(BiddingDetailItemActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                intent.putExtra("images", imageUrls); // 이미지 URL 배열 전달
                 startActivity(intent);
             }
         });
@@ -229,7 +222,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
                 if (bidAmount.equals("") || bidAmount.equals((null))) {
                     Toast.makeText(BiddingDetailItemActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                } else {
                     if (!bidAmount.isEmpty()) {
                         // 컬렉션만들고 로직만들자리
                         long userBidAmount = Long.parseLong(bidAmount);
@@ -264,12 +257,75 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
             }
         });
 
+        mBtnreport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showReportDialog();
+            }
+        });
+
         cancelBidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bidPopupLayout.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void showReportDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("신고하기");
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_report2, null);
+        builder.setView(dialogView);
+        Item item = new Item();
+        builder.setPositiveButton("신고", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                String userEmail = sellerr;
+
+                updateReports(userEmail);
+            }
+        });
+
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 취소 버튼을 눌렀을 때 실행할 동작을 여기에 추가
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void updateReports(String email) {
+        // 사용자의 이메일을 기반으로 문서를 찾아옴
+        db.collection("User")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            DocumentReference userRef = document.getReference();
+
+                            db.runTransaction(new Transaction.Function<Void>() {
+                                @Override
+                                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                                    DocumentSnapshot userSnapshot = transaction.get(userRef);
+                                    if (userSnapshot.exists()) {
+                                        long currentReports = userSnapshot.getLong("reports");
+                                        transaction.update(userRef, "reports", currentReports + 1);
+                                    }
+                                    return null;
+                                }
+                            });
+                        }
+                    } else {
+                        // 처리 실패 시 동작
+                    }
+                });
     }
 
     private void updateEndTime(String documentId) {
@@ -308,6 +364,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         startPrice.setText(selectedItem.getPrice());
 //        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
         seller.setText(selectedItem.getSeller());
+        sellerr = selectedItem.getSeller();
         timeinfo.setText(selectedItem.getFutureDate());
 
         String title = selectedItem.getTitle();
@@ -414,7 +471,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         futureMillis.setText(remainingTime);
     }
 
-    // bidding Item 클릭 시 이벤트
+    // getSelectbItem() 메서드 내부에서 images 배열 초기화 및 값 복사
     private void getSelectbItem() {
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
@@ -428,12 +485,7 @@ public class BiddingDetailItemActivity extends AppCompatActivity {
         if (selectedItem != null) {
             // selectedItem 사용하기
             setbValues(selectedItem);
-            imageUrl1 = selectedItem.getImageUrl1();
-            imageUrl2 = selectedItem.getImageUrl2();
-            imageUrl3 = selectedItem.getImageUrl3();
-            imageUrl4 = selectedItem.getImageUrl4();
-            imageUrl5 = selectedItem.getImageUrl5();
-            imageUrl6 = selectedItem.getImageUrl6();
+
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }

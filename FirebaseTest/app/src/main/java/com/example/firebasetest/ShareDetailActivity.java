@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
+//import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -38,16 +38,15 @@ public class ShareDetailActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidJoin, mBtnAgain, mBtnCong, mBtnBigButton, mBtnback; // 입찰하기 버튼
     private String sellerName, bidAmount;
     private ViewPager2 sliderViewPager;
-    private PhotoView photoViewSlider;
+//    private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
-    private String[] images = new String[6];
+    private String[] imageUrls;
     String buyer, document;
-    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+//    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     FirebaseFirestore database;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
@@ -96,26 +95,12 @@ public class ShareDetailActivity extends AppCompatActivity {
         }
         open = false;
         getSelectoItem();
-        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
-            images[0] = imageUrl1;
-        }
-        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
-            images[1] = imageUrl2;
-        }
-        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
-            images[2] = imageUrl3;
-        }
-        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
-            images[3] = imageUrl4;
-        }
-        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
-            images[4] = imageUrl5;
-        }
-        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
-            images[5] = imageUrl6;
-        }
+        // 이미지 URL 배열을 받아옵니다.
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
 
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
 
         // 입력받은 입찰 가격
         mBtnBidJoin = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
@@ -201,7 +186,7 @@ public class ShareDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ShareDetailActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                intent.putExtra("images", imageUrls); // 이미지 URL 배열 전달
                 startActivity(intent);
             }
         });
@@ -352,12 +337,7 @@ public class ShareDetailActivity extends AppCompatActivity {
         if (selectedItem != null) {
             // selectedItem 사용하기
             setValues(selectedItem);
-            imageUrl1 = selectedItem.getImageUrl1();
-            imageUrl2 = selectedItem.getImageUrl2();
-            imageUrl3 = selectedItem.getImageUrl3();
-            imageUrl4 = selectedItem.getImageUrl4();
-            imageUrl5 = selectedItem.getImageUrl5();
-            imageUrl6 = selectedItem.getImageUrl6();
+
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }

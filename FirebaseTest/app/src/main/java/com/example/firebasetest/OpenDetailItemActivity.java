@@ -2,15 +2,18 @@ package com.example.firebasetest;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -26,8 +29,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -40,17 +45,17 @@ public class OpenDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
     private TextView itmeTitle, itemId, startPrice, endPrice, magamPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
+
     private EditText mETBidPrice;
     private ViewPager2 sliderViewPager;
-    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback;
-    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+    private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback, mBtnreport;
+
     String document, buyer, highPrice, buyerId, upfutureMillis;
     FirebaseFirestore database;
-    private String[] images = new String[6];
+    private String[] imageUrls;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
-    String userEmail; // 현재 유저의 이메일
+    String userEmail, sellerr; // 현재 유저의 이메일
     private boolean highestBidUpdated = false;
     private boolean first = true;
 
@@ -77,9 +82,9 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         timeinfo = findViewById(R.id.timeInfoinfo);
         futureMillis = findViewById(R.id.futureMillis);
         mBtnback = findViewById(R.id.btn_back);
+        mBtnreport = findViewById(R.id.btn_report); //신고버튼
         remainingTimeMillis = 0;
         highPrice = "0";
-
 
         buyer = " ";
         buyerId = " ";
@@ -108,27 +113,13 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
         userEmail = UserManager.getInstance().getUserEmail(); // 현재 사용자의 이메일
 //            UserManager.getInstance().setUserEmail(userEmail); // UserManager에 이메일 저장
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
+
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
         getSelectedItem();
 
-        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
-            images[0] = imageUrl1;
-        }
-        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
-            images[1] = imageUrl2;
-        }
-        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
-            images[2] = imageUrl3;
-        }
-        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
-            images[3] = imageUrl4;
-        }
-        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
-            images[4] = imageUrl5;
-        }
-        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
-            images[5] = imageUrl6;
-        }
-        sliderViewPager.setAdapter(new ImageSliderAdapter(this, images));
         mBtnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,7 +132,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OpenDetailItemActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                intent.putExtra("images", imageUrls); // 이미지 URL 배열 전달
                 startActivity(intent);
             }
         });
@@ -337,14 +328,70 @@ public class OpenDetailItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OpenDetailItemActivity.this, LargeImageActivity.class);
-                intent.putExtra("images", images); // 이미지 URL 배열 전달
+                intent.putExtra("images", imageUrls); // 이미지 URL 배열 전달
                 startActivity(intent);
             }
         });
-
-        // 이하 내용은 코드 조각입니다. (updateEndTime 및 getEndTime 메소드 호출 등)
+        mBtnreport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showReportDialog();
+            }
+        });
     }
+    private void showReportDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("신고하기");
 
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_report2, null);
+        builder.setView(dialogView);
+        Item item = new Item();
+        builder.setPositiveButton("신고", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                String userEmail = sellerr;
+
+                updateReports(userEmail);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // 취소 버튼을 눌렀을 때 실행할 동작을 여기에 추가
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void updateReports(String email) {
+        // 사용자의 이메일을 기반으로 문서를 찾아옴
+        db.collection("User")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            DocumentReference userRef = document.getReference();
+
+                            db.runTransaction(new Transaction.Function<Void>() {
+                                @Override
+                                public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                                    DocumentSnapshot userSnapshot = transaction.get(userRef);
+                                    if (userSnapshot.exists()) {
+                                        long currentReports = userSnapshot.getLong("reports");
+                                        transaction.update(userRef, "reports", currentReports + 1);
+                                    }
+                                    return null;
+                                }
+                            });
+                        }
+                    } else {
+                        // 처리 실패 시 동작
+                    }
+                });
+    }
 
     private void updateEndTime(String documentId) {
         // 현재 시간을 기준으로 종료 시간 업데이트
@@ -439,7 +486,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
                     endPrice.setText(String.valueOf(highestBid));
                     magamPrice.setText(selectedItem.getMagamPrice());
                     seller.setText(selectedItem.getSeller());
-
+                    sellerr = selectedItem.getSeller();
                     timeinfo.setText(selectedItem.getFutureDate());
 
 
@@ -538,12 +585,7 @@ public class OpenDetailItemActivity extends AppCompatActivity {
         }
         if (selectedItem != null) {
             setItemValues(selectedItem);
-            imageUrl1 = selectedItem.getImageUrl1();
-            imageUrl2 = selectedItem.getImageUrl2();
-            imageUrl3 = selectedItem.getImageUrl3();
-            imageUrl4 = selectedItem.getImageUrl4();
-            imageUrl5 = selectedItem.getImageUrl5();
-            imageUrl6 = selectedItem.getImageUrl6();
+
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }
