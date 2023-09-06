@@ -24,10 +24,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,18 +64,18 @@ public class OpenRegistItemActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     TextView write_text;
     EditText itemTitle, itemName, itemPrice, itemmagamPrice, itemInfo;
-    Button itemCategory, selectImagesBtn;
-    private ViewPager2 sliderViewPager;
+    ImageView selectImagesBtn, delImageBtn;
 
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠 레저", "취미 게임", "기타"};
-    ArrayList<Uri> mArrayUri = new ArrayList<>();
     private final int PICK_IMAGE_MULTIPLE = 1;
+    ArrayList<Uri> mArrayUri = new ArrayList<>();
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    Button mBtnback;
+    private Spinner itemCategorySpinner;
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠 레저", "취미 게임", "기타"};
+    private String selectedCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,51 +84,42 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         itemTitle = findViewById(R.id.input_title);
         itemName = findViewById(R.id.input_itemName);
         itemPrice = findViewById(R.id.input_itemPrice);
-        itemmagamPrice = findViewById(R.id.input_itemendPrice);
         itemInfo = findViewById(R.id.input_itemExplain);
-        itemCategory = findViewById(R.id.input_itemCategory);
         write_text = findViewById(R.id.write_text);
-        selectImagesBtn = findViewById(R.id.btn_selectImg);
+        selectImagesBtn = findViewById(R.id.iv_camera);
+        delImageBtn= findViewById(R.id.iv_del);
+        mBtnback = findViewById(R.id.btn_back);
+        itemCategorySpinner = findViewById(R.id.input_itemCategory);
+
+        // 스피너 어댑터 설정
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itemCategorySpinner.setAdapter(adapter);
+
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
 
         Log.d(TAG, "<< 시작 가격 최소 금액은 100원입니다. >>");
 
-        // 이미지 클릭 이벤트
-        ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                        Intent data = result.getData();
-                        if (data.getClipData() != null) {
-                            int count = data.getClipData().getItemCount();
-                            for (int i = 0; i < count; i++) {
-                                Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                                // imageUri를 업로드하고 URL 가져오는 작업을 수행
-                                // 업로드된 이미지의 URL을 imageUrl1, imageUrl2, ... 에 저장
-                            }
-                            // 업로드 완료 후 동작 수행
-                        } else if (data.getData() != null) {
-                            Uri imageUri = data.getData();
-                            // imageUri를 업로드하고 URL 가져오는 작업을 수행
-                            // 업로드된 이미지의 URL을 imageUrl1, imageUrl2, ... 에 저장
-                            // 업로드 완료 후 동작 수행
-                        }
-                    }
-                });
-
-        // 카테고리 클릭 시 이벤트
-        itemCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog(view);
-            }
-        });
-        selectImagesBtn.setOnClickListener(new View.OnClickListener() {
+        delImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openGallery();
+                deleteImage();
             }
         });
+        // 카테고리 클릭 시 이벤트
+        itemCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // 선택된 카테고리를 처리하는 코드를 여기에 추가하세요.
+                selectedCategory = categories[position];
+                // 선택된 카테고리를 사용하여 원하는 작업을 수행합니다.
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // 아무것도 선택되지 않았을 때 처리할 코드를 여기에 추가하세요.
+            }
+        });
         // 등록 클릭 이벤트
         Button registBtn = findViewById(R.id.btn_itemRegist);
         registBtn.setOnClickListener(new View.OnClickListener() {
@@ -134,9 +128,9 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                 String strTitle = itemTitle.getText().toString();
                 String strName = itemName.getText().toString();
                 String strPrice = itemPrice.getText().toString();
-                String strmagamPrice = itemmagamPrice.getText().toString();
+//                String strmagamPrice = itemmagamPrice.getText().toString();
                 String strInfo = itemInfo.getText().toString();
-                String strCategory = itemCategory.getText().toString();
+                String strCategory = selectedCategory;//itemCategory.getText().toString();
                 String sellerId = firebaseUser.getEmail();
 
                 if (strCategory.isEmpty()) {
@@ -144,31 +138,65 @@ public class OpenRegistItemActivity extends AppCompatActivity {
                     return;
                 }
                 Log.d(TAG, "" + sellerId);
-
-                uploadToFirebase(strTitle, strName, strPrice, strmagamPrice, strInfo, strCategory, sellerId);
+                uploadToFirebase(strTitle, strName, strPrice, strInfo, strCategory, sellerId);
                 Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
                 startActivity(intent);
-
             }
         });
-
+        selectImagesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
         // 아이템 리스트 버튼 클릭 이벤트
-        Button listBtn = findViewById(R.id.btn_back);
-        listBtn.setOnClickListener(new View.OnClickListener() {
+        // 아이템 리스트 버튼 클릭 이벤트
+        mBtnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showConfirmationDialog();
             }
         });
-
     } // onCreate
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("확인")
+                .setMessage("정말 작성을 취소하시겠습니까?\n작성중인 내용이 삭제됩니다.")
+                .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 예 버튼 클릭 시 처리할 로직 작성
+                        Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("아니요", null); // 아니요 버튼
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void deleteImage() {
+        if (mArrayUri.size() > 0) {
+            // 선택한 이미지들을 모두 삭제
+            mArrayUri.clear();
+
+            // ViewPager2를 업데이트하여 이미지가 삭제된 것을 사용자에게 표시
+            ViewPager2 viewPager2 = findViewById(R.id.sliderViewPager);
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, mArrayUri);
+            viewPager2.setAdapter(viewPagerAdapter);
+
+            Toast.makeText(this, "이미지가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "삭제할 이미지가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -193,6 +221,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             viewPager2.setAdapter(viewPagerAdapter);
         }
     }
+
     public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
 
         private ArrayList<Uri> mArrayUri;
@@ -231,26 +260,9 @@ public class OpenRegistItemActivity extends AppCompatActivity {
             }
         }
     }
-    private void showConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("확인")
-                .setMessage("정말 작성을 취소하시겠습니까?\n작성중인 내용이 삭제됩니다.")
-                .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 예 버튼 클릭 시 처리할 로직 작성
-                        Intent intent = new Intent(OpenRegistItemActivity.this, OpenAuctionActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("아니요", null); // 아니요 버튼
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
     // 파이어베이스 이미지 업로드
-    private void uploadToFirebase(String strTitle, String strName, String strPrice, String strmagamPrice, String strInfo, String strCategory, String sellerId) {
+    private void uploadToFirebase(String strTitle, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
 
         // 모든 이미지의 URL을 가져온 후 Firestore 데이터 업로드
         Map<String, Object> data = new HashMap<>();
@@ -274,7 +286,7 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         } else {
             data.put("endPrice", "100");
         }
-        data.put("magamPrice", strmagamPrice);
+//        data.put("magamPrice", strmagamPrice);
         data.put("info", strInfo);
         data.put("category", strCategory);
         data.put("seller", sellerId);
@@ -282,9 +294,11 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         data.put("futureMillis", futureMillis);
         data.put("futureDate", formattedDate);
         data.put("uploadMillis", uploadMillis);
+        data.put("buyerConfirm", false);
         data.put("confirm", false);
         data.put("itemType", "OpenItem");
         data.put("views", 0);
+        data.put("cancel", "0");
 
         // 업로드된 이미지 URL을 저장
         ArrayList<String> imageUrls = new ArrayList<>();
@@ -344,22 +358,6 @@ public class OpenRegistItemActivity extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
-    }
-
-    public void showDialog(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("카테고리 선택")
-                .setItems(categories, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String selectedCategory = categories[which];
-                        // 선택한 카테고리 값을 TextView에 할당
-                        itemCategory.setText(selectedCategory);
-                    }
-                })
-                .setNegativeButton("취소", null); // 취소 버튼
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     //이미지 업로드시 url 처리

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/_pay"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,8 +14,8 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:background="#00FF0000"
             android:text="◀"
@@ -25,8 +25,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar3"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="#210063"
+            android:layout_height="55dp"
+            android:background="@drawable/toolbar_gradient"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,8 +60,8 @@
 
         <ImageButton
             android:id="@+id/btn_category"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/img_1"

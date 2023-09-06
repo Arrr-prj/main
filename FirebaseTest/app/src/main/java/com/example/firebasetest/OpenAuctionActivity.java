@@ -62,7 +62,7 @@ public class OpenAuctionActivity extends AppCompatActivity {
 
         this.InitializeOpenItem();
 
-        btnRegistItem = findViewById(R.id.btn_registItem);
+        btnRegistItem = findViewById(R.id.btn_registOpenItem);
 
         searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -131,6 +131,9 @@ public class OpenAuctionActivity extends AppCompatActivity {
                 showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                 showDetail.putExtra("futureMillis", item.getFutureMillis());
+                showDetail.putExtra("endprice", item.getEndPrice());
+                showDetail.putExtra("cancel",item.getCancel());
+
                 startActivity(showDetail);
             }
         });
@@ -171,7 +174,8 @@ public class OpenAuctionActivity extends AppCompatActivity {
                                             String.valueOf(calMillis(String.valueOf(document.getData().get("uploadMillis")))), // 오늘이랑 업로드한 날짜 차이
                                             Boolean.getBoolean(String.valueOf(document.getData().get("confirm"))),
                                             String.valueOf(document.getData().get("itemType")),
-                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
+                                            Integer.valueOf(String.valueOf(document.getData().get("views"))),
+                                            String.valueOf(document.getData().get("cancel"))
                                     )
                             );
                         }

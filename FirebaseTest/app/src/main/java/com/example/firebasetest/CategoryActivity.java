@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -74,15 +75,13 @@ public class CategoryActivity extends AppCompatActivity {
                         ArrayList<Item> openItem  = new ArrayList<>(); // 새로운 임시 리스트에 저장
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -111,16 +110,13 @@ public class CategoryActivity extends AppCompatActivity {
 
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -149,16 +145,13 @@ public class CategoryActivity extends AppCompatActivity {
 
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -186,16 +179,13 @@ public class CategoryActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
-                                            String.valueOf(document.getData().get("imgUrl2")),
-                                            String.valueOf(document.getData().get("imgUrl3")),
-                                            String.valueOf(document.getData().get("imgUrl4")),
-                                            String.valueOf(document.getData().get("imgUrl5")),
-                                            String.valueOf(document.getData().get("imgUrl6")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("endPrice")),
@@ -257,6 +247,7 @@ public class CategoryActivity extends AppCompatActivity {
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
@@ -282,6 +273,7 @@ public class CategoryActivity extends AppCompatActivity {
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
@@ -304,6 +296,7 @@ public class CategoryActivity extends AppCompatActivity {
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
@@ -326,6 +319,7 @@ public class CategoryActivity extends AppCompatActivity {
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());

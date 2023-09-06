@@ -52,7 +52,7 @@ public class EventAuctionActivity extends AppCompatActivity {
 
         this.InitializeOpenItem();
 
-        btnRegistItem = findViewById(R.id.btn_registItem);
+        btnRegistItem = findViewById(R.id.btn_registEventItem);
 
 
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid

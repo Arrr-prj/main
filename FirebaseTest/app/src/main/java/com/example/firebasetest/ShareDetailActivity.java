@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-//import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -40,13 +40,13 @@ public class ShareDetailActivity extends AppCompatActivity {
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidJoin, mBtnAgain, mBtnCong, mBtnBigButton, mBtnback; // 입찰하기 버튼
+    private ImageView SellerInfo;
     private String sellerName, bidAmount;
     private ViewPager2 sliderViewPager;
-//    private PhotoView photoViewSlider;
+    private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
     private String[] imageUrls;
     String buyer, document;
-//    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
     FirebaseFirestore database;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
@@ -76,6 +76,8 @@ public class ShareDetailActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        SellerInfo = findViewById(R.id.iv_profile); // 판매자정보
+
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String seller = intent.getStringExtra("seller");
@@ -85,6 +87,29 @@ public class ShareDetailActivity extends AppCompatActivity {
         String futureMillis = intent.getStringExtra("futureMillis");
         String documentId = title + seller;
         String uid = UserManager.getInstance().getUserUid(); // 현재 유저의 uid
+
+        // User 컬렉션에서 판매자 정보 가져오기
+        db.collection("User")
+                .whereEqualTo("email", seller)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        // 첫 번째 문서 가져오기
+                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+
+                        // User 문서에서 프로필 사진 URL 가져오기
+                        String profileImageUrl = document.getString("profile picture");
+
+                        Glide.with(this)
+                                .load(profileImageUrl)
+                                .into(SellerInfo);
+                    } else {
+                        // 해당 이메일을 가진 User 문서가 없을 때 처리
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // User 컬렉션에서 데이터 가져오기 실패 처리
+                });
 
 
         Calendar calendar = Calendar.getInstance();
@@ -101,6 +126,8 @@ public class ShareDetailActivity extends AppCompatActivity {
         // ViewPager2 어댑터를 설정합니다.
         ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
         sliderViewPager.setAdapter(imageSliderAdapter);
+
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, imageUrls));
 
         // 입력받은 입찰 가격
         mBtnBidJoin = findViewById(R.id.btn_shareJoin); // 입찰하기 버튼
@@ -136,6 +163,8 @@ public class ShareDetailActivity extends AppCompatActivity {
             mBtnBidJoin.setVisibility(View.VISIBLE);
         }
         DocumentReference docRef = database.collection("ShareItem").document(documentId);
+
+
         // 문서 읽기
         docRef.get().addOnCompleteListener(task -> {
             if (true) {
@@ -174,6 +203,16 @@ public class ShareDetailActivity extends AppCompatActivity {
                 // futureMillis 필드가 null인 경우
             }
         });
+
+        SellerInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShareDetailActivity.this, SellerInfoActivity.class);
+                intent.putExtra("sellerId",sellerName);
+                startActivity(intent);
+            }
+        });
+
         mBtnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,7 +289,7 @@ public class ShareDetailActivity extends AppCompatActivity {
                     timeinfo.setText(selectedItem.getFutureDate());
 
                     String title = selectedItem.getTitle();
-                    String sellerName = selectedItem.getSeller();
+                    sellerName = selectedItem.getSeller();
 
                     String documentId1 = title + sellerName;
 

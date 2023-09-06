@@ -9,24 +9,25 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="81dp"
-        android:background="?attr/colorPrimary"
-        android:backgroundTint="#330099"
+        android:layout_height="55dp"
+        android:background="@drawable/toolbar_gradient"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="@+id/TV_categoryType"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
 
     <TextView
         android:id="@+id/TV_categoryType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:text="차 량"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,10 +35,12 @@
 
     <Button
         android:id="@+id/btn_back"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:backgroundTint="#330099"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#00ff0000"
         android:text="◀"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +48,7 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="55dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

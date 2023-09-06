@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,11 +33,14 @@ public class MyShareDetailActivity extends AppCompatActivity {
     private ImageView imgUrl;
     FirebaseUser firebaseUser;
     ListAdapter shareAdapter;
+    private ViewPager2 sliderViewPager;
+    private String[] imageUrls;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_share_detail);
-
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+        sliderViewPager.setOffscreenPageLimit(1);
         db = FirebaseFirestore.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         // 아이템 정보들
@@ -46,14 +50,19 @@ public class MyShareDetailActivity extends AppCompatActivity {
 //        endPrice = findViewById(R.id.endPrice);
         itemInfo = findViewById(R.id.itemInfo);
         seller = findViewById(R.id.seller);
-//        imgUrl = findViewById(R.id.imgUrl);
+//        imgUrl = findViewById(R.id.imgUrl); 이미지 수정
         category = findViewById(R.id.category);
 
         // 수정 or 삭제
         btnDelete = findViewById(R.id.btn_delete);
         btnEdit = findViewById(R.id.btn_edit);
         btnList = findViewById(R.id.btn_list);
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
 
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
+        sliderViewPager.setAdapter(new ImageSliderAdapter(this, imageUrls));
         Intent intent = getIntent();
         String state = intent.getStringExtra("state");
         // 나눔 받은 아이템인 경우
@@ -178,12 +187,12 @@ public class MyShareDetailActivity extends AppCompatActivity {
                         itemId.setText(get_id);
                         itemInfo.setText(get_info);
                         category.setText(get_category);
-                        startPrice.setText(get_price);
-                        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
+//                        startPrice.setText(get_price);
+//                        endPrice.setText("0"); // 낙찰가 설정 방법 구상 필요 **************
                         seller.setText(firebaseUser.getEmail());
-                        Glide.with(MyShareDetailActivity.this)
-                                .load(get_url)
-                                .into(imgUrl);
+//                        Glide.with(MyShareDetailActivity.this)
+//                                .load(get_url)
+//                                .into(imgUrl);
 
                     }
                 });

@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,10 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -40,19 +39,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
-
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private String Username ;
     private FirebaseUser currentUser;
 
-    private ImageButton btnBidding, btnOpen, btnBest, btnShare, btnEvent, btnAlarm, btnMypage, btnMembership;
+    private ImageButton btnBidding, btnOpen, btnBest, btnShare, btnEvent, btnAlarm, btnMypage, btnMembership,btnSearch;
 
     private ImageButton btnCateCar, btnCateAcc, btnCateClo, btnCatelimited , btnCatePremium, btnCateShoes, btnCateGoods, btnCateFurn,btnCateSport, btnCateGame, btnCateAnotOther, btnCateBag; // 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
     private ImageButton btnCateNike, btnCateAdidas, btnCateApple, btnCateSamsung; // 브랜드 카테고리 버튼들은 헷갈리지 않게 따로 만들었습니다.
 
-    private ImageView buyItem, saleItem, shareItem, waitingBuy, eventItem, btnAnnounce, btnReport; // 슬라이드한 곳에 있는 버튼
+    private ImageView buyItem, saleItem, shareItem, waitingBuy, eventItem, btnAnnounce, btnReport,btnChat; // 슬라이드한 곳에 있는 버튼
     private TextView textName;
 
     private Boolean membershipValue;
@@ -63,6 +61,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvPageNumber;
     private LinearLayout ll_left_area;
     private DrawerLayout drawerLayout;
+
+
+    private Button btn_pay;
 
 
     @Override
@@ -82,6 +83,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnAnnounce = findViewById(R.id.btn_announce);
         currentUser = mAuth.getCurrentUser();
         btnReport = findViewById(R.id.btn_report);
+        btnChat = findViewById(R.id.btn_chat);
 
         // 카테고리 버튼들은 헷갈리지 않게 따로 선언해줬습니다
         // 필요하실때 가져다가 쓰시면 됩니다.
@@ -97,6 +99,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         btnCateSport = findViewById(R.id.btn_cateSpo); // 스포츠 / 레저 카테고리 버튼
         btnCateGame = findViewById(R.id.btn_cateHob); // 게임 / 취미 카테고리 버튼
         btnCateBag = findViewById(R.id.btn_cateBag);
+
+        btnSearch = findViewById(R.id.btn_search);// 홈 검색 버튼
 
 
 
@@ -126,6 +130,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
         db = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = db.collection("User").document(uid);
@@ -141,7 +146,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         findViewById(R.id.iv_hamburger).setOnClickListener((View.OnClickListener) this);
-        viewPager2 = findViewById(R.id.viewPager2);
 //        initViewPager2();
         textName = findViewById(R.id.text_name);
 
@@ -198,6 +202,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //            builder.show(); // 다이얼로그 보이기
 //        }
 
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 현재 액티비티에서 값을 저장하여 다른 액티비티로 전달
+                Intent intent = new Intent(HomeActivity.this, ChatRoomListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnCateBag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +220,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, HomeSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnCateCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -452,12 +474,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        btnReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReportDialog();
-            }
-        });
+
 
         btnBidding.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -497,6 +514,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showReportDialog();
+            }
+        });
     }
     private void showReportDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -526,7 +549,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     private void updateReports(String email) {
         // 사용자의 이메일을 기반으로 문서를 찾아옴
         db.collection("User")
@@ -631,7 +653,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         viewModel.getCurrentPosition().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer currentPosition) {
-                ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
                 viewPager2.setCurrentItem(currentPosition);
             }
         });

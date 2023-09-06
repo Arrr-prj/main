@@ -2,12 +2,18 @@ package com.example.firebasetest;
 
 import static android.content.ContentValues.TAG;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class UserDataHolderOpenItems {
@@ -43,6 +49,20 @@ public class UserDataHolderOpenItems {
                             // Item 생성자에 맞게 데이터 추가
                             Item item = new Item(title,  imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, id, price, endPrice, category, info, seller, buyer, futureMillis, futureDate, uploadMillis, differenceDays, confirm, itemType, views);
                             openItemList.add(item);
+                            DocumentReference doc = db.collection("OpenAuctionInProgress").document(title + seller);
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("cancel", "0"); // 필드 추가
+                            doc.set(data)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
                         }
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());

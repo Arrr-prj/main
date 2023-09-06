@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ListAdapter extends ArrayAdapter<Item> {
@@ -41,13 +42,12 @@ public class ListAdapter extends ArrayAdapter<Item> {
     LayoutInflater layoutInflater = null;
     ImageView load;
     Bitmap bitmap;
-
+    private DecimalFormat decimalFormat;
     public ListAdapter(Context context, List<Item> dataList) {
         super(context, 0, dataList);
         this.oItem = dataList;
         this.context = context;
     }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -72,7 +72,9 @@ public class ListAdapter extends ArrayAdapter<Item> {
             if (String.valueOf(data.getPrice()).equals("share item")) {
                 price.setText("무료나눔 상품입니다");
             } else {
-                price.setText("시작 가격 : " + String.valueOf(data.getPrice()));
+                decimalFormat = new DecimalFormat("#,###");
+                String formattedPrice = decimalFormat.format(Double.valueOf(data.getPrice()));
+                price.setText("시작 가격 : " + formattedPrice);
             }
             //현재시간을 가져오고 아이템의 저장돼있는 마감시간을 비교해서 현재시간이 더 높으면 색깔처리 (회색말고 색깔 변경가능)
             long currenTimeMillis = System.currentTimeMillis();

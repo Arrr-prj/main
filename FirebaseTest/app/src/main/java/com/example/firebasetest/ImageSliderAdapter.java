@@ -46,7 +46,10 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     @Override
     public int getItemCount() {
-        return sliderImage.length;
+        if (sliderImage != null) {
+            return sliderImage.length;
+        }
+        return 0;
     }
 
     public class ImageSliderViewHolder extends RecyclerView.ViewHolder {

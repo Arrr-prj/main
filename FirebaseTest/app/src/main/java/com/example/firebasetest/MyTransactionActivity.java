@@ -33,7 +33,6 @@ public class MyTransactionActivity extends AppCompatActivity {
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyTransactionActivity.this, MyPageActivity.class));
                 finish();
             }
         });
@@ -97,7 +96,6 @@ public class MyTransactionActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        startActivity(new Intent(MyTransactionActivity.this, MyPageActivity.class));
         finish();
     }
 }

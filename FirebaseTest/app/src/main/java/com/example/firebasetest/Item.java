@@ -12,12 +12,12 @@ public class Item {
     private String title;
     private String futureMillis;
     private String futureDate;
-    private String endPrice;
-    private String uploadMillis;
+    private  String endPrice;
+    private  String uploadMillis;
     private Boolean confirm;
     private String buyer;
     private String itemType;
-    private String email, name, address, nickname, reports, membership, magamPrice;
+    private String cancel;
 
     public String getDifferenceDays() {
         return differenceDays;
@@ -26,11 +26,11 @@ public class Item {
     public void setDifferenceDays(String differenceDays) {
         this.differenceDays = differenceDays;
     }
-
+    private String email, name, address, nickname, reports, membership, magamPrice;
     private String differenceDays;
     private Integer views;
     private String[] imageUrls;
-    public Item(String title, String[] imageUrls, String id, String price, String endPrice, String magamPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
+    public Item(String title, String[] imageUrls, String id, String price, String endPrice, String magamPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views, String cancel) {
         this.title = title;
         this.imageUrls = imageUrls;
         this.id = id;
@@ -48,125 +48,30 @@ public class Item {
         this.confirm = confirm;
         this.itemType = itemType;
         this.views = views;
+        this.cancel = cancel;
     }
-    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
-        this.title = title;
-        this.id = id;
-        this.price = price;
-        this.endPrice = endPrice;
-        this.imageUrl1 = imageUrl1;
-        this.imageUrl2 = imageUrl2;
-        this.imageUrl3 = imageUrl3;
-        this.imageUrl4 = imageUrl4;
-        this.imageUrl5 = imageUrl5;
-        this.imageUrl6 = imageUrl6;
-        this.category = category;
-        this.info = info;
-        this.seller = seller;
-        this.buyer = buyer;
-        this.futureDate = futureDate;
-        this.futureMillis = futureMillis;
-        this.uploadMillis = uploadMillis;
-        this.differenceDays = differenceDays;
-        this.confirm = confirm;
-        this.itemType = itemType;
-        this.views = views;
-    }
-
-    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm) {
-        this.title = title;
-        this.id = id;
-        this.price = price;
-        this.endPrice = endPrice;
-        this.imageUrl1 = imageUrl1;
-        this.imageUrl2 = imageUrl2;
-        this.imageUrl3 = imageUrl3;
-        this.imageUrl4 = imageUrl4;
-        this.imageUrl5 = imageUrl5;
-        this.imageUrl6 = imageUrl6;
-        this.category = category;
-        this.info = info;
-        this.seller = seller;
-        this.buyer = buyer;
-        this.futureDate = futureDate;
-        this.futureMillis = futureMillis;
-        this.uploadMillis = uploadMillis;
-        this.differenceDays = differenceDays;
-        this.confirm = confirm;
-    }
-
-    public Item() {
-
-    }
-    public Item(String title, String[] imageUrls, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
+    public Item(String title, String[] imageUrls, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views, String cancel) {
         this.title = title;
         this.imageUrls = imageUrls;
         this.id = id;
         this.price = price;
         this.endPrice = endPrice;
-        this.category = category;
-        this.info = info;
-        this.seller = seller;
-        this.buyer = buyer;
-        this.futureDate = futureDate;
-        this.futureMillis = futureMillis;
-        this.uploadMillis = uploadMillis;
-        this.differenceDays = differenceDays;
-        this.confirm = confirm;
-        this.itemType = itemType;
-        this.views = views;
-    }
-
-
-    public Item(String title, String imageUrl, String id, String price, String category, String info, String seller, String futureMillis, String futureDate, Boolean confirm) {
-        this.title = title;
-        this.id = id;
-        this.price = price;
-        this.imageUrl1 = imageUrl;
-        this.category = category;
-        this.info = info;
-        this.seller = seller;
-        this.futureDate = futureDate;
-        this.futureMillis = futureMillis;
-        this.confirm = confirm; // **
-    }
-
-    public Item(String title, String imageUrl, String id, String category, String info, String seller, String futureMillis, String futureDate) { // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
-        this.title = title;
-        this.id = id;
-        this.price = "share item";
-        this.imageUrl1 = imageUrl;
-        this.category = category;
-        this.info = info;
-        this.seller = seller;
-        this.futureDate = futureDate;
-        this.futureMillis = futureMillis;
-    }
-
-    public Item(String email, String name, String address, String membership, String nickname, String reports) {
-        this.email = email;
-        this.name = name;
-        this.address = address;
-        this.membership = membership;
-        this.nickname = nickname;
-        this.reports = reports;
-    }
-// 생성자 추가
-
-    public String[] getImageUrls() {
-        return imageUrls;
-    }
-
-    public void setImageUrls(String[] imageUrls) {
-        this.imageUrls = imageUrls;
-    }
-    public String getMagamPrice() {
-        return magamPrice;
-    }
-
-    public void setMagamPrice(String magamPrice) {
         this.magamPrice = magamPrice;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.uploadMillis = uploadMillis;
+        this.differenceDays = differenceDays;
+        this.confirm = confirm;
+        this.itemType = itemType;
+        this.views = views;
+        this.cancel = cancel;
     }
+    public String getCancel(){ return cancel;}
+    public void setCancel(){this.cancel = cancel;}
 
     public String getEmail() {
         return email;
@@ -216,10 +121,125 @@ public class Item {
         this.membership = membership;
     }
 
+    public String getMagamPrice() {
+        return magamPrice;
+    }
+
+    public void setMagamPrice(String magamPrice) {
+        this.magamPrice = magamPrice;
+    }
+
+    public Item(String title, String[] imageUrls, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views) {
+        this.title = title;
+        this.imageUrls = imageUrls;
+        this.id = id;
+        this.price = price;
+        this.endPrice = endPrice;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.uploadMillis = uploadMillis;
+        this.differenceDays = differenceDays;
+        this.confirm = confirm;
+        this.itemType = itemType;
+        this.views = views;
+    }
+
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6,  String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm, String itemType, Integer views){
+        this.title = title;
+        this.id = id;
+        this.price = price;
+        this.endPrice = endPrice;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.imageUrl3 = imageUrl3;
+        this.imageUrl4 = imageUrl4;
+        this.imageUrl5 = imageUrl5;
+        this.imageUrl6 = imageUrl6;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.uploadMillis = uploadMillis;
+        this.differenceDays = differenceDays;
+        this.confirm = confirm;
+        this.itemType = itemType;
+        this.views = views;
+    }
+
+    public Item(String title, String imageUrl1, String imageUrl2, String imageUrl3, String imageUrl4, String imageUrl5, String imageUrl6, String id, String price, String endPrice, String category, String info, String seller, String buyer, String futureMillis, String futureDate, String uploadMillis, String differenceDays, Boolean confirm){
+        this.title = title;
+        this.id = id;
+        this.price = price;
+        this.endPrice = endPrice;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.imageUrl3 = imageUrl3;
+        this.imageUrl4 = imageUrl4;
+        this.imageUrl5 = imageUrl5;
+        this.imageUrl6 = imageUrl6;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.buyer = buyer;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.uploadMillis = uploadMillis;
+        this.differenceDays = differenceDays;
+        this.confirm = confirm;
+    }
+
+    public Item(){
+
+    }
+    public Item(String title, String[] imageUrls, String id, String price, String category, String info, String seller, String futureMillis, String futureDate, Boolean confirm){
+        this.title = title;
+        this.id = id;
+        this.price = price;
+        this.imageUrls = imageUrls;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+        this.confirm = confirm; // **
+    }
+
+    public Item(String title, String[] imageUrls, String id, String category, String info, String seller, String futureMillis, String futureDate){ // 나눔 아이템 생성자 오버로딩 -> 가격이 빠져있음
+        this.title = title;
+        this.id = id;
+        this.price = "share item";
+        this.imageUrls = imageUrls;
+        this.category = category;
+        this.info = info;
+        this.seller = seller;
+        this.futureDate = futureDate;
+        this.futureMillis = futureMillis;
+    }
+    public Item(String email, String name, String address, String membership, String nickname, String reports) {
+        this.email = email;
+        this.name = name;
+        this.address = address;
+        this.membership = membership;
+        this.nickname = nickname;
+        this.reports = reports;
+    }
+    public String[] getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(String[] imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
     public Integer getViews() {
         return views;
     }
-
     public void setViews(Integer views) {
         this.views = views;
     }
@@ -271,6 +291,7 @@ public class Item {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
 
     public String getId() {

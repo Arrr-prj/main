@@ -1,119 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".BiddingRegistItemActivity">
+    android:background="@color/white"
+    tools:context=".EventAuctionRegisterItemActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@drawable/toolbar_gradient"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/write_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="상품 등록"
-        android:textSize="30sp" />
-
-
-    <ImageView
-        android:id="@+id/input_itemImg"
-        android:layout_width="98dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="60dp"
-        android:background="#616161"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="상 품 등 록"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FF0000"
+        android:text="◀"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_add_photo" />
+        style="?android:attr/borderlessButtonStyle"/>
 
-    <EditText
-        android:id="@+id/input_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="글 제목"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemImg" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <EditText
-        android:id="@+id/input_itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="상품명"
-        android:inputType="textMultiLine"
-        android:scrollHorizontally="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_title" />
+        <LinearLayout
+            android:id="@+id/linearimage"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/input_itemExplain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="상품 설명"
-        android:inputType="textMultiLine"
-        android:scrollHorizontally="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemName" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_add_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_photo">
 
-    <EditText
-        android:id="@+id/input_itemPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="최소 가격"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemExplain" />
-    <Button
-        android:id="@+id/input_itemCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="카테고리"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemPrice" />
+                <ImageView
+                    android:id="@+id/iv_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_camera"
+                    app:layout_constraintBottom_toTopOf="@id/guideline"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.55" />
+
+                <TextView
+                    android:id="@+id/tv_image_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14dp"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/tv_max_image"
+                    app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+                <TextView
+                    android:id="@+id/tv_max_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/10"
+                    android:textSize="14dp"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toRightOf="@id/tv_image_count"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_image" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider1"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/input_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearimage" />
+
+        <EditText
+            android:id="@+id/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/title"
+            android:lines="1"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <View
+            android:id="@+id/divider11"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_title"/>
+
+        <EditText
+            android:id="@+id/input_itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/itemName"
+            android:lines="1"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:id="@+id/divider2"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemCategory"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_itemName"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/input_itemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@id/divider3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+        <View
+            android:id="@+id/divider3"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemPrice"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_itemCategory" />
+
+        <TextView
+            android:id="@+id/tv_won"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/won"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@id/divider4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+        <EditText
+            android:id="@+id/input_itemPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:background="@null"
+            android:hint="@string/price_hint"
+            android:inputType="numberDecimal"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@id/divider4"
+            app:layout_constraintLeft_toRightOf="@id/tv_won"
+            app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+        <View
+            android:id="@+id/divider4"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemExplain"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_itemPrice" />
+
+        <EditText
+            android:id="@+id/input_itemExplain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="@string/content_hint"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_itemRegist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="#540063FF"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#E6E6E6"
         android:text="등록"
-        app:iconTint="#540063FF"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="0.926" />
 
-    <Button
-        android:id="@+id/btn_itemList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#540063FF"
-        android:text="리스트"
-        app:iconTint="#54006300"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/btn_itemRegist" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

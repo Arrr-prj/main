@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyShareActivity extends AppCompatActivity {
     ListView listView;
@@ -65,6 +66,7 @@ public class MyShareActivity extends AppCompatActivity {
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("state", "Off");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 startActivity(showDetail);
             }
         });
@@ -80,6 +82,7 @@ public class MyShareActivity extends AppCompatActivity {
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("state", "On");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
+                showDetail.putExtra("imageUrls", item.getImageUrls());
 //                showDetail.putExtra("sellerId", )
                 startActivity(showDetail);
             }
@@ -96,10 +99,13 @@ public class MyShareActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             freeItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),
@@ -126,11 +132,13 @@ public class MyShareActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             freeItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("category")),
                                             String.valueOf(document.getData().get("info")),

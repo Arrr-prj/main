@@ -5,26 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ShareRegistItemActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:background="#210063"
+        android:layout_height="55dp"
+        android:background="@drawable/toolbar_gradient"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/write_text"
         android:layout_width="140dp"
         android:layout_height="44dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:text="상 품 등 록"
         android:textColor="@color/white"
@@ -48,226 +47,198 @@
         app:layout_constraintTop_toTopOf="parent"
         style="?android:attr/borderlessButtonStyle"/>
 
-    <ImageButton
-        android:id="@+id/btn_home"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/homeimage"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.854"
-        app:layout_constraintStart_toEndOf="@+id/write_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/sliderViewPager"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="520dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    </androidx.viewpager2.widget.ViewPager2>
+        <LinearLayout
+            android:id="@+id/linearimage"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btn_selectImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sliderViewPager" />
+            <LinearLayout
+                android:id="@+id/linearimage2"
+                android:layout_width="80dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/input_itemName"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="상품명"
-        android:inputType="textPersonName"
-        android:background="@null"
-        android:textColorHint="#C8C8C8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_title" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_add_image"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_photo">
 
-    <Button
-        android:id="@+id/input_itemCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#E6E6E6"
-        android:ems="10"
-        android:hint="카테고리"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemExplain" />
+                    <ImageView
+                        android:id="@+id/iv_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_camera"
+                        app:layout_constraintBottom_toTopOf="@id/guideline"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
 
-    <EditText
-        android:id="@+id/input_title"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="-440dp"
-        android:ems="10"
-        android:hint="글 제목"
-        android:inputType="textPersonName"
-        android:background="@null"
-        android:textColorHint="#C8C8C8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.55" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_del_image"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_photo">
+
+                    <ImageView
+                        android:id="@+id/iv_del"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/del_icon"
+                        android:layout_marginBottom="-25dp"
+                        app:layout_constraintBottom_toTopOf="@+id/cl_del_image"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/sliderViewPager"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="55dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            </androidx.viewpager2.widget.ViewPager2>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider1"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/input_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearimage" />
+
+        <EditText
+            android:id="@+id/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/title"
+            android:lines="1"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        <View
+            android:id="@+id/divider11"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_title"/>
+
+        <EditText
+            android:id="@+id/input_itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/itemName"
+            android:lines="1"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:id="@+id/divider2"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemCategory"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_itemName"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/input_itemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@id/divider3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+        <View
+            android:id="@+id/divider3"
+            style="@style/Divider.Horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@id/input_itemExplain"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_itemCategory" />
+
+        <EditText
+            android:id="@+id/input_itemExplain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="top|left"
+            android:hint="@string/content_hint"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn_itemRegist"
         android:layout_width="130dp"
         android:layout_height="40dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
         android:backgroundTint="#E6E6E6"
         android:text="등록"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemCategory" />
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
-        android:backgroundTint="#E6E6E6"
-        android:text="취소"
-        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.307"
-        app:layout_constraintStart_toEndOf="@+id/btn_itemRegist"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemCategory" />
-
-    <EditText
-        android:id="@+id/input_itemExplain"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="상품 설명"
-        android:inputType="textMultiLine"
-        android:scrollHorizontally="false"
-        android:background="@null"
-        android:textColorHint="#C8C8C8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_itemName" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="0.926" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/write_text"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:gravity="center"-->
-    <!--        android:text="상품 등록"-->
-    <!--        android:textSize="30sp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/input_itemImg"-->
-    <!--        android:layout_width="98dp"-->
-    <!--        android:layout_height="90dp"-->
-    <!--        android:layout_marginTop="60dp"-->
-    <!--        android:background="#616161"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.498"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:srcCompat="@drawable/ic_add_photo" />-->
-    <!--    <EditText-->
-    <!--        android:id="@+id/input_title"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="글 제목"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/input_itemImg" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/input_itemName"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="상품명"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.502"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/input_title" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/input_itemExplain"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="20dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="상품 설명"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.502"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/input_itemName" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/input_itemCategory"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="50dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="카테고리"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.502"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/input_itemExplain" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btn_itemRegist"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginBottom="10dp"-->
-    <!--        android:background="#540063FF"-->
-    <!--        android:text="등록"-->
-    <!--        app:iconTint="#540063FF"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/btn_itemList"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btn_itemList"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:background="#540063FF"-->
-    <!--        android:text="리스트"-->
-    <!--        app:iconTint="#54006300"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/btn_itemRegist" />-->
-
-    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -42,12 +42,10 @@ public class AnnounceAdapter extends ArrayAdapter<Announcement> {
         Announcement data = getItem(position);
         if (data != null) {
             TextView title = (TextView) itemView.findViewById(R.id.title);
-            TextView contents = (TextView) itemView.findViewById(R.id.contents);
-
+            TextView contents = (TextView) itemView.findViewById(R.id.date);
 
             title.setText(data.getTitle());
             contents.setText(data.getContents());
-
         }
         return itemView;
     }

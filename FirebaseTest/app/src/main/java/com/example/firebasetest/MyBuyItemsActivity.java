@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyBuyItemsActivity extends AppCompatActivity {
     ListView listView;
@@ -72,10 +73,13 @@ public class MyBuyItemsActivity extends AppCompatActivity {
 
                             // Firebase Storage에서 이미지 불러오기
                             if(Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))){
+                                List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                                String[] imageUrlsArray = new String[imageUrlsList.size()];
+                                imageUrlsList.toArray(imageUrlsArray);
                                 openItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                imageUrlsArray,
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("endPrice")),
                                                 String.valueOf(document.getData().get("category")),
@@ -110,11 +114,13 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                             Log.d(TAG, "구매한 bidding 아이템 confirm : "+Boolean.getBoolean(String.valueOf(document.getData().get("confirm"))));
 
                             if(Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))){
-
+                                List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                                String[] imageUrlsArray = new String[imageUrlsList.size()];
+                                imageUrlsList.toArray(imageUrlsArray);
                                 biddingItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
+                                                imageUrlsArray,
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("endPrice")),
                                                 String.valueOf(document.getData().get("category")),
@@ -144,6 +150,7 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                 Log.d(TAG, "info를 확인해보자. "+item.getInfo());
                 showDetail.putExtra("state", "On");
                 showDetail.putExtra("isBuy","Buy");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 // item.getSeller() 에서 error 생길 수 있음 ***********
                 showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
@@ -159,6 +166,7 @@ public class MyBuyItemsActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 showDetail.putExtra("state", "Off");
                 showDetail.putExtra("isBuy","Buy");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                 startActivity(showDetail);
             }

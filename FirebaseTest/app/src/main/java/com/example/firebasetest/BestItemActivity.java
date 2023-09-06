@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BestItemActivity extends AppCompatActivity {
@@ -42,8 +43,8 @@ public class BestItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_item);
 
-        listView = (ListView) findViewById(R.id.listView);
-        btnBack = (Button) findViewById(R.id.btn_back);
+        listView = (ListView)findViewById(R.id.listView);
+        btnBack = (Button)findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,8 +56,7 @@ public class BestItemActivity extends AppCompatActivity {
         InitializeEndItemList();
         setUpOnClickListener();
     }
-
-    public void InitializeEndItemList() {
+    public void InitializeEndItemList(){
         // 기존 아이템 리스트 비워줘서 로딩할때 다시 기존 리스트들이 추가되지 않도록 방지
         endItemList.clear();
 
@@ -65,45 +65,34 @@ public class BestItemActivity extends AppCompatActivity {
         db.collection("OpenItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.DAY_OF_MONTH, -1); // 현재 시각의 전날
-                        long previousDayStartMillis = getStartOfDayMillis(calendar);
-                        long previousDayEndMillis = getEndOfDayMillis(calendar);
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
 
-                        for (QueryDocumentSnapshot document : (task.getResult())) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
-                            String uploadMillisStr = String.valueOf(document.getData().get("uploadMillis"));
-                            long uploadMillis = Long.parseLong(uploadMillisStr);
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
 
-                            if (uploadMillis >= previousDayStartMillis && uploadMillis <= previousDayEndMillis) {
-                                endItemList.add(
-                                        new Item(
-                                                String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
-                                                String.valueOf(document.getData().get("imgUrl2")),
-                                                String.valueOf(document.getData().get("imgUrl3")),
-                                                String.valueOf(document.getData().get("imgUrl4")),
-                                                String.valueOf(document.getData().get("imgUrl5")),
-                                                String.valueOf(document.getData().get("imgUrl6")),
-                                                String.valueOf(document.getData().get("id")),
-                                                String.valueOf(document.getData().get("price")),
-                                                String.valueOf(document.getData().get("endPrice")),
-                                                String.valueOf(document.getData().get("category")),
-                                                String.valueOf(document.getData().get("info")),
-                                                String.valueOf(document.getData().get("seller")),
-                                                String.valueOf(document.getData().get("buyer")),
-                                                String.valueOf(document.getData().get("futureMillis")),
-                                                String.valueOf(document.getData().get("futureDate")),
-                                                String.valueOf(document.getData().get("uploadDate")),
-                                                String.valueOf(calDays(((String) document.getData().get("futureDate")))),
-                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
-                                                String.valueOf(document.getData().get("itemType")),
-                                                Integer.valueOf(String.valueOf(document.getData().get("views")))
-                                        )
-                                );
-                            }
+                            endItemList.add(
+                                    new Item(
+                                            String.valueOf(document.getData().get("title")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("buyer")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("uploadDate")),
+                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
+                                            String.valueOf(document.getData().get("itemType")),
+                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
+                                    )
+                            );
                         }
                     }
                 });
@@ -111,45 +100,33 @@ public class BestItemActivity extends AppCompatActivity {
         db.collection("BiddingItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.DAY_OF_MONTH, -1); // 현재 시각의 전날
-                        long previousDayStartMillis = getStartOfDayMillis(calendar);
-                        long previousDayEndMillis = getEndOfDayMillis(calendar);
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
 
-                        for (QueryDocumentSnapshot document : (task.getResult())) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
-                            String uploadMillisStr = String.valueOf(document.getData().get("uploadMillis"));
-                            long uploadMillis = Long.parseLong(uploadMillisStr);
-
-                            if (uploadMillis >= previousDayStartMillis && uploadMillis <= previousDayEndMillis) {
-                                endItemList.add(
-                                        new Item(
-                                                String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
-                                                String.valueOf(document.getData().get("imgUrl2")),
-                                                String.valueOf(document.getData().get("imgUrl3")),
-                                                String.valueOf(document.getData().get("imgUrl4")),
-                                                String.valueOf(document.getData().get("imgUrl5")),
-                                                String.valueOf(document.getData().get("imgUrl6")),
-                                                String.valueOf(document.getData().get("id")),
-                                                String.valueOf(document.getData().get("price")),
-                                                String.valueOf(document.getData().get("endPrice")),
-                                                String.valueOf(document.getData().get("category")),
-                                                String.valueOf(document.getData().get("info")),
-                                                String.valueOf(document.getData().get("seller")),
-                                                String.valueOf(document.getData().get("buyer")),
-                                                String.valueOf(document.getData().get("futureMillis")),
-                                                String.valueOf(document.getData().get("futureDate")),
-                                                String.valueOf(document.getData().get("uploadDate")),
-                                                String.valueOf(calDays(((String) document.getData().get("futureDate")))),
-                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
-                                                String.valueOf(document.getData().get("itemType")),
-                                                Integer.valueOf(String.valueOf(document.getData().get("views")))
-                                        )
-                                );
-                            }
+                            endItemList.add(
+                                    new Item(
+                                            String.valueOf(document.getData().get("title")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("buyer")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("uploadDate")),
+                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
+                                            String.valueOf(document.getData().get("itemType")),
+                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
+                                    )
+                            );
                         }
                     }
                 });
@@ -157,45 +134,34 @@ public class BestItemActivity extends AppCompatActivity {
         db.collection("ShareItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.DAY_OF_MONTH, -1); // 현재 시각의 전날
-                        long previousDayStartMillis = getStartOfDayMillis(calendar);
-                        long previousDayEndMillis = getEndOfDayMillis(calendar);
-
-                        for (QueryDocumentSnapshot document : (task.getResult())) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id"));
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
-                            String uploadMillisStr = String.valueOf(document.getData().get("uploadMillis"));
-                            long uploadMillis = Long.parseLong(uploadMillisStr);
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
 
-                            if (uploadMillis >= previousDayStartMillis && uploadMillis <= previousDayEndMillis) {
-                                endItemList.add(
-                                        new Item(
-                                                String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
-                                                String.valueOf(document.getData().get("imgUrl2")),
-                                                String.valueOf(document.getData().get("imgUrl3")),
-                                                String.valueOf(document.getData().get("imgUrl4")),
-                                                String.valueOf(document.getData().get("imgUrl5")),
-                                                String.valueOf(document.getData().get("imgUrl6")),
-                                                String.valueOf(document.getData().get("id")),
-                                                String.valueOf(document.getData().get("price")),
-                                                String.valueOf(document.getData().get("endPrice")),
-                                                String.valueOf(document.getData().get("category")),
-                                                String.valueOf(document.getData().get("info")),
-                                                String.valueOf(document.getData().get("seller")),
-                                                String.valueOf(document.getData().get("buyer")),
-                                                String.valueOf(document.getData().get("futureMillis")),
-                                                String.valueOf(document.getData().get("futureDate")),
-                                                String.valueOf(document.getData().get("uploadDate")),
-                                                String.valueOf(calDays(((String) document.getData().get("futureDate")))),
-                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
-                                                String.valueOf(document.getData().get("itemType")),
-                                                Integer.valueOf(String.valueOf(document.getData().get("views")))
-                                        )
-                                );
-                            }
+                            endItemList.add(
+                                    new Item(
+                                            String.valueOf(document.getData().get("title")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("buyer")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("uploadDate")),
+                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
+                                            String.valueOf(document.getData().get("itemType")),
+                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
+                                    )
+                            );
                         }
                     }
                 });
@@ -204,45 +170,34 @@ public class BestItemActivity extends AppCompatActivity {
         db.collection("EventItem").whereNotEqualTo("confirm", false)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.DAY_OF_MONTH, -1); // 현재 시각의 전날
-                        long previousDayStartMillis = getStartOfDayMillis(calendar);
-                        long previousDayEndMillis = getEndOfDayMillis(calendar);
-
-                        for (QueryDocumentSnapshot document : (task.getResult())) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id"));
+                    if(task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : (task.getResult())){
+                            Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
-                            String uploadMillisStr = String.valueOf(document.getData().get("uploadMillis"));
-                            long uploadMillis = Long.parseLong(uploadMillisStr);
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
 
-                            if (uploadMillis >= previousDayStartMillis && uploadMillis <= previousDayEndMillis) {
-                                endItemList.add(
-                                        new Item(
-                                                String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl1")),
-                                                String.valueOf(document.getData().get("imgUrl2")),
-                                                String.valueOf(document.getData().get("imgUrl3")),
-                                                String.valueOf(document.getData().get("imgUrl4")),
-                                                String.valueOf(document.getData().get("imgUrl5")),
-                                                String.valueOf(document.getData().get("imgUrl6")),
-                                                String.valueOf(document.getData().get("id")),
-                                                String.valueOf(document.getData().get("price")),
-                                                String.valueOf(document.getData().get("endPrice")),
-                                                String.valueOf(document.getData().get("category")),
-                                                String.valueOf(document.getData().get("info")),
-                                                String.valueOf(document.getData().get("seller")),
-                                                String.valueOf(document.getData().get("buyer")),
-                                                String.valueOf(document.getData().get("futureMillis")),
-                                                String.valueOf(document.getData().get("futureDate")),
-                                                String.valueOf(document.getData().get("uploadDate")),
-                                                String.valueOf(calDays(((String) document.getData().get("futureDate")))),
-                                                Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
-                                                String.valueOf(document.getData().get("itemType")),
-                                                Integer.valueOf(String.valueOf(document.getData().get("views")))
-                                        )
-                                );
-                            }
+                            endItemList.add(
+                                    new Item(
+                                            String.valueOf(document.getData().get("title")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
+                                            String.valueOf(document.getData().get("id")),
+                                            String.valueOf(document.getData().get("price")),
+                                            String.valueOf(document.getData().get("endPrice")),
+                                            String.valueOf(document.getData().get("category")),
+                                            String.valueOf(document.getData().get("info")),
+                                            String.valueOf(document.getData().get("seller")),
+                                            String.valueOf(document.getData().get("buyer")),
+                                            String.valueOf(document.getData().get("futureMillis")),
+                                            String.valueOf(document.getData().get("futureDate")),
+                                            String.valueOf(document.getData().get("uploadDate")),
+                                            String.valueOf(calDays(((String)document.getData().get("futureDate")))),
+                                            Boolean.parseBoolean(String.valueOf(document.getData().get("confirm"))),
+                                            String.valueOf(document.getData().get("itemType")),
+                                            Integer.valueOf(String.valueOf(document.getData().get("views")))
+                                    )
+                            );
                         }
 
                         // 조회수를 기준으로 정렬
@@ -263,37 +218,18 @@ public class BestItemActivity extends AppCompatActivity {
                 });
 
     }
-
-    // 하루의 시작 시각을 반환하는 메소드
-    private long getStartOfDayMillis(Calendar calendar) {
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        return calendar.getTimeInMillis();
-    }
-
-    // 하루의 마지막 시각을 반환하는 메소드
-    private long getEndOfDayMillis(Calendar calendar) {
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        calendar.set(Calendar.MILLISECOND, 999);
-        return calendar.getTimeInMillis();
-    }
-
     // 오늘 날짜 - 경매 마감된 날짜 계산해주는 메소드
-    public String calDays(String endDate1) {
+    public String calDays(String endDate1){
         // SimpleDateFormat을 사용하여 String을 Date로 변환
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar calendar = Calendar.getInstance();
         Date date;
-        try {
+        try{
             date = dateFormat.parse(endDate1);
 
             // Date를 Calendar로 변환
             calendar.setTime(date);
-        } catch (ParseException e) {
+        }catch (ParseException e){
             e.printStackTrace();
         }
         Calendar nowMillis = Calendar.getInstance();
@@ -302,7 +238,6 @@ public class BestItemActivity extends AppCompatActivity {
 
         return String.valueOf(differenceInDays);
     }
-
     // 상세 페이지 이벤트
     private void setUpOnClickListener() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -310,96 +245,100 @@ public class BestItemActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 Item item = (Item) listView.getItemAtPosition(position);
-                if (item.getItemType().equals("BiddingItem")) {
+                if(item.getItemType().equals("BiddingItem")){
                     Intent showDetail = new Intent(BestItemActivity.this, BiddingDetailItemActivity.class);
 
                     // 조회수 카운팅
-                    String documentId = item.getTitle() + item.getSeller();
+                    String documentId = item.getTitle()+item.getSeller();
                     DocumentReference docRef = db.collection("Bidding").document(documentId);
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("views", item.getViews() + 1);
-                    Log.d(TAG, "views : " + item.getSeller());
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
                     // 문서 수정
                     docRef.update(updates);
                     // 수정된 내용 갱신
                     UserDataHolderShareItem.loadShareItems();
 
-                    showDetail.putExtra("documentId", item.getTitle() + item.getSeller());
+                    showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
                     startActivity(showDetail);
                     finish();
-                } else if (item.getItemType().equals("OpenItem")) {
-                    Log.d(TAG, "ItemType : " + item.getItemType());
-                    Log.d(TAG, "DifferenceDays : " + item.getDifferenceDays());
-                    Log.d(TAG, "documentId : " + item.getTitle() + item.getSeller());
+                }else if(item.getItemType().equals("OpenItem")){
+                    Log.d(TAG, "ItemType : "+item.getItemType());
+                    Log.d(TAG, "DifferenceDays : "+item.getDifferenceDays());
+                    Log.d(TAG, "documentId : "+item.getTitle()+item.getSeller());
                     Intent showDetail = new Intent(BestItemActivity.this, OpenDetailItemActivity.class);
 
                     // 조회수 카운팅
-                    String documentId = item.getTitle() + item.getSeller();
+                    String documentId = item.getTitle()+item.getSeller();
                     DocumentReference docRef = db.collection("OpenItem").document(documentId);
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("views", item.getViews() + 1);
-                    Log.d(TAG, "views : " + item.getSeller());
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
                     // 문서 수정
                     docRef.update(updates);
                     // 수정된 내용 갱신
                     UserDataHolderShareItem.loadShareItems();
 
-                    showDetail.putExtra("documentId", item.getTitle() + item.getSeller());
+                    showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
                     startActivity(showDetail);
                     finish();
-                } else if (item.getItemType().equals("ShareItem")) {
+                }else if(item.getItemType().equals("ShareItem")){
                     Intent showDetail = new Intent(BestItemActivity.this, ShareDetailActivity.class);
 
                     // 조회수 카운팅
-                    String documentId = item.getTitle() + item.getSeller();
+                    String documentId = item.getTitle()+item.getSeller();
                     DocumentReference docRef = db.collection("ShareItem").document(documentId);
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("views", item.getViews() + 1);
-                    Log.d(TAG, "views : " + item.getSeller());
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
                     // 문서 수정
                     docRef.update(updates);
                     // 수정된 내용 갱신
                     UserDataHolderShareItem.loadShareItems();
 
-                    showDetail.putExtra("documentId", item.getTitle() + item.getSeller());
+                    showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());
                     startActivity(showDetail);
                     finish();
-                } else if (item.getItemType().equals("EventItem")) {
+                }else if(item.getItemType().equals("EventItem")){
                     Intent showDetail = new Intent(BestItemActivity.this, EventAuctionDetailItemActivity.class);
 
                     // 조회수 카운팅
-                    String documentId = item.getTitle() + item.getSeller();
+                    String documentId = item.getTitle()+item.getSeller();
                     DocumentReference docRef = db.collection("EventItem").document(documentId);
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("views", item.getViews() + 1);
-                    Log.d(TAG, "views : " + item.getSeller());
+                    updates.put("views", item.getViews()+1);
+                    Log.d(TAG, "views : "+item.getSeller());
                     // 문서 수정
                     docRef.update(updates);
                     // 수정된 내용 갱신
                     UserDataHolderShareItem.loadShareItems();
 
-                    showDetail.putExtra("documentId", item.getTitle() + item.getSeller());
+                    showDetail.putExtra("documentId", item.getTitle()+item.getSeller());
                     showDetail.putExtra("id", item.getId());
                     showDetail.putExtra("title", item.getTitle());
                     showDetail.putExtra("seller", item.getSeller());
+                    showDetail.putExtra("imageUrls", item.getImageUrls());
                     showDetail.putExtra("buyer", item.getBuyer());
                     showDetail.putExtra("confirm", String.valueOf(item.getConfirm()));
                     showDetail.putExtra("futureMillis", item.getFutureMillis());

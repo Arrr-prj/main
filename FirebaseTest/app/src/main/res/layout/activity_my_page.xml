@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="#210063"
+        android:background="@drawable/toolbar_gradient"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
 
     <ImageView
         android:id="@+id/mypage_myimage"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/mypageimage"
@@ -61,8 +61,9 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:textSize="15sp"
+        android:layout_marginTop="60dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
         android:id="@+id/btn_modify"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="130dp"
         android:backgroundTint="#E6E6E6"
         android:text="수정"
         android:textColor="@color/black"
@@ -103,8 +104,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_membership" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -137,9 +137,9 @@
         android:id="@+id/btn_membership"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#E6E6E6"
-        android:text="멤버십 가입"
+        android:text="멤버십"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +152,8 @@
         android:layout_height="30dp"
         android:layout_marginTop="36dp"
         android:text="매출현황"
-        android:textSize="5sp"
+        android:textSize="10sp"
+        android:backgroundTint="#2F4D8F"
         app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -162,20 +163,21 @@
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:text="전체매출"
-        android:textSize="5sp"
+        android:textSize="10sp"
+        android:backgroundTint="#2F4D8F"
         app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sales" />
 
     <Button
-        android:id="@+id/btn_member"
+        android:id="@+id/btn_memberR"
         android:layout_width="50dp"
         android:layout_height="30dp"
-        android:layout_marginTop="28dp"
         android:text="회원관리"
-        android:textSize="5sp"
+        android:textSize="10sp"
+        android:backgroundTint="#2F4D8F"
         app:layout_constraintEnd_toStartOf="@+id/mypage_myimage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sales" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_totalA" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,7 +82,7 @@ public class ShareActivity extends AppCompatActivity {
             }
         });
 
-        btnRegistItem = findViewById(R.id.btn_registItem);
+        btnRegistItem = findViewById(R.id.btn_registShareItem);
         // 아이템 등록 버튼 클릭 시 이벤트
         btnRegistItem.setOnClickListener(new View.OnClickListener() {
             @Override

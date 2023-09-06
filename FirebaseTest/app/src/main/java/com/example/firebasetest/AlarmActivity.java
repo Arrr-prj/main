@@ -19,12 +19,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,15 +30,12 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 public class AlarmActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -468,7 +462,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
         listView.setAdapter(notificationAdapter);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout); // Correct the ID
+        drawerLayout = (DrawerLayout)findViewById(R.id._pay); // Correct the ID
 
         btnbck.setOnClickListener(new View.OnClickListener() {
             @Override

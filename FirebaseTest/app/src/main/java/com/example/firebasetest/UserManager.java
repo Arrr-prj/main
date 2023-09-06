@@ -4,6 +4,7 @@ public class UserManager {
     private static UserManager instance;
     private String userUid;
     private String userEmail;
+    private String nickName;
 
     private UserManager() {
     }
@@ -28,6 +29,13 @@ public class UserManager {
     }
     public String getUserUid() {
         return userUid;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+    public String getNickName() {
+        return nickName;
     }
     public void clearUserUid() {userUid = null;}
 }

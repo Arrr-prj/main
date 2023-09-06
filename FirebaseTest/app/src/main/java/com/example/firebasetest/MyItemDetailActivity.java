@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-//import com.github.chrisbanes.photoview.PhotoView;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -42,20 +42,18 @@ public class MyItemDetailActivity extends AppCompatActivity {
 
     private Button btnEdit, btnDelete, btnList, btnConfirm, btnCancle;
     private TextView itemTitle, itemId, startPrice, endPrice, itemInfo, seller, category;
-    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
+
     ListAdapter listAdapter;
     FirebaseUser firebaseUser;
     private ViewPager2 sliderViewPager;
-//    private PhotoView photoViewSlider;
+    private PhotoView photoViewSlider;
     private LinearLayout layoutIndicator;
 
-
-
-    private String[] images = new String[6];
+    private String[] imageUrls;
     public static ArrayList<Item> biddingItemList = new ArrayList<Item>();
     public static ArrayList<Item> openItemList = new ArrayList<Item>();
     public static ArrayList<Item> eventItemList = new ArrayList<Item>();
-    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+
     Item item;
     Bitmap bitmap;
 
@@ -91,7 +89,11 @@ public class MyItemDetailActivity extends AppCompatActivity {
         btnCancle = findViewById(R.id.btn_cancle);
 
         // 페이지 접속 시 새로 로딩해준다.
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
 
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+        sliderViewPager.setAdapter(imageSliderAdapter);
 
         UserDataHolderOpenItems.openItemList.clear();
         UserDataHolderBiddingItems.loadBiddingItems();
@@ -125,24 +127,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
             btnEdit.setVisibility(View.GONE);
             getSelecteItem();
         }
-        if (imageUrl1 != null && !imageUrl1.isEmpty()) {
-            images[0] = imageUrl1;
-        }
-        if (imageUrl2 != null && !imageUrl2.isEmpty()) {
-            images[1] = imageUrl2;
-        }
-        if (imageUrl3 != null && !imageUrl3.isEmpty()) {
-            images[2] = imageUrl3;
-        }
-        if (imageUrl4 != null && !imageUrl4.isEmpty()) {
-            images[3] = imageUrl4;
-        }
-        if (imageUrl5 != null && !imageUrl5.isEmpty()) {
-            images[4] = imageUrl5;
-        }
-        if (imageUrl6 != null && !imageUrl6.isEmpty()) {
-            images[5] = imageUrl6;
-        }
+
         // 구매한 아이템 수정 삭제 막기
         String isBuy = intent.getStringExtra("isBuy");
         if(isBuy.equals("Buy")){
@@ -393,6 +378,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     intent1.putExtra("state", "bidding");
                     // 여기서 해당 유저의 이메일을 불러와서 해당 아이템의 글 제목과 이메일이 documentId와 일치하는지 넘겨서 확인해줌
                     intent1.putExtra("documentId", selectedItem.getTitle() + firebaseUser.getEmail());
+                    intent1.putExtra("imageUrls", imageUrls); // imageUrls 전달
                     startActivity(intent1);
                 } else if (selectedoItem != null) {
                     UserDataHolderOpenItems.loadOpenItems();
@@ -401,6 +387,7 @@ public class MyItemDetailActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(getApplicationContext(), EditItemActivity.class);
                     intent1.putExtra("state", "open");
                     intent1.putExtra("documentId", selectedoItem.getTitle() + firebaseUser.getEmail());
+                    intent1.putExtra("imageUrls", imageUrls); // imageUrls 전달
                     startActivity(intent1);
                 }
             }
@@ -428,21 +415,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
                             String get_price = document.getString("price");
                             if (true/*document.exists()*/) {
                                 // 이미지 URL들을 images 배열에 저장
-                                imageUrl1 = document.getString("imgUrl1");
-                                imageUrl2 = document.getString("imgUrl2");
-                                imageUrl3 = document.getString("imgUrl3");
-                                imageUrl4 = document.getString("imgUrl4");
-                                imageUrl5 = document.getString("imgUrl5");
-                                imageUrl6 = document.getString("imgUrl6");
-                                // 이미지 URL들을 images 배열에 저장
-                                images[0] = imageUrl1;
-                                images[1] = imageUrl2;
-                                images[2] = imageUrl3;
-                                images[3] = imageUrl4;
-                                images[4] = imageUrl5;
-                                images[5] = imageUrl6;
+
                                 // 이미지 슬라이더 어댑터 업데이트
-                                ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
+                                ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, imageUrls);
                                 sliderViewPager.setAdapter(imageSliderAdapter);
                                 itemTitle.setText(get_itemTitle);
                                 itemId.setText(get_id);
@@ -489,21 +464,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         String get_price = document.getString("price");
                         String get_url = document.getString("imgUrl");
                         // 이미지 URL들을 images 배열에 저장
-                        imageUrl1 = document.getString("imgUrl1");
-                        imageUrl2 = document.getString("imgUrl2");
-                        imageUrl3 = document.getString("imgUrl3");
-                        imageUrl4 = document.getString("imgUrl4");
-                        imageUrl5 = document.getString("imgUrl5");
-                        imageUrl6 = document.getString("imgUrl6");
-                        // 이미지 URL들을 images 배열에 저장
-                        images[0] = imageUrl1;
-                        images[1] = imageUrl2;
-                        images[2] = imageUrl3;
-                        images[3] = imageUrl4;
-                        images[4] = imageUrl5;
-                        images[5] = imageUrl6;
+
                         // 이미지 슬라이더 어댑터 업데이트
-                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
+                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, imageUrls);
 
                         sliderViewPager.setAdapter(imageSliderAdapter);
                         itemTitle.setText(get_itemTitle);
@@ -539,21 +502,9 @@ public class MyItemDetailActivity extends AppCompatActivity {
                         String get_price = document.getString("price");
                         String get_url = document.getString("imgUrl");
                         // 이미지 URL들을 images 배열에 저장
-                        imageUrl1 = document.getString("imgUrl1");
-                        imageUrl2 = document.getString("imgUrl2");
-                        imageUrl3 = document.getString("imgUrl3");
-                        imageUrl4 = document.getString("imgUrl4");
-                        imageUrl5 = document.getString("imgUrl5");
-                        imageUrl6 = document.getString("imgUrl6");
-                        // 이미지 URL들을 images 배열에 저장
-                        images[0] = imageUrl1;
-                        images[1] = imageUrl2;
-                        images[2] = imageUrl3;
-                        images[3] = imageUrl4;
-                        images[4] = imageUrl5;
-                        images[5] = imageUrl6;
+
                         // 이미지 슬라이더 어댑터 업데이트
-                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, images);
+                        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(MyItemDetailActivity.this, imageUrls);
 
                         sliderViewPager.setAdapter(imageSliderAdapter);
                         itemTitle.setText(get_itemTitle);

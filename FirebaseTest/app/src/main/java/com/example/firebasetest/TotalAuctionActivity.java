@@ -45,7 +45,6 @@ public class TotalAuctionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_total_auction);
 
         listView = (ListView)findViewById(R.id.listView);
-        totalProfit = (TextView)findViewById(R.id.totalProfit);
         btnBack = (Button)findViewById(R.id.btn_back);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +68,7 @@ public class TotalAuctionActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
-                            // Firebase Storage에서 이미지 불러오기
+
                             endItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
@@ -218,12 +217,10 @@ public class TotalAuctionActivity extends AppCompatActivity {
                         Collections.sort(endItemList, calDaysComparator);
 
 
-                        SalesAdapter salesAdapter = new SalesAdapter(this, endItemList);
-                        listView.setAdapter(salesAdapter);
-                        totalProfit.setText("총 이익 : "+String.valueOf(salesAdapter.getTotalProfit())+" 원");
+                        TotalAdapter totalAdapter = new TotalAdapter(this, endItemList);
+                        listView.setAdapter(totalAdapter);
                     }
                 });
-
     }
     // 오늘 날짜 - 경매 마감된 날짜 계산해주는 메소드
     public String calDays(String endDate1){

@@ -110,7 +110,6 @@ public class AnnounceDetailActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             Intent intent = new Intent(AnnounceDetailActivity.this, AnnounceActivity.class);
                             startActivity(intent);
-
                         }
                     });
                     // 수정 버튼 눌렀을 때

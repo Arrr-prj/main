@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:scrollbars="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_report"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/chat_report"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_buyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:text="구매 완료"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#2F4D8F"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_seller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:text="구매 완료"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#2F4D8F"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_send"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/layout_send_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:id="@+id/Button_pay"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:padding="10dp"
+            android:background="@null"
+            android:src="@drawable/baseline_payment_24"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <EditText
+            android:id="@+id/EditText_chat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:hint="@string/hint_send_chat"
+            android:textColorHint="@color/hint_gray"
+            android:background="@drawable/bg_input_message"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/Button_pay"
+            app:layout_constraintRight_toLeftOf="@id/Button_send"/>
+
+        <ImageButton
+            android:id="@+id/Button_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            android:background="@null"
+            android:src="@drawable/ic_send"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

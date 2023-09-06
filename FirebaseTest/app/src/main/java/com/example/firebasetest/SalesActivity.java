@@ -82,7 +82,7 @@ public class SalesActivity extends AppCompatActivity {
 
         // 낙찰자가 있는 아이템을 불러오도록 함
         // Open Item
-        db.collection("OpenItem").whereEqualTo("confirm", true)
+        db.collection("OpenItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -119,7 +119,7 @@ public class SalesActivity extends AppCompatActivity {
                     }
                 });
         // Bidding Item
-        db.collection("BiddingItem").whereEqualTo("confirm", true)
+        db.collection("BiddingItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -157,7 +157,7 @@ public class SalesActivity extends AppCompatActivity {
                 });
 
         // EventItem
-        db.collection("EventItem").whereEqualTo("confirm", true)
+        db.collection("EventItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -207,9 +207,6 @@ public class SalesActivity extends AppCompatActivity {
                         totalProfit.setText("총 이익 : "+String.valueOf(salesAdapter.getTotalProfit())+" 원");
                     }
                 });
-
-
-
         }
 
         public void InitializeEndItemGraph(){
@@ -218,7 +215,7 @@ public class SalesActivity extends AppCompatActivity {
 
             // 낙찰자가 있는 아이템을 불러오도록 함
             // Open Item
-            db.collection("OpenItem").whereEqualTo("confirm", true)
+            db.collection("OpenItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -254,7 +251,7 @@ public class SalesActivity extends AppCompatActivity {
                         }
                     });
             // Bidding Item
-            db.collection("BiddingItem").whereEqualTo("confirm", true)
+            db.collection("BiddingItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -290,7 +287,7 @@ public class SalesActivity extends AppCompatActivity {
                         }
                     });
             // ShareItem
-            db.collection("ShareItem").whereEqualTo("confirm", true)
+            db.collection("ShareItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
@@ -327,7 +324,7 @@ public class SalesActivity extends AppCompatActivity {
                     });
 
             // EventItem
-            db.collection("EventItem").whereEqualTo("confirm", true)
+            db.collection("EventItem").whereEqualTo("ArrrPay", true).whereEqualTo("BuyerMembership", false)
                     .get()
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){

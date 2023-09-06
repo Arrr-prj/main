@@ -23,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyItemsActivity extends AppCompatActivity {
     ListView listView;
@@ -72,10 +73,13 @@ public class MyItemsActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             openItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
@@ -106,10 +110,14 @@ public class MyItemsActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id") + document.getData().get("imgUrl"));
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
+
                             biddingItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl1")),
+                                            imageUrlsArray,  // 수정된 이미지 URL
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("endPrice")),
                                             String.valueOf(document.getData().get("category")),
@@ -138,6 +146,7 @@ public class MyItemsActivity extends AppCompatActivity {
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("state", "On");
                 showDetail.putExtra("isBuy", "Sell");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
 //                showDetail.putExtra("sellerId", )
                 startActivity(showDetail);
@@ -153,6 +162,7 @@ public class MyItemsActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 showDetail.putExtra("state", "Off");
                 showDetail.putExtra("isBuy", "Sell");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
                 startActivity(showDetail);
             }

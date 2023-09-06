@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +15,23 @@
         android:theme="@style/Theme.FirebaseTest"
         tools:targetApi="31">
         <activity
-            android:name=".MemberActivity"
+            android:name=".MembershipDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".ChatRoomListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArrrPayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="andoird.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BestItemActivity"
             android:exported="false" />
@@ -33,9 +46,23 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <activity
+            android:name=".MemberActivity"
+            android:label="Member Activity">
+            <!-- 필요한 인텐트 필터나 설정을 추가할 수 있습니다. -->
+        </activity>
 
         <activity
             android:name=".LargeImageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerItemActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SellerInfoActivity"
             android:exported="false" />
         <activity
             android:name=".MyConfirmItemActivity"

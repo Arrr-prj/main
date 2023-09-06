@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-//import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private long remainingTimeMillis;
     private CountDownTimer countDownTimer;
     private TextView itmeTitle, itemId, startPrice, endPrice, itemInfo, seller, category, timeinfo, futureMillis;
-    private ImageView imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6;
+
     private EditText mETBidPrice; // 입찰가
     private Button mBtnBidButton, mBtnBuy, mBtnConfirm, mBtnBidEnd, mBtnBigButton, mBtnback; // 입찰하기 버튼
 
@@ -48,15 +49,16 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
     private LinearLayout layoutIndicator;
     private String[] imageUrls;
     String buyer, document;
-
+    private DecimalFormat decimalFormat;
     boolean membershipValue;
     FirebaseFirestore database;
-    String imageUrl1, imageUrl2, imageUrl3, imageUrl4, imageUrl5, imageUrl6;
+
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user = auth.getCurrentUser();
 
     String userEmail; // 현재 유저의 이메일
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +88,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         String uid = UserManager.getInstance().getUserUid(); // 현재 사용자의 uid
         database = FirebaseFirestore.getInstance();
         DocumentReference userDocRef = database.collection("User").document(uid);
+        decimalFormat = new DecimalFormat("#,###");
 
         database = FirebaseFirestore.getInstance();
 
@@ -124,6 +127,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                         membershipValue = documentSnapshot.getBoolean("membership");
                     }
                 });
+
 
         Calendar calendar = Calendar.getInstance();
         Long nowMillis = calendar.getTimeInMillis();
@@ -304,14 +308,21 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    double price = Double.parseDouble(String.valueOf(selectedItem.getPrice()));
+                    String formattedPrice = decimalFormat.format(price);
+
                     itmeTitle.setText(selectedItem.getTitle());
                     itemId.setText(selectedItem.getId());
                     itemInfo.setText(selectedItem.getInfo());
                     category.setText(selectedItem.getCategory());
-                    startPrice.setText(String.valueOf(selectedItem.getPrice()));
-                    endPrice.setText(String.valueOf(highestBid));
+                    startPrice.setText(formattedPrice);
+
+                    double price2 = Double.parseDouble(String.valueOf(highestBid));
+                    String formattedPrice2 = decimalFormat.format(price2);
+
+                    endPrice.setText(formattedPrice2);
                     seller.setText(selectedItem.getSeller());
-                    timeinfo.setText(selectedItem.getFutureDate());
+//                    timeinfo.setText(selectedItem.getFutureDate());
 
                     long currentTimeMillis = System.currentTimeMillis();
                     String futureMillisStr = selectedItem.getFutureMillis();
@@ -389,12 +400,7 @@ public class EventAuctionDetailItemActivity extends AppCompatActivity {
         if (selectedItem != null) {
             // selectedItem 사용하기
             setoValues(selectedItem);
-            imageUrl1 = selectedItem.getImageUrl1();
-            imageUrl2 = selectedItem.getImageUrl2();
-            imageUrl3 = selectedItem.getImageUrl3();
-            imageUrl4 = selectedItem.getImageUrl4();
-            imageUrl5 = selectedItem.getImageUrl5();
-            imageUrl6 = selectedItem.getImageUrl6();
+
         } else {
             // 해당 id와 일치하는 아이템이 없는 경우
         }

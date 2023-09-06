@@ -9,18 +9,27 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.ClipData;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +50,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,31 +59,52 @@ public class EditItemActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    TextView write_text, itemTitle;
-    EditText itemId, itemPrice, itemInfo;
-    Button itemCategory;
-    private Uri imageUrl;
+    TextView write_text;
+    ImageView selectImagesBtn, delImageBtn;
+    EditText itemId, itemPrice, itemInfo, itemTitle;
+    Button mBtnback;
+    private String selectedCategory;
+
+
     String url;
-    ImageView imageView;
+//    ImageView imageView;
+    private final int PICK_IMAGE_MULTIPLE = 1;
+    ArrayList<Uri> mArrayUri = new ArrayList<>();
     private final StorageReference reference = FirebaseStorage.getInstance().getReference().child("image");
-    private String[] categories = {"차량", "액세서리", "가전제품", "예술품", "의류", "골동품", "식품", "가구"};
+    private String[] categories = {"Nike", "Adidas", "Apple", "Samsung", "차량", "액세서리", "의류", "한정판", "프리미엄", "신발", "굿즈", "가구 인테리어", "스포츠 레저", "취미 게임", "기타"};
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    String[] imageUrls;
+    private Spinner itemCategorySpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
         // 아이템 정보들
-        itemTitle = findViewById(R.id.input_itemTitle);
+        itemTitle = findViewById(R.id.input_itemtitle);
         itemId = findViewById(R.id.input_itemId);
+        selectImagesBtn = findViewById(R.id.iv_camera);
         itemPrice = findViewById(R.id.input_itemPrice);
+        delImageBtn = findViewById(R.id.iv_del);
         itemInfo = findViewById(R.id.input_itemExplain);
-        itemCategory = findViewById(R.id.input_itemCategory);
+        mBtnback = findViewById(R.id.btn_back);
+        itemCategorySpinner = findViewById(R.id.input_itemCategory);
         write_text = findViewById(R.id.write_text);
 
-        imageView = findViewById(R.id.input_itemImg);
+//        imageView = findViewById(R.id.input_itemImg); 사진 수정
         Intent intent = getIntent();
         String state = intent.getStringExtra("state");
+        imageUrls = intent.getStringArrayExtra("imageUrls");
+        ViewPager2 viewPager2 = findViewById(R.id.sliderViewPager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, mArrayUri);
+        viewPager2.setAdapter(viewPagerAdapter);
+
+        // 페이지 접속 시 새로 로딩해준다.
+        imageUrls = getIntent().getStringArrayExtra("imageUrls");
+
+        // ViewPager2 어댑터를 설정합니다.
+        ImageSliderAdapter imageSliderAdapter = new ImageSliderAdapter(this, imageUrls);
+//        sliderViewPager.setAdapter(imageSliderAdapter);
         if(state.equals("bidding")){
             getSelectbItem();
         }else if(state.equals("open")){
@@ -81,22 +112,28 @@ public class EditItemActivity extends AppCompatActivity {
         }else{
             getSelectsItem();
         }
-
-        // 이미지 클릭 이벤트
-        imageView.setOnClickListener(new View.OnClickListener(){
+        // 스피너 어댑터 설정
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itemCategorySpinner.setAdapter(adapter);
+        delImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/");
-                activityResult.launch(intent); // activityResult? launcher?
+            public void onClick(View v) {
+                deleteImage();
             }
         });
-        // 카테고리 버튼 클릭 시 이벤트
-        itemCategory.setOnClickListener(new View.OnClickListener() {
+        // 카테고리 클릭 시 이벤트
+        itemCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                showDialog(view);
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // 선택된 카테고리를 처리하는 코드를 여기에 추가하세요.
+                selectedCategory = categories[position];
+                // 선택된 카테고리를 사용하여 원하는 작업을 수행합니다.
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // 아무것도 선택되지 않았을 때 처리할 코드를 여기에 추가하세요.
             }
         });
 
@@ -108,7 +145,102 @@ public class EditItemActivity extends AppCompatActivity {
                 updateToFirebase();
             }
         });
+        selectImagesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
+        });
+    }
+    private void deleteImage() {
+        if (mArrayUri.size() > 0) {
+            // 선택한 이미지들을 모두 삭제
+            mArrayUri.clear();
 
+            // ViewPager2를 업데이트하여 이미지가 삭제된 것을 사용자에게 표시
+            ViewPager2 viewPager2 = findViewById(R.id.sliderViewPager);
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, mArrayUri);
+            viewPager2.setAdapter(viewPagerAdapter);
+
+            Toast.makeText(this, "이미지가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "삭제할 이미지가 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_MULTIPLE);
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && data != null) {
+            // If a single image is selected
+            if (data.getData() != null) {
+                mArrayUri.add(data.getData());
+            }
+            // If multiple images are selected
+            else if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                for (int i = 0; i < mClipData.getItemCount(); i++) {
+                    ClipData.Item item = mClipData.getItemAt(i);
+                    Uri uri = item.getUri();
+                    mArrayUri.add(uri);
+                }
+            }
+
+            // Update the ViewPager2 after images are selected
+            ViewPager2 viewPager2 = findViewById(R.id.sliderViewPager);
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, mArrayUri);
+            viewPager2.setAdapter(viewPagerAdapter);
+        }
+    }
+
+    public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
+
+        private ArrayList<Uri> mArrayUri;
+        private Context context;
+
+        public ViewPagerAdapter(Context context, ArrayList<Uri> mArrayUri) {
+            this.context = context;
+            this.mArrayUri = mArrayUri;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_banner, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewPagerAdapter.ViewHolder holder, int position) {
+            Glide.with(context)
+                    .load(mArrayUri.get(position))
+                    .into(holder.imageView);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mArrayUri.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            ImageView imageView;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.iv_banner_image);
+            }
+        }
+        // 이미지 배열 업데이트 메서드 추가
+        public void updateImages(ArrayList<Uri> updatedImages) {
+            mArrayUri.clear();
+            mArrayUri.addAll(updatedImages);
+            notifyDataSetChanged();
+        }
     }
     // 파이어베이스에 업로드하기
     private void updateToFirebase(){
@@ -146,55 +278,24 @@ public class EditItemActivity extends AppCompatActivity {
             }
         }
 
-        if (selectedItem != null) {
-            // BiddingItem을 Firestore에서 업데이트
-            uploadToBFirebase(selectedItem.getTitle() , imageUrl, selectedItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
-        } else if (selectedoItem != null) {
-            Log.d(TAG, ""+imageUrl);
-            // OpenItem을 Firestore에서 업데이트
-            uploadToOFirebase(selectedoItem.getTitle() , imageUrl, selectedoItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
-        } else if(selectedsItem != null){
-            uploadToSFirebase(selectedsItem.getTitle(), imageUrl, selectedsItem.getId(), "share item", itemInfo.getText().toString(), itemCategory.getText().toString(), firebaseUser.getEmail());
-        }else {
-            Toast.makeText(EditItemActivity.this, "선택한 아이템을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
-        }
+//        if (selectedItem != null) {
+//            // BiddingItem을 Firestore에서 업데이트
+//            uploadToBFirebase(selectedItem.getTitle() , imageUrl, selectedItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(),selectedCategory, firebaseUser.getEmail());
+//        } else if (selectedoItem != null) {
+//            Log.d(TAG, ""+imageUrl);
+//            // OpenItem을 Firestore에서 업데이트
+//            uploadToOFirebase(selectedoItem.getTitle() , imageUrl, selectedoItem.getId(), itemPrice.getText().toString(), itemInfo.getText().toString(), selectedCategory, firebaseUser.getEmail());
+//        } else if(selectedsItem != null){
+//            uploadToSFirebase(selectedsItem.getTitle(), imageUrl, selectedsItem.getId(), "share item", itemInfo.getText().toString(), selectedCategory, firebaseUser.getEmail());
+//        }else {
+//            Toast.makeText(EditItemActivity.this, "선택한 아이템을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+//        }
     }
-    // 사진 가져오기
-    ActivityResultLauncher<Intent> activityResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode()==RESULT_OK && result.getData() != null){
-                        imageUrl = result.getData().getData();
-                        imageView.setImageURI(imageUrl);
-                    }
-                }
-            });
-
-    public void showDialog(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("카테고리 선택")
-                .setItems(categories, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String selectedCategory = categories[which];
-                        // 선택한 카테고리 값을 TextView에 할당
-                        itemCategory.setText(selectedCategory);
-                    }
-                })
-                .setNegativeButton("취소", null); // 취소 버튼
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-
-    // bidding Item 클릭 시 이벤트
     private void getSelectbItem(){
         Intent intent = getIntent();
         String documentId = intent.getStringExtra("documentId");
         Log.d(TAG, ""+documentId);
-//        item = BiddingActivity.biddingItemList.get().getId().equals(id);
+//    item = BiddingActivity.biddingItemList.get().getId().equals(id);
         db.collection("BiddingItem").document(documentId).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -210,16 +311,12 @@ public class EditItemActivity extends AppCompatActivity {
                         itemTitle.setText(get_itemTitle);
                         itemId.setHint(get_id);
                         itemInfo.setHint(get_info);
-                        itemCategory.setText(get_category);
+                        selectedCategory = get_category; // itemCategory 대신 selectedCategory에 설정
                         itemPrice.setHint(get_price);
-
-                        Glide.with(EditItemActivity.this)
-                                .load(get_url)
-                                .into(imageView);
-
                     }
                 });
     }
+
     // openItemList 클릭 시 이벤트
     private void getSelectoItem(){
         Intent intent = getIntent();
@@ -240,16 +337,12 @@ public class EditItemActivity extends AppCompatActivity {
                         itemTitle.setText(get_itemTitle);
                         itemId.setHint(get_id);
                         itemInfo.setHint(get_info);
-                        itemCategory.setText(get_category);
+                        selectedCategory = get_category; // itemCategory 대신 selectedCategory에 설정
                         itemPrice.setHint(get_price);
-
-                        Glide.with(EditItemActivity.this)
-                                .load(get_url)
-                                .into(imageView);
-
                     }
                 });
     }
+
 
     // share Item 클릭 시 이벤트
     private void getSelectsItem(){
@@ -273,16 +366,17 @@ public class EditItemActivity extends AppCompatActivity {
                         itemTitle.setText(get_itemTitle);
                         itemId.setHint(get_id);
                         itemInfo.setHint(get_info);
-                        itemCategory.setText(get_category);
+                        selectedCategory = get_category; // itemCategory 대신 selectedCategory에 설정
                         itemPrice.setText(get_price);
 
-                        Glide.with(EditItemActivity.this)
-                                .load(get_url)
-                                .into(imageView);
+//                        Glide.with(EditItemActivity.this)
+//                                .load(get_url)
+//                                .into(imageView);
 
                     }
                 });
     }
+
 
     private void uploadToBFirebase(String strTitle, Uri uri, String strName, String strPrice, String strInfo, String strCategory, String sellerId) {
         StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
@@ -306,7 +400,7 @@ public class EditItemActivity extends AppCompatActivity {
                 if(uriResult != null){
                     data.put("imgUrl", uriResult.toString());
                 }else{
-                    data.put("imgUrl", imageView);
+//                    data.put("imgUrl", imageView);
                 }
 
                 DocumentReference userDocRef = db.collection("BiddingItem").document(strTitle + sellerId);

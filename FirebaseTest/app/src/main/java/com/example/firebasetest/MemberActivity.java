@@ -2,20 +2,18 @@ package com.example.firebasetest;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class MemberActivity extends AppCompatActivity {
     public static ArrayList<Item> userList = new ArrayList<Item>();

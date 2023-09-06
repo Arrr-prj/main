@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyEventActivity extends AppCompatActivity {
     ListView listView;
@@ -67,6 +68,7 @@ public class MyEventActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("isBuy","Buy");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("state", "Event");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
                 startActivity(showDetail);
@@ -83,6 +85,7 @@ public class MyEventActivity extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), MyItemDetailActivity.class);
                 Log.d(TAG, ""+item.getSeller());
                 showDetail.putExtra("isBuy","Confirm");
+                showDetail.putExtra("imageUrls", item.getImageUrls());
                 showDetail.putExtra("state", "Event");
                 showDetail.putExtra("documentId", item.getTitle()+firebaseUser.getEmail());
                 startActivity(showDetail);
@@ -100,10 +103,13 @@ public class MyEventActivity extends AppCompatActivity {
                         for (QueryDocumentSnapshot document : (task.getResult())){
                             Log.d(TAG, "DocumentSnapshot data: "+document.getData().get("id"));
                             // Firebase Storage에서 이미지 불러오기
+                            List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                            String[] imageUrlsArray = new String[imageUrlsList.size()];
+                            imageUrlsList.toArray(imageUrlsArray);
                             eventItemList.add(
                                     new Item(
                                             String.valueOf(document.getData().get("title")),
-                                            String.valueOf(document.getData().get("imgUrl")),
+                                            imageUrlsArray,
                                             String.valueOf(document.getData().get("id")),
                                             String.valueOf(document.getData().get("price")),
                                             String.valueOf(document.getData().get("category")),
@@ -132,10 +138,14 @@ public class MyEventActivity extends AppCompatActivity {
                             // Firebase Storage에서 이미지 불러오기
                             // confirm이 true인 아이템 불러오기 = 구매가 완료된 아이템
                             if(Boolean.parseBoolean(String.valueOf(document.getData().get("confirm")))) {
+                                List<String> imageUrlsList = (List<String>) document.get("imageUrls");
+                                String[] imageUrlsArray = new String[imageUrlsList.size()];
+                                imageUrlsList.toArray(imageUrlsArray);
+
                                 eventItemList.add(
                                         new Item(
                                                 String.valueOf(document.getData().get("title")),
-                                                String.valueOf(document.getData().get("imgUrl")),
+                                                imageUrlsArray,
                                                 String.valueOf(document.getData().get("id")),
                                                 String.valueOf(document.getData().get("price")),
                                                 String.valueOf(document.getData().get("category")),

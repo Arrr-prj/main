@@ -1,20 +1,18 @@
 package com.example.firebasetest;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,6 +32,10 @@ public class MembershipActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membership);
+
+        ImageView alarm = findViewById(R.id.btn_membership_alarm);
+        ImageView event = findViewById(R.id.btn_membership_event);
+        ImageView arrrpay = findViewById(R.id.btn_membership_fee);
 
 
         mBtnRegister = findViewById(R.id.btn_membershipRegister); // 멤버십 가입 버튼
@@ -185,8 +187,34 @@ public class MembershipActivity extends AppCompatActivity {
         mBtnBackSpace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MembershipActivity.this, HomeActivity.class));
                 finish();
+            }
+        });
+
+        alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent showDetail = new Intent(getApplicationContext(), MembershipDetailActivity.class);
+                showDetail.putExtra("choiceType", "알림");
+                startActivity(showDetail);
+            }
+        });
+
+        event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent showDetail = new Intent(getApplicationContext(), MembershipDetailActivity.class);
+                showDetail.putExtra("choiceType", "이벤트");
+                startActivity(showDetail);
+            }
+        });
+
+        arrrpay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent showDetail = new Intent(getApplicationContext(), MembershipDetailActivity.class);
+                showDetail.putExtra("choiceType", "수수료");
+                startActivity(showDetail);
             }
         });
     }
